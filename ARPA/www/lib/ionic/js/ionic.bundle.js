@@ -4262,11 +4262,11 @@ var Scroller;
 
 
 /**
- * ionic.views.Scroll
+ * ionic.templates.Scroll
  * A powerful scroll view with support for bouncing, pull to refresh, and paging.
  * @param   {Object}        options options for the scroll view
  * @class A scroll view system
- * @memberof ionic.views
+ * @memberof ionic.templates
  */
 ionic.views.Scroll = ionic.views.View.inherit({
   initialize: function(options) {
@@ -7135,7 +7135,7 @@ ionic.scroll = {
 
   /**
    * The ListView handles a list of items. It will process drag animations, edit mode,
-   * and other operations that are common on mobile lists or table views.
+   * and other operations that are common on mobile lists or table templates.
    */
   ionic.views.ListView = ionic.views.View.inherit({
     initialize: function(opts) {
@@ -32190,7 +32190,7 @@ var ngNonBindableDirective = ngDirective({ terminal: true, priority: 1000 });
  *
  * Notice that we are still using two plural categories(one, other), but we added
  * three explicit number rules 0, 1 and 2.
- * When one person, perhaps John, views the document, "John is viewing" will be shown.
+ * When one person, perhaps John, templates the document, "John is viewing" will be shown.
  * When three people view the document, no explicit number rule is found, so
  * an offset of 2 is taken off 3, and Angular uses 1 to decide the plural category.
  * In this case, plural category 'one' is matched and "John, Mary and one other person are viewing"
@@ -39456,7 +39456,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
 
     // If there is no explicit multi-view configuration, make one up so we don't have
     // to handle both cases in the view directive later. Note that having an explicit
-    // 'views' property will mean the default unnamed view properties are ignored. This
+    // 'templates' property will mean the default unnamed view properties are ignored. This
     // is also a good time to resolve view names to absolute names, so everything is a
     // straight lookup at link time.
     views: function(state) {
@@ -39666,9 +39666,9 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    *   navigable).
    * - **params** `{object}` - returns an array of state params that are ensured to 
    *   be a super-set of parent's params.
-   * - **views** `{object}` - returns a views object where each key is an absolute view 
+   * - **templates** `{object}` - returns a templates object where each key is an absolute view
    *   name (i.e. "viewName@stateName") and each value is the config object 
-   *   (template, controller) for the view. Even when you don't use the views object 
+   *   (template, controller) for the view. Even when you don't use the templates object
    *   explicitly on a state config, one is still created for you internally.
    *   So by decorating this builder function you have access to decorating template 
    *   and controller properties.
@@ -39681,13 +39681,13 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    *
    * @example
    * <pre>
-   * // Override the internal 'views' builder with a function that takes the state
+   * // Override the internal 'templates' builder with a function that takes the state
    * // definition, and a reference to the internal function being overridden:
-   * $stateProvider.decorator('views', function (state, parent) {
+   * $stateProvider.decorator('templates', function (state, parent) {
    *   var result = {},
-   *       views = parent(state);
+   *       templates = parent(state);
    *
-   *   angular.forEach(views, function (config, name) {
+   *   angular.forEach(templates, function (config, name) {
    *     var autoName = (state.name + '.' + name).replace('.', '/');
    *     config.templateUrl = config.templateUrl || '/partials/' + autoName + '.html';
    *     result[name] = config;
@@ -39696,7 +39696,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * });
    *
    * $stateProvider.state('home', {
-   *   views: {
+   *   templates: {
    *     'contact.list': { controller: 'ListController' },
    *     'contact.item': { controller: 'ItemController' }
    *   }
@@ -39705,7 +39705,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * // ...
    *
    * $state.go('home');
-   * // Auto-populates list and item views with /partials/home/contact/list.html,
+   * // Auto-populates list and item templates with /partials/home/contact/list.html,
    * // and /partials/home/contact/item.html, respectively.
    * </pre>
    *
@@ -39862,15 +39862,15 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * url: "/messages?{before:date}&{after:date}"</pre>
    * url: "/messages/:mailboxid?{before:date}&{after:date}"
    *
-   * @param {object=} stateConfig.views
-   * <a id='views'></a>
-   * an optional map&lt;string, object&gt; which defined multiple views, or targets views
+   * @param {object=} stateConfig.templates
+   * <a id='templates'></a>
+   * an optional map&lt;string, object&gt; which defined multiple templates, or targets templates
    * manually/explicitly.
    *
    * Examples:
    *
    * Targets three named `ui-view`s in the parent state's template
-   * <pre>views: {
+   * <pre>templates: {
    *     header: {
    *       controller: "headerCtrl",
    *       templateUrl: "header.html"
@@ -39884,7 +39884,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    *   }</pre>
    *
    * Targets named `ui-view="header"` from grandparent state 'top''s template, and named `ui-view="body" from parent state's template.
-   * <pre>views: {
+   * <pre>templates: {
    *     'header@top': {
    *       controller: "msgHeaderCtrl",
    *       templateUrl: "msgHeader.html"
@@ -40706,7 +40706,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
       })];
       if (inherited) promises.push(inherited);
 
-      // Resolve template and dependencies for all views.
+      // Resolve template and dependencies for all templates.
       forEach(state.views, function (view, name) {
         var injectables = (view.resolve && view.resolve !== state.resolve ? view.resolve : {});
         injectables.$template = [ function () {
@@ -40889,8 +40889,8 @@ angular.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProvider)
  * @description
  * The ui-view directive tells $state where to place your templates.
  *
- * @param {string=} name A view name. The name should be unique amongst the other views in the
- * same state. You can have views of the same name that live in different states.
+ * @param {string=} name A view name. The name should be unique amongst the other templates in the
+ * same state. You can have templates of the same name that live in different states.
  *
  * @param {string=} autoscroll It allows you to set the scroll behavior of the browser window
  * when a view is populated. By default, $anchorScroll is overridden by ui-router's custom scroll
@@ -40921,11 +40921,11 @@ angular.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProvider)
  * })
  * </pre>
  * 
- * The above is a convenient shortcut equivalent to specifying your view explicitly with the {@link ui.router.state.$stateProvider#views `views`}
+ * The above is a convenient shortcut equivalent to specifying your view explicitly with the {@link ui.router.state.$stateProvider#views `templates`}
  * config property, by name, in this case an empty name:
  * <pre>
  * $stateProvider.state("home", {
- *   views: {
+ *   templates: {
  *     "": {
  *       template: "<h1>HELLO!</h1>"
  *     }
@@ -40933,7 +40933,7 @@ angular.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProvider)
  * })
  * </pre>
  * 
- * But typically you'll only use the views property if you name your view or have more than one view 
+ * But typically you'll only use the templates property if you name your view or have more than one view
  * in the same template. There's not really a compelling reason to name a view if its the only one, 
  * but you could if you wanted, like so:
  * <pre>
@@ -40941,7 +40941,7 @@ angular.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProvider)
  * </pre> 
  * <pre>
  * $stateProvider.state("home", {
- *   views: {
+ *   templates: {
  *     "main": {
  *       template: "<h1>HELLO!</h1>"
  *     }
@@ -40949,7 +40949,7 @@ angular.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProvider)
  * })
  * </pre>
  * 
- * Really though, you'll use views to set up multiple views:
+ * Really though, you'll use templates to set up multiple templates:
  * <pre>
  * <div ui-view></div>
  * <div ui-view="chart"></div> 
@@ -40958,7 +40958,7 @@ angular.module('ui.router.state').provider('$uiViewScroll', $ViewScrollProvider)
  * 
  * <pre>
  * $stateProvider.state("home", {
- *   views: {
+ *   templates: {
  *     "": {
  *       template: "<h1>HELLO!</h1>"
  *     },
@@ -42139,7 +42139,7 @@ IonicModule
  * @name $ionicHistory
  * @module ionic
  * @description
- * $ionicHistory keeps track of views as the user navigates through an app. Similar to the way a
+ * $ionicHistory keeps track of templates as the user navigates through an app. Similar to the way a
  * browser behaves, an Ionic app is able to keep track of the previous view, the current view, and
  * the forward view (if there is one).  However, a typical web browser only keeps track of one
  * history stack in a linear fashion.
@@ -42163,7 +42163,7 @@ IonicModule
   '$ionicNavViewDelegate',
 function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $ionicNavViewDelegate) {
 
-  // history actions while navigating views
+  // history actions while navigating templates
   var ACTION_INITIAL_VIEW = 'initialView';
   var ACTION_NEW_VIEW = 'newView';
   var ACTION_MOVE_BACK = 'moveBack';
@@ -42391,7 +42391,7 @@ function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $
       } else if (currentView && currentView.historyId !== historyId &&
                 hist.cursor > -1 && hist.stack.length > 0 && hist.cursor < hist.stack.length &&
                 hist.stack[hist.cursor].stateId === currentStateId) {
-        // they just changed to a different history and the history already has views in it
+        // they just changed to a different history and the history already has templates in it
         var switchToView = hist.stack[hist.cursor];
         viewId = switchToView.viewId;
         historyId = switchToView.historyId;
@@ -42482,7 +42482,7 @@ function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $
         }
 
         if (stateChangeCounter < 2) {
-          // views that were spun up on the first load should not animate
+          // templates that were spun up on the first load should not animate
           direction = DIRECTION_NONE;
         }
 
@@ -42570,7 +42570,7 @@ function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $
     /**
      * @ngdoc method
      * @name $ionicHistory#viewHistory
-     * @description The app's view history data, such as all the views and histories, along
+     * @description The app's view history data, such as all the templates and histories, along
      * with how they are ordered and linked together within the navigation stack.
      * @returns {object} Returns an object containing the apps view history data.
      */
@@ -42747,7 +42747,7 @@ function($rootScope, $state, $location, $window, $timeout, $ionicViewSwitcher, $
     /**
      * @ngdoc method
      * @name $ionicHistory#clearCache
-     * @description Removes all cached views within every {@link ionic.directive:ionNavView}.
+     * @description Removes all cached templates within every {@link ionic.directive:ionNavView}.
      * This both removes the view element from the DOM, and destroy it's scope.
      */
     clearCache: function() {
@@ -42954,14 +42954,14 @@ function($rootScope, $state, $location, $document, $ionicPlatform, $ionicHistory
  * The following code would set the same config variable for all platforms:
  *
  * ```js
- * $ionicConfigProvider.views.maxCache(10);
+ * $ionicConfigProvider.templates.maxCache(10);
  * ```
  *
  * Additionally, each platform can have it's own config within the `$ionicConfigProvider.platform`
  * property. The config below would only apply to Android devices.
  *
  * ```js
- * $ionicConfigProvider.platform.android.views.maxCache(5);
+ * $ionicConfigProvider.platform.android.templates.maxCache(5);
  * ```
  *
  * @usage
@@ -42969,7 +42969,7 @@ function($rootScope, $state, $location, $document, $ionicPlatform, $ionicHistory
  * var myApp = angular.module('reallyCoolApp', ['ionic']);
  *
  * myApp.config(function($ionicConfigProvider) {
- *   $ionicConfigProvider.views.maxCache(5);
+ *   $ionicConfigProvider.templates.maxCache(5);
  *
  *   // note that you can also chain configs
  *   $ionicConfigProvider.backButton.text('Go Back').icon('ion-chevron-left');
@@ -42979,8 +42979,8 @@ function($rootScope, $state, $location, $document, $ionicPlatform, $ionicHistory
 
 /**
  * @ngdoc method
- * @name $ionicConfigProvider#views.transition
- * @description Animation style when transitioning between views. Default `platform`.
+ * @name $ionicConfigProvider#templates.transition
+ * @description Animation style when transitioning between templates. Default `platform`.
  *
  * @param {string} transition Which style of view transitioning to use.
  *
@@ -42996,7 +42996,7 @@ function($rootScope, $state, $location, $document, $ionicPlatform, $ionicHistory
 
 /**
  * @ngdoc method
- * @name $ionicConfigProvider#views.maxCache
+ * @name $ionicConfigProvider#templates.maxCache
  * @description  Maximum number of view elements to cache in the DOM. When the max number is
  * exceeded, the view with the longest time period since it was accessed is removed. Views that
  * stay in the DOM cache the view's scope, current state, and scroll position. The scope is
@@ -43004,19 +43004,19 @@ function($rootScope, $state, $location, $document, $ionicPlatform, $ionicHistory
  * When the maximum cache is `0`, the leaving view's element will be removed from the DOM after
  * each view transition, and the next time the same view is shown, it will have to re-compile,
  * attach to the DOM, and link the element again. This disables caching, in effect.
- * @param {number} maxNumber Maximum number of views to retain. Default `10`.
- * @returns {number} How many views Ionic will hold onto until the a view is removed.
+ * @param {number} maxNumber Maximum number of templates to retain. Default `10`.
+ * @returns {number} How many templates Ionic will hold onto until the a view is removed.
  */
 
 /**
  * @ngdoc method
- * @name $ionicConfigProvider#views.forwardCache
- * @description  By default, when navigating, views that were recently visited are cached, and
+ * @name $ionicConfigProvider#templates.forwardCache
+ * @description  By default, when navigating, templates that were recently visited are cached, and
  * the same instance data and DOM elements are referenced when navigating back. However, when
- * navigating back in the history, the "forward" views are removed from the cache. If you
+ * navigating back in the history, the "forward" templates are removed from the cache. If you
  * navigate forward to the same view again, it'll create a new DOM element and controller
- * instance. Basically, any forward views are reset each time. Set this config to `true` to have
- * forward views cached and not reset on each load.
+ * instance. Basically, any forward templates are reset each time. Set this config to `true` to have
+ * forward templates cached and not reset on each load.
  * @param {boolean} value
  * @returns {boolean}
  */
@@ -44357,7 +44357,7 @@ IonicModule
  *
  * - Show more info about the current view
  * - Select a commonly used tool or configuration
- * - Present a list of actions to perform inside one of your views
+ * - Present a list of actions to perform inside one of your templates
  *
  * Put the content of the popover inside of an `<ion-popover-view>` element.
  *
@@ -45163,7 +45163,7 @@ IonicModule
  * {@link ionic.directive:ionScroll} directives).
  *
  * Methods called directly on the $ionicScrollDelegate service will control all scroll
- * views.  Use the {@link ionic.service:$ionicScrollDelegate#$getByHandle $getByHandle}
+ * templates.  Use the {@link ionic.service:$ionicScrollDelegate#$getByHandle $getByHandle}
  * method to control specific scrollViews.
  *
  * @usage
@@ -45295,7 +45295,7 @@ IonicModule
   /**
    * @ngdoc method
    * @name $ionicScrollDelegate#freezeAllScrolls
-   * @description Does not allow any of the app's scroll views to scroll either x or y.
+   * @description Does not allow any of the app's scroll templates to scroll either x or y.
    * @param {boolean=} shouldFreeze Should all app scrolls be prevented from scrolling or not.
    */
   'freezeAllScrolls',
@@ -45647,7 +45647,7 @@ IonicModule
  *       })
  *       .state('tabs.home', {
  *         url: "/home",
- *         views: {
+ *         templates: {
  *           'home-tab': {
  *             prefetchTemplate: false,
  *             templateUrl: "tabs-templates/home.html",
@@ -46012,7 +46012,7 @@ function($timeout, $document, $q, $ionicClickBlock, $ionicConfig, $ionicNavBarDe
           }
 
           if (renderStart) {
-            // notify the views "before" the transition starts
+            // notify the templates "before" the transition starts
             switcher.emit('before', enteringData, leavingData);
 
             // stage entering element, opacity 0, no transition duration
@@ -46098,11 +46098,11 @@ function($timeout, $document, $q, $ionicClickBlock, $ionicConfig, $ionicNavBarDe
             $timeout.cancel(enteringEle.data(DATA_FALLBACK_TIMER));
             leavingEle && $timeout.cancel(leavingEle.data(DATA_FALLBACK_TIMER));
 
-            // emit that the views have finished transitioning
-            // each parent nav-view will update which views are active and cached
+            // emit that the templates have finished transitioning
+            // each parent nav-view will update which templates are active and cached
             switcher.emit('after', enteringData, leavingData);
 
-            // resolve that this one transition (there could be many w/ nested views)
+            // resolve that this one transition (there could be many w/ nested templates)
             deferred && deferred.resolve(navViewCtrl);
 
             // the most recent transition added has completed and all the active
@@ -46164,10 +46164,10 @@ function($timeout, $document, $q, $ionicClickBlock, $ionicConfig, $ionicNavBarDe
         },
 
         cleanup: function(transData) {
-          // check if any views should be removed
+          // check if any templates should be removed
           if (leavingEle && transData.direction == 'back' && !$ionicConfig.views.forwardCache()) {
             // if they just navigated back we can destroy the forward view
-            // do not remove forward views if cacheForwardViews config is true
+            // do not remove forward templates if cacheForwardViews config is true
             destroyViewEle(leavingEle);
           }
 
@@ -47583,16 +47583,16 @@ function($scope, $element, $attrs, $compile, $controller, $ionicNavBarDelegate, 
 
   self.render = function(registerData, viewLocals, enteringView, leavingView, renderStart, renderEnd) {
     // register the view and figure out where it lives in the various
-    // histories and nav stacks, along with how views should enter/leave
+    // histories and nav stacks, along with how templates should enter/leave
     var switcher = $ionicViewSwitcher.create(self, viewLocals, enteringView, leavingView, renderStart, renderEnd);
 
-    // init the rendering of views for this navView directive
+    // init the rendering of templates for this navView directive
     switcher.init(registerData, function() {
-      // the view is now compiled, in the dom and linked, now lets transition the views.
+      // the view is now compiled, in the dom and linked, now lets transition the templates.
       // this uses a callback incase THIS nav-view has a nested nav-view, and after the NESTED
       // nav-view links, the NESTED nav-view would update which direction THIS nav-view should use
 
-      // kick off the transition of views
+      // kick off the transition of templates
       switcher.transition(self.direction(), registerData.enableBack, !disableAnimation);
 
       // reset private vars for next time
@@ -49498,7 +49498,7 @@ function($scope, $element, $attrs, $compile, $rootScope, $ionicViewSwitcher) {
 
   self.beforeEnter = function(ev, transData) {
     // this event was emitted, starting at intial ion-view, then bubbles up
-    // only the first ion-view should do something with it, parent ion-views should ignore
+    // only the first ion-view should do something with it, parent ion-templates should ignore
     if (transData && !transData.viewNotified) {
       transData.viewNotified = true;
 
@@ -52089,12 +52089,12 @@ function($timeout) {
  *
  * @description
  * `menu-close` is an attribute directive that closes a currently opened side menu.
- * Note that by default, navigation transitions will not animate between views when
+ * Note that by default, navigation transitions will not animate between templates when
  * the menu is open. Additionally, this directive will reset the entering view's
  * history stack, making the new page the root of the history stack. This is done
  * to replicate the user experience seen in most side menu implementations, which is
  * to not show the back button at the root of the stack and show only the
- * menu button. We recommend that you also use the `enable-menu-with-back-views="false"`
+ * menu button. We recommend that you also use the `enable-menu-with-back-templates="false"`
  * {@link ionic.directive:ionSideMenus} attribute when using the menuClose directive.
  *
  * @usage
@@ -52148,13 +52148,13 @@ IonicModule
  *
  * ### Button Hidden On Child Views
  * By default, the menu toggle button will only appear on a root
- * level side-menu page. Navigating in to child views will hide the menu-
+ * level side-menu page. Navigating in to child templates will hide the menu-
  * toggle button. They can be made visible on child pages by setting the
- * enable-menu-with-back-views attribute of the {@link ionic.directive:ionSideMenus}
+ * enable-menu-with-back-templates attribute of the {@link ionic.directive:ionSideMenus}
  * directive to true.
  *
  * ```html
- * <ion-side-menus enable-menu-with-back-views="true">
+ * <ion-side-menus enable-menu-with-back-templates="true">
  * ```
  */
 IonicModule
@@ -52485,7 +52485,7 @@ IonicModule
             parentViewCtrl.navElement(navElementType, spanEle.outerHTML);
 
           } else {
-            // these are buttons for all views that do not have their own ion-nav-buttons
+            // these are buttons for all templates that do not have their own ion-nav-buttons
             navBarCtrl.navElement(navElementType, spanEle.outerHTML);
           }
 
@@ -52587,7 +52587,7 @@ IonicModule
             parentViewCtrl.navElement(navElementType, spanEle.outerHTML);
 
           } else {
-            // these are buttons for all views that do not have their own ion-nav-buttons
+            // these are buttons for all templates that do not have their own ion-nav-buttons
             navBarCtrl.navElement(navElementType, spanEle.outerHTML);
           }
 
@@ -52636,15 +52636,15 @@ IonicModule
  *
  * @description
  * As a user navigates throughout your app, Ionic is able to keep track of their
- * navigation history. By knowing their history, transitions between views
+ * navigation history. By knowing their history, transitions between templates
  * correctly enter and exit using the platform's transition style. An additional
  * benefit to Ionic's navigation system is its ability to manage multiple
  * histories. For example, each tab can have it's own navigation history stack.
  *
  * Ionic uses the AngularUI Router module so app interfaces can be organized
  * into various "states". Like Angular's core $route service, URLs can be used
- * to control the views. However, the AngularUI Router provides a more powerful
- * state manager in that states are bound to named, nested, and parallel views,
+ * to control the templates. However, the AngularUI Router provides a more powerful
+ * state manager in that states are bound to named, nested, and parallel templates,
  * allowing more than one template to be rendered on the same page.
  * Additionally, each state is not required to be bound to a URL, and data can
  * be pushed to each state which allows much flexibility.
@@ -52701,38 +52701,38 @@ IonicModule
  *
  * ## Caching
  *
- * By default, views are cached to improve performance. When a view is navigated away from, its
+ * By default, templates are cached to improve performance. When a view is navigated away from, its
  * element is left in the DOM, and its scope is disconnected from the `$watch` cycle. When
  * navigating to a view that is already cached, its scope is then reconnected, and the existing
  * element that was left in the DOM becomes the active view. This also allows for the scroll
- * position of previous views to be maintained.
+ * position of previous templates to be maintained.
  *
  * Caching can be disabled and enabled in multiple ways. By default, Ionic will cache a maximum of
- * 10 views, and not only can this be configured, but apps can also explicitly state which views
+ * 10 templates, and not only can this be configured, but apps can also explicitly state which templates
  * should and should not be cached.
  *
- * Note that because we are caching these views, *we aren’t destroying scopes*. Instead, scopes
+ * Note that because we are caching these templates, *we aren’t destroying scopes*. Instead, scopes
  * are being disconnected from the watch cycle. Because scopes are not being destroyed and
  * recreated, controllers are not loading again on a subsequent viewing. If the app/controller
  * needs to know when a view has entered or has left, then view events emitted from the
  * {@link ionic.directive:ionView} scope, such as `$ionicView.enter`, may be useful.
  *
- * By default, when navigating back in the history, the "forward" views are removed from the cache.
+ * By default, when navigating back in the history, the "forward" templates are removed from the cache.
  * If you navigate forward to the same view again, it'll create a new DOM element and controller
- * instance. Basically, any forward views are reset each time. This can be configured using the
+ * instance. Basically, any forward templates are reset each time. This can be configured using the
  * {@link ionic.provider:$ionicConfigProvider}:
  *
  * ```js
- * $ionicConfigProvider.views.forwardCache(true);
+ * $ionicConfigProvider.templates.forwardCache(true);
  * ```
  *
  * #### Disable cache globally
  *
- * The {@link ionic.provider:$ionicConfigProvider} can be used to set the maximum allowable views
+ * The {@link ionic.provider:$ionicConfigProvider} can be used to set the maximum allowable templates
  * which can be cached, but this can also be use to disable all caching by setting it to 0.
  *
  * ```js
- * $ionicConfigProvider.views.maxCache(0);
+ * $ionicConfigProvider.templates.maxCache(0);
  * ```
  *
  * #### Disable cache within state provider
@@ -52763,8 +52763,8 @@ IonicModule
  * <iframe width="560" height="315" src="//www.youtube.com/embed/dqJRoh8MnBo"
  * frameborder="0" allowfullscreen></iframe>
  *
- * @param {string=} name A view name. The name should be unique amongst the other views in the
- * same state. You can have views of the same name that live in different states. For more
+ * @param {string=} name A view name. The name should be unique amongst the other templates in the
+ * same state. You can have templates of the same name that live in different states. For more
  * information, see ui-router's
  * [ui-view documentation](http://angular-ui.github.io/ui-router/site/#/api/ui.router.state.directive:ui-view).
  */
@@ -52774,7 +52774,7 @@ IonicModule
   '$ionicConfig',
 function($state, $ionicConfig) {
   // IONIC's fork of Angular UI Router, v0.2.10
-  // the navView handles registering views in the history and how to transition between them
+  // the navView handles registering templates in the history and how to transition between them
   return {
     restrict: 'E',
     terminal: true,
@@ -52783,7 +52783,7 @@ function($state, $ionicConfig) {
     controller: '$ionicNavView',
     compile: function(tElement, tAttrs, transclude) {
 
-      // a nav view element is a container for numerous views
+      // a nav view element is a container for numerous templates
       tElement.addClass('view-container');
       ionic.DomUtil.cachedAttr(tElement, 'nav-view-transition', $ionicConfig.views.transition());
 
@@ -53520,7 +53520,7 @@ IonicModule
  * "Burger Icon" toggles can be added to the header with the {@link ionic.directive:menuToggle}
  * attribute directive. Clicking the toggle will open and close the side menu like the `menu-close`
  * directive. The side menu will automatically hide on child pages, but can be overridden with the
- * enable-menu-with-back-views attribute mentioned below.
+ * enable-menu-with-back-templates attribute mentioned below.
  *
  * By default, side menus are hidden underneath their side menu content and can be opened by swiping
  * the content left or right or by toggling a button to show the side menu. Additionally, by adding the
@@ -53566,7 +53566,7 @@ IonicModule
  * }
  * ```
  *
- * @param {bool=} enable-menu-with-back-views Determines whether the side menu is enabled when the
+ * @param {bool=} enable-menu-with-back-templates Determines whether the side menu is enabled when the
  * back button is showing. When set to `false`, any {@link ionic.directive:menuToggle} will be hidden,
  * and the user cannot swipe to open the menu. When going back to the root page of the side menu (the
  * page without a back button visible), then any menuToggle buttons will show again, and menus will be
@@ -54373,7 +54373,7 @@ function($ionicTabsDelegate, $ionicConfig, $ionicHistory) {
           // variable to inform child tabs that they're all being blown away
           // used so that while destorying an individual tab, each one
           // doesn't select the next tab as the active one, which causes unnecessary
-          // loading of tab views when each will eventually all go away anyway
+          // loading of tab templates when each will eventually all go away anyway
           $scope.$tabsDestroy = true;
           deregisterInstance();
           tabsCtrl.$tabsElement = tabsCtrl.$element = tabsCtrl.$scope = innerElement = null;
@@ -54510,7 +54510,7 @@ function($timeout, $ionicConfig) {
  * left in the DOM, and its scope is disconnected from the `$watch` cycle. When navigating to a
  * view that is already cached, its scope is reconnected, and the existing element, which was
  * left in the DOM, becomes active again. This can be disabled, or the maximum number of cached
- * views changed in {@link ionic.provider:$ionicConfigProvider}, in the view's `$state` configuration, or
+ * templates changed in {@link ionic.provider:$ionicConfigProvider}, in the view's `$state` configuration, or
  * as an attribute on the view itself (see below).
  *
  * @usage
@@ -54582,7 +54582,7 @@ function($timeout, $ionicConfig) {
  * ## Caching
  *
  * Caching can be disabled and enabled in multiple ways. By default, Ionic will
- * cache a maximum of 10 views. You can optionally choose to disable caching at
+ * cache a maximum of 10 templates. You can optionally choose to disable caching at
  * either an individual view basis, or by global configuration. Please see the
  * _Caching_ section in {@link ionic.directive:ionNavView} for more info.
  *

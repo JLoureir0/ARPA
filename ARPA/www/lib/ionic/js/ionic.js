@@ -4255,11 +4255,11 @@ var Scroller;
 
 
 /**
- * ionic.views.Scroll
+ * ionic.templates.Scroll
  * A powerful scroll view with support for bouncing, pull to refresh, and paging.
  * @param   {Object}        options options for the scroll view
  * @class A scroll view system
- * @memberof ionic.views
+ * @memberof ionic.templates
  */
 ionic.views.Scroll = ionic.views.View.inherit({
   initialize: function(options) {
@@ -7128,7 +7128,7 @@ ionic.scroll = {
 
   /**
    * The ListView handles a list of items. It will process drag animations, edit mode,
-   * and other operations that are common on mobile lists or table views.
+   * and other operations that are common on mobile lists or table templates.
    */
   ionic.views.ListView = ionic.views.View.inherit({
     initialize: function(opts) {

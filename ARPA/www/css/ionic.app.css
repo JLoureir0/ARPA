@@ -4346,7 +4346,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
 /**
  * Popovers
  * --------------------------------------------------
- * Popovers are independent views which float over content
+ * Popovers are independent templates which float over content
  */
 .popover-backdrop {
   position: fixed;
@@ -7602,3 +7602,23 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.scroll-content {
+  background-image: url("../img/fundo.jpg"); }
+
+/* Can be any width and height */
+.buttons-block {
+  height: 28vh;
+  text-align: center; }
+
+.buttons-block ul {
+  margin-bottom: 2vh; }
+
+/* The ghost, nudged to maintain perfect centering */
+.buttons-block:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em;
+  /* Adjusts for spacing */ }
