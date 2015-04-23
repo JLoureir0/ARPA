@@ -21,7 +21,7 @@ angular.module('arpa', ['ionic'])
     .config(function($stateProvider, $urlRouterProvider) {
 
       $stateProvider
-          .state('home', {
+          .state('app', {
             url: '/home',
             views: {
               home: {
@@ -42,6 +42,72 @@ angular.module('arpa', ['ionic'])
 
     })
 
-    .controller('mainController', function($scope){
+    .controller('homeController', function($scope, $window, $ionicSideMenuDelegate){
+        $scope.width = function () {
+            return $window.innerWidth;
+        };
 
+        $scope.openMenu = function() {
+            $ionicSideMenuDelegate.toggleRight(true);
+        };
+
+        $scope.isWalletShown = false;
+        $scope.toggleWallet = function () {
+            $scope.isWalletShown = $scope.isWalletShown === false ? true : false;
+            console.log('Toggled');
+        }
+    })
+
+    .directive('fader', function ($timeout, $ionicGesture, $ionicSideMenuDelegate) {
+        return {
+            restrict: 'E',
+            require: '^ionSideMenus',
+            scope: true,
+            link: function($scope, $element, $attr, sideMenuCtrl) {
+                $ionicGesture.on('tap', function(e) {
+                    $ionicSideMenuDelegate.toggleRight(true);
+                }, $element);
+                $ionicGesture.on('dragleft', function(e) {
+                    sideMenuCtrl._handleDrag(e);
+                    e.gesture.srcEvent.preventDefault();
+                }, $element);
+                $ionicGesture.on('dragright', function(e) {
+                    sideMenuCtrl._handleDrag(e);
+                    e.gesture.srcEvent.preventDefault();
+                }, $element);
+                $ionicGesture.on('release', function(e) {
+                    sideMenuCtrl._endDrag(e);
+                }, $element);
+                $scope.sideMenuDelegate = $ionicSideMenuDelegate;
+                $scope.$watch('sideMenuDelegate.getOpenRatio()', function(ratio) {
+                    if (Math.abs(ratio)<1) {
+                        $element[0].style.zIndex = "1";
+                        $element[0].style.opacity = 0.7-Math.abs(ratio);
+                    } else {
+                        $element[0].style.zIndex = "-1";
+                    }
+                });
+            }
+        }
+    })
+
+    .directive('canDragMenu', function ($timeout, $ionicGesture, $ionicSideMenuDelegate) {
+        return {
+            restrict: 'A',
+            require: '^ionSideMenus',
+            scope: true,
+            link: function($scope, $element, $attr, sideMenuCtrl) {
+                $ionicGesture.on('dragleft', function(e) {
+                    sideMenuCtrl._handleDrag(e);
+                    e.gesture.srcEvent.preventDefault();
+                }, $element);
+                $ionicGesture.on('dragright', function(e) {
+                    sideMenuCtrl._handleDrag(e);
+                    e.gesture.srcEvent.preventDefault();
+                }, $element);
+                $ionicGesture.on('release', function(e) {
+                    sideMenuCtrl._endDrag(e);
+                }, $element);
+            }
+        }
     })
