@@ -7604,21 +7604,36 @@ a.button {
   transition-duration: 0s; }
 
 .scroll-content {
-  background-image: url("../img/fundo.jpg"); }
+  background-image: url("../img/fundo.jpg");
+  background-size: 135%; }
 
-/* Can be any width and height */
+.buttons-block .button {
+  border-width: 2px; }
+
+.logo-holder {
+  height: 32vh;
+  margin-left: -4vw; }
+
+.logo-holder img {
+  margin-top: 6vh;
+  width: 103vw;
+  height: 30vh; }
+
 .buttons-block {
-  height: 28vh;
+  height: 18vh;
   text-align: center; }
 
 .buttons-block ul {
-  margin-bottom: 2vh; }
+  margin-bottom: 3vh; }
 
-/* The ghost, nudged to maintain perfect centering */
+.width-150px {
+  width: 150px; }
+
+a.thick {
+  font-weight: 900; }
+
 .buttons-block:before {
   content: '';
   display: inline-block;
   height: 100%;
-  vertical-align: middle;
-  margin-right: -0.25em;
-  /* Adjusts for spacing */ }
+  vertical-align: middle; }
