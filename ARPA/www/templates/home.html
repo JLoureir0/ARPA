@@ -1,13 +1,18 @@
 <ion-view title="Home">
-    <ion-content padding="true">
+<ion-content ng-controller="homeController" padding="true">
         <!--<div class="container">
         <h2>Home Page</h2>
         <p>Here's the main route for the app.</p>-->
-            <div class="logo-holder">
+        <div class="logo-holder">
             <img class="logo" src="./img/logo-arpa-nome.svg" />
-            </div>
+        </div>
         <div class="buttons-block">
             <div class="centered">
+                <ul>
+                    <button class="button button-outline button-light width-150px" ng-click="fbLogin()">
+                        Login with Facebook
+                    </button>
+                </ul>
                 <ul>
                     <button class="button button-outline button-light width-150px">
                         <a class="thick">PROFILE</a>

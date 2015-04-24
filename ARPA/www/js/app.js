@@ -20,12 +20,21 @@ angular.module('arpa', ['ionic'])
 
     .config(function($stateProvider, $urlRouterProvider) {
 
+      openFB.init({appId:'367156356826931'});
       $stateProvider
           .state('app', {
             url: '/home',
             views: {
               home: {
                 templateUrl: 'templates/home.html'
+              }
+            }
+          })
+          .state('mainPage', {
+            url: '/mainPage',
+            views: {
+              home: {
+                templateUrl: 'templates/mainPage.html'
               }
             }
           })
@@ -42,7 +51,19 @@ angular.module('arpa', ['ionic'])
 
     })
 
-    .controller('homeController', function($scope, $window, $ionicSideMenuDelegate){
+    .controller('homeController', function($scope, $state, $window, $ionicSideMenuDelegate){
+      console.log("IN");
+      $scope.fbLogin = function(){
+        openFB.login(
+          function(response){
+            if(response.status == 'connected'){
+              console.log('Login succedeed');
+              $state.go('mainPage');
+            }else{
+              alert('Facebook login failed');
+            }
+          }, {scope: 'email, publish_actions'});
+      }
 
     })
 
