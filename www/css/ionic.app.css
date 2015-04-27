@@ -4134,7 +4134,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 18px;
   font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   opacity: 0.7; }
   .tab-item:hover {
@@ -7648,3 +7648,8 @@ a.button {
 
 .tabbed {
   top: 7%; }
+
+.tab-text {
+  margin-top: 25%;
+  font-weight: 800;
+  font-size: 18px; }

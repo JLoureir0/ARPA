@@ -38,6 +38,16 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services'])
 
   // Each tab has its own nav history stack:
 
+      .state('tab.allergens', {
+        url: '/allergens',
+        views: {
+          'tab-allergens': {
+            templateUrl: 'templates/tab-allergens.html',
+            controller: 'AllergensCtrl'
+          }
+        }
+      })
+
   .state('tab.dash', {
     url: '/dash',
     views: {
@@ -78,6 +88,6 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/tab/allergens');
 
 });
