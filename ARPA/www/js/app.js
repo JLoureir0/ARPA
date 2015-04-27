@@ -62,7 +62,7 @@ angular.module('arpa', ['ionic'])
             }else{
               alert('Facebook login failed');
             }
-          }, {scope: 'email, publish_actions'});
+          }, {scope: 'email, publish_actions, user_birthday'});
       }
 
     })
