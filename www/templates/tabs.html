@@ -4,9 +4,9 @@ Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
 <div class="profile">
-  <div class="circle middle"></div>
+  <div><img class="circle middle" src="{{userpicture}}" /></div>
   <div class="profile-name middle">
-    Coisas Gostosas
+    {{username}}
   </div>
 </div>
 
@@ -23,8 +23,8 @@ navigation history that also transitions its views in and out.
   </ion-tab>
 
   <!-- Account Tab -->
-  <ion-tab title="DEFINITIONS" href="#/tab/account">
-    <ion-nav-view <!--name="tab-account"-->></ion-nav-view>
+  <ion-tab title="DEFINITIONS" href="#/tab/definitions">
+    <ion-nav-view name="tab-definitions"></ion-nav-view>
   </ion-tab>
 
 

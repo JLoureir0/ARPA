@@ -22,7 +22,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services'])
 })
 
 .config(function($stateProvider, $urlRouterProvider) {
-
+  openFB.init({appId:'367156356826931'});
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -33,7 +33,8 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services'])
     .state('tab', {
     url: "/tab",
     abstract: true,
-    templateUrl: "templates/tabs.html"
+    templateUrl: "templates/tabs.html",
+	controller: 'MainCtrl'
   })
 
   // Each tab has its own nav history stack:
@@ -44,6 +45,16 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services'])
           'tab-allergens': {
             templateUrl: 'templates/tab-allergens.html',
             controller: 'AllergensCtrl'
+          }
+        }
+      })
+	  
+      .state('tab.definitions', {
+        url: '/definitions',
+        views: {
+          'tab-definitions': {
+            templateUrl: 'templates/tab-definitions.html',
+            controller: 'DefinitionsCtrl'
           }
         }
       })

@@ -1,6 +1,40 @@
 angular.module('arpa.controllers', [])
 
+	.factory('$localstorage', ['$window', function($window) {
+	  return {
+		set: function(key, value) {
+		  $window.localStorage[key] = value;
+		},
+		get: function(key, defaultValue) {
+		  return $window.localStorage[key] || defaultValue;
+		},
+		setObject: function(key, value) {
+		  $window.localStorage[key] = JSON.stringify(value);
+		},
+		getObject: function(key) {
+		  return JSON.parse($window.localStorage[key] || '{}');
+		}
+	  }
+	}])
+
     .controller('DashCtrl', function($scope) {})
+	
+	.controller('MainCtrl', function($scope, $localstorage, $http){
+		if($localstorage.getObject('userinfo') != null) {
+			var userinfo = $localstorage.getObject('userinfo');
+			$scope.username = userinfo.name;
+			//$scope.userbirthday = userinfo.birthday;
+			//$http.get(userinfo.picture).then(function(resp) {
+				$scope.userpicture = 'http://graph.facebook.com/' + userinfo.id + '/picture?width=270&height=270';
+				//$scope.userpicture = userinfo.picture;
+			/*}, function(err) {
+				$scope.userpicture = './img/Logo_arpa.png';
+			});*/
+		} else {
+			$scope.username = 'ARPA';
+			$scope.userpicture = './img/logo_arpa.svg';
+		}
+	})
 
     .controller('AllergensCtrl', function($scope){
         $scope.value_allergies = true;
@@ -117,4 +151,42 @@ angular.module('arpa.controllers', [])
         $scope.settings = {
             enableFriends: true
         };
+    })
+
+    .controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window) {
+      $scope.fbLogin = function(){
+        openFB.login(
+          function(response){
+            if(response.status == 'connected'){
+              console.log('Login succedeed');
+			  	openFB.api({
+					path: '/me',
+					params: {fields: 'name,birthday,picture'},
+					success: function(user) {
+						$scope.$apply(function() {
+							$scope.user = user;
+							var date = new Date($scope.user.birthday);							
+							$localstorage.setObject('userinfo', {
+								logged: true,
+								id: $scope.user.id,
+								name: $scope.user.name,
+								birthday: date.toLocaleDateString(),
+								picture: $scope.user.picture.data.url
+							});		
+							$window.location.reload();					
+						});
+					},
+					error: function(error) {
+						alert('Unable to connect to your data');
+					}
+				});
+            }else{
+              alert('Facebook login failed!');
+            }
+          }, {scope: 'email, publish_actions, user_birthday'});
+      }
+	  $scope.logout = function(){
+        $localstorage.setObject('userinfo',null);
+		$window.location.reload();
+      }	  
     });
