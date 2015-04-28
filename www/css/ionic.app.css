@@ -4134,7 +4134,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 14px;
   font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   opacity: 0.7; }
   .tab-item:hover {
@@ -7628,14 +7628,14 @@ a.button {
   /* width and height can be anything, as long as they're equal */ }
 
 .profile {
-  background-color: #387ef5;
-  height: 28vh; }
+  height: 28%; }
 
 .middle {
   position: absolute;
   top: 12%;
-  left: 36%;
-  transform: translate(-50%, -50%); }
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 0 0 0; }
 
 .profile-name {
   font-weight: 800;
@@ -7646,10 +7646,114 @@ a.button {
 .tabs {
   top: 28%; }
 
+.tab-item {
+  margin-top: 40%;
+  font-size: 1.1em !important;
+  line-height: 0.9em !important;
+  font-weight: bold !important;
+  color: #0066b1 !important; }
+
 .tabbed {
-  top: 7%; }
+  top: 7%;
+  background-size: auto 100%;
+  background-color: rgba(255, 255, 255, 0.6); }
+
+.tabbed h1 {
+  color: #2095B8;
+  font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
+  margin-bottom: 6%;
+  font-size: medium;
+  font-weight: bold; }
 
 .tab-text {
   margin-top: 25%;
   font-weight: 800;
   font-size: 18px; }
+
+.allergies {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 3%; }
+
+.allergies img {
+  width: 85%;
+  border: 0 none;
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle; }
+
+ul.allergens li {
+  width: 19%;
+  display: inline-block;
+  vertical-align: middle; }
+
+.intolerances {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 3%; }
+
+.intolerances img {
+  width: 85%;
+  border: 0 none;
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle; }
+
+ul.intolerance li {
+  width: 19%;
+  display: inline-block; }
+
+.to-add-into {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 3%; }
+
+.to-add-into img {
+  width: 85%;
+  border: 0 none;
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle; }
+
+ul.to-add-into li {
+  width: 19%;
+  display: inline-block; }
+
+.to-add-allergs img {
+  width: 85%;
+  border: 0 none;
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle; }
+
+ul.to-add-allergs li {
+  width: 19%;
+  display: inline-block; }
+
+.sexy-line {
+  margin-top: 10%;
+  margin-bottom: 10%;
+  height: 2px;
+  background: none repeat scroll 0% 0% #fff;
+  margin-left: 10%;
+  margin-right: 10%; }
+
+.allergs {
+  margin-left: 3%; }
+
+.intols {
+  margin-left: 3%; }
+
+.no_block .scroll {
+  height: 7em; }
+
+.pane {
+  background: url("../img/novo_fundo.svg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; }
