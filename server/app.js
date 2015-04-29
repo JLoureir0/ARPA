@@ -1,9 +1,9 @@
-var restify = require('restify');
-var server  = restify.createServer({ name: 'ARPA' });
+var restify    = require('restify');
+var server     = restify.createServer({ name: 'ARPA' });
 
-var logger = require('restify-logger');
+var logger     = require('restify-logger');
 
-var greetings = 'Connect with ARPA';
+var root_route = require('./routes/root.js');
 
 server.use(restify.fullResponse());
 server.use(restify.bodyParser());
@@ -19,6 +19,4 @@ server.listen(3000, function() {
   console.log(server.name + ' listening at ' + server.url);
 });
 
-server.get('/', function(req, res) {
-  res.send({ data: greetings });
-});
+root_route.define_route(server);

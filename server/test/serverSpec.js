@@ -1,7 +1,7 @@
-var expect = require('chai').expect;
-var restify = require('restify');
+var expect    = require('chai').expect;
+var restify   = require('restify');
 
-var client = restify.createJsonClient({
+var client    = restify.createJsonClient({
   url: 'http://localhost:3000'
 });
 
