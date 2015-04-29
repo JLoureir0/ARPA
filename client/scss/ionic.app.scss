@@ -56,14 +56,18 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .tabs{
 
-  top: 29% !important;
+  top: 28% !important;
 }
 
 .tab-item{
-  margin-top: 5% !important;
-  font-size: 1.1em !important;
+  margin-top:1.1em !important;
+  font-size: 1.0em !important;
   font-weight: bold !important;
   color: #0066b1 !important;
+}
+
+.tab-content{
+
 }
 
 .tabbed{
@@ -166,10 +170,12 @@ ul.to-add-allergs li {
 }
 
 .allergs{
+  width: 19%;
   margin-left: 3%;
 }
 
 .intols{
+  width: 19%;
   margin-left: 3%;
 }
 
