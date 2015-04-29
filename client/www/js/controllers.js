@@ -171,7 +171,7 @@ angular.module('arpa.controllers', [])
 								name: $scope.user.name,
 								birthday: date.toLocaleDateString()
 							});
-                            $window.location.reload;
+                            $window.location.reload();
 						});
 					},
 					error: function(error) {
@@ -185,6 +185,6 @@ angular.module('arpa.controllers', [])
       }
 	  $scope.logout = function(){
         $localstorage.setObject('userinfo',null);
-        $window.location.reload;
+        $window.location.reload();
       }	  
     });
