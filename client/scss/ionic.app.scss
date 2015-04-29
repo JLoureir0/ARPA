@@ -66,8 +66,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   color: #0066b1 !important;
 }
 
-.tab-content{
-
+.overflow-scroll .scroll{
+  height: 121%
 }
 
 .tabbed{
@@ -190,5 +190,9 @@ ul.to-add-allergs li {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.ionic-scroll[direction=y] {
+  height: 100vh!important;
 }
 

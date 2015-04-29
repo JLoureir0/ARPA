@@ -17,6 +17,7 @@
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
   <platform name="android">
-    <icon src="www/img/logo_azul.svg" width="76" height="76" />'
+    <!-- Android -->
+    <icon src="icons/icon-alergias.png" width="76" height="76" />
   </platform>
 </widget>

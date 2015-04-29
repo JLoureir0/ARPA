@@ -7643,6 +7643,9 @@ a.button {
   font-weight: bold !important;
   color: #0066b1 !important; }
 
+.overflow-scroll .scroll {
+  height: 121%; }
+
 .tabbed {
   top: 3rem;
   background-size: auto 100%;
@@ -7746,3 +7749,6 @@ ul.to-add-allergs li {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; }
+
+.ionic-scroll[direction=y] {
+  height: 100vh !important; }
