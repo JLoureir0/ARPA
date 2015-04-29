@@ -24,12 +24,12 @@ angular.module('arpa.controllers', [])
 			var userinfo = $localstorage.getObject('userinfo');
 			$scope.username = userinfo.name;
 			//$scope.userbirthday = userinfo.birthday;
-			//$http.get(userinfo.picture).then(function(resp) {
-				$scope.userpicture = 'http://graph.facebook.com/' + userinfo.id + '/picture?width=270&height=270';
-				//$scope.userpicture = userinfo.picture;
-			/*}, function(err) {
-				$scope.userpicture = './img/Logo_arpa.png';
-			});*/
+			var picture = 'http://graph.facebook.com/' + userinfo.id + '/picture?width=270&height=270';
+			$http.get(picture).then(function(resp) {
+				$scope.userpicture = picture;
+			}, function(err) {
+				$scope.userpicture = './img/logo_arpa.svg';
+			});
 		} else {
 			$scope.username = 'ARPA';
 			$scope.userpicture = './img/logo_arpa.svg';
@@ -161,17 +161,15 @@ angular.module('arpa.controllers', [])
               console.log('Login succedeed');
 			  	openFB.api({
 					path: '/me',
-					params: {fields: 'name,birthday,picture'},
+					params: {fields: 'id,name,birthday'},
 					success: function(user) {
 						$scope.$apply(function() {
 							$scope.user = user;
 							var date = new Date($scope.user.birthday);							
 							$localstorage.setObject('userinfo', {
-								logged: true,
 								id: $scope.user.id,
 								name: $scope.user.name,
-								birthday: date.toLocaleDateString(),
-								picture: $scope.user.picture.data.url
+								birthday: date.toLocaleDateString()
 							});		
 							$window.location.reload();					
 						});
