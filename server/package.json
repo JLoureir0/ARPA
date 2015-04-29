@@ -1,0 +1,30 @@
+{
+  "name": "arpa",
+  "version": "1.0.0",
+  "description": "API for the ARPA app",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Jflima92/ARPA.git"
+  },
+  "keywords": [
+    "ARPA",
+    "allergic"
+  ],
+  "author": "Lettuce",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jflima92/ARPA/issues"
+  },
+  "homepage": "https://github.com/Jflima92/ARPA",
+  "devDependencies": {
+    "chai": "^2.3.0"
+  },
+  "dependencies": {
+    "restify": "^3.0.2",
+    "restify-logger": "^2.0.1"
+  }
+}
