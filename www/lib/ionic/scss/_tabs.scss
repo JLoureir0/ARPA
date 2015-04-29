@@ -105,7 +105,6 @@
         margin-top: -$tabs-striped-border-width;
         color: $color;
         border-style: solid;
-        border-width: $tabs-striped-border-width 0 0 0;
         border-color: $color;
       }
     }
@@ -203,7 +202,6 @@
     &.activated {
       margin-top: -$tabs-striped-border-width;
       border-style: solid;
-      border-width: $tabs-striped-border-width 0 0 0;
       border-color: $dark;
       .badge{
         top:$tabs-striped-border-width;
@@ -304,7 +302,6 @@ ion-tabs {
       &.active,
       &.activated {
         margin-top: $tabs-striped-border-width - 1px;
-        border-width: 0px 0px $tabs-striped-border-width 0px !important;
         border-style: solid;
         > .badge, > i{
           margin-top: -$tabs-striped-border-width + 1px;

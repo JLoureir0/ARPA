@@ -119,8 +119,8 @@ angular.module('arpa.controllers', [])
             },
             {
                 id: 7,
-                name: "tremoços",
-                src: "./img/allergens-icons/tremoços.svg"
+                name: "tremocos",
+                src: "./img/allergens-icons/tremocos.svg"
             }
         ];
 
