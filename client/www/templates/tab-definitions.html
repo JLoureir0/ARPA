@@ -1,18 +1,54 @@
 <ion-view view-title="Definitions">
   <ion-content class="tabbed">
-    <ion-list>
-    <br />
-    <br />
-    <br />
-    <button class="btn btn-facebook" ng-click="fbLogin()">
-        <i class="fa fa-facebook"></i> 
-        Connect with Facebook
-    </button>
-    <br />
-    <br />
-    <button class="" ng-click="logout()">
+    <!--<ion-list show-delete="true">
+      <br />
+      <br />
+      <br />
+
+      <button class="btn btn-facebook medium-button" ng-click="fbLogin()">
+        <i class="fa fa-facebook"></i>
+        Login
+      </button>
+      <br />
+      <br />
+
+      <button class="button button-positive middle tab-center" ng-click="logout()">
         Logout
-    </button>
-    </ion-list>
+      </button>
+    </ion-list>-->
+
+    <div class="buttons-block">
+      <div class="centered">
+        <ul>
+          <a class="thick">
+            <button class="button button-positive width-150px" ng-click="modal.show()" ng-hide="sign_in_hide">
+              SIGN IN
+            </button>
+          </a>
+        </ul>
+        <ul>
+          <a class="thick">
+            <button class="button button-positive width-150px" ng-click="logout()">
+              SIGN OUT
+            </button>
+          </a>
+        </ul>
+
+      </div>
+    </div>
+
+    <!--<ul class="list- _toggle defs" >
+      <li>
+        <button class="button button-positive middle tab-center" >
+          Logout
+        </button>
+      </li>
+      <li>
+        <button class="button button-positive middle tab-center" ng-click="logout()">
+          Logout
+        </button>
+      </li>
+    </ul>-->
+
   </ion-content>
 </ion-view>
