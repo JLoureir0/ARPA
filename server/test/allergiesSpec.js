@@ -86,5 +86,35 @@ describe('/allergies.json', function() {
         done();
       });
     });
+    it('should return 409 and an error message if no allergic passed', function(done) {
+      var allergies_with_no_allergic = JSON.parse(JSON.stringify(allergies));
+      delete allergies_with_no_allergic.allergic;
+
+      client.post('/allergies.json', allergies_with_no_allergic, function(err, req, res, obj) {
+        expect(res.statusCode).to.be.equal(409);
+        expect(obj.message).to.be.equal('allergic must be supplied');
+        done();
+      });
+    });
+    it('should return 409 and an error message if allergic is not an array', function(done) {
+      var allergies_string_allergic = JSON.parse(JSON.stringify(allergies));
+      allergies_string_allergic.allergic = 'string';
+
+      client.post('/allergies.json', allergies_string_allergic, function(err, req, res, obj) {
+        expect(res.statusCode).to.be.equal(409);
+        expect(obj.message).to.be.equal('allergic must be an array');
+        done();
+      });
+    });
+    it('should return 409 and an error message if allergic has invalid values', function(done) {
+      var allergies_invalid_allergic = JSON.parse(JSON.stringify(allergies));
+      allergies_invalid_allergic.allergic = ['invalid'];
+
+      client.post('/allergies.json', allergies_invalid_allergic, function(err, req, res, obj) {
+        expect(res.statusCode).to.be.equal(409);
+        expect(obj.message).to.be.equal('allergic must be an array with valid values');
+        done();
+      });
+    });
   });
 });

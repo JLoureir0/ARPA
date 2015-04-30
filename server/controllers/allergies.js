@@ -25,6 +25,7 @@ function parse_allergies(allergies) {
 function verify_allergies_attributes(allergies, next) {
   parse_id(allergies._id, next);
   parse_intolerant(allergies.intolerant, next);
+  parse_allergic(allergies.allergic, next);
 }
 
 function parse_id(id, next) {
@@ -43,5 +44,17 @@ function parse_intolerant(intolerant, next) {
   intolerant.forEach(function(element) {
     if(valid_allergies.indexOf(element) === -1)
       return next(new restify.InvalidArgumentError('intolerant must be an array with valid values'));
+  });
+}
+
+function parse_allergic(allergic, next) {
+  if(allergic === undefined)
+    return next(new restify.InvalidArgumentError('allergic must be supplied'));
+  if(allergic.constructor !== Array)
+    return next(new restify.InvalidArgumentError('allergic must be an array'));
+
+  allergic.forEach(function(element) {
+    if(valid_allergies.indexOf(element) === -1)
+      return next(new restify.InvalidArgumentError('allergic must be an array with valid values'));
   });
 }
