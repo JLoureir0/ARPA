@@ -3,7 +3,7 @@ var restify   = require('restify');
 
 var allergies = {
   _id         : 'userid',
-  intolerance : ['milk'],
+  intolerant  : ['milk'],
   allergic    : ['peanuts', 'eggs']
 };
 
@@ -56,33 +56,33 @@ describe('/allergies.json', function() {
         done();
       });
     });
-    it('should return 409 and an error message if no intolerance passed', function(done) {
-      var allergies_with_no_intolerance = JSON.parse(JSON.stringify(allergies));
-      delete allergies_with_no_intolerance.intolerance;
+    it('should return 409 and an error message if no intolerant passed', function(done) {
+      var allergies_with_no_intolerant = JSON.parse(JSON.stringify(allergies));
+      delete allergies_with_no_intolerant.intolerant;
 
-      client.post('/allergies.json', allergies_with_no_intolerance, function(err, req, res, obj) {
+      client.post('/allergies.json', allergies_with_no_intolerant, function(err, req, res, obj) {
         expect(res.statusCode).to.be.equal(409);
-        expect(obj.message).to.be.equal('intolerance must be supplied');
+        expect(obj.message).to.be.equal('intolerant must be supplied');
         done();
       });
     });
-    it('should return 409 and an error message if intolerance is not an array', function(done) {
-      var allergies_string_intolerance = JSON.parse(JSON.stringify(allergies));
-      allergies_string_intolerance.intolerance = 'string';
+    it('should return 409 and an error message if intolerant is not an array', function(done) {
+      var allergies_string_intolerant = JSON.parse(JSON.stringify(allergies));
+      allergies_string_intolerant.intolerant = 'string';
 
-      client.post('/allergies.json', allergies_string_intolerance, function(err, req, res, obj) {
+      client.post('/allergies.json', allergies_string_intolerant, function(err, req, res, obj) {
         expect(res.statusCode).to.be.equal(409);
-        expect(obj.message).to.be.equal('intolerance must be an array');
+        expect(obj.message).to.be.equal('intolerant must be an array');
         done();
       });
     });
-    it('should return 409 and an error message if intolerance has invalid values', function(done) {
-      var allergies_invalid_intolerance = JSON.parse(JSON.stringify(allergies));
-      allergies_invalid_intolerance.intolerance = ['invalid'];
+    it('should return 409 and an error message if intolerant has invalid values', function(done) {
+      var allergies_invalid_intolerant = JSON.parse(JSON.stringify(allergies));
+      allergies_invalid_intolerant.intolerant = ['invalid'];
 
-      client.post('/allergies.json', allergies_invalid_intolerance, function(err, req, res, obj) {
+      client.post('/allergies.json', allergies_invalid_intolerant, function(err, req, res, obj) {
         expect(res.statusCode).to.be.equal(409);
-        expect(obj.message).to.be.equal('intolerance must be an array with valid values');
+        expect(obj.message).to.be.equal('intolerant must be an array with valid values');
         done();
       });
     });

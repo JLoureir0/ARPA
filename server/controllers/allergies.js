@@ -12,7 +12,7 @@ exports.handle_params = function(req, res, next) {
 function parse_allergies(allergies) {
   var allergies_attributes = [
     '_id',
-    'intolerance',
+    'intolerant',
     'allergic'
   ];
 
@@ -24,7 +24,7 @@ function parse_allergies(allergies) {
 
 function verify_allergies_attributes(allergies, next) {
   parse_id(allergies._id, next);
-  parse_intolerance(allergies.intolerance, next);
+  parse_intolerant(allergies.intolerant, next);
 }
 
 function parse_id(id, next) {
@@ -34,14 +34,14 @@ function parse_id(id, next) {
     return next(new restify.InvalidArgumentError('_id must be an alphanumeric string'));
 }
 
-function parse_intolerance(intolerance, next) {
-  if(intolerance === undefined)
-    return next(new restify.InvalidArgumentError('intolerance must be supplied'));
-  if(intolerance.constructor !== Array)
-    return next(new restify.InvalidArgumentError('intolerance must be an array'));
+function parse_intolerant(intolerant, next) {
+  if(intolerant === undefined)
+    return next(new restify.InvalidArgumentError('intolerant must be supplied'));
+  if(intolerant.constructor !== Array)
+    return next(new restify.InvalidArgumentError('intolerant must be an array'));
 
-  intolerance.forEach(function(element) {
+  intolerant.forEach(function(element) {
     if(valid_allergies.indexOf(element) === -1)
-      return next(new restify.InvalidArgumentError('intolerance must be an array with valid values'));
+      return next(new restify.InvalidArgumentError('intolerant must be an array with valid values'));
   });
 }
