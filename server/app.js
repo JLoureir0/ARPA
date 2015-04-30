@@ -1,10 +1,12 @@
-var restify    = require('restify');
-var server     = restify.createServer({ name: 'ARPA' });
+var restify          = require('restify');
+var server           = restify.createServer({ name: 'ARPA' });
 
-var logger     = require('restify-logger');
+var logger           = require('restify-logger');
 
-var root_route = require('./routes/root.js');
+var root_route       = require('./routes/root.js');
+var allergies_routes = require('./routes/allergies.js');
 
+//Middleware
 server.use(restify.fullResponse());
 server.use(restify.bodyParser());
 
@@ -15,8 +17,11 @@ server.use(function(req, res, next) {
   next();
 });
 
+//Routes
+root_route.define_route(server);
+allergies_routes.define_routes(server);
+
+//Running server
 server.listen(3000, function() {
   console.log(server.name + ' listening at ' + server.url);
 });
-
-root_route.define_route(server);

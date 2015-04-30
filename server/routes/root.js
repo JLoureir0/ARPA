@@ -1,4 +1,4 @@
-var greetings  = 'Connect with ARPA';
+var greetings        = 'Connect with ARPA';
 
 exports.define_route = function(server) {
   server.get('/', function(req, res) {
