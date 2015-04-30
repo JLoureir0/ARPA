@@ -1,0 +1,12 @@
+<ion-modal-view class=">
+    <div class="to-add-allergs adding"  ng-hide="value_allergies">
+        <h1>caralho</h1>
+        <ion-scroll direction="x" class="available-scroller no_block">
+            <div class="allergs" collection-repeat="allergen in not_selected_allergens"
+                 item-height="150" item-width="19%" >
+                <img ng-src="{{allergen.src}}">
+            </div>
+        </ion-scroll>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">Cancel</button>
+    </div>
+</ion-modal-view>

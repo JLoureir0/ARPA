@@ -1,0 +1,51 @@
+<ion-view view-title="Allergens"  ng-style="push_down" class="over-background">
+    <ion-content class="tabbed">
+            <div class="allergies">
+                <h1>ALLERGIES</h1>
+                <!--<ion-scroll direction="x" class="available-scroller"> //TODO for allergen sellection use this
+                    <div class="allergens" collection-repeat="allergen in allergens"
+                         item-height="150" item-width="100" >
+                        <img ng-src="{{allergen.src}}">
+                    </div>
+                </ion-scroll>-->
+                <ul class="allergens">
+                    <li ng-repeat="allergen in allergens">
+                        <img src="{{allergen.src}}"/> <!-- TODO error in console, dunno why -->
+
+                    </li>
+                    <li>
+                        <img ng-click="plus_allergs()" src="{{extra_icons_allergs}}">
+                    </li>
+                </ul>
+            </div>
+            <div class="to-add-allergs adding " ng-hide="value_allergies">
+                <ion-scroll direction="x" class="available-scroller no_block">
+                    <div class="allergs" collection-repeat="allergen in not_selected_allergens"
+                         item-height="150" item-width="19%" >
+                        <img ng-src="{{allergen.src}}">
+                    </div>
+                </ion-scroll>
+            </div>
+            <div class="sexy-line"></div>
+
+            <div class="intolerances">
+                <h1>INTOLERANCES</h1>
+                <ul class="intolerance">
+                    <li ng-repeat="intolerance in intolerances">
+                        <img src="{{intolerance.src}}"/>
+                    </li>
+                    <li>
+                            <img ng-click="plus_into()" src="{{extra_icons_intol}}">
+                    </li>
+                </ul>
+            </div>
+            <div class="to-add-into" ng-hide="value_intolerances">
+               <ion-scroll direction="x" class="available-scroller no_block">
+                    <div class="intolers" collection-repeat="allergen in allergens"
+                         item-height="150" item-width="19%" >
+                        <img ng-src="{{allergen.src}}">
+                    </div>
+                </ion-scroll>
+            </div>
+    </ion-content>
+</ion-view>

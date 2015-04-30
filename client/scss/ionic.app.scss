@@ -1,0 +1,233 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+
+.circle {
+  border-radius: 50%;
+  width: 6.1rem;
+  height: 6.1rem;
+  background-color: #FFFFFF;
+
+  /* width and height can be anything, as long as they're equal */
+}
+
+.profile{
+ // background-image: url("../img/novo_fundo.svg");
+  height: 28%;
+}
+
+.middle {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  margin: 0 0 0 0;
+
+}
+
+.profile-name {
+  font-weight: 800;
+  color: #FFFFFF;
+  top: 24%;
+  left: 50%;
+}
+
+.tabs{
+
+  top: 28% !important;
+}
+
+.tab-item{
+  padding-top: 5% !important;
+  font-size: 1.0em !important;
+  font-weight: bold !important;
+  color: #0066b1 !important;
+}
+
+.overflow-scroll .scroll{
+  height: 121%
+}
+
+.tabbed{
+  top: 3.0rem;
+  //background-image: url("../img/novo_fundo.svg");
+  background-size: auto 100%;
+  -webkit-background-size: auto 100%;
+  -moz-background-size: auto 100%;
+  -o-background-size: auto 100%;
+  background-color: rgba(255,255,255,0.6);
+}
+
+.tabbed h1{
+  color: #2095B8;
+  font-family: $font-family-sans-serif;
+  margin-bottom: 6%;
+  font-size: medium;
+  font-weight: bold;
+}
+
+.allergies{
+  margin-top: 5%;
+  margin-bottom: 7%;
+  margin-left: 3%
+}
+
+.allergies img{
+  width: 85%;
+  border: 0 none;
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+ul.allergens li {
+  width: 19%;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.intolerances{
+  margin-top: 5%;
+  margin-bottom: 8%;
+  margin-left: 3%
+}
+
+.intolerances img{
+  width: 85%;
+  border: 0 none;
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+ul.intolerance li {
+  width: 19%;
+  display: inline-block;
+}
+
+
+.to-add-into{
+  margin-top: 5%;
+  margin-bottom: 5%;
+  margin-left: 3%
+}
+
+.to-add-into img{
+  width: 85%;
+  border: 0 none;
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+ul.to-add-into li {
+  width: 19%;
+  display: inline-block;
+}
+
+
+.box_shadow {
+  box-shadow: 0px 10px 5px #888888;
+  opacity: 1 !important;
+}
+
+
+.to-add-allergs img{
+  width: 85%;
+  border: 0 none;
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+
+
+ul.to-add-allergs li {
+  width: 19%;
+  display: inline-block;
+}
+.sexy-line{
+  margin-bottom: 10%;
+  height: 2px;
+  background: none repeat scroll 0% 0% #fff;
+  margin-left: 10%;
+  margin-right:10%;
+}
+
+.allergs{
+  width: 19%;
+  margin-left: 3%;
+}
+
+.intols{
+  width: 19%;
+  margin-left: 3%;
+}
+
+
+.no_block .scroll{
+  height: 3.8rem;
+}
+
+.pane{
+  background:url("../img/novo_fundo.svg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.ionic-scroll[direction=y] {
+  height: 100vh!important;
+}
+
+._toggle{
+
+  background-color: transparent;
+  padding-top: 20%;
+
+}
+
+.toggle-button{
+  margin-top: 1.4em;
+  font-size: 1.0em !important;
+  font-weight: bold !important;
+  color: #0066b1 !important;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.toggle-button img{
+  margin-right: 3%;
+  width: 15%;
+  border: 0 none;
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle
+}
