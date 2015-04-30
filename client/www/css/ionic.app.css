@@ -7681,7 +7681,7 @@ ul.allergens li {
 
 .intolerances {
   margin-top: 5%;
-  margin-bottom: 5%;
+  margin-bottom: 8%;
   margin-left: 3%; }
 
 .intolerances img {
@@ -7713,6 +7713,10 @@ ul.to-add-into li {
   width: 19%;
   display: inline-block; }
 
+.box_shadow {
+  box-shadow: 0px 10px 5px #888888;
+  opacity: 1 !important; }
+
 .to-add-allergs img {
   width: 85%;
   border: 0 none;
@@ -7741,7 +7745,7 @@ ul.to-add-allergs li {
   margin-left: 3%; }
 
 .no_block .scroll {
-  height: 6em; }
+  height: 3.8rem; }
 
 .pane {
   background: url("../img/novo_fundo.svg") no-repeat center center fixed;
@@ -7752,3 +7756,24 @@ ul.to-add-allergs li {
 
 .ionic-scroll[direction=y] {
   height: 100vh !important; }
+
+._toggle {
+  background-color: transparent;
+  padding-top: 20%; }
+
+.toggle-button {
+  margin-top: 1.4em;
+  font-size: 1em !important;
+  font-weight: bold !important;
+  color: #0066b1 !important;
+  border-color: transparent;
+  background-color: transparent; }
+
+.toggle-button img {
+  margin-right: 3%;
+  width: 15%;
+  border: 0 none;
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle; }

@@ -1,4 +1,4 @@
-<ion-view view-title="Allergens" class="over-background">
+<ion-view view-title="Allergens"  ng-style="push_down" class="over-background">
     <ion-content class="tabbed">
             <div class="allergies">
                 <h1>ALLERGIES</h1>
@@ -18,7 +18,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="to-add-allergs adding" ng-hide="value_allergies">
+            <div class="to-add-allergs adding " ng-hide="value_allergies">
                 <ion-scroll direction="x" class="available-scroller no_block">
                     <div class="allergs" collection-repeat="allergen in not_selected_allergens"
                          item-height="150" item-width="19%" >

@@ -70,12 +70,12 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services'])
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.applications', {
+      url: '/applications',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-applications': {
+          templateUrl: 'templates/tab-applications.html',
+          controller: 'AppsCtrl'
         }
       }
     })
