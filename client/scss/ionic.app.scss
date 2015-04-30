@@ -56,18 +56,22 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .tabs{
 
-  top: 29% !important;
+  top: 28% !important;
 }
 
 .tab-item{
-  margin-top: 5% !important;
-  font-size: 1.1em !important;
+  padding-top: 5% !important;
+  font-size: 1.0em !important;
   font-weight: bold !important;
   color: #0066b1 !important;
 }
 
+.overflow-scroll .scroll{
+  height: 121%
+}
+
 .tabbed{
-  top: 3.1rem;
+  top: 3.0rem;
   //background-image: url("../img/novo_fundo.svg");
   background-size: auto 100%;
   -webkit-background-size: auto 100%;
@@ -166,10 +170,12 @@ ul.to-add-allergs li {
 }
 
 .allergs{
+  width: 19%;
   margin-left: 3%;
 }
 
 .intols{
+  width: 19%;
   margin-left: 3%;
 }
 
@@ -184,5 +190,9 @@ ul.to-add-allergs li {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+
+.ionic-scroll[direction=y] {
+  height: 100vh!important;
 }
 

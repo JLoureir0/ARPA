@@ -20,6 +20,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services'])
     }
   });
 })
+    .config(function($ionicConfigProvider) {if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);})
 
 .config(function($stateProvider, $urlRouterProvider) {
   openFB.init({appId:'367156356826931'});
