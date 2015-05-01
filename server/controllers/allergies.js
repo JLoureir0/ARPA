@@ -53,10 +53,7 @@ function parse_intolerant(intolerant, next) {
   if(intolerant.constructor !== Array)
     return next(new restify.InvalidArgumentError('intolerant must be an array'));
 
-  intolerant.forEach(function(element) {
-    if(valid_allergies.indexOf(element) === -1)
-      return next(new restify.InvalidArgumentError('intolerant must be an array with valid values'));
-  });
+  parse_valid_allergies(intolerant, 'intolerant', next);
 }
 
 function parse_allergic(allergic, next) {
@@ -65,8 +62,12 @@ function parse_allergic(allergic, next) {
   if(allergic.constructor !== Array)
     return next(new restify.InvalidArgumentError('allergic must be an array'));
 
-  allergic.forEach(function(element) {
+  parse_valid_allergies(allergic, 'allergic', next);
+}
+
+function parse_valid_allergies(array, type, next) {
+  array.forEach(function(element) {
     if(valid_allergies.indexOf(element) === -1)
-      return next(new restify.InvalidArgumentError('allergic must be an array with valid values'));
+      return next(new restify.InvalidArgumentError(type + ' must be an array with valid values'));
   });
 }
