@@ -1,6 +1,8 @@
-var restify           = require('restify');
+var restify         = require('restify');
+var allergies_model = require('../models/allergies.js');
+
 //TODO Add all the allergies
-var valid_allergies   = ['milk', 'peanuts', 'eggs'];
+var valid_allergies = ['milk', 'peanuts', 'eggs'];
 
 exports.handle_params = function(req, res, next) {
   parse_allergies(req.params);
@@ -8,6 +10,16 @@ exports.handle_params = function(req, res, next) {
 
   next();
 };
+
+exports.save_allergies = function(req, res, next) {
+  var allergies = req.params;
+  allergies_model.save(allergies._id, allergies.intolerant, allergies.allergic, function(err, result) {
+    if(err)
+      return next(new restify.ForbiddenError(err.detail));
+    console.log('Inserted the allergies of user "' + allergies._id + '" to the database');
+    res.send(201, { data: req.params });
+  });
+}
 
 function parse_allergies(allergies) {
   var allergies_attributes = [

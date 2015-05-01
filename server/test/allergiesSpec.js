@@ -1,5 +1,7 @@
-var expect    = require('chai').expect;
-var restify   = require('restify');
+var expect  = require('chai').expect;
+var restify = require('restify');
+
+var allergies_model = require('../models/allergies.js');
 
 var allergies = {
   _id         : 'userid',
@@ -7,16 +9,29 @@ var allergies = {
   allergic    : ['peanuts', 'eggs']
 };
 
-var client    = restify.createJsonClient({
+var client = restify.createJsonClient({
   url: 'http://localhost:3000'
 });
 
 describe('/allergies.json', function() {
   describe('post request', function() {
+    beforeEach(function(done) {
+      allergies_model.delete(allergies._id, function(err, result) {
+        done();
+      })
+    });
     it('should return 201 on create', function(done) {
       client.post('/allergies.json', allergies, function(err, req, res, obj) {
         expect(res.statusCode).to.be.equal(201);
         done();
+      });
+    });
+    it('should store the allergies in the database', function(done) {
+      client.post('/allergies.json', allergies, function(err, req, res, obj) {
+        allergies_model.get(allergies._id, function(err, result) {
+          expect(result.rows.length).to.be.equal(1);
+          done();
+        });
       });
     });
     it('should return the user on create in the data param', function(done) {

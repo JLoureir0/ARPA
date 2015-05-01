@@ -24,6 +24,7 @@
     "chai": "^2.3.0"
   },
   "dependencies": {
+    "pg": "^4.3.0",
     "restify": "^3.0.2",
     "restify-logger": "^2.0.1"
   }

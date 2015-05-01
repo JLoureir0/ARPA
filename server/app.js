@@ -1,7 +1,7 @@
-var restify          = require('restify');
-var server           = restify.createServer({ name: 'ARPA' });
+var restify = require('restify');
+var server  = restify.createServer({ name: 'ARPA' });
 
-var logger           = require('restify-logger');
+var logger = require('restify-logger');
 
 var root_route       = require('./routes/root.js');
 var allergies_routes = require('./routes/allergies.js');
