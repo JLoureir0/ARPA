@@ -67,7 +67,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 .overflow-scroll .scroll{
-  height: 121%
+  height: 150%
 }
 
 .tabbed{
@@ -172,7 +172,8 @@ ul.to-add-allergs li {
   display: inline-block;
 }
 .sexy-line{
-  margin-bottom: 10%;
+  margin-top:5%;
+  margin-bottom: 7%;
   height: 2px;
   background: none repeat scroll 0% 0% #fff;
   margin-left: 10%;
@@ -191,7 +192,7 @@ ul.to-add-allergs li {
 
 
 .no_block .scroll{
-  height: 3.8rem;
+  height: 4.4em;
 }
 
 .pane{
@@ -230,4 +231,55 @@ ul.to-add-allergs li {
   height: auto;
   max-width: 100%;
   vertical-align: middle
+}
+
+.medium-button{
+ line-height: 2em;
+  width: 10%;
+  margin-left: 1%;
+}
+
+.tab-center{
+  top:55%;
+}
+
+.buttons-block .button {
+  border-width: 2px;
+  border-color: #387ef5;
+}
+
+.buttons-block {
+  height:12%;
+  text-align: center;
+}
+.buttons-block ul{
+  margin-bottom: 3vh;
+}
+
+.width-150px {
+  width:150px;
+}
+
+.buttons-block:before {
+  content:'';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.defs{
+  top:10%;
+}
+
+.center-modal{
+  min-height: 50% !important;
+  top: 28% !important;
+}
+
+.login-with{
+  padding-left: 5%;
+  color: #0c60ee;
+  font-family: $font-family-sans-serif;
+  font-size: medium;
+  font-weight: bold;
 }

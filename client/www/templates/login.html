@@ -1,0 +1,35 @@
+<ion-modal-view class="center-modal">
+    <ion-content>
+        <div class="list">
+
+            <label class="item item-input">
+                <span class="input-label">Username</span>
+                <input type="text" ng-model="user.username">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Password</span>
+                <input type="password" ng-model="user.password">
+            </label>
+        </div>
+        <div class="padding">
+            <button class="button button-block button-positive" ng-click="fbLogin()">
+                SIGN IN
+            </button>
+        </div>
+        <div class="login-with">
+            OR LOGIN WITH
+                <button class="btn btn-social-icon btn-facebook " ng-click="fbLogin()">
+                    <i class="fa fa-facebook"></i>
+                </button>
+            <button class="btn btn-social-icon btn-google" ng-click="fbLogin()">
+                <i class="fa fa-google-plus"></i>
+
+            </button>
+            <button class="btn btn-social-icon btn-linkedin " ng-click="fbLogin()">
+                <i class="fa fa-linkedin"></i>
+            </button>
+        </div>
+
+    </ion-content>
+</ion-modal-view>
+</script>

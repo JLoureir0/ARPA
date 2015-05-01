@@ -20,6 +20,8 @@ angular.module('arpa.controllers', [])
     .controller('AppsCtrl', function($scope) {})
 
     .controller('MainCtrl', function($scope, $localstorage, $http){
+        $scope.userpicture = './img/logo_arpa.svg';
+
         if($localstorage.getObject('userinfo') != null) {
             var userinfo = $localstorage.getObject('userinfo');
             $scope.username = userinfo.name;
@@ -36,7 +38,7 @@ angular.module('arpa.controllers', [])
         }
     })
 
-    .controller('AllergensCtrl', function($scope, $ionicModal, $ionicPopover){
+    .controller('AllergensCtrl', function($scope, $ionicModal){
         $scope.value_allergies = true;
         $scope.value_intolerances = true;
         $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
@@ -53,7 +55,7 @@ angular.module('arpa.controllers', [])
             }
         };
 
-         $scope.plus_allergs = function() {
+        $scope.plus_allergs = function() {
             if ($scope.value_allergies == true) {
                 $scope.value_allergies = false;
                 $scope.extra_icons_allergs = "./img/allergens-icons/guardar.svg";
@@ -132,7 +134,6 @@ angular.module('arpa.controllers', [])
                 name: "lacteos",
                 src: "./img/allergens-icons/lacteos.svg"
             },
-
         ];
     })
 
@@ -147,8 +148,8 @@ angular.module('arpa.controllers', [])
         };
     })
 
-    .controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window) {
-        $scope.userpicture = './img/logo_arpa.svg';
+    .controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window, $ionicModal) {
+        $scope.sign_in_hide = false;
         $scope.fbLogin = function(){
             openFB.login(
                 function(response){
@@ -182,4 +183,15 @@ angular.module('arpa.controllers', [])
             $localstorage.setObject('userinfo',null);
             $window.location.reload();
         }
+
+        $scope.contact = {
+            name: 'Mittens Cat',
+            info: 'Tap anywhere on the card to open the modal'
+        }
+
+        $ionicModal.fromTemplateUrl('./templates/login.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
     });
