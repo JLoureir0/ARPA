@@ -23,7 +23,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services'])
     .config(function($ionicConfigProvider) {if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);})
 
 .config(function($stateProvider, $urlRouterProvider) {
-  openFB.init({appId:'367156356826931'});
+  openFB.init({appId:'367156356826931'}, ionic.Platform.isWebView());
   // Ionic uses AngularUI Router which uses the concept of states
   // Learn more here: https://github.com/angular-ui/ui-router
   // Set up the various states which the app can be in.
@@ -70,12 +70,12 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services'])
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
+  .state('tab.applications', {
+      url: '/applications',
       views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
+        'tab-applications': {
+          templateUrl: 'templates/tab-applications.html',
+          controller: 'AppsCtrl'
         }
       }
     })

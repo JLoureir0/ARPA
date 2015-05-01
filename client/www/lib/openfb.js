@@ -21,7 +21,7 @@ var openFB = (function () {
 
         baseURL = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '') + context,
 
-        oauthRedirectURL = baseURL + '/oauthcallback.html',
+        oauthRedirectURL = 'https://www.facebook.com/connect/login_success.html',
 
         logoutRedirectURL = baseURL + '/logoutcallback.html',
 
@@ -49,7 +49,10 @@ var openFB = (function () {
      *  appId: The id of the Facebook app,
      *  tokenStore: The store used to save the Facebook token. Optional. If not provided, we use sessionStorage.
      */
-    function init(params) {
+    function init(params,isWeb) {
+        if(isWeb == false){
+            oauthRedirectURL = baseURL + '/oauthcallback.html';
+        }
         if (params.appId) {
             fbAppId = params.appId;
         } else {

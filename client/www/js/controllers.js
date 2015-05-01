@@ -1,42 +1,44 @@
 angular.module('arpa.controllers', [])
 
-	.factory('$localstorage', ['$window', function($window) {
-	  return {
-		set: function(key, value) {
-		  $window.localStorage[key] = value;
-		},
-		get: function(key, defaultValue) {
-		  return $window.localStorage[key] || defaultValue;
-		},
-		setObject: function(key, value) {
-		  $window.localStorage[key] = JSON.stringify(value);
-		},
-		getObject: function(key) {
-		  return JSON.parse($window.localStorage[key] || '{}');
-		}
-	  }
-	}])
+    .factory('$localstorage', ['$window', function($window) {
+        return {
+            set: function(key, value) {
+                $window.localStorage[key] = value;
+            },
+            get: function(key, defaultValue) {
+                return $window.localStorage[key] || defaultValue;
+            },
+            setObject: function(key, value) {
+                $window.localStorage[key] = JSON.stringify(value);
+            },
+            getObject: function(key) {
+                return JSON.parse($window.localStorage[key] || '{}');
+            }
+        }
+    }])
 
-    .controller('DashCtrl', function($scope) {})
-	
-	.controller('MainCtrl', function($scope, $localstorage, $http){
-		if($localstorage.getObject('userinfo') != null) {
-			var userinfo = $localstorage.getObject('userinfo');
-			$scope.username = userinfo.name;
-			//$scope.userbirthday = userinfo.birthday;
-			var picture = 'http://graph.facebook.com/' + userinfo.id + '/picture?width=270&height=270';
-			$http.get(picture).then(function(resp) {
-				$scope.userpicture = picture;
-			}, function(err) {
-				$scope.userpicture = './img/logo_arpa.svg';
-			});
-		} else {
-			$scope.username = 'ARPA';
-			$scope.userpicture = './img/logo_arpa.svg';
-		}
-	})
+    .controller('AppsCtrl', function($scope) {})
 
-    .controller('AllergensCtrl', function($scope){
+    .controller('MainCtrl', function($scope, $localstorage, $http){
+        $scope.userpicture = './img/logo_arpa.svg';
+
+        if($localstorage.getObject('userinfo') != null) {
+            var userinfo = $localstorage.getObject('userinfo');
+            $scope.username = userinfo.name;
+            //$scope.userbirthday = userinfo.birthday;
+            var picture = 'http://graph.facebook.com/' + userinfo.id + '/picture?width=270&height=270';
+            $http.get(picture).then(function(resp) {
+                $scope.userpicture = picture;
+            }, function(err) {
+                $scope.userpicture = './img/logo_arpa.svg';
+            });
+        } else {
+            $scope.username = 'ARPA';
+            $scope.userpicture = './img/logo_arpa.svg';
+        }
+    })
+
+    .controller('AllergensCtrl', function($scope, $ionicModal){
         $scope.value_allergies = true;
         $scope.value_intolerances = true;
         $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
@@ -57,9 +59,11 @@ angular.module('arpa.controllers', [])
             if ($scope.value_allergies == true) {
                 $scope.value_allergies = false;
                 $scope.extra_icons_allergs = "./img/allergens-icons/guardar.svg";
+                //$scope.push_down = {'opacity': "0.6"};
             }else{
                 $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
                 $scope.value_allergies = true;
+                //$scope.push_down = {'opacity': "1"};
             }
         };
 
@@ -130,18 +134,9 @@ angular.module('arpa.controllers', [])
                 name: "lacteos",
                 src: "./img/allergens-icons/lacteos.svg"
             },
-
         ];
     })
 
-
-
-    .controller('ChatsCtrl', function($scope, Chats) {
-        $scope.chats = Chats.all();
-        $scope.remove = function(chat) {
-            Chats.remove(chat);
-        }
-    })
 
     .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
         $scope.chat = Chats.get($stateParams.chatId);
@@ -153,38 +148,50 @@ angular.module('arpa.controllers', [])
         };
     })
 
-    .controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window) {
-      $scope.fbLogin = function(){
-        openFB.login(
-          function(response){
-            if(response.status == 'connected'){
-              console.log('Login succedeed');
-			  	openFB.api({
-					path: '/me',
-					params: {fields: 'id,name,birthday'},
-					success: function(user) {
-						$scope.$apply(function() {
-							$scope.user = user;
-							var date = new Date($scope.user.birthday);							
-							$localstorage.setObject('userinfo', {
-								id: $scope.user.id,
-								name: $scope.user.name,
-								birthday: date.toLocaleDateString()
-							});
-                            $window.location.reload();
-						});
-					},
-					error: function(error) {
-						alert('Unable to connect to your data');
-					}
-				});
-            }else{
-              alert('Facebook login failed!');
-            }
-          }, {scope: 'email, publish_actions, user_birthday'});
-      }
-	  $scope.logout = function(){
-        $localstorage.setObject('userinfo',null);
-        $window.location.reload();
-      }	  
+    .controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window, $ionicModal) {
+        $scope.sign_in_hide = false;
+        $scope.fbLogin = function(){
+            openFB.login(
+                function(response){
+                    if(response.status == 'connected'){
+                        console.log('Login succedeed');
+                        openFB.api({
+                            path: '/me',
+                            params: {fields: 'id,name,birthday'},
+                            success: function(user) {
+                                $scope.$apply(function() {
+                                    $scope.user = user;
+                                    var date = new Date($scope.user.birthday);
+                                    $localstorage.setObject('userinfo', {
+                                        id: $scope.user.id,
+                                        name: $scope.user.name,
+                                        birthday: date.toLocaleDateString()
+                                    });
+                                    $window.location.reload();
+                                });
+                            },
+                            error: function(error) {
+                                alert('Unable to connect to your data');
+                            }
+                        });
+                    }else{
+                        alert('Facebook login failed!');
+                    }
+                }, {scope: 'email, publish_actions, user_birthday'});
+        }
+        $scope.logout = function(){
+            $localstorage.setObject('userinfo',null);
+            $window.location.reload();
+        }
+
+        $scope.contact = {
+            name: 'Mittens Cat',
+            info: 'Tap anywhere on the card to open the modal'
+        }
+
+        $ionicModal.fromTemplateUrl('./templates/login.html', {
+            scope: $scope
+        }).then(function(modal) {
+            $scope.modal = modal;
+        });
     });

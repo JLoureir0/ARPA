@@ -1,700 +1,101 @@
-/*!
- * Social Buttons for Twitter Bootstrap v1.0.0
+/*
+ * Social Buttons for Bootstrap
  *
- * Copyright 2013 Adam Neumann
- * Licensed under the Apache License v2.0
- * http://www.apache.org/licenses/LICENSE-2.0
+ * Copyright 2013-2015 Panayiotis Lipiridis
+ * Licensed under the MIT License
+ *
+ * https://github.com/lipis/bootstrap-social
  */
 
-.btn-facebook {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #2b4b90;
-  *background-color: #133783;
-  background-image: -moz-linear-gradient(top, #3b5998, #133783);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3b5998), to(#133783));
-  background-image: -webkit-linear-gradient(top, #3b5998, #133783);
-  background-image: -o-linear-gradient(top, #3b5998, #133783);
-  background-image: linear-gradient(to bottom, #3b5998, #133783);
-  background-repeat: repeat-x;
-  border-color: #133783 #133783 #091b40;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3b5998', endColorstr='#ff133783', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-facebook:hover,
-.btn-facebook:focus,
-.btn-facebook:active,
-.btn-facebook.active,
-.btn-facebook.disabled,
-.btn-facebook[disabled] {
-  color: #ffffff;
-  background-color: #133783;
-  *background-color: #102e6d;
-}
-
-.btn-facebook:active,
-.btn-facebook.active {
-  background-color: #0d2456 \9;
-}
-
-.btn-twitter {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #1c95d0;
-  *background-color: #0271bf;
-  background-image: -moz-linear-gradient(top, #2daddc, #0271bf);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2daddc), to(#0271bf));
-  background-image: -webkit-linear-gradient(top, #2daddc, #0271bf);
-  background-image: -o-linear-gradient(top, #2daddc, #0271bf);
-  background-image: linear-gradient(to bottom, #2daddc, #0271bf);
-  background-repeat: repeat-x;
-  border-color: #0271bf #0271bf #014473;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff2daddc', endColorstr='#ff0271bf', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-twitter:hover,
-.btn-twitter:focus,
-.btn-twitter:active,
-.btn-twitter.active,
-.btn-twitter.disabled,
-.btn-twitter[disabled] {
-  color: #ffffff;
-  background-color: #0271bf;
-  *background-color: #0262a6;
-}
-
-.btn-twitter:active,
-.btn-twitter.active {
-  background-color: #01538d \9;
-}
-
-.btn-github {
-  color: #000000;
-  text-shadow: 0 0.7px 0 rgba(0, 0, 0, 0.1);
-  background-color: #f2f2f2;
-  *background-color: #e6e6e6;
-  background-image: -moz-linear-gradient(top, #fafafa, #e6e6e6);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#e6e6e6));
-  background-image: -webkit-linear-gradient(top, #fafafa, #e6e6e6);
-  background-image: -o-linear-gradient(top, #fafafa, #e6e6e6);
-  background-image: linear-gradient(to bottom, #fafafa, #e6e6e6);
-  background-repeat: repeat-x;
-  border-color: #e6e6e6 #e6e6e6 #c0c0c0;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffafafa', endColorstr='#ffe6e6e6', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-github:hover,
-.btn-github:focus,
-.btn-github:active,
-.btn-github.active,
-.btn-github.disabled,
-.btn-github[disabled] {
-  color: #000000;
-  background-color: #e6e6e6;
-  *background-color: #d9d9d9;
-}
-
-.btn-github:active,
-.btn-github.active {
-  background-color: #cdcdcd \9;
-}
-
-.btn-pinterest {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #c51e25;
-  *background-color: #ab171e;
-  background-image: -moz-linear-gradient(top, #d62229, #ab171e);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#d62229), to(#ab171e));
-  background-image: -webkit-linear-gradient(top, #d62229, #ab171e);
-  background-image: -o-linear-gradient(top, #d62229, #ab171e);
-  background-image: linear-gradient(to bottom, #d62229, #ab171e);
-  background-repeat: repeat-x;
-  border-color: #ab171e #ab171e #680e12;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffd62229', endColorstr='#ffab171e', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-pinterest:hover,
-.btn-pinterest:focus,
-.btn-pinterest:active,
-.btn-pinterest.active,
-.btn-pinterest.disabled,
-.btn-pinterest[disabled] {
-  color: #ffffff;
-  background-color: #ab171e;
-  *background-color: #95141a;
-}
-
-.btn-pinterest:active,
-.btn-pinterest.active {
-  background-color: #7e1116 \9;
-}
-
-.btn-linkedin {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #60a9ce;
-  *background-color: #4393bb;
-  background-image: -moz-linear-gradient(top, #73b8db, #4393bb);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#73b8db), to(#4393bb));
-  background-image: -webkit-linear-gradient(top, #73b8db, #4393bb);
-  background-image: -o-linear-gradient(top, #73b8db, #4393bb);
-  background-image: linear-gradient(to bottom, #73b8db, #4393bb);
-  background-repeat: repeat-x;
-  border-color: #4393bb #4393bb #2f6783;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff73b8db', endColorstr='#ff4393bb', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-linkedin:hover,
-.btn-linkedin:focus,
-.btn-linkedin:active,
-.btn-linkedin.active,
-.btn-linkedin.disabled,
-.btn-linkedin[disabled] {
-  color: #ffffff;
-  background-color: #4393bb;
-  *background-color: #3c84a8;
-}
-
-.btn-linkedin:active,
-.btn-linkedin.active {
-  background-color: #367595 \9;
-}
-
-.btn-google-plus {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #d34332;
-  *background-color: #c53727;
-  background-image: -moz-linear-gradient(top, #dd4b39, #c53727);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#dd4b39), to(#c53727));
-  background-image: -webkit-linear-gradient(top, #dd4b39, #c53727);
-  background-image: -o-linear-gradient(top, #dd4b39, #c53727);
-  background-image: linear-gradient(to bottom, #dd4b39, #c53727);
-  background-repeat: repeat-x;
-  border-color: #c53727 #c53727 #85251a;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdd4b39', endColorstr='#ffc53727', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-google-plus:hover,
-.btn-google-plus:focus,
-.btn-google-plus:active,
-.btn-google-plus.active,
-.btn-google-plus.disabled,
-.btn-google-plus[disabled] {
-  color: #ffffff;
-  background-color: #c53727;
-  *background-color: #b03123;
-}
-
-.btn-google-plus:active,
-.btn-google-plus.active {
-  background-color: #9a2b1f \9;
-}
-
-.btn-instagram {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #5c88ab;
-  *background-color: #3f729b;
-  background-image: -moz-linear-gradient(top, #6f97b6, #3f729b);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6f97b6), to(#3f729b));
-  background-image: -webkit-linear-gradient(top, #6f97b6, #3f729b);
-  background-image: -o-linear-gradient(top, #6f97b6, #3f729b);
-  background-image: linear-gradient(to bottom, #6f97b6, #3f729b);
-  background-repeat: repeat-x;
-  border-color: #3f729b #3f729b #294a65;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff6f97b6', endColorstr='#ff3f729b', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-instagram:hover,
-.btn-instagram:focus,
-.btn-instagram:active,
-.btn-instagram.active,
-.btn-instagram.disabled,
-.btn-instagram[disabled] {
-  color: #ffffff;
-  background-color: #3f729b;
-  *background-color: #386589;
-}
-
-.btn-instagram:active,
-.btn-instagram.active {
-  background-color: #305777 \9;
-}
-
-.btn-dropbox {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #2e95e0;
-  *background-color: #2181cf;
-  background-image: -moz-linear-gradient(top, #37a3eb, #2181cf);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#37a3eb), to(#2181cf));
-  background-image: -webkit-linear-gradient(top, #37a3eb, #2181cf);
-  background-image: -o-linear-gradient(top, #37a3eb, #2181cf);
-  background-image: linear-gradient(to bottom, #37a3eb, #2181cf);
-  background-repeat: repeat-x;
-  border-color: #2181cf #2181cf #16588d;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff37a3eb', endColorstr='#ff2181cf', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-dropbox:hover,
-.btn-dropbox:focus,
-.btn-dropbox:active,
-.btn-dropbox.active,
-.btn-dropbox.disabled,
-.btn-dropbox[disabled] {
-  color: #ffffff;
-  background-color: #2181cf;
-  *background-color: #1d73b9;
-}
-
-.btn-dropbox:active,
-.btn-dropbox.active {
-  background-color: #1a66a3 \9;
-}
-
-.btn-bitbucket {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #285991;
-  *background-color: #205081;
-  background-image: -moz-linear-gradient(top, #2d5f9c, #205081);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2d5f9c), to(#205081));
-  background-image: -webkit-linear-gradient(top, #2d5f9c, #205081);
-  background-image: -o-linear-gradient(top, #2d5f9c, #205081);
-  background-image: linear-gradient(to bottom, #2d5f9c, #205081);
-  background-repeat: repeat-x;
-  border-color: #205081 #205081 #112a44;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff2d5f9c', endColorstr='#ff205081', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-bitbucket:hover,
-.btn-bitbucket:focus,
-.btn-bitbucket:active,
-.btn-bitbucket.active,
-.btn-bitbucket.disabled,
-.btn-bitbucket[disabled] {
-  color: #ffffff;
-  background-color: #205081;
-  *background-color: #1b436d;
-}
-
-.btn-bitbucket:active,
-.btn-bitbucket.active {
-  background-color: #163758 \9;
-}
-
-.btn-dribbble {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #de447f;
-  *background-color: #cb396f;
-  background-image: -moz-linear-gradient(top, #ea4c89, #cb396f);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ea4c89), to(#cb396f));
-  background-image: -webkit-linear-gradient(top, #ea4c89, #cb396f);
-  background-image: -o-linear-gradient(top, #ea4c89, #cb396f);
-  background-image: linear-gradient(to bottom, #ea4c89, #cb396f);
-  background-repeat: repeat-x;
-  border-color: #cb396f #cb396f #91264e;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffea4c89', endColorstr='#ffcb396f', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-dribbble:hover,
-.btn-dribbble:focus,
-.btn-dribbble:active,
-.btn-dribbble.active,
-.btn-dribbble.disabled,
-.btn-dribbble[disabled] {
-  color: #ffffff;
-  background-color: #cb396f;
-  *background-color: #ba3163;
-}
-
-.btn-dribbble:active,
-.btn-dribbble.active {
-  background-color: #a62b59 \9;
-}
-
-.btn-flickr {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #f63198;
-  *background-color: #ff0084;
-  background-image: -moz-linear-gradient(top, #f051a5, #ff0084);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f051a5), to(#ff0084));
-  background-image: -webkit-linear-gradient(top, #f051a5, #ff0084);
-  background-image: -o-linear-gradient(top, #f051a5, #ff0084);
-  background-image: linear-gradient(to bottom, #f051a5, #ff0084);
-  background-repeat: repeat-x;
-  border-color: #ff0084 #ff0084 #b3005c;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff051a5', endColorstr='#ffff0084', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-flickr:hover,
-.btn-flickr:focus,
-.btn-flickr:active,
-.btn-flickr.active,
-.btn-flickr.disabled,
-.btn-flickr[disabled] {
-  color: #ffffff;
-  background-color: #ff0084;
-  *background-color: #e60077;
-}
-
-.btn-flickr:active,
-.btn-flickr.active {
-  background-color: #cc006a \9;
-}
-
-.btn-foursquare {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #079dcd;
-  *background-color: #0072b1;
-  background-image: -moz-linear-gradient(top, #0cbadf, #0072b1);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0cbadf), to(#0072b1));
-  background-image: -webkit-linear-gradient(top, #0cbadf, #0072b1);
-  background-image: -o-linear-gradient(top, #0cbadf, #0072b1);
-  background-image: linear-gradient(to bottom, #0cbadf, #0072b1);
-  background-repeat: repeat-x;
-  border-color: #0072b1 #0072b1 #004165;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0cbadf', endColorstr='#ff0072b1', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-foursquare:hover,
-.btn-foursquare:focus,
-.btn-foursquare:active,
-.btn-foursquare.active,
-.btn-foursquare.disabled,
-.btn-foursquare[disabled] {
-  color: #ffffff;
-  background-color: #0072b1;
-  *background-color: #006298;
-}
-
-.btn-foursquare:active,
-.btn-foursquare.active {
-  background-color: #00517e \9;
-}
-
-.btn-renren {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #3773ab;
-  *background-color: #33669a;
-  background-image: -moz-linear-gradient(top, #397cb6, #33669a);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#397cb6), to(#33669a));
-  background-image: -webkit-linear-gradient(top, #397cb6, #33669a);
-  background-image: -o-linear-gradient(top, #397cb6, #33669a);
-  background-image: linear-gradient(to bottom, #397cb6, #33669a);
-  background-repeat: repeat-x;
-  border-color: #33669a #33669a #204061;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff397cb6', endColorstr='#ff33669a', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-renren:hover,
-.btn-renren:focus,
-.btn-renren:active,
-.btn-renren.active,
-.btn-renren.disabled,
-.btn-renren[disabled] {
-  color: #ffffff;
-  background-color: #33669a;
-  *background-color: #2d5987;
-}
-
-.btn-renren:active,
-.btn-renren.active {
-  background-color: #264d74 \9;
-}
-
-.btn-skype {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #43bbe8;
-  *background-color: #00aff0;
-  background-image: -moz-linear-gradient(top, #70c3e2, #00aff0);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#70c3e2), to(#00aff0));
-  background-image: -webkit-linear-gradient(top, #70c3e2, #00aff0);
-  background-image: -o-linear-gradient(top, #70c3e2, #00aff0);
-  background-image: linear-gradient(to bottom, #70c3e2, #00aff0);
-  background-repeat: repeat-x;
-  border-color: #00aff0 #00aff0 #0077a3;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff70c3e2', endColorstr='#ff00aff0', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-skype:hover,
-.btn-skype:focus,
-.btn-skype:active,
-.btn-skype.active,
-.btn-skype.disabled,
-.btn-skype[disabled] {
-  color: #ffffff;
-  background-color: #00aff0;
-  *background-color: #009cd7;
-}
-
-.btn-skype:active,
-.btn-skype.active {
-  background-color: #008abd \9;
-}
-
-.btn-stackexchange {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #3a70b0;
-  *background-color: #185397;
-  background-image: -moz-linear-gradient(top, #5184c1, #185397);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5184c1), to(#185397));
-  background-image: -webkit-linear-gradient(top, #5184c1, #185397);
-  background-image: -o-linear-gradient(top, #5184c1, #185397);
-  background-image: linear-gradient(to bottom, #5184c1, #185397);
-  background-repeat: repeat-x;
-  border-color: #185397 #185397 #0e2f55;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5184c1', endColorstr='#ff185397', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-stackexchange:hover,
-.btn-stackexchange:focus,
-.btn-stackexchange:active,
-.btn-stackexchange.active,
-.btn-stackexchange.disabled,
-.btn-stackexchange[disabled] {
-  color: #ffffff;
-  background-color: #185397;
-  *background-color: #154781;
-}
-
-.btn-stackexchange:active,
-.btn-stackexchange.active {
-  background-color: #113b6b \9;
-}
-
-.btn-trello {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #438ab4;
-  *background-color: #27709b;
-  background-image: -moz-linear-gradient(top, #569cc4, #27709b);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#569cc4), to(#27709b));
-  background-image: -webkit-linear-gradient(top, #569cc4, #27709b);
-  background-image: -o-linear-gradient(top, #569cc4, #27709b);
-  background-image: linear-gradient(to bottom, #569cc4, #27709b);
-  background-repeat: repeat-x;
-  border-color: #27709b #27709b #18445e;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff569cc4', endColorstr='#ff27709b', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-trello:hover,
-.btn-trello:focus,
-.btn-trello:active,
-.btn-trello.active,
-.btn-trello.disabled,
-.btn-trello[disabled] {
-  color: #ffffff;
-  background-color: #27709b;
-  *background-color: #226187;
-}
-
-.btn-trello:active,
-.btn-trello.active {
-  background-color: #1d5372 \9;
-}
-
-.btn-tumblr {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #34526e;
-  *background-color: #2a4763;
-  background-image: -moz-linear-gradient(top, #3a5976, #2a4763);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3a5976), to(#2a4763));
-  background-image: -webkit-linear-gradient(top, #3a5976, #2a4763);
-  background-image: -o-linear-gradient(top, #3a5976, #2a4763);
-  background-image: linear-gradient(to bottom, #3a5976, #2a4763);
-  background-repeat: repeat-x;
-  border-color: #2a4763 #2a4763 #13202d;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3a5976', endColorstr='#ff2a4763', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-tumblr:hover,
-.btn-tumblr:focus,
-.btn-tumblr:active,
-.btn-tumblr.active,
-.btn-tumblr.disabled,
-.btn-tumblr[disabled] {
-  color: #ffffff;
-  background-color: #2a4763;
-  *background-color: #223a51;
-}
-
-.btn-tumblr:active,
-.btn-tumblr.active {
-  background-color: #1b2d3f \9;
-}
-
-.btn-vk {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #50739a;
-  *background-color: #426187;
-  background-image: -moz-linear-gradient(top, #5a7fa6, #426187);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5a7fa6), to(#426187));
-  background-image: -webkit-linear-gradient(top, #5a7fa6, #426187);
-  background-image: -o-linear-gradient(top, #5a7fa6, #426187);
-  background-image: linear-gradient(to bottom, #5a7fa6, #426187);
-  background-repeat: repeat-x;
-  border-color: #426187 #426187 #293c54;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5a7fa6', endColorstr='#ff426187', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-vk:hover,
-.btn-vk:focus,
-.btn-vk:active,
-.btn-vk.active,
-.btn-vk.disabled,
-.btn-vk[disabled] {
-  color: #ffffff;
-  background-color: #426187;
-  *background-color: #3a5576;
-}
-
-.btn-vk:active,
-.btn-vk.active {
-  background-color: #314865 \9;
-}
-
-.btn-weibo {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #f14f4f;
-  *background-color: #e64141;
-  background-image: -moz-linear-gradient(top, #f85959, #e64141);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f85959), to(#e64141));
-  background-image: -webkit-linear-gradient(top, #f85959, #e64141);
-  background-image: -o-linear-gradient(top, #f85959, #e64141);
-  background-image: linear-gradient(to bottom, #f85959, #e64141);
-  background-repeat: repeat-x;
-  border-color: #e64141 #e64141 #c11919;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff85959', endColorstr='#ffe64141', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-weibo:hover,
-.btn-weibo:focus,
-.btn-weibo:active,
-.btn-weibo.active,
-.btn-weibo.disabled,
-.btn-weibo[disabled] {
-  color: #ffffff;
-  background-color: #e64141;
-  *background-color: #e32a2a;
-}
-
-.btn-weibo:active,
-.btn-weibo.active {
-  background-color: #d81c1c \9;
-}
-
-.btn-xing {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #155c5d;
-  *background-color: #074c4d;
-  background-image: -moz-linear-gradient(top, #1f6768, #074c4d);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1f6768), to(#074c4d));
-  background-image: -webkit-linear-gradient(top, #1f6768, #074c4d);
-  background-image: -o-linear-gradient(top, #1f6768, #074c4d);
-  background-image: linear-gradient(to bottom, #1f6768, #074c4d);
-  background-repeat: repeat-x;
-  border-color: #074c4d #074c4d #010707;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff1f6768', endColorstr='#ff074c4d', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-xing:hover,
-.btn-xing:focus,
-.btn-xing:active,
-.btn-xing.active,
-.btn-xing.disabled,
-.btn-xing[disabled] {
-  color: #ffffff;
-  background-color: #074c4d;
-  *background-color: #053536;
-}
-
-.btn-xing:active,
-.btn-xing.active {
-  background-color: #031e1e \9;
-}
-
-.btn-youtube {
-  color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #a72121;
-  *background-color: #6e0610;
-  background-image: -moz-linear-gradient(top, #cd332d, #6e0610);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#cd332d), to(#6e0610));
-  background-image: -webkit-linear-gradient(top, #cd332d, #6e0610);
-  background-image: -o-linear-gradient(top, #cd332d, #6e0610);
-  background-image: linear-gradient(to bottom, #cd332d, #6e0610);
-  background-repeat: repeat-x;
-  border-color: #6e0610 #6e0610 #250205;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffcd332d', endColorstr='#ff6e0610', GradientType=0);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-}
-
-.btn-youtube:hover,
-.btn-youtube:focus,
-.btn-youtube:active,
-.btn-youtube.active,
-.btn-youtube.disabled,
-.btn-youtube[disabled] {
-  color: #ffffff;
-  background-color: #6e0610;
-  *background-color: #56050c;
-}
-
-.btn-youtube:active,
-.btn-youtube.active {
-  background-color: #3e0309 \9;
-}
+.btn-social{position:relative;padding-left:44px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.btn-social>:first-child{position:absolute;left:0;top:0;bottom:0;width:32px;line-height:34px;font-size:1.6em;text-align:center;border-right:1px solid rgba(0,0,0,0.2)}
+.btn-social.btn-lg{padding-left:61px}.btn-social.btn-lg>:first-child{line-height:45px;width:45px;font-size:1.8em}
+.btn-social.btn-sm{padding-left:38px}.btn-social.btn-sm>:first-child{line-height:28px;width:28px;font-size:1.4em}
+.btn-social.btn-xs{padding-left:30px}.btn-social.btn-xs>:first-child{line-height:20px;width:20px;font-size:1.2em}
+.btn-social-icon{position:relative;padding-left:44px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:34px;width:34px;padding:0}.btn-social-icon>:first-child{position:absolute;left:0;top:0;bottom:0;width:32px;line-height:34px;font-size:1.6em;text-align:center;border-right:1px solid rgba(0,0,0,0.2)}
+.btn-social-icon.btn-lg{padding-left:61px}.btn-social-icon.btn-lg>:first-child{line-height:45px;width:45px;font-size:1.8em}
+.btn-social-icon.btn-sm{padding-left:38px}.btn-social-icon.btn-sm>:first-child{line-height:28px;width:28px;font-size:1.4em}
+.btn-social-icon.btn-xs{padding-left:30px}.btn-social-icon.btn-xs>:first-child{line-height:20px;width:20px;font-size:1.2em}
+.btn-social-icon>:first-child{border:none;text-align:center;width:100% !important}
+.btn-social-icon.btn-lg{height:45px;width:45px;padding-left:0;padding-right:0}
+.btn-social-icon.btn-sm{height:30px;width:30px;padding-left:0;padding-right:0}
+.btn-social-icon.btn-xs{height:22px;width:22px;padding-left:0;padding-right:0}
+.btn-adn{color:#fff;background-color:#d87a68;border-color:rgba(0,0,0,0.2)}.btn-adn:hover,.btn-adn:focus,.btn-adn:active,.btn-adn.active,.open>.dropdown-toggle.btn-adn{color:#fff;background-color:#ce563f;border-color:rgba(0,0,0,0.2)}
+.btn-adn:active,.btn-adn.active,.open>.dropdown-toggle.btn-adn{background-image:none}
+.btn-adn.disabled,.btn-adn[disabled],fieldset[disabled] .btn-adn,.btn-adn.disabled:hover,.btn-adn[disabled]:hover,fieldset[disabled] .btn-adn:hover,.btn-adn.disabled:focus,.btn-adn[disabled]:focus,fieldset[disabled] .btn-adn:focus,.btn-adn.disabled:active,.btn-adn[disabled]:active,fieldset[disabled] .btn-adn:active,.btn-adn.disabled.active,.btn-adn[disabled].active,fieldset[disabled] .btn-adn.active{background-color:#d87a68;border-color:rgba(0,0,0,0.2)}
+.btn-adn .badge{color:#d87a68;background-color:#fff}
+.btn-bitbucket{color:#fff;background-color:#205081;border-color:rgba(0,0,0,0.2)}.btn-bitbucket:hover,.btn-bitbucket:focus,.btn-bitbucket:active,.btn-bitbucket.active,.open>.dropdown-toggle.btn-bitbucket{color:#fff;background-color:#163758;border-color:rgba(0,0,0,0.2)}
+.btn-bitbucket:active,.btn-bitbucket.active,.open>.dropdown-toggle.btn-bitbucket{background-image:none}
+.btn-bitbucket.disabled,.btn-bitbucket[disabled],fieldset[disabled] .btn-bitbucket,.btn-bitbucket.disabled:hover,.btn-bitbucket[disabled]:hover,fieldset[disabled] .btn-bitbucket:hover,.btn-bitbucket.disabled:focus,.btn-bitbucket[disabled]:focus,fieldset[disabled] .btn-bitbucket:focus,.btn-bitbucket.disabled:active,.btn-bitbucket[disabled]:active,fieldset[disabled] .btn-bitbucket:active,.btn-bitbucket.disabled.active,.btn-bitbucket[disabled].active,fieldset[disabled] .btn-bitbucket.active{background-color:#205081;border-color:rgba(0,0,0,0.2)}
+.btn-bitbucket .badge{color:#205081;background-color:#fff}
+.btn-dropbox{color:#fff;background-color:#1087dd;border-color:rgba(0,0,0,0.2)}.btn-dropbox:hover,.btn-dropbox:focus,.btn-dropbox:active,.btn-dropbox.active,.open>.dropdown-toggle.btn-dropbox{color:#fff;background-color:#0d6aad;border-color:rgba(0,0,0,0.2)}
+.btn-dropbox:active,.btn-dropbox.active,.open>.dropdown-toggle.btn-dropbox{background-image:none}
+.btn-dropbox.disabled,.btn-dropbox[disabled],fieldset[disabled] .btn-dropbox,.btn-dropbox.disabled:hover,.btn-dropbox[disabled]:hover,fieldset[disabled] .btn-dropbox:hover,.btn-dropbox.disabled:focus,.btn-dropbox[disabled]:focus,fieldset[disabled] .btn-dropbox:focus,.btn-dropbox.disabled:active,.btn-dropbox[disabled]:active,fieldset[disabled] .btn-dropbox:active,.btn-dropbox.disabled.active,.btn-dropbox[disabled].active,fieldset[disabled] .btn-dropbox.active{background-color:#1087dd;border-color:rgba(0,0,0,0.2)}
+.btn-dropbox .badge{color:#1087dd;background-color:#fff}
+.btn-facebook{color:#fff;background-color:#3b5998;border-color:rgba(0,0,0,0.2)}.btn-facebook:hover,.btn-facebook:focus,.btn-facebook:active,.btn-facebook.active,.open>.dropdown-toggle.btn-facebook{color:#fff;background-color:#2d4373;border-color:rgba(0,0,0,0.2)}
+.btn-facebook:active,.btn-facebook.active,.open>.dropdown-toggle.btn-facebook{background-image:none}
+.btn-facebook.disabled,.btn-facebook[disabled],fieldset[disabled] .btn-facebook,.btn-facebook.disabled:hover,.btn-facebook[disabled]:hover,fieldset[disabled] .btn-facebook:hover,.btn-facebook.disabled:focus,.btn-facebook[disabled]:focus,fieldset[disabled] .btn-facebook:focus,.btn-facebook.disabled:active,.btn-facebook[disabled]:active,fieldset[disabled] .btn-facebook:active,.btn-facebook.disabled.active,.btn-facebook[disabled].active,fieldset[disabled] .btn-facebook.active{background-color:#3b5998;border-color:rgba(0,0,0,0.2)}
+.btn-facebook .badge{color:#3b5998;background-color:#fff}
+.btn-flickr{color:#fff;background-color:#ff0084;border-color:rgba(0,0,0,0.2)}.btn-flickr:hover,.btn-flickr:focus,.btn-flickr:active,.btn-flickr.active,.open>.dropdown-toggle.btn-flickr{color:#fff;background-color:#cc006a;border-color:rgba(0,0,0,0.2)}
+.btn-flickr:active,.btn-flickr.active,.open>.dropdown-toggle.btn-flickr{background-image:none}
+.btn-flickr.disabled,.btn-flickr[disabled],fieldset[disabled] .btn-flickr,.btn-flickr.disabled:hover,.btn-flickr[disabled]:hover,fieldset[disabled] .btn-flickr:hover,.btn-flickr.disabled:focus,.btn-flickr[disabled]:focus,fieldset[disabled] .btn-flickr:focus,.btn-flickr.disabled:active,.btn-flickr[disabled]:active,fieldset[disabled] .btn-flickr:active,.btn-flickr.disabled.active,.btn-flickr[disabled].active,fieldset[disabled] .btn-flickr.active{background-color:#ff0084;border-color:rgba(0,0,0,0.2)}
+.btn-flickr .badge{color:#ff0084;background-color:#fff}
+.btn-foursquare{color:#fff;background-color:#f94877;border-color:rgba(0,0,0,0.2)}.btn-foursquare:hover,.btn-foursquare:focus,.btn-foursquare:active,.btn-foursquare.active,.open>.dropdown-toggle.btn-foursquare{color:#fff;background-color:#f71752;border-color:rgba(0,0,0,0.2)}
+.btn-foursquare:active,.btn-foursquare.active,.open>.dropdown-toggle.btn-foursquare{background-image:none}
+.btn-foursquare.disabled,.btn-foursquare[disabled],fieldset[disabled] .btn-foursquare,.btn-foursquare.disabled:hover,.btn-foursquare[disabled]:hover,fieldset[disabled] .btn-foursquare:hover,.btn-foursquare.disabled:focus,.btn-foursquare[disabled]:focus,fieldset[disabled] .btn-foursquare:focus,.btn-foursquare.disabled:active,.btn-foursquare[disabled]:active,fieldset[disabled] .btn-foursquare:active,.btn-foursquare.disabled.active,.btn-foursquare[disabled].active,fieldset[disabled] .btn-foursquare.active{background-color:#f94877;border-color:rgba(0,0,0,0.2)}
+.btn-foursquare .badge{color:#f94877;background-color:#fff}
+.btn-github{color:#fff;background-color:#444;border-color:rgba(0,0,0,0.2)}.btn-github:hover,.btn-github:focus,.btn-github:active,.btn-github.active,.open>.dropdown-toggle.btn-github{color:#fff;background-color:#2b2b2b;border-color:rgba(0,0,0,0.2)}
+.btn-github:active,.btn-github.active,.open>.dropdown-toggle.btn-github{background-image:none}
+.btn-github.disabled,.btn-github[disabled],fieldset[disabled] .btn-github,.btn-github.disabled:hover,.btn-github[disabled]:hover,fieldset[disabled] .btn-github:hover,.btn-github.disabled:focus,.btn-github[disabled]:focus,fieldset[disabled] .btn-github:focus,.btn-github.disabled:active,.btn-github[disabled]:active,fieldset[disabled] .btn-github:active,.btn-github.disabled.active,.btn-github[disabled].active,fieldset[disabled] .btn-github.active{background-color:#444;border-color:rgba(0,0,0,0.2)}
+.btn-github .badge{color:#444;background-color:#fff}
+.btn-google{color:#fff;background-color:#dd4b39;border-color:rgba(0,0,0,0.2)}.btn-google:hover,.btn-google:focus,.btn-google:active,.btn-google.active,.open>.dropdown-toggle.btn-google{color:#fff;background-color:#c23321;border-color:rgba(0,0,0,0.2)}
+.btn-google:active,.btn-google.active,.open>.dropdown-toggle.btn-google{background-image:none}
+.btn-google.disabled,.btn-google[disabled],fieldset[disabled] .btn-google,.btn-google.disabled:hover,.btn-google[disabled]:hover,fieldset[disabled] .btn-google:hover,.btn-google.disabled:focus,.btn-google[disabled]:focus,fieldset[disabled] .btn-google:focus,.btn-google.disabled:active,.btn-google[disabled]:active,fieldset[disabled] .btn-google:active,.btn-google.disabled.active,.btn-google[disabled].active,fieldset[disabled] .btn-google.active{background-color:#dd4b39;border-color:rgba(0,0,0,0.2)}
+.btn-google .badge{color:#dd4b39;background-color:#fff}
+.btn-instagram{color:#fff;background-color:#3f729b;border-color:rgba(0,0,0,0.2)}.btn-instagram:hover,.btn-instagram:focus,.btn-instagram:active,.btn-instagram.active,.open>.dropdown-toggle.btn-instagram{color:#fff;background-color:#305777;border-color:rgba(0,0,0,0.2)}
+.btn-instagram:active,.btn-instagram.active,.open>.dropdown-toggle.btn-instagram{background-image:none}
+.btn-instagram.disabled,.btn-instagram[disabled],fieldset[disabled] .btn-instagram,.btn-instagram.disabled:hover,.btn-instagram[disabled]:hover,fieldset[disabled] .btn-instagram:hover,.btn-instagram.disabled:focus,.btn-instagram[disabled]:focus,fieldset[disabled] .btn-instagram:focus,.btn-instagram.disabled:active,.btn-instagram[disabled]:active,fieldset[disabled] .btn-instagram:active,.btn-instagram.disabled.active,.btn-instagram[disabled].active,fieldset[disabled] .btn-instagram.active{background-color:#3f729b;border-color:rgba(0,0,0,0.2)}
+.btn-instagram .badge{color:#3f729b;background-color:#fff}
+.btn-linkedin{color:#fff;background-color:#007bb6;border-color:rgba(0,0,0,0.2)}.btn-linkedin:hover,.btn-linkedin:focus,.btn-linkedin:active,.btn-linkedin.active,.open>.dropdown-toggle.btn-linkedin{color:#fff;background-color:#005983;border-color:rgba(0,0,0,0.2)}
+.btn-linkedin:active,.btn-linkedin.active,.open>.dropdown-toggle.btn-linkedin{background-image:none}
+.btn-linkedin.disabled,.btn-linkedin[disabled],fieldset[disabled] .btn-linkedin,.btn-linkedin.disabled:hover,.btn-linkedin[disabled]:hover,fieldset[disabled] .btn-linkedin:hover,.btn-linkedin.disabled:focus,.btn-linkedin[disabled]:focus,fieldset[disabled] .btn-linkedin:focus,.btn-linkedin.disabled:active,.btn-linkedin[disabled]:active,fieldset[disabled] .btn-linkedin:active,.btn-linkedin.disabled.active,.btn-linkedin[disabled].active,fieldset[disabled] .btn-linkedin.active{background-color:#007bb6;border-color:rgba(0,0,0,0.2)}
+.btn-linkedin .badge{color:#007bb6;background-color:#fff}
+.btn-microsoft{color:#fff;background-color:#2672ec;border-color:rgba(0,0,0,0.2)}.btn-microsoft:hover,.btn-microsoft:focus,.btn-microsoft:active,.btn-microsoft.active,.open>.dropdown-toggle.btn-microsoft{color:#fff;background-color:#125acd;border-color:rgba(0,0,0,0.2)}
+.btn-microsoft:active,.btn-microsoft.active,.open>.dropdown-toggle.btn-microsoft{background-image:none}
+.btn-microsoft.disabled,.btn-microsoft[disabled],fieldset[disabled] .btn-microsoft,.btn-microsoft.disabled:hover,.btn-microsoft[disabled]:hover,fieldset[disabled] .btn-microsoft:hover,.btn-microsoft.disabled:focus,.btn-microsoft[disabled]:focus,fieldset[disabled] .btn-microsoft:focus,.btn-microsoft.disabled:active,.btn-microsoft[disabled]:active,fieldset[disabled] .btn-microsoft:active,.btn-microsoft.disabled.active,.btn-microsoft[disabled].active,fieldset[disabled] .btn-microsoft.active{background-color:#2672ec;border-color:rgba(0,0,0,0.2)}
+.btn-microsoft .badge{color:#2672ec;background-color:#fff}
+.btn-openid{color:#fff;background-color:#f7931e;border-color:rgba(0,0,0,0.2)}.btn-openid:hover,.btn-openid:focus,.btn-openid:active,.btn-openid.active,.open>.dropdown-toggle.btn-openid{color:#fff;background-color:#da7908;border-color:rgba(0,0,0,0.2)}
+.btn-openid:active,.btn-openid.active,.open>.dropdown-toggle.btn-openid{background-image:none}
+.btn-openid.disabled,.btn-openid[disabled],fieldset[disabled] .btn-openid,.btn-openid.disabled:hover,.btn-openid[disabled]:hover,fieldset[disabled] .btn-openid:hover,.btn-openid.disabled:focus,.btn-openid[disabled]:focus,fieldset[disabled] .btn-openid:focus,.btn-openid.disabled:active,.btn-openid[disabled]:active,fieldset[disabled] .btn-openid:active,.btn-openid.disabled.active,.btn-openid[disabled].active,fieldset[disabled] .btn-openid.active{background-color:#f7931e;border-color:rgba(0,0,0,0.2)}
+.btn-openid .badge{color:#f7931e;background-color:#fff}
+.btn-pinterest{color:#fff;background-color:#cb2027;border-color:rgba(0,0,0,0.2)}.btn-pinterest:hover,.btn-pinterest:focus,.btn-pinterest:active,.btn-pinterest.active,.open>.dropdown-toggle.btn-pinterest{color:#fff;background-color:#9f191f;border-color:rgba(0,0,0,0.2)}
+.btn-pinterest:active,.btn-pinterest.active,.open>.dropdown-toggle.btn-pinterest{background-image:none}
+.btn-pinterest.disabled,.btn-pinterest[disabled],fieldset[disabled] .btn-pinterest,.btn-pinterest.disabled:hover,.btn-pinterest[disabled]:hover,fieldset[disabled] .btn-pinterest:hover,.btn-pinterest.disabled:focus,.btn-pinterest[disabled]:focus,fieldset[disabled] .btn-pinterest:focus,.btn-pinterest.disabled:active,.btn-pinterest[disabled]:active,fieldset[disabled] .btn-pinterest:active,.btn-pinterest.disabled.active,.btn-pinterest[disabled].active,fieldset[disabled] .btn-pinterest.active{background-color:#cb2027;border-color:rgba(0,0,0,0.2)}
+.btn-pinterest .badge{color:#cb2027;background-color:#fff}
+.btn-reddit{color:#000;background-color:#eff7ff;border-color:rgba(0,0,0,0.2)}.btn-reddit:hover,.btn-reddit:focus,.btn-reddit:active,.btn-reddit.active,.open>.dropdown-toggle.btn-reddit{color:#000;background-color:#bcddff;border-color:rgba(0,0,0,0.2)}
+.btn-reddit:active,.btn-reddit.active,.open>.dropdown-toggle.btn-reddit{background-image:none}
+.btn-reddit.disabled,.btn-reddit[disabled],fieldset[disabled] .btn-reddit,.btn-reddit.disabled:hover,.btn-reddit[disabled]:hover,fieldset[disabled] .btn-reddit:hover,.btn-reddit.disabled:focus,.btn-reddit[disabled]:focus,fieldset[disabled] .btn-reddit:focus,.btn-reddit.disabled:active,.btn-reddit[disabled]:active,fieldset[disabled] .btn-reddit:active,.btn-reddit.disabled.active,.btn-reddit[disabled].active,fieldset[disabled] .btn-reddit.active{background-color:#eff7ff;border-color:rgba(0,0,0,0.2)}
+.btn-reddit .badge{color:#eff7ff;background-color:#000}
+.btn-soundcloud{color:#fff;background-color:#f50;border-color:rgba(0,0,0,0.2)}.btn-soundcloud:hover,.btn-soundcloud:focus,.btn-soundcloud:active,.btn-soundcloud.active,.open>.dropdown-toggle.btn-soundcloud{color:#fff;background-color:#c40;border-color:rgba(0,0,0,0.2)}
+.btn-soundcloud:active,.btn-soundcloud.active,.open>.dropdown-toggle.btn-soundcloud{background-image:none}
+.btn-soundcloud.disabled,.btn-soundcloud[disabled],fieldset[disabled] .btn-soundcloud,.btn-soundcloud.disabled:hover,.btn-soundcloud[disabled]:hover,fieldset[disabled] .btn-soundcloud:hover,.btn-soundcloud.disabled:focus,.btn-soundcloud[disabled]:focus,fieldset[disabled] .btn-soundcloud:focus,.btn-soundcloud.disabled:active,.btn-soundcloud[disabled]:active,fieldset[disabled] .btn-soundcloud:active,.btn-soundcloud.disabled.active,.btn-soundcloud[disabled].active,fieldset[disabled] .btn-soundcloud.active{background-color:#f50;border-color:rgba(0,0,0,0.2)}
+.btn-soundcloud .badge{color:#f50;background-color:#fff}
+.btn-tumblr{color:#fff;background-color:#2c4762;border-color:rgba(0,0,0,0.2)}.btn-tumblr:hover,.btn-tumblr:focus,.btn-tumblr:active,.btn-tumblr.active,.open>.dropdown-toggle.btn-tumblr{color:#fff;background-color:#1c2d3f;border-color:rgba(0,0,0,0.2)}
+.btn-tumblr:active,.btn-tumblr.active,.open>.dropdown-toggle.btn-tumblr{background-image:none}
+.btn-tumblr.disabled,.btn-tumblr[disabled],fieldset[disabled] .btn-tumblr,.btn-tumblr.disabled:hover,.btn-tumblr[disabled]:hover,fieldset[disabled] .btn-tumblr:hover,.btn-tumblr.disabled:focus,.btn-tumblr[disabled]:focus,fieldset[disabled] .btn-tumblr:focus,.btn-tumblr.disabled:active,.btn-tumblr[disabled]:active,fieldset[disabled] .btn-tumblr:active,.btn-tumblr.disabled.active,.btn-tumblr[disabled].active,fieldset[disabled] .btn-tumblr.active{background-color:#2c4762;border-color:rgba(0,0,0,0.2)}
+.btn-tumblr .badge{color:#2c4762;background-color:#fff}
+.btn-twitter{color:#fff;background-color:#55acee;border-color:rgba(0,0,0,0.2)}.btn-twitter:hover,.btn-twitter:focus,.btn-twitter:active,.btn-twitter.active,.open>.dropdown-toggle.btn-twitter{color:#fff;background-color:#2795e9;border-color:rgba(0,0,0,0.2)}
+.btn-twitter:active,.btn-twitter.active,.open>.dropdown-toggle.btn-twitter{background-image:none}
+.btn-twitter.disabled,.btn-twitter[disabled],fieldset[disabled] .btn-twitter,.btn-twitter.disabled:hover,.btn-twitter[disabled]:hover,fieldset[disabled] .btn-twitter:hover,.btn-twitter.disabled:focus,.btn-twitter[disabled]:focus,fieldset[disabled] .btn-twitter:focus,.btn-twitter.disabled:active,.btn-twitter[disabled]:active,fieldset[disabled] .btn-twitter:active,.btn-twitter.disabled.active,.btn-twitter[disabled].active,fieldset[disabled] .btn-twitter.active{background-color:#55acee;border-color:rgba(0,0,0,0.2)}
+.btn-twitter .badge{color:#55acee;background-color:#fff}
+.btn-vimeo{color:#fff;background-color:#1ab7ea;border-color:rgba(0,0,0,0.2)}.btn-vimeo:hover,.btn-vimeo:focus,.btn-vimeo:active,.btn-vimeo.active,.open>.dropdown-toggle.btn-vimeo{color:#fff;background-color:#1295bf;border-color:rgba(0,0,0,0.2)}
+.btn-vimeo:active,.btn-vimeo.active,.open>.dropdown-toggle.btn-vimeo{background-image:none}
+.btn-vimeo.disabled,.btn-vimeo[disabled],fieldset[disabled] .btn-vimeo,.btn-vimeo.disabled:hover,.btn-vimeo[disabled]:hover,fieldset[disabled] .btn-vimeo:hover,.btn-vimeo.disabled:focus,.btn-vimeo[disabled]:focus,fieldset[disabled] .btn-vimeo:focus,.btn-vimeo.disabled:active,.btn-vimeo[disabled]:active,fieldset[disabled] .btn-vimeo:active,.btn-vimeo.disabled.active,.btn-vimeo[disabled].active,fieldset[disabled] .btn-vimeo.active{background-color:#1ab7ea;border-color:rgba(0,0,0,0.2)}
+.btn-vimeo .badge{color:#1ab7ea;background-color:#fff}
+.btn-vk{color:#fff;background-color:#587ea3;border-color:rgba(0,0,0,0.2)}.btn-vk:hover,.btn-vk:focus,.btn-vk:active,.btn-vk.active,.open>.dropdown-toggle.btn-vk{color:#fff;background-color:#466482;border-color:rgba(0,0,0,0.2)}
+.btn-vk:active,.btn-vk.active,.open>.dropdown-toggle.btn-vk{background-image:none}
+.btn-vk.disabled,.btn-vk[disabled],fieldset[disabled] .btn-vk,.btn-vk.disabled:hover,.btn-vk[disabled]:hover,fieldset[disabled] .btn-vk:hover,.btn-vk.disabled:focus,.btn-vk[disabled]:focus,fieldset[disabled] .btn-vk:focus,.btn-vk.disabled:active,.btn-vk[disabled]:active,fieldset[disabled] .btn-vk:active,.btn-vk.disabled.active,.btn-vk[disabled].active,fieldset[disabled] .btn-vk.active{background-color:#587ea3;border-color:rgba(0,0,0,0.2)}
+.btn-vk .badge{color:#587ea3;background-color:#fff}
+.btn-yahoo{color:#fff;background-color:#720e9e;border-color:rgba(0,0,0,0.2)}.btn-yahoo:hover,.btn-yahoo:focus,.btn-yahoo:active,.btn-yahoo.active,.open>.dropdown-toggle.btn-yahoo{color:#fff;background-color:#500a6f;border-color:rgba(0,0,0,0.2)}
+.btn-yahoo:active,.btn-yahoo.active,.open>.dropdown-toggle.btn-yahoo{background-image:none}
+.btn-yahoo.disabled,.btn-yahoo[disabled],fieldset[disabled] .btn-yahoo,.btn-yahoo.disabled:hover,.btn-yahoo[disabled]:hover,fieldset[disabled] .btn-yahoo:hover,.btn-yahoo.disabled:focus,.btn-yahoo[disabled]:focus,fieldset[disabled] .btn-yahoo:focus,.btn-yahoo.disabled:active,.btn-yahoo[disabled]:active,fieldset[disabled] .btn-yahoo:active,.btn-yahoo.disabled.active,.btn-yahoo[disabled].active,fieldset[disabled] .btn-yahoo.active{background-color:#720e9e;border-color:rgba(0,0,0,0.2)}
+.btn-yahoo .badge{color:#720e9e;background-color:#fff}
