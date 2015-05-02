@@ -5,6 +5,7 @@ var logger = require('restify-logger');
 
 var root_route       = require('./routes/root.js');
 var allergies_routes = require('./routes/allergies.js');
+var allergy_routes   = require('./routes/allergy.js');
 
 //Middleware
 server.use(restify.fullResponse());
@@ -20,6 +21,7 @@ server.use(function(req, res, next) {
 //Routes
 root_route.define_route(server);
 allergies_routes.define_routes(server);
+allergy_routes.define_routes(server);
 
 //Running server
 server.listen(3000, function() {

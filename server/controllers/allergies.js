@@ -19,7 +19,7 @@ exports.save_allergies = function(req, res, next) {
     console.log('Inserted the allergies of user "' + allergies._id + '" to the database');
     res.send(201, { data: req.params });
   });
-}
+};
 
 function parse_allergies(allergies) {
   var allergies_attributes = [
