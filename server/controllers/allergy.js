@@ -36,6 +36,20 @@ exports.update_allergies = function(req, res) {
   });
 };
 
+exports.delete_allergies = function(req, res) {
+  allergies_model.get(req.params[0], function(err, result) {
+    if(result.rows.length === 0)
+      res.send(404);
+    else
+      allergies_model.delete(req.params[0], function(err, result) {
+        if(result.rowCount === 1)
+          res.send(200);
+        else
+          res.send(404);
+      });
+  });
+};
+
 function verify_allergies_attributes(allergies, next) {
   if(allergies.intolerant)
     parse_intolerant(allergies.intolerant, next);

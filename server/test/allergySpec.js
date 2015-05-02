@@ -128,4 +128,30 @@ describe('/allergies/:id.json', function() {
       });
     });
   });
+  describe('delete request', function() {
+    it('should return 200 if _id is valid and delete it', function(done) {
+      client.del(url, function(err, req, res) {
+        expect(res.statusCode).to.be.equal(200);
+        client.get(url, function(err, req, res, obj) {
+          expect(res.statusCode).to.be.equal(404);
+          done();
+        });
+      });
+    });
+    it('should return 404 if url is a substring of /allergies/:id.json', function(done) {
+      client.del('/asdasdasd' + url, function(err, req, res) {
+        expect(res.statusCode).to.be.equal(404);
+        client.del(url + 'asdasdas', function(err, req, res) {
+          expect(res.statusCode).to.be.equal(404);
+          done();
+        });
+      });
+    });
+    it('should return 404 if _id is invalid', function(done) {
+      client.del('/users/invalid.json', function(err, req, res) {
+        expect(res.statusCode).to.be.equal(404);
+        done();
+      });
+    });
+  });
 });
