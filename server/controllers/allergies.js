@@ -2,7 +2,7 @@ var restify         = require('restify');
 var allergies_model = require('../models/allergies.js');
 
 //TODO Add all the allergies
-var valid_allergies = ['milk', 'peanuts', 'eggs'];
+var valid_allergies = ['milk', 'peanuts', 'eggs', 'shrimp'];
 
 exports.handle_params = function(req, res, next) {
   parse_allergies(req.params);
