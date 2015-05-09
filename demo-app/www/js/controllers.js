@@ -1,6 +1,6 @@
 angular.module('controllers', [])
 
-.controller('SearchCtrl', function($scope, $http) {
+.controller('SearchCtrl', function($scope, $http, $ionicLoading) {
   $scope.payload = {
     inSortOrder: "ASC",
     inPageNumber: 1,
@@ -11,6 +11,7 @@ angular.module('controllers', [])
     try{
       cordova.plugins.Keyboard.close();
     }catch(e) {}
+    show_loading();
     search_product();
   };
 
@@ -20,10 +21,14 @@ angular.module('controllers', [])
       .then(function(response) {
         var result = response.data.SearchProductResult;
         console.log(JSON.stringify(response));
-        if(result.Code === 0)
+        if(result.Code === 0) {
           $scope.results = result.Result.ItemList;
-        else if(result.Code === 1)
+          $ionicLoading.hide();
+        }
+        else if(result.Code === 1) {
           $scope.results = [{ Name: result.Message }];
+          $ionicLoading.hide();
+        }
         else if(result.Code === -88888 || result.Code === -99999) {
           anonymous_authentication(search_product);
         }
@@ -38,6 +43,16 @@ angular.module('controllers', [])
         if(response.data.AuthenticateAnonymousResult.Code === 0)
           $scope.payload.inSessionID = response.data.AuthenticateAnonymousResult.Result;
         done();
+    });
+  }
+
+  function show_loading() {
+    $ionicLoading.show({
+      content: 'Loading',
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 200,
+      showDelay: 500
     });
   }
 });
