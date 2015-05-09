@@ -8,6 +8,9 @@ angular.module('controllers', [])
   };
 
   $scope.search = function() {
+    try{
+      cordova.plugins.Keyboard.close();
+    }catch(e) {}
     search_product();
   };
 
