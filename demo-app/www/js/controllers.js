@@ -11,7 +11,7 @@ angular.module('controllers', [])
     try{
       cordova.plugins.Keyboard.close();
     }catch(e) {}
-    $ionicLoading.show({ delay: 500 });
+    $ionicLoading.show({ delay: 250 });
     search_product();
   };
 
