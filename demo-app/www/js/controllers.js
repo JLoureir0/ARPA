@@ -11,7 +11,7 @@ angular.module('controllers', [])
     try{
       cordova.plugins.Keyboard.close();
     }catch(e) {}
-    show_loading();
+    $ionicLoading.show();
     search_product();
   };
 
@@ -43,16 +43,6 @@ angular.module('controllers', [])
         if(response.data.AuthenticateAnonymousResult.Code === 0)
           $scope.payload.inSessionID = response.data.AuthenticateAnonymousResult.Result;
         done();
-    });
-  }
-
-  function show_loading() {
-    $ionicLoading.show({
-      content: 'Loading',
-      animation: 'fade-in',
-      showBackdrop: true,
-      maxWidth: 200,
-      showDelay: 500
     });
   }
 });
