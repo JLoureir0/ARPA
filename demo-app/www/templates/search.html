@@ -6,9 +6,12 @@
         <input type="text" placeholder="Search" ng-model="payload.inKeyword" ng-enter="search()">
       </label>
     </div>
-    <div class="card" ng-repeat="product in results">
+    <div class="list card" ng-repeat="product in results">
       <div class="item item-text-wrap">
-        {{ product.Name}}
+        {{ product.Name }}
+      </div>
+      <div class="item item-image">
+        <img ng-if="product.UrlLargeImage" ng-src="{{ product.UrlLargeImage }}">
       </div>
     </div>
   </ion-content>
