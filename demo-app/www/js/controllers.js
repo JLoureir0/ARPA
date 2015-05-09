@@ -11,7 +11,7 @@ angular.module('controllers', [])
     try{
       cordova.plugins.Keyboard.close();
     }catch(e) {}
-    $ionicLoading.show();
+    $ionicLoading.show({ delay: 500 });
     search_product();
   };
 
@@ -20,7 +20,6 @@ angular.module('controllers', [])
     $http.post(url, $scope.payload, { headers: { 'Content-Type': 'application/json' } })
       .then(function(response) {
         var result = response.data.SearchProductResult;
-        console.log(JSON.stringify(response));
         if(result.Code === 0) {
           $scope.results = result.Result.ItemList;
           $ionicLoading.hide();
@@ -39,7 +38,6 @@ angular.module('controllers', [])
     var url = 'https://m.continente.pt/MRS.Web/Proxy.ashx?Method=/BSLogin/AuthenticateAnonymous';
     $http.post(url, { inLanguage:"pt" }, { headers: { 'Content-Type': 'application/json' } })
       .then(function(response) {
-        console.log(response);
         if(response.data.AuthenticateAnonymousResult.Code === 0)
           $scope.payload.inSessionID = response.data.AuthenticateAnonymousResult.Result;
         done();
