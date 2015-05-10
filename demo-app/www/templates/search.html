@@ -7,12 +7,15 @@
       </label>
     </div>
     <div class="list">
-      <a class="item item-thumbnail-left item-text-wrap" ng-repeat="product in results">
-        <img ng-if="product.UrlLargeImage" ng-src="{{ product.UrlLargeImage }}">
+      <a class="item item-thumbnail-left item-text-wrap" ng-repeat="product in results" ng-if="product.UrlLargeImage">
+        <img ng-src="{{ product.UrlLargeImage }}">
         <h2>{{ product.Name }}</h2>
         <p>{{ product.Description }}</p>
         <h3 id="price_tag">{{ product.RetailPrice }}€</h3>
       </a>
+      <div ng-repeat="product in results" ng-if="!product.UrlLargeImage" class="item">
+        {{ product.Name }}
+      </div>
     </div>
   </ion-content>
 </ion-view>
