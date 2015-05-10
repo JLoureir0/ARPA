@@ -6,13 +6,13 @@
         <input type="text" placeholder="Search" ng-model="payload.inKeyword" ng-enter="search()">
       </label>
     </div>
-    <div class="list card" ng-repeat="product in results">
-      <div class="item item-text-wrap">
-        {{ product.Name }}
-      </div>
-      <div class="item item-image">
+    <div class="list">
+      <a class="item item-thumbnail-left" ng-repeat="product in results">
         <img ng-if="product.UrlLargeImage" ng-src="{{ product.UrlLargeImage }}">
-      </div>
+        <h2>{{ product.Name }}</h2>
+        <p>{{ product.Description }}</p>
+        <h3 id="price_tag">{{ product.RetailPrice }}€</h3>
+      </a>
     </div>
   </ion-content>
 </ion-view>
