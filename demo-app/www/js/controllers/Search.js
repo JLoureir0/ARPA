@@ -1,23 +1,28 @@
-angular.module('controllers', [])
+angular.module('demo-app')
 
-.controller('SearchCtrl', function($scope, $http, $ionicLoading, $ionicPopup) {
-  $scope.payload = {
+.controller('SearchController', SearchController);
+
+function SearchController($scope, $http, $ionicLoading, $ionicPopup) {
+  var vm = this;
+
+  vm.search = search;
+  vm.payload = {
     inSortOrder  : "ASC",
     inPageNumber : 1,
     inPageSize   : 50
   };
 
-  $scope.search = function() {
+  function search() {
     try{
       cordova.plugins.Keyboard.close();
     }catch(e) {}
     $ionicLoading.show({ delay: 250 });
     search_product();
-  };
+  }
 
   function search_product() {
     var url = 'https://m.continente.pt/MRS.Web/Proxy.ashx?Method=/BSProductCatalog/SearchProduct';
-    $http.post(url, $scope.payload, { headers: { 'Content-Type': 'application/json' }, timeout: 5000 })
+    $http.post(url, vm.payload, { headers: { 'Content-Type': 'application/json' }, timeout: 5000 })
     .then(function(response) {
       var result = response.data.SearchProductResult;
       if(result.Code === 0) {
@@ -45,7 +50,7 @@ angular.module('controllers', [])
     $http.post(url, { inLanguage:"pt" }, { headers: { 'Content-Type': 'application/json' }, timeout: 5000 })
     .then(function(response) {
       if(response.data.AuthenticateAnonymousResult.Code === 0)
-        $scope.payload.inSessionID = response.data.AuthenticateAnonymousResult.Result;
+        vm.payload.inSessionID = response.data.AuthenticateAnonymousResult.Result;
       done();
     }, function() {
       $ionicLoading.hide();
@@ -55,4 +60,4 @@ angular.module('controllers', [])
       });
     });
   }
-});
+}

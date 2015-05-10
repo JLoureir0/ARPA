@@ -1,4 +1,4 @@
-angular.module('directives', [])
+angular.module('demo-app')
 
 .directive('ngEnter', function () {
   return function (scope, element, attrs) {
