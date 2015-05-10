@@ -7,7 +7,7 @@
       </label>
     </div>
     <div class="list">
-      <a class="item item-thumbnail-left" ng-repeat="product in results">
+      <a class="item item-thumbnail-left item-text-wrap" ng-repeat="product in results">
         <img ng-if="product.UrlLargeImage" ng-src="{{ product.UrlLargeImage }}">
         <h2>{{ product.Name }}</h2>
         <p>{{ product.Description }}</p>
