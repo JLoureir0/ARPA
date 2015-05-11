@@ -20,7 +20,7 @@ function productFactory($http, $ionicLoading, $ionicPopup) {
   function searchProducts(query) {
     var searchURL = 'https://m.continente.pt/MRS.Web/Proxy.ashx?Method=/BSProductCatalog/SearchProduct';
 
-    var searchPayload = {
+    var payload = {
       inSortOrder  : "ASC",
       inPageNumber : 1,
       inPageSize   : 50,
@@ -28,7 +28,7 @@ function productFactory($http, $ionicLoading, $ionicPopup) {
       inSessionID  : inSessionID
     };
 
-    return $http.post(searchURL, searchPayload, config)
+    return $http.post(searchURL, payload, config)
     .then(searchProductsComplete)
     .catch(httpFailed);
 
@@ -42,13 +42,32 @@ function productFactory($http, $ionicLoading, $ionicPopup) {
         $ionicLoading.hide();
         return [{ Name: result.Message }];
       }
-      else if(result.Code === -88888 || result.Code === -99999) {
+      else if(result.Code === -88888 || result.Code === -99999)
         return anonymousAuthentication(query, searchProducts);
-      }
     }
   }
 
   function getProductInfo(productID) {
+    var productInfoURL = 'https://m.continente.pt/MRS.Web/Proxy.ashx?Method=/BSProductCatalog/GetProductDetail';
+
+    var payload = {
+      inSessionID : inSessionID,
+      inItemID    : productID
+    };
+
+    return $http.post(productInfoURL, payload, config)
+    .then(getProductInfoComplete)
+    .catch(httpFailed);
+
+    function getProductInfoComplete(response) {
+      var result = response.data.GetProductDetailResult;
+      if(result.Code === 0) {
+        $ionicLoading.hide();
+        return result.Result;
+      }
+      else if(result.Code === -88888 || result.Code === -99999)
+        return anonymousAuthentication(productID, getProductInfo);
+    }
   }
 
   function httpFailed() {
@@ -59,7 +78,7 @@ function productFactory($http, $ionicLoading, $ionicPopup) {
     });
   }
 
-  function anonymousAuthentication(query, done) {
+  function anonymousAuthentication(param, done) {
     var authenticationURL     = 'https://m.continente.pt/MRS.Web/Proxy.ashx?Method=/BSLogin/AuthenticateAnonymous';
     var authenticationPayload = { inLanguage: "pt"};
 
@@ -71,7 +90,7 @@ function productFactory($http, $ionicLoading, $ionicPopup) {
       var result = response.data.AuthenticateAnonymousResult;
       if(result.Code === 0)
         inSessionID = result.Result;
-      return done(query);
+      return done(param);
     }
   }
 }

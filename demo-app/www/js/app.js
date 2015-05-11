@@ -24,6 +24,6 @@ angular.module('demo-app', ['ionic'])
     .state('product', {
       url         : '/product/{productID:^[0-9]{7}$}',
       templateUrl : 'templates/product.html',
-      controller  : function() {}
+      controller  : 'ProductController as vm'
     });
 });
