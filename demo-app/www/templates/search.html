@@ -13,8 +13,8 @@
         <p>{{ product.Description }}</p>
         <h3 id="price_tag">{{ product.RetailPrice }}€</h3>
       </a>
-      <div ng-repeat="product in results" ng-if="!product.UrlLargeImage" class="item">
-        {{ product.Name }}
+      <div id="no_products" ng-repeat="product in results" ng-if="!product.UrlLargeImage">
+        <h4>{{ product.Name }}</h4>
       </div>
     </div>
   </ion-content>
