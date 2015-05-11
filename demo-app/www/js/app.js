@@ -20,5 +20,10 @@ angular.module('demo-app', ['ionic'])
       url         : '/search',
       templateUrl : 'templates/search.html',
       controller  : 'SearchController as vm'
+    })
+    .state('product', {
+      url         : '/product/{productID:^[0-9]{7}$}',
+      templateUrl : 'templates/product.html',
+      controller  : function() {}
     });
 });

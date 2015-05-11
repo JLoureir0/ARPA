@@ -7,7 +7,7 @@
       </label>
     </div>
     <div class="list">
-      <a class="item item-thumbnail-left item-text-wrap" ng-repeat="product in vm.results" ng-if="product.UrlLargeImage">
+      <a class="item item-thumbnail-left item-text-wrap" ng-repeat="product in vm.results" ng-if="product.UrlLargeImage" ui-sref="product({ productID: product.ItemID })">
         <img ng-src="{{ product.UrlLargeImage }}">
         <h2>{{ product.Name }}</h2>
         <p ng-if="product.Brand">{{ product.Brand }}</p>
