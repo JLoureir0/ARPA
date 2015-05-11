@@ -10,6 +10,7 @@
       <a class="item item-thumbnail-left item-text-wrap" ng-repeat="product in vm.results" ng-if="product.UrlLargeImage">
         <img ng-src="{{ product.UrlLargeImage }}">
         <h2>{{ product.Name }}</h2>
+        <p ng-if="product.Brand">{{ product.Brand }}</p>
         <p>{{ product.Description }}</p>
         <h3 id="price_tag">{{ product.RetailPrice }}€</h3>
       </a>
