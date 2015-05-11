@@ -3,11 +3,11 @@
     <div class="list list-inset">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Search" ng-model="vm.payload.inKeyword" ng-enter="vm.search()">
+        <input type="text" placeholder="Search" ng-model="vm.query" ng-enter="vm.search()">
       </label>
     </div>
     <div class="list">
-      <a class="item item-thumbnail-left item-text-wrap" ng-repeat="product in results" ng-if="product.UrlLargeImage">
+      <a class="item item-thumbnail-left item-text-wrap" ng-repeat="product in vm.results" ng-if="product.UrlLargeImage">
         <img ng-src="{{ product.UrlLargeImage }}">
         <h2>{{ product.Name }}</h2>
         <p>{{ product.Description }}</p>
