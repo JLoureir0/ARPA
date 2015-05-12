@@ -29,5 +29,6 @@ angular.module('demo-app', ['ionic'])
     .state('list', {
       url         : '/list',
       templateUrl : 'templates/list.html',
+      controller  : 'ListController as vm'
     });
 });
