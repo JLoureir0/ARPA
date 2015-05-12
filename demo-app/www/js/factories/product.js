@@ -2,7 +2,7 @@ angular.module('demo-app')
 
 .factory('productFactory', productFactory);
 
-function productFactory($http, $ionicLoading, $ionicPopup) {
+function productFactory($http) {
   var config = {
     headers: { 'Content-Type': 'application/json' },
     timeout: 5000
