@@ -34,14 +34,10 @@ function productFactory($http, $ionicLoading, $ionicPopup) {
 
     function searchProductsComplete(response) {
       var result = response.data.SearchProductResult;
-      if(result.Code === 0) {
-        $ionicLoading.hide();
+      if(result.Code === 0)
         return result.Result.ItemList;
-      }
-      else if(result.Code === 1) {
-        $ionicLoading.hide();
+      else if(result.Code === 1)
         return [{ Name: result.Message }];
-      }
       else if(result.Code === -88888 || result.Code === -99999)
         return anonymousAuthentication(query, searchProducts);
     }
@@ -61,21 +57,15 @@ function productFactory($http, $ionicLoading, $ionicPopup) {
 
     function getProductInfoComplete(response) {
       var result = response.data.GetProductDetailResult;
-      if(result.Code === 0) {
-        $ionicLoading.hide();
+      if(result.Code === 0)
         return result.Result;
-      }
       else if(result.Code === -88888 || result.Code === -99999)
         return anonymousAuthentication(productID, getProductInfo);
     }
   }
 
-  function httpFailed() {
-    $ionicLoading.hide();
-    $ionicPopup.alert({
-      title   : 'Check your internet connection!',
-      buttons : [{ text: 'Ok', type: 'button-assertive' }]
-    });
+  function httpFailed(reason) {
+    throw reason;
   }
 
   function anonymousAuthentication(param, done) {

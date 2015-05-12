@@ -2,7 +2,7 @@ angular.module('demo-app')
 
 .controller('SearchController', SearchController);
 
-function SearchController($ionicLoading, productFactory) {
+function SearchController($ionicLoading, $ionicPopup, productFactory) {
   var vm = this;
 
   vm.search = search;
@@ -19,8 +19,16 @@ function SearchController($ionicLoading, productFactory) {
     function searchProducts() {
       return productFactory.searchProducts(vm.query)
       .then(function(data) {
+        $ionicLoading.hide();
         vm.results = data;
         return vm.results;
+      })
+      .catch(function(reason) {
+        $ionicLoading.hide();
+        $ionicPopup.alert({
+          title   : 'Check your internet connection!',
+          buttons : [{ text: 'Ok', type: 'button-assertive' }]
+        });
       });
     }
   }
