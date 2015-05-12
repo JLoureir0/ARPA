@@ -37,7 +37,7 @@ function productFactory($http) {
       if(result.Code === 0)
         return result.Result.ItemList;
       else if(result.Code === 1)
-        return [{ Name: result.Message }];
+        return [{ Error: result.Message }];
       else if(result.Code === -88888 || result.Code === -99999)
         return anonymousAuthentication(query, searchProducts);
     }
