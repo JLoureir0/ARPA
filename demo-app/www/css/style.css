@@ -1,4 +1,4 @@
-#price_tag {
+.price_tag {
   text-align: right;
   margin-top: 5%;
 }
@@ -6,4 +6,36 @@
 #no_products {
   text-align: center;
   margin-top: 40%;
+}
+
+.icon-add:before,
+.icon-add {
+  font-size: 175% !important;
+  display: block !important;
+  color: #e42012;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.product-image {
+  text-align: center;
+  margin-bottom: 10%;
+}
+
+.product-detail {
+  margin-bottom: 10%;
+}
+
+p.add {
+  margin-top: 2%;
+}
+
+.item-no-border {
+  border: none;
+}
+
+.bold {
+  font-weight: bold !important;
 }

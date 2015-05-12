@@ -1,5 +1,21 @@
 <ion-view view-title="Continente">
   <ion-content>
-    {{ vm.product.Name }}
+    <div class="item item-body item-no-border" ng-if="vm.product">
+        <div class="product-image">
+          <img ng-src="{{ vm.product.UrlLargeImage }}">
+        </div>
+        <div class="item product-detail">
+          <h2 class="bold">{{ vm.product.Name }}</h2>
+          <h2 ng-if="vm.product.Brand">{{ vm.product.Brand }}</h2>
+          <p>{{ vm.product.Description }}</p>
+          <h3 class="price_tag bold">{{ vm.product.RetailPrice }}€</h3>
+        </div>
+        <div class="text-center">
+          <a class="button button-clear">
+            <i class="icon ion-plus-circled icon-add"></i>
+          </a>
+          <p class="add">Adicionar</p>
+        </div>
+    </div>
   </ion-content>
 </ion-view>

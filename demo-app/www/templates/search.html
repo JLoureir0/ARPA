@@ -12,7 +12,7 @@
         <h2>{{ product.Name }}</h2>
         <p ng-if="product.Brand">{{ product.Brand }}</p>
         <p>{{ product.Description }}</p>
-        <h3 id="price_tag">{{ product.RetailPrice }}€</h3>
+        <h3 class="price_tag">{{ product.RetailPrice }}€</h3>
       </a>
       <div id="no_products" ng-repeat="product in vm.results" ng-if="!product.UrlLargeImage">
         <h4>{{ product.Name }}</h4>
