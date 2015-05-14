@@ -39,7 +39,7 @@ angular.module('arpa.controllers', [])
     })
 
 
-    .controller('AllergensCtrl', function($scope, $ionicModal){
+    .controller('AllergensCtrl', function($scope, $ionicModal, $localstorage){
         $scope.value_allergies = true;
         $scope.value_intolerances = true;
         $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
@@ -69,31 +69,38 @@ angular.module('arpa.controllers', [])
         };
 
         $scope.addAllergens = function($index, $value){
-            $scope.not_selected_allergens.splice($index,1);
-
+            $scope.not_selected_allergens.splice($index,1);			
             $scope.allergens.push($value);
-
+			$localstorage.setObject('allergies', {
+				allergies: $scope.allergens
+			});
         }
 
         $scope.removeAllergens = function($index, $value) {
             if ($scope.value_allergies != true) {
                 $scope.allergens.splice($index, 1);
                 $scope.not_selected_allergens.push($value);
+				$localstorage.setObject('allergies', {
+					allergies: $scope.allergens
+				});
             }
         }
 
         $scope.addIntol = function($index, $value){
             $scope.not_selected_intolerances.splice($index,1);
-
             $scope.intolerances.push($value);
-
+			$localstorage.setObject('intolerances', {
+				intolerances: $scope.intolerances
+			});
         }
 
         $scope.removeIntol = function($index, $value){
             if ($scope.value_intolerances != true) {
                 $scope.intolerances.splice($index, 1);
-
                 $scope.not_selected_intolerances.push($value);
+				$localstorage.setObject('intolerances', {
+					intolerances: $scope.intolerances
+				});
             }
 
         }
