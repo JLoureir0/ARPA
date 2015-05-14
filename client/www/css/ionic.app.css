@@ -7643,6 +7643,9 @@ a.button {
   font-weight: bold !important;
   color: #0066b1 !important; }
 
+.scroll {
+  height: 100%; }
+
 .overflow-scroll .scroll {
   height: 150%; }
 
@@ -7820,3 +7823,11 @@ ul.to-add-allergs li {
   font-family: "Helvetica Neue", "Roboto", "Segoe UI", sans-serif;
   font-size: medium;
   font-weight: bold; }
+
+.intro_slide {
+  margin-top: 13%;
+  height: 100%;
+  background-color: #ffffff; }
+
+.intro_slide .slider-pager {
+  bottom: 10% !important; }

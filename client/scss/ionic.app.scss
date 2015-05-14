@@ -66,6 +66,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   color: #0066b1 !important;
 }
 
+.scroll{
+  height:100%;
+}
+
 .overflow-scroll .scroll{
   height: 150%
 }
@@ -284,3 +288,12 @@ ul.to-add-allergs li {
   font-weight: bold;
 }
 
+.intro_slide{
+  margin-top:13%;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.intro_slide .slider-pager{
+    bottom:10% !important;
+}

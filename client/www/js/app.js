@@ -30,8 +30,6 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'ngCordova
         var version = "v2.0";
         $cordovaFacebookProvider.browserInit(appID, version);
       });
-
-
     })
 
     .config(function($ionicConfigProvider) {if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);})
@@ -43,6 +41,11 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'ngCordova
       // Each state's controller can be found in controllers.js
       $stateProvider
 
+          .state('firstSelect', {
+            url: "/",
+            templateUrl: "templates/select.html",
+            controller: 'SelectCtrl'
+          })
         // setup an abstract state for the tabs directive
           .state('tab', {
             url: "/tab",
@@ -113,6 +116,6 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'ngCordova
           });
 
       // if none of the above states are matched, use this as the fallback
-      $urlRouterProvider.otherwise('/tab/allergens');
+      $urlRouterProvider.otherwise('/');
 
     });
