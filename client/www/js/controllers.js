@@ -38,7 +38,7 @@ angular.module('arpa.controllers', [])
         }
     })
 
-    .controller('AllergensCtrl', function($scope, $ionicModal){
+    .controller('AllergensCtrl', function($scope){
         $scope.value_allergies = true;
         $scope.value_intolerances = true;
         $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
@@ -49,6 +49,7 @@ angular.module('arpa.controllers', [])
             if ($scope.value_intolerances == true) {
                 $scope.value_intolerances = false;
                 $scope.extra_icons_intol = "./img/allergens-icons/guardar.svg";
+
             }else{
                 $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
                 $scope.value_intolerances = true;
@@ -66,6 +67,36 @@ angular.module('arpa.controllers', [])
                 //$scope.push_down = {'opacity': "1"};
             }
         };
+
+        $scope.addAllergens = function($index, $value){
+            $scope.not_selected_allergens.splice($index,1);
+
+            $scope.allergens.push($value);
+
+        }
+
+        $scope.removeAllergens = function($index, $value) {
+            if ($scope.value_allergies != true) {
+                $scope.allergens.splice($index, 1);
+                $scope.not_selected_allergens.push($value);
+            }
+        }
+
+        $scope.addIntol = function($index, $value){
+            $scope.not_selected_intolerances.splice($index,1);
+
+            $scope.intolerances.push($value);
+
+        }
+
+        $scope.removeIntol = function($index, $value){
+            if ($scope.value_intolerances != true) {
+                $scope.intolerances.splice($index, 1);
+
+                $scope.not_selected_intolerances.push($value);
+            }
+
+        }
 
         $scope.allergens = [
             {
@@ -134,6 +165,44 @@ angular.module('arpa.controllers', [])
                 name: "lacteos",
                 src: "./img/allergens-icons/lacteos.svg"
             },
+        ];
+
+        $scope.not_selected_intolerances = [
+            {
+                id: 1,
+                name: "moluscos",
+                src: "./img/allergens-icons/moluscos.svg"
+            },
+            {
+                id: 2,
+                name: "mostarda",
+                src: "./img/allergens-icons/mostarda.svg"
+            },
+            {
+                id: 3,
+                name: "peixe",
+                src: "./img/allergens-icons/peixe.svg"
+            },
+            {
+                id: 4,
+                name: "sesamo",
+                src: "./img/allergens-icons/sesamo.svg"
+            },
+            {
+                id: 5,
+                name: "so2",
+                src: "./img/allergens-icons/so2.svg"
+            },
+            {
+                id: 6,
+                name: "soja",
+                src: "./img/allergens-icons/soja.svg"
+            },
+            {
+                id: 7,
+                name: "tremocos",
+                src: "./img/allergens-icons/tremocos.svg"
+            }
         ];
     })
 
