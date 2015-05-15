@@ -38,7 +38,8 @@ angular.module('arpa.controllers', [])
         }
     })
 
-    .controller('AllergensCtrl', function($scope, $ionicModal){
+
+    .controller('AllergensCtrl', function($scope, $ionicModal, $localstorage){
         $scope.value_allergies = true;
         $scope.value_intolerances = true;
         $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
@@ -66,6 +67,43 @@ angular.module('arpa.controllers', [])
                 //$scope.push_down = {'opacity': "1"};
             }
         };
+
+        $scope.addAllergens = function($index, $value){
+            $scope.not_selected_allergens.splice($index,1);			
+            $scope.allergens.push($value);
+			$localstorage.setObject('allergies', {
+				allergies: $scope.allergens
+			});
+        }
+
+        $scope.removeAllergens = function($index, $value) {
+            if ($scope.value_allergies != true) {
+                $scope.allergens.splice($index, 1);
+                $scope.not_selected_allergens.push($value);
+				$localstorage.setObject('allergies', {
+					allergies: $scope.allergens
+				});
+            }
+        }
+
+        $scope.addIntol = function($index, $value){
+            $scope.not_selected_intolerances.splice($index,1);
+            $scope.intolerances.push($value);
+			$localstorage.setObject('intolerances', {
+				intolerances: $scope.intolerances
+			});
+        }
+
+        $scope.removeIntol = function($index, $value){
+            if ($scope.value_intolerances != true) {
+                $scope.intolerances.splice($index, 1);
+                $scope.not_selected_intolerances.push($value);
+				$localstorage.setObject('intolerances', {
+					intolerances: $scope.intolerances
+				});
+            }
+
+        }
 
         $scope.allergens = [
             {
@@ -135,6 +173,44 @@ angular.module('arpa.controllers', [])
                 src: "./img/allergens-icons/lacteos.svg"
             },
         ];
+
+        $scope.not_selected_intolerances = [
+            {
+                id: 1,
+                name: "moluscos",
+                src: "./img/allergens-icons/moluscos.svg"
+            },
+            {
+                id: 2,
+                name: "mostarda",
+                src: "./img/allergens-icons/mostarda.svg"
+            },
+            {
+                id: 3,
+                name: "peixe",
+                src: "./img/allergens-icons/peixe.svg"
+            },
+            {
+                id: 4,
+                name: "sesamo",
+                src: "./img/allergens-icons/sesamo.svg"
+            },
+            {
+                id: 5,
+                name: "so2",
+                src: "./img/allergens-icons/so2.svg"
+            },
+            {
+                id: 6,
+                name: "soja",
+                src: "./img/allergens-icons/soja.svg"
+            },
+            {
+                id: 7,
+                name: "tremocos",
+                src: "./img/allergens-icons/tremocos.svg"
+            }
+        ];
     })
 
 
@@ -148,37 +224,30 @@ angular.module('arpa.controllers', [])
         };
     })
 
-    .controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window, $ionicModal) {
+    .controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook) {
         $scope.sign_in_hide = false;
+
         $scope.fbLogin = function(){
-            openFB.login(
-                function(response){
-                    if(response.status == 'connected'){
-                        console.log('Login succedeed');
-                        openFB.api({
-                            path: '/me',
-                            params: {fields: 'id,name,birthday'},
-                            success: function(user) {
-                                $scope.$apply(function() {
-                                    $scope.user = user;
-                                    var date = new Date($scope.user.birthday);
-                                    $localstorage.setObject('userinfo', {
-                                        id: $scope.user.id,
-                                        name: $scope.user.name,
-                                        birthday: date.toLocaleDateString()
-                                    });
-                                    $window.location.reload();
-                                });
-                            },
-                            error: function(error) {
-                                alert('Unable to connect to your data');
-                            }
+            $cordovaFacebook.login(["public_profile", "email"])
+                .then(function(success){
+                    $cordovaFacebook.api("me", ["public_profile"])
+                        .then(function(user) {
+                            $scope.user = user;
+                            var date = new Date($scope.user.birthday);
+                            $localstorage.setObject('userinfo', {
+                                id: $scope.user.id,
+                                name: $scope.user.name,
+                                birthday: date.toLocaleDateString()
+                            });
+                            $window.location.reload();
+                        }, function (error) {
+
                         });
-                    }else{
-                        alert('Facebook login failed!');
-                    }
-                }, {scope: 'email, publish_actions, user_birthday'});
-        }
+
+                }, function(error){
+
+                });
+        };
         $scope.logout = function(){
             $localstorage.setObject('userinfo',null);
             $window.location.reload();
@@ -194,4 +263,34 @@ angular.module('arpa.controllers', [])
         }).then(function(modal) {
             $scope.modal = modal;
         });
+    })
+
+    .controller('SelectCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
+        var firstRun;
+
+        // set up some logic to decide which slide to show first
+        $scope.$on('$ionicView.enter', function() {
+            var jumpTo = firstRun ? 1 : 0;
+            $ionicSlideBoxDelegate.slide(jumpTo);
+            if (!firstRun) {
+                firstRun = true;
+            }
+        });
+
+        // Called to navigate to the main app
+        $scope.startApp = function() {
+            $state.go('tab.allergens');
+
+        };
+        $scope.next = function() {
+            $ionicSlideBoxDelegate.next();
+        };
+        $scope.previous = function() {
+            $ionicSlideBoxDelegate.previous();
+        };
+
+        // Called each time the slide changes
+        $scope.slideChanged = function(index) {
+            $scope.slideIndex = index;
+        };
     });

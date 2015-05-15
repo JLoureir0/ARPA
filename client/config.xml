@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.ionictabs842102" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>ARPA</name>
-  <description>
-        Allergic Reaction Product Alert.
+  <description>&#xD;
+        Allergic Reaction Product Alert.&#xD;
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="hi@ionicframework" href="http://ionicframework.com/">&#xD;
+      Ionic Framework Team&#xD;
     </author>
   <content src="index.html"/>
   <access origin="*"/>
@@ -14,10 +14,15 @@
   <preference name="DisallowOverscroll" value="true"/>
   <preference name="BackupWebStorage" value="none"/>
   <feature name="StatusBar">
-    <param name="ios-package" value="CDVStatusBar" onload="true"/>
+    <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
   <platform name="android">
-    <!-- Android -->
-    <icon src="icons/icon-alergias.png" width="76" height="76" />
+    <icon height="76" src="icons/icon-alergias.png" width="76"/>
   </platform>
+  <plugin name="com.phonegap.plugins.facebookconnect" spec="^0.11.0">
+    <variable name="APP_ID" value="367156356826931"/>
+    <variable name="APP_NAME" value="ARPA"/>
+  </plugin>
+  <plugin name="org.apache.cordova.device" spec="^0.3.0"/>
+  <plugin name="org.apache.cordova.console" spec="^0.2.13"/>
 </widget>
