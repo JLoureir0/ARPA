@@ -42,7 +42,7 @@
             </div>
             <div class="to-add-into "  ng-hide="value_intolerances">
                <ion-scroll direction="x" class="available-scroller no_block">
-                    <div class="intolers"  collection-repeat="intolerance in not_selected_intolerances"
+                    <div class="intolers"  collection-repeat="intolerance in not_selected_allergens"
                          item-height="150" item-width="19%" >
                         <img ng-src="{{intolerance.src}}" ng-click="addIntol($index, intolerance)">
                     </div>

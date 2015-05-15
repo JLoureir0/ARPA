@@ -87,7 +87,7 @@ angular.module('arpa.controllers', [])
         }
 
         $scope.addIntol = function($index, $value){
-            $scope.not_selected_intolerances.splice($index,1);
+            $scope.not_selected_allergens.splice($index,1);
             $scope.intolerances.push($value);
 			$localstorage.setObject('intolerances', {
 				intolerances: $scope.intolerances
@@ -97,7 +97,7 @@ angular.module('arpa.controllers', [])
         $scope.removeIntol = function($index, $value){
             if ($scope.value_intolerances != true) {
                 $scope.intolerances.splice($index, 1);
-                $scope.not_selected_intolerances.push($value);
+                $scope.not_selected_allergens.push($value);
 				$localstorage.setObject('intolerances', {
 					intolerances: $scope.intolerances
 				});

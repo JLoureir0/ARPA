@@ -25,11 +25,17 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'ngCordova
 
     .config(function($cordovaFacebookProvider){
 
-      ionic.Platform.ready(function () {
+      /*if(!window.cordova){ //Comment for browser testing, uncomment to deploy
         var appID = 367156356826931;
         var version = "v2.0";
         $cordovaFacebookProvider.browserInit(appID, version);
-      });
+      }*/
+
+      ionic.Platform.ready(function () {
+       var appID = 367156356826931;
+       var version = "v2.0";
+       $cordovaFacebookProvider.browserInit(appID, version);
+       });
     })
 
     .config(function($ionicConfigProvider) {if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);})
