@@ -8,8 +8,17 @@
   margin-top: 40%;
 }
 
+/*TODO: repeated code*/
+
 .icon-add:before,
 .icon-add {
+  font-size: 175% !important;
+  display: block !important;
+  color: #33cd5f;
+}
+
+.icon-remove:before,
+.icon-remove {
   font-size: 175% !important;
   display: block !important;
   color: #e42012;
@@ -28,7 +37,7 @@
   margin-bottom: 10%;
 }
 
-p.add {
+p.below-button {
   margin-top: 2%;
 }
 

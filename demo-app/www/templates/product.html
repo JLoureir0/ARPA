@@ -10,11 +10,17 @@
           <p>{{ vm.product.Description }}</p>
           <h3 class="price_tag bold">{{ vm.product.RetailPrice }}€</h3>
         </div>
-        <div class="text-center">
+        <div class="text-center" ng-if="!vm.isProductOnList()">
           <a class="button button-clear" ng-click="vm.addProductToList()">
             <i class="icon ion-plus-circled icon-add"></i>
           </a>
-          <p class="add">Adicionar</p>
+          <p class="below-button">Add</p>
+        </div>
+        <div class="text-center" ng-if="vm.isProductOnList()">
+          <a class="button button-clear" ng-click="vm.removeProductFromList()">
+            <i class="icon ion-minus-circled icon-remove"></i>
+          </a>
+          <p class="below-button">Remove</p>
         </div>
     </div>
   </ion-content>

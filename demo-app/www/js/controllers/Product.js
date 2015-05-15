@@ -5,8 +5,10 @@ angular.module('demo-app')
 function SearchController($ionicLoading, $ionicPopup, $state, $stateParams, productFactory, listFactory) {
   var vm = this;
 
-  vm.product = null;
-  vm.addProductToList = addProductToList;
+  vm.product               = null;
+  vm.addProductToList      = addProductToList;
+  vm.removeProductFromList = removeProductFromList;
+  vm.isProductOnList       = isProductOnList;
 
   $ionicLoading.show({ delay: 250 });
 
@@ -14,6 +16,16 @@ function SearchController($ionicLoading, $ionicPopup, $state, $stateParams, prod
 
   function addProductToList() {
     listFactory.addProduct(vm.product);
+    alertButton('Product added to the list');
+  }
+
+  function removeProductFromList() {
+    listFactory.removeProduct(vm.product.ItemID);
+    alertButton('Product removed from the list');
+  }
+
+  function isProductOnList() {
+    return listFactory.hasProduct(vm.product.ItemID);
   }
 
   function getProductInfo() {
@@ -25,11 +37,15 @@ function SearchController($ionicLoading, $ionicPopup, $state, $stateParams, prod
     })
     .catch(function(reason) {
       $ionicLoading.hide();
-      $ionicPopup.alert({
-        title   : 'Check your internet connection!',
-        buttons : [{ text: 'Ok', type: 'button-assertive' }]
-      });
+      alertButton('Check your internet connection!');
       $state.go('search');
+    });
+  }
+
+  function alertButton(title) {
+    $ionicPopup.alert({
+      title   : title,
+      buttons : [{ text: 'Ok', type: 'button-assertive' }]
     });
   }
 }

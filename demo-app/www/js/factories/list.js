@@ -6,10 +6,11 @@ function listFactory() {
   var list = [];
 
   var factory = {
-    isEmpty    : isEmpty,
-    addProduct : addProduct,
-    getList    : getList,
-    hasProduct : hasProduct
+    isEmpty       : isEmpty,
+    addProduct    : addProduct,
+    removeProduct : removeProduct,
+    getList       : getList,
+    hasProduct    : hasProduct
   };
 
   return factory;
@@ -24,15 +25,22 @@ function listFactory() {
     list.push(product);
   }
 
+  function removeProduct(productID) {
+    for(var i = 0; i < list.length; i++) {
+      if(list[i].ItemID === productID)
+        list.splice(i,1);
+    }
+  }
+
   function getList() {
     return list;
   }
 
   function hasProduct(productID) {
-    list.forEach(function(product) {
-      if(product.productID === productID)
+    for(var i = 0; i < list.length; i++) {
+      if(list[i].ItemID === productID)
         return true;
-    });
+    }
     return false;
   }
 }
