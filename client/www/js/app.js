@@ -49,6 +49,16 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services'])
           }
         }
       })
+
+      .state('tab.profile', {
+          url: '/profile',
+          views: {
+              'tab-profile': {
+                  templateUrl: 'templates/tab-profile.html',
+                  controller: 'ProfileCtrl'
+              }
+          }
+      })
 	  
       .state('tab.definitions', {
         url: '/definitions',

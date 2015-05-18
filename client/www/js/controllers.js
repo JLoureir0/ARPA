@@ -148,6 +148,10 @@ angular.module('arpa.controllers', [])
         };
     })
 
+    .controller('ProfileCtrl', function($scope) {
+            $scope.myActiveSlide = 1;
+    })
+
     .controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window, $ionicModal) {
         $scope.sign_in_hide = false;
         $scope.fbLogin = function(){
