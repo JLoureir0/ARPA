@@ -6,53 +6,6 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-<<<<<<< HEAD
-.config(function($stateProvider, $urlRouterProvider) {
-  openFB.init({appId:'367156356826931'}, ionic.Platform.isWebView());
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $stateProvider
-
-  // setup an abstract state for the tabs directive
-    .state('tab', {
-    url: "/tab",
-    abstract: true,
-    templateUrl: "templates/tabs.html",
-	controller: 'MainCtrl'
-  })
-
-  // Each tab has its own nav history stack:
-
-      .state('tab.allergens', {
-        url: '/allergens',
-        views: {
-          'tab-allergens': {
-            templateUrl: 'templates/tab-allergens.html',
-            controller: 'AllergensCtrl'
-          }
-        }
-      })
-
-      .state('tab.profile', {
-          url: '/profile',
-          views: {
-              'tab-profile': {
-                  templateUrl: 'templates/tab-profile.html',
-                  controller: 'ProfileCtrl'
-              }
-          }
-      })
-	  
-      .state('tab.definitions', {
-        url: '/definitions',
-        views: {
-          'tab-definitions': {
-            templateUrl: 'templates/tab-definitions.html',
-            controller: 'DefinitionsCtrl'
-          }
-=======
 angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'ngCordova', 'ngAnimate'])
 
     .run(function($ionicPlatform) {
@@ -61,7 +14,6 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'ngCordova
         // for form inputs)
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
           cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
->>>>>>> 122555b2ca856ec818bc121b8275ffee43be7458
         }
         if (window.StatusBar) {
           // org.apache.cordova.statusbar required

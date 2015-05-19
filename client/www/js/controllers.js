@@ -224,15 +224,11 @@ angular.module('arpa.controllers', [])
         };
     })
 
-<<<<<<< HEAD
     .controller('ProfileCtrl', function($scope) {
             $scope.myActiveSlide = 1;
     })
 
-    .controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window, $ionicModal) {
-=======
     .controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook) {
->>>>>>> 122555b2ca856ec818bc121b8275ffee43be7458
         $scope.sign_in_hide = false;
 
         $scope.fbLogin = function(){
