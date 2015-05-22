@@ -44,7 +44,7 @@ angular.module('arpa.controllers', [])
 .controller('AllergensCtrl', function($scope, $ionicModal, $localstorage){
     $scope.value_allergies = true;
     $scope.value_intolerances = true;
-    $scope.extra_icons_intol = "./img/allergens-icons/mais.png";
+    $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
     $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
 
 
