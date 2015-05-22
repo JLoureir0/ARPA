@@ -46,9 +46,26 @@ angular.module('arpa.controllers', [])
     $scope.value_intolerances = true;
     $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
     $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
+	
+	var access2 = $localstorage.get('accessibility');
+	if(access2 && access2 == 'true'){
+		console.log($localstorage.get('accessibility'));
+	} else {
+		console.log('false');	
+	}
 
 	$scope.onHold = function() {
-		console.log('Pelos poderes de Greyskull! Eu tenho a acessibilidade!');
+		var accessibility = $localstorage.get('accessibility');
+		if(accessibility && accessibility == 'true'){
+			$localstorage.set('accessibility','false');
+		} else {
+			$localstorage.set('accessibility','true');
+		}
+		if($localstorage.get('accessibility') == 'true') {
+			console.log('Pelos poderes de Greyskull! Eu tenho a acessibilidade!');
+		} else {
+			console.log('Eu já não tenho a acessibilidade...');
+		}
 	};
 
 
