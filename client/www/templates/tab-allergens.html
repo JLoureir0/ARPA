@@ -11,11 +11,11 @@
                 </ion-scroll>-->
                 <ul class="allergens ">
                     <li ng-repeat="allergen in allergens">
-                        <img src="{{allergen.src}}"  ng-click="removeAllergens($index, allergen)"/> <!-- TODO error in console, dunno why -->
+                        <img ng-src="{{allergen.src}}"  ng-click="removeAllergens($index, allergen)"/> <!-- TODO error in console, dunno why -->
 
                     </li>
                     <li>
-                        <img ng-click="plus_allergs()" src="{{extra_icons_allergs}}">
+                        <img ng-click="plus_allergs()" ng-src="{{extra_icons_allergs}}">
                     </li>
                 </ul>
             </div>
@@ -33,10 +33,10 @@
                 <h1>INTOLERANCES</h1>
                 <ul class="intolerance">
                     <li ng-repeat="intolerance in intolerances">
-                        <img src="{{intolerance.src}}"  ng-click="removeIntol($index, intolerance)"/>
+                        <img ng-src="{{intolerance.src}}"  ng-click="removeIntol($index, intolerance)"/>
                     </li>
                     <li>
-                            <img ng-click="plus_into()" src="{{extra_icons_intol}}">
+                            <img ng-click="plus_into()" ng-src="{{extra_icons_intol}}">
                     </li>
                 </ul>
             </div>

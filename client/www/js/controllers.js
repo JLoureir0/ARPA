@@ -1,11 +1,11 @@
 angular.module('arpa.controllers', [])
 
-
-
     .controller('AppsCtrl', function($scope) {})
 
     .controller('MainCtrl', function($scope, $ionicPlatform, $localstorage, $http, Socket){
         $scope.userpicture = './img/logo_arpa.svg';
+
+        var userinfo = $localstorage.getObject('userinfo');
 
         Socket.forward('text', $scope);
         console.log("cenas");
@@ -14,7 +14,7 @@ angular.module('arpa.controllers', [])
             console.log(data);
         })
 
-        if($localstorage.getObject('userinfo') != null) {
+        if(userinfo){
             var userinfo = $localstorage.getObject('userinfo');
             $scope.username = userinfo.name;
             //$scope.userbirthday = userinfo.birthday;
@@ -28,9 +28,6 @@ angular.module('arpa.controllers', [])
             $scope.username = 'ARPA';
             $scope.userpicture = './img/logo_arpa.svg';
         }
-
-
-
     })
 
 
@@ -64,38 +61,38 @@ angular.module('arpa.controllers', [])
         };
 
         $scope.addAllergens = function($index, $value){
-            $scope.not_selected_allergens.splice($index,1);			
+            $scope.not_selected_allergens.splice($index,1);
             $scope.allergens.push($value);
-			$localstorage.setObject('allergies', {
-				allergies: $scope.allergens
-			});
+            $localstorage.setObject('allergies', {
+                allergies: $scope.allergens
+            });
         }
 
         $scope.removeAllergens = function($index, $value) {
             if ($scope.value_allergies != true) {
                 $scope.allergens.splice($index,1);
                 $scope.not_selected_allergens.push($value);
-				$localstorage.setObject('allergies', {
-					allergies: $scope.allergens
-				});
+                $localstorage.setObject('allergies', {
+                    allergies: $scope.allergens
+                });
             }
         }
 
         $scope.addIntol = function($index, $value){
             $scope.not_selected_allergens.splice($index,1);
             $scope.intolerances.push($value);
-			$localstorage.setObject('intolerances', {
-				intolerances: $scope.intolerances
-			});
+            $localstorage.setObject('intolerances', {
+                intolerances: $scope.intolerances
+            });
         }
 
         $scope.removeIntol = function($index, $value){
             if ($scope.value_intolerances != true) {
                 $scope.intolerances.splice($index,1);
                 $scope.not_selected_allergens.push($value);
-				$localstorage.setObject('intolerances', {
-					intolerances: $scope.intolerances
-				});
+                $localstorage.setObject('intolerances', {
+                    intolerances: $scope.intolerances
+                });
             }
 
         }
@@ -106,7 +103,7 @@ angular.module('arpa.controllers', [])
                 name: "lacteos",
                 src: "./img/allergens-icons/lacteos.svg"
             },
-			{
+            {
                 id: 2,
                 name: "gluten",
                 src: "./img/allergens-icons/gluten.svg"
@@ -126,7 +123,7 @@ angular.module('arpa.controllers', [])
                 name: "marisco",
                 src: "./img/allergens-icons/marisco.svg"
             },
-			{
+            {
                 id: 6,
                 name: "moluscos",
                 src: "./img/allergens-icons/moluscos.svg"
@@ -163,44 +160,44 @@ angular.module('arpa.controllers', [])
             }
         ];
 
-		$scope.allergens = [];
-		
-		$scope.intolerances = [];
+        $scope.allergens = [];
 
-		if($localstorage.getObject('allergies') != null) {
-			var allergies = $localstorage.getObject('allergies').allergies;
-			var indexy = 0;
-			while(indexy < allergies.length) {
-				if(allergies[indexy].$$hashKey != null) {
-					allergies[indexy].$$hashKey = null;
-				}
-				$scope.allergens.push(allergies[indexy]);
-				for(var i = 0; i < $scope.not_selected_allergens.length; i++) {
-					if(allergies[indexy].name == $scope.not_selected_allergens[i].name) {
-						$scope.not_selected_allergens.splice(i,1);
-					}
-				 }
-				indexy++;
-			}
-		}
+        $scope.intolerances = [];
 
-		if($localstorage.getObject('intolerances') != null) {
-			var intolerances = $localstorage.getObject('intolerances').intolerances;
-			var indexz = 0;
-			while(indexz < intolerances.length) {
-				if(intolerances[indexz].$$hashKey != null) {
-					intolerances[indexz].$$hashKey = null;
-				}
-				$scope.intolerances.push(intolerances[indexz]);
-				for(var j = 0; j < $scope.not_selected_allergens.length; j++) {
-					if(intolerances[indexz].name == $scope.not_selected_allergens[j].name) {
-						$scope.not_selected_allergens.splice(j,1);
-					}
-				 }
-				indexz++;
-			}
-		}
-		
+        if($localstorage.getObject('allergies') != null) {
+            var allergies = $localstorage.getObject('allergies').allergies;
+            var indexy = 0;
+            while(indexy < allergies.length) {
+                if(allergies[indexy].$$hashKey != null) {
+                    allergies[indexy].$$hashKey = null;
+                }
+                $scope.allergens.push(allergies[indexy]);
+                for(var i = 0; i < $scope.not_selected_allergens.length; i++) {
+                    if(allergies[indexy].name == $scope.not_selected_allergens[i].name) {
+                        $scope.not_selected_allergens.splice(i,1);
+                    }
+                }
+                indexy++;
+            }
+        }
+
+        if($localstorage.getObject('intolerances') != null) {
+            var intolerances = $localstorage.getObject('intolerances').intolerances;
+            var indexz = 0;
+            while(indexz < intolerances.length) {
+                if(intolerances[indexz].$$hashKey != null) {
+                    intolerances[indexz].$$hashKey = null;
+                }
+                $scope.intolerances.push(intolerances[indexz]);
+                for(var j = 0; j < $scope.not_selected_allergens.length; j++) {
+                    if(intolerances[indexz].name == $scope.not_selected_allergens[j].name) {
+                        $scope.not_selected_allergens.splice(j,1);
+                    }
+                }
+                indexz++;
+            }
+        }
+
     })
 
 
@@ -215,7 +212,7 @@ angular.module('arpa.controllers', [])
     })
 
     .controller('ProfileCtrl', function($scope) {
-            $scope.myActiveSlide = 1;
+        $scope.myActiveSlide = 1;
     })
 
     .controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook) {
@@ -259,14 +256,11 @@ angular.module('arpa.controllers', [])
         });
     })
 
-    .controller('SelectCtrl', function($scope, $state, $ionicSlideBoxDelegate, $http) {
+    .controller('SelectCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
         var firstRun;
 
-        //var test = $http.post('localhost:3000/allergies', {});
         // set up some logic to decide which slide to show first
         $scope.$on('$ionicView.enter', function() {
-
-
             var jumpTo = firstRun ? 1 : 0;
             $ionicSlideBoxDelegate.slide(jumpTo);
             if (!firstRun) {
