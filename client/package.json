@@ -18,7 +18,6 @@
     "org.apache.cordova.device",
     "org.apache.cordova.console",
     "com.ionic.keyboard",
-    "com.phonegap.plugins.facebookconnect",
     "org.apache.cordova.dialogs",
     "org.apache.cordova.file",
     "org.apache.cordova.media",
@@ -29,6 +28,11 @@
     {
       "locator": "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git",
       "id": "nl.x-services.plugins.toast"
+    },
+    "de.appplant.cordova.plugin.local-notification",
+    {
+      "locator": "https://github.com/Wizcorp/phonegap-facebook-plugin.git",
+      "id": "com.phonegap.plugins.facebookconnect"
     }
   ],
   "cordovaPlatforms": [
