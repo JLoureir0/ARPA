@@ -25,6 +25,30 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
+img {
+  max-width: 80%;
+  height: auto;
+  width: auto;
+  display: block;
+  margin: auto;
+}
+
+#slide-box {
+  height: 100%;
+}
+.scroll {
+  height: 100%;
+}
+.slider-slide {
+  padding-top: 50px;
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+}
+.slider-pager {
+  bottom: 2%;
+}
+
 .circle {
   border-radius: 50%;
   width: 6.1rem;
@@ -292,8 +316,7 @@ ul.to-add-allergs li {
   font-weight: bold;
 }
 
-
-.allergicBtn{
+.allergicBtn {
   margin-left: 5%;
   margin-bottom: 5%;
 }
