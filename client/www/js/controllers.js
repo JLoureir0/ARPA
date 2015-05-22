@@ -12,7 +12,7 @@ angular.module('arpa.controllers', [])
                 $window.localStorage[key] = JSON.stringify(value);
             },
             getObject: function(key) {
-                return JSON.parse($window.localStorage[key] || '{}');
+                return JSON.parse($window.localStorage[key]);
             }
         }
     }])
@@ -20,10 +20,12 @@ angular.module('arpa.controllers', [])
     .controller('AppsCtrl', function($scope) {})
 
     .controller('MainCtrl', function($scope, $localstorage, $http){
-        $scope.userpicture = './img/logo_arpa.svg';
+        $scope.userpicture = './img/logo_arpa.svg'; 
 
-        if($localstorage.getObject('userinfo') != null) {
-            var userinfo = $localstorage.getObject('userinfo');
+        var userinfo = $localstorage.getObject('userinfo');
+
+        if(userinfo) {
+            
             $scope.username = userinfo.name;
             //$scope.userbirthday = userinfo.birthday;
             var picture = 'http://graph.facebook.com/' + userinfo.id + '/picture?width=270&height=270';
@@ -42,7 +44,7 @@ angular.module('arpa.controllers', [])
     .controller('AllergensCtrl', function($scope, $ionicModal, $localstorage){
         $scope.value_allergies = true;
         $scope.value_intolerances = true;
-        $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
+        $scope.extra_icons_intol = "./img/allergens-icons/mais.png";
         $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
 
 
@@ -172,8 +174,11 @@ angular.module('arpa.controllers', [])
 		
 		$scope.intolerances = [];
 
-		if($localstorage.getObject('allergies') != null) {
-			var allergies = $localstorage.getObject('allergies').allergies;
+        var allergiesObject = $localstorage.getObject('allergies');
+        var intoleranceObject = $localstorage.getObject('intolerances');
+
+		if(allergiesObject) {
+			var allergies = allergiesObject.allergies;
 			var indexy = 0;
 			while(indexy < allergies.length) {
 				if(allergies[indexy].$$hashKey != null) {
@@ -189,8 +194,8 @@ angular.module('arpa.controllers', [])
 			}
 		}
 
-		if($localstorage.getObject('intolerances') != null) {
-			var intolerances = $localstorage.getObject('intolerances').intolerances;
+		if(intoleranceObject) {
+			var intolerances = intoleranceObject.intolerances;
 			var indexz = 0;
 			while(indexz < intolerances.length) {
 				if(intolerances[indexz].$$hashKey != null) {
