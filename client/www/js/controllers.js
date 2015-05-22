@@ -47,6 +47,10 @@ angular.module('arpa.controllers', [])
     $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
     $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
 
+	$scope.onHold = function() {
+		console.log('Pelos poderes de Greyskull! Eu tenho a acessibilidade!');
+	};
+
 
     $scope.plus_into = function() {
         if ($scope.value_intolerances == true) {
