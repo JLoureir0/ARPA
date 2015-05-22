@@ -1,26 +1,18 @@
 angular.module('arpa.controllers', [])
 
-    .factory('$localstorage', ['$window', function($window) {
-        return {
-            set: function(key, value) {
-                $window.localStorage[key] = value;
-            },
-            get: function(key, defaultValue) {
-                return $window.localStorage[key] || defaultValue;
-            },
-            setObject: function(key, value) {
-                $window.localStorage[key] = JSON.stringify(value);
-            },
-            getObject: function(key) {
-                return JSON.parse($window.localStorage[key] || '{}');
-            }
-        }
-    }])
+
 
     .controller('AppsCtrl', function($scope) {})
 
-    .controller('MainCtrl', function($scope, $localstorage, $http){
+    .controller('MainCtrl', function($scope, $ionicPlatform, $localstorage, $http, Socket){
         $scope.userpicture = './img/logo_arpa.svg';
+
+        Socket.forward('text', $scope);
+        console.log("cenas");
+
+        $scope.$on('socket:text', function(ev, data){
+            console.log(data);
+        })
 
         if($localstorage.getObject('userinfo') != null) {
             var userinfo = $localstorage.getObject('userinfo');
@@ -36,6 +28,9 @@ angular.module('arpa.controllers', [])
             $scope.username = 'ARPA';
             $scope.userpicture = './img/logo_arpa.svg';
         }
+
+
+
     })
 
 
@@ -264,11 +259,14 @@ angular.module('arpa.controllers', [])
         });
     })
 
-    .controller('SelectCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
+    .controller('SelectCtrl', function($scope, $state, $ionicSlideBoxDelegate, $http) {
         var firstRun;
 
+        //var test = $http.post('localhost:3000/allergies', {});
         // set up some logic to decide which slide to show first
         $scope.$on('$ionicView.enter', function() {
+
+
             var jumpTo = firstRun ? 1 : 0;
             $ionicSlideBoxDelegate.slide(jumpTo);
             if (!firstRun) {
