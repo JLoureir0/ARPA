@@ -81,7 +81,7 @@ angular.module('arpa.controllers', [])
         $scope.removeAllergens = function($index, $value) {
             if ($scope.value_allergies != true) {
                 $scope.allergens.splice($index,1);
-                $scope.not_selected_allergens.push($value);
+                $scope.not_selected_allergens.unshift($value);
                 $localstorage.setObject('allergies', {
                    allergies: $scope.allergens
                });
@@ -99,7 +99,7 @@ angular.module('arpa.controllers', [])
         $scope.removeIntol = function($index, $value){
             if ($scope.value_intolerances != true) {
                 $scope.intolerances.splice($index,1);
-                $scope.not_selected_allergens.push($value);
+                $scope.not_selected_allergens.unshift($value);
                 $localstorage.setObject('intolerances', {
                    intolerances: $scope.intolerances
                });
@@ -177,7 +177,7 @@ angular.module('arpa.controllers', [])
         var allergiesObject = $localstorage.getObject('allergies');
         var intoleranceObject = $localstorage.getObject('intolerances');
 
-        if(allergiesObject) {
+        if(allergiesObject && allergiesObject.allergies) {
          var allergies = allergiesObject.allergies;
          var indexy = 0;
          while(indexy < allergies.length) {
@@ -194,7 +194,7 @@ angular.module('arpa.controllers', [])
       }
   }
 
-  if(intoleranceObject) {
+  if(intoleranceObject && intoleranceObject.intolerances) {
      var intolerances = intoleranceObject.intolerances;
      var indexz = 0;
      while(indexz < intolerances.length) {
@@ -271,16 +271,14 @@ angular.module('arpa.controllers', [])
 
 .controller('SelectCtrl', function($scope, $state, $ionicSlideBoxDelegate, $localstorage) {
     var firstRun = $localstorage.get('firstRun');
-    if(firstRun){
+    if(firstRun && firstRun == 'false'){
         $state.go('tab.allergens');
-        console.log("NOT FIRST RUN");
+        
     }
     else{
         $scope.$on('$ionicView.enter', function() {
-            var jumpTo = firstRun ? 1 : 0;
-            console.log("FIRST RUN");
             $ionicSlideBoxDelegate.slide(0);
-            $localstorage.set('firstRun', false);
+            $localstorage.set('firstRun', 'false');
         });
     }
 
