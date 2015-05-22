@@ -21,6 +21,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+* {  
+ font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
 .circle {
   border-radius: 50%;
   width: 6.1rem;
@@ -30,7 +34,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   /* width and height can be anything, as long as they're equal */
 }
 
-.profile{
+.profile {
   // background-image: url("../img/novo_fundo.svg");
   height: 28%;
 }
@@ -54,7 +58,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   left: 50%;
 }
 
-.tabs{
+.tabs {
 
   top: 28% !important;
 }
@@ -74,7 +78,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   height: 150%
 }
 
-.tabbed{
+.tabbed {  
   top: 3.0rem;
   //background-image: url("../img/novo_fundo.svg");
   background-size: auto 100%;
