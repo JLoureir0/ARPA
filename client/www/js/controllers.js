@@ -269,16 +269,16 @@ angular.module('arpa.controllers', [])
         });
     })
 
-    .controller('SelectCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
-        var firstRun;
-
+    .controller('SelectCtrl', function($scope, $state, $ionicSlideBoxDelegate, $localstorage) {
+        var firstRun = $localstorage.get('firstRun', false);
+        if(firstRun){
+            $state.go('tab.allergens');
+        }
         // set up some logic to decide which slide to show first
         $scope.$on('$ionicView.enter', function() {
             var jumpTo = firstRun ? 1 : 0;
             $ionicSlideBoxDelegate.slide(jumpTo);
-            if (!firstRun) {
-                firstRun = true;
-            }
+            $localstorage.set('firstRun', true);
         });
 
         // Called to navigate to the main app
