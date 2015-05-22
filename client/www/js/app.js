@@ -28,7 +28,6 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.so
         });
     })
 
-
     .config(function($cordovaFacebookProvider){
         /*
          if(!window.cordova){ //Comment for browser testing, uncomment to deploy
@@ -47,97 +46,88 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.so
     .config(function($ionicConfigProvider) {if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);})
 
     .config(function($stateProvider, $urlRouterProvider) {
-        // Ionic uses AngularUI Router which uses the concept of states
-        // Learn more here: https://github.com/angular-ui/ui-router
-        // Set up the various states which the app can be in.
-        // Each state's controller can be found in controllers.js
-        $stateProvider
 
-            .state('firstSelect', {
-                url: "/",
-                templateUrl: "templates/select.html",
-                controller: 'SelectCtrl'
-            })
-            // setup an abstract state for the tabs directive
-            .state('tab', {
-                url: "/tab",
-                abstract: true,
-                templateUrl: "templates/tabs.html",
-                controller: 'MainCtrl'
-            })
+      // Ionic uses AngularUI Router which uses the concept of states
+      // Learn more here: https://github.com/angular-ui/ui-router
+      // Set up the various states which the app can be in.
+      // Each state's controller can be found in controllers.js
+      $stateProvider
 
-            // Each tab has its own nav history stack:
+          .state('firstSelect', {
+            url: "/firstSelect",
+            templateUrl: "templates/select.html",
+            controller: 'SelectCtrl as selectCtrl'
+          })
+        // setup an abstract state for the tabs directive
+          .state('tab', {
+            url: "/tab",
+            abstract: true,
+            templateUrl: "templates/tabs.html",
+            controller: 'MainCtrl'
+          })
 
-            .state('tab.allergens', {
-                url: '/allergens',
-                views: {
-                    'tab-allergens': {
-                        templateUrl: 'templates/tab-allergens.html',
-                        controller: 'AllergensCtrl'
-                    }
-                }
-            })
+        // Each tab has its own nav history stack:
 
-            .state('tab.profile', {
-                url: '/profile',
-                views: {
-                    'tab-profile': {
-                        templateUrl: 'templates/tab-profile.html',
-                        controller: 'ProfileCtrl'
-                    }
-                }
-            })
+          .state('tab.allergens', {
+            url: '/allergens',
+            views: {
+              'tab-allergens': {
+                templateUrl: 'templates/tab-allergens.html',
+                controller: 'AllergensCtrl'
+              }
+            }
+          })
 
-            .state('tab.definitions', {
-                url: '/definitions',
-                views: {
-                    'tab-definitions': {
-                        templateUrl: 'templates/tab-definitions.html',
-                        controller: 'DefinitionsCtrl'
-                    }
-                }
-            })
+          .state('tab.definitions', {
+            url: '/definitions',
+            views: {
+              'tab-definitions': {
+                templateUrl: 'templates/tab-definitions.html',
+                controller: 'DefinitionsCtrl'
+              }
+            }
+          })
 
-            .state('tab.dash', {
-                url: '/dash',
-                views: {
-                    'tab-dash': {
-                        templateUrl: 'templates/tab-dash.html',
-                        controller: 'DashCtrl'
-                    }
-                }
-            })
+          .state('tab.dash', {
+            url: '/dash',
+            views: {
+              'tab-dash': {
+                templateUrl: 'templates/tab-dash.html',
+                controller: 'DashCtrl'
+              }
+            }
+          })
 
-            .state('tab.applications', {
-                url: '/applications',
-                views: {
-                    'tab-applications': {
-                        templateUrl: 'templates/tab-applications.html',
-                        controller: 'AppsCtrl'
-                    }
-                }
-            })
-            .state('tab.chat-detail', {
-                url: '/chats/:chatId',
-                views: {
-                    'tab-chats': {
-                        templateUrl: 'templates/chat-detail.html',
-                        controller: 'ChatDetailCtrl'
-                    }
-                }
-            })
+          .state('tab.applications', {
+            url: '/applications',
+            views: {
+              'tab-applications': {
+                templateUrl: 'templates/tab-applications.html',
+                controller: 'AppsCtrl'
+              }
+            }
+          })
+          .state('tab.chat-detail', {
+            url: '/chats/:chatId',
+            views: {
+              'tab-chats': {
+                templateUrl: 'templates/chat-detail.html',
+                controller: 'ChatDetailCtrl'
+              }
+            }
+          })
 
-            .state('tab.account', {
-                url: '/account',
-                views: {
-                    'tab-account': {
-                        templateUrl: 'templates/tab-account.html',
-                        controller: 'AccountCtrl'
-                    }
-                }
-            });
+          .state('tab.account', {
+            url: '/account',
+            views: {
+              'tab-account': {
+                templateUrl: 'templates/tab-account.html',
+                controller: 'AccountCtrl'
+              }
+            }
+          });
 
-        // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/');
+      // if none of the above states are matched, use this as the fallback
+      $urlRouterProvider.otherwise('/firstSelect');
 
     });

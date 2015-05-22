@@ -3615,6 +3615,7 @@ a.subdued {
 .tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {
   margin-top: -2px;
   border-style: solid;
+  border-width: 2px 0 0 0;
   border-color: #444; }
   .tabs-striped .tab-item.tab-item-active .badge, .tabs-striped .tab-item.active .badge, .tabs-striped .tab-item.activated .badge {
     top: 2px;
@@ -3630,6 +3631,7 @@ a.subdued {
     margin-top: -2px;
     color: #444;
     border-style: solid;
+    border-width: 2px 0 0 0;
     border-color: #444; }
 .tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
@@ -3644,6 +3646,7 @@ a.subdued {
     margin-top: -2px;
     color: #444;
     border-style: solid;
+    border-width: 2px 0 0 0;
     border-color: #444; }
 .tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
@@ -3658,6 +3661,7 @@ a.subdued {
     margin-top: -2px;
     color: #fff;
     border-style: solid;
+    border-width: 2px 0 0 0;
     border-color: #fff; }
 .tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
@@ -3672,6 +3676,7 @@ a.subdued {
     margin-top: -2px;
     color: #fff;
     border-style: solid;
+    border-width: 2px 0 0 0;
     border-color: #fff; }
 .tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
@@ -3686,6 +3691,7 @@ a.subdued {
     margin-top: -2px;
     color: #fff;
     border-style: solid;
+    border-width: 2px 0 0 0;
     border-color: #fff; }
 .tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
@@ -3700,6 +3706,7 @@ a.subdued {
     margin-top: -2px;
     color: #fff;
     border-style: solid;
+    border-width: 2px 0 0 0;
     border-color: #fff; }
 .tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
@@ -3714,6 +3721,7 @@ a.subdued {
     margin-top: -2px;
     color: #fff;
     border-style: solid;
+    border-width: 2px 0 0 0;
     border-color: #fff; }
 .tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
@@ -3728,6 +3736,7 @@ a.subdued {
     margin-top: -2px;
     color: #fff;
     border-style: solid;
+    border-width: 2px 0 0 0;
     border-color: #fff; }
 .tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
@@ -3742,6 +3751,7 @@ a.subdued {
     margin-top: -2px;
     color: #fff;
     border-style: solid;
+    border-width: 2px 0 0 0;
     border-color: #fff; }
 .tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
@@ -4082,6 +4092,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
     transition: color .1s ease; }
     .tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-top.tabs-striped .tab-item.active, .tabs-top.tabs-striped .tab-item.activated {
       margin-top: 1px;
+      border-width: 0px 0px 2px 0px !important;
       border-style: solid; }
       .tabs-top.tabs-striped .tab-item.tab-item-active > .badge, .tabs-top.tabs-striped .tab-item.tab-item-active > i, .tabs-top.tabs-striped .tab-item.active > .badge, .tabs-top.tabs-striped .tab-item.active > i, .tabs-top.tabs-striped .tab-item.activated > .badge, .tabs-top.tabs-striped .tab-item.activated > i {
         margin-top: -1px; }
@@ -7607,6 +7618,31 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+* {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+
+img {
+  max-width: 80%;
+  height: auto;
+  width: auto;
+  display: block;
+  margin: auto; }
+
+#slide-box {
+  height: 100%; }
+
+.scroll {
+  height: 100%; }
+
+.slider-slide {
+  padding-top: 50px;
+  color: #000;
+  background-color: #fff;
+  text-align: center; }
+
+.slider-pager {
+  bottom: 2%; }
 
 .circle {
   border-radius: 50%;

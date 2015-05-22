@@ -1,4 +1,4 @@
-angular.module('arpa.controllers', [])
+angular.module('arpa.controllers', ['ionic', 'ui.router'])
 
 
 .controller('AppsCtrl', function($scope) {})
@@ -281,33 +281,35 @@ angular.module('arpa.controllers', [])
     });
 })
 
-.controller('SelectCtrl', function($scope, $state, $ionicSlideBoxDelegate, $localstorage) {
+.controller('SelectCtrl', function($state, $ionicSlideBoxDelegate, $localstorage) {
+
+    var selectCtrl = this;
+
     var firstRun = $localstorage.get('firstRun');
-    if(firstRun && firstRun == 'false'){
+    
+    if (firstRun && firstRun == 'false'){
         $state.go('tab.allergens');
         
-    }
-    else{
-        $scope.$on('$ionicView.enter', function() {
+    } else {
+        selectCtrl.$on('$ionicView.enter', function() {
             $ionicSlideBoxDelegate.slide(0);
             $localstorage.set('firstRun', 'false');
         });
     }
 
-        // Called to navigate to the main app
-        $scope.startApp = function() {
-            $state.go('tab.allergens');
+    // Called to navigate to the main app
+    selectCtrl.startApp = function() {
+        $state.go('tab.allergens');
 
-        };
-        $scope.next = function() {
-            $ionicSlideBoxDelegate.next();
-        };
-        $scope.previous = function() {
-            $ionicSlideBoxDelegate.previous();
-        };
-
-        // Called each time the slide changes
-        $scope.slideChanged = function(index) {
-            $scope.slideIndex = index;
-        };
-    });
+    };
+    selectCtrl.next = function() {
+        $ionicSlideBoxDelegate.next();
+    };
+    selectCtrl.previous = function() {
+        $ionicSlideBoxDelegate.previous();
+    };
+    // Called each time the slide changes
+    selectCtrl.slideChanged = function(index) {
+        selectCtrl.slideIndex = index;
+    };
+});
