@@ -54,7 +54,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.so
       $stateProvider
 
           .state('firstSelect', {
-            url: "/firstSelect",
+            url: "/",
             templateUrl: "templates/select.html",
             controller: 'SelectCtrl as selectCtrl'
           })
@@ -128,6 +128,6 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.so
           });
 
       // if none of the above states are matched, use this as the fallback
-      $urlRouterProvider.otherwise('/firstSelect');
+      $urlRouterProvider.otherwise('/');
 
     });

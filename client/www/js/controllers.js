@@ -285,7 +285,7 @@ angular.module('arpa.controllers', ['ionic', 'ui.router'])
 
     var selectCtrl = this;
 
-    var firstRun = $localstorage.get('firstRun');
+    /*var firstRun = $localstorage.get('firstRun');
     
     if (firstRun && firstRun == 'false'){
         $state.go('tab.allergens');
@@ -295,7 +295,7 @@ angular.module('arpa.controllers', ['ionic', 'ui.router'])
             $ionicSlideBoxDelegate.slide(0);
             $localstorage.set('firstRun', 'false');
         });
-    }
+    }*/
 
     // Called to navigate to the main app
     selectCtrl.startApp = function() {
@@ -310,6 +310,21 @@ angular.module('arpa.controllers', ['ionic', 'ui.router'])
     };
     // Called each time the slide changes
     selectCtrl.slideChanged = function(index) {
+        
         selectCtrl.slideIndex = index;
+
+        if (index == 2) {
+
+            var video = document.getElementById("video1");
+
+            video.load();
+            video.play();
+        } else if (index == 3) {
+
+            var video = document.getElementById("video2");
+
+            video.load();
+            video.play();
+        }
     };
 });

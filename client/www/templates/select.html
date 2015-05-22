@@ -15,11 +15,11 @@
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
         <button class="button button-positive button-clear no-animation"
-                ng-click="selectCtrl.next()" ng-if="selectCtrl.slideIndex != 2">
+                ng-click="selectCtrl.next()" ng-if="selectCtrl.slideIndex != 3">
             Next
         </button>
         <button class="button button-positive button-clear no-animation"
-                ng-click="selectCtrl.startApp()" ng-if="selectCtrl.slideIndex == 2">
+                ng-click="selectCtrl.startApp()" ng-if="selectCtrl.slideIndex == 3">
             Start using ARPA
         </button>
     </ion-nav-buttons>
@@ -56,8 +56,14 @@
         </div>
       </ion-slide>
       <ion-slide>
-        <video width="300" height="600">
+        <video id="video1" width="300" height="600">
             <source src="./video/allergicprofile.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+     </ion-slide>
+      <ion-slide>
+        <video id="video2" width="300" height="600">
+            <source src="./video/selection.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
      </ion-slide>
