@@ -1,7 +1,9 @@
 var connection = require('../db/connection.js');
 
 exports.save = function(id, intolerant, allergic, cb) {
-  connection.query("INSERT INTO user_allergy VALUES('" + id + "'," + array_parser(intolerant) + "," + array_parser(allergic) +");", cb);
+  var query = "INSERT INTO user_allergy VALUES('" + id + "'," + array_parser(intolerant) + "," + array_parser(allergic) +") RETURNING _id;";
+  console.log(query);
+  connection.query(query, cb);
 };
 
 exports.get = function(id, cb) {
@@ -26,8 +28,16 @@ exports.update = function(id, intolerant, allergic, cb) {
 };
 
 function array_parser(array) {
+  var q = array.toString();
+  console.log("SIZE: " + array + ", "  + array.length);
+  if(array === "[]"){
+    q = "['']";
+  } else{
+    q = q.replace(/"/g, "'");
+  }
+  
   //Converts array to => ARRAY['x,'y','z']
-  return ('ARRAY'+ JSON.stringify(array)).replace(/"/g, "'");
+  return ("ARRAY"+ q);
 }
 
 function update_intolerant(id, intolerant, cb) {

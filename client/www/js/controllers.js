@@ -1,3 +1,5 @@
+var host = "http://localhost:3000/allergies";
+
 angular.module('arpa.controllers', [])
 
 .factory('$localstorage', ['$window', function($window) {
@@ -41,7 +43,7 @@ angular.module('arpa.controllers', [])
     })
 
 
-.controller('AllergensCtrl', function($scope, $ionicModal, $localstorage){
+.controller('AllergensCtrl', function($scope, $ionicModal, $localstorage, $http){
     $scope.value_allergies = true;
     $scope.value_intolerances = true;
     $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
@@ -52,9 +54,10 @@ angular.module('arpa.controllers', [])
         if ($scope.value_intolerances == true) {
             $scope.value_intolerances = false;
             $scope.extra_icons_intol = "./img/allergens-icons/guardar.svg";
-        }else{
+        }else{ //Save
             $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
             $scope.value_intolerances = true;
+            $http.post
         }
     };
 
@@ -63,9 +66,31 @@ angular.module('arpa.controllers', [])
             $scope.value_allergies = false;
             $scope.extra_icons_allergs = "./img/allergens-icons/guardar.svg";
                 //$scope.push_down = {'opacity': "0.6"};
-            }else{
+            }else{ //Save
+                var alreadyRegistered = $localstorage.get('alreadyRegistered');
                 $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
                 $scope.value_allergies = true;
+
+                
+                var allergensToSend = [];
+                for(var i = 0; i < $scope.allergens.length; i++){
+                    allergensToSend.push($scope.allergens[i].name);
+                }
+                if(!alreadyRegistered){
+                    $http.post(host + '/' + $localstorage.getObject('userinfo').id, {intolerant: "[]", allergic: JSON.stringify(allergensToSend)}).
+                    success(function(data, status, headers, config){
+                        console.log(data);
+                        $localstorage.setObject('alreadyRegistered', 'true');
+                    }).
+                    error(function(data, status, headers, config){
+                        console.log("ERROR: " + JSON.stringify(data));
+                    });
+                } else{
+                    
+                }
+                
+                
+
                 //$scope.push_down = {'opacity': "1"};
             }
         };
@@ -241,7 +266,7 @@ angular.module('arpa.controllers', [])
                 $localstorage.setObject('userinfo', {
                     id: $scope.user.id,
                     name: $scope.user.name,
-                    birthday: date.toLocaleDateString()
+                    birthday: date.toLocaleDateString(),
                 });
                 $window.location.reload();
             }, function (error) {

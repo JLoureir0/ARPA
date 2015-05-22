@@ -2,7 +2,20 @@ var restify         = require('restify');
 var allergies_model = require('../models/allergies.js');
 
 //TODO Add all the allergies
-var valid_allergies = ['milk', 'peanuts', 'eggs', 'shrimp'];
+var valid_allergies = 
+[
+  'lacteos', 
+  'gluten', 
+  'amendoins', 
+  'ovos', 
+  'marisco', 
+  'moluscos',
+  'mostarda',
+  'peixe',
+  'sesamo',
+  'so2',
+  'soja',
+  'tremoços' ];
 
 exports.handle_params = function(req, res, next) {
   verify_allergies_attributes(req.params, next);
@@ -16,6 +29,16 @@ exports.get_allergies = function(req, res) {
       res.send(404);
     else
       res.send(200, { data: result.rows[0] });
+  });
+};
+
+exports.new_user = function(req, res){
+  allergies_model.save(req.params[0], req.params.intolerant, req.params.allergic, function(err, result){
+    if(result.rows.length === 0){
+      res.send(404);
+    } else{
+      res.send(200, {data: result.rows[0]});
+    }
   });
 };
 
@@ -58,17 +81,19 @@ function verify_allergies_attributes(allergies, next) {
 }
 
 function parse_intolerant(intolerant, next) {
-  if(intolerant.constructor !== Array)
+  var parsed = JSON.parse(intolerant);
+  if(parsed.constructor !== Array)
     return next(new restify.InvalidArgumentError('intolerant must be an array'));
 
-  parse_valid_allergies(intolerant, 'intolerant', next);
+  parse_valid_allergies(parsed, 'intolerant', next);
 }
 
 function parse_allergic(allergic, next) {
-  if(allergic.constructor !== Array)
+  var parsed = JSON.parse(allergic);
+  console.log("PARSED: " + allergic);
+  if(parsed.constructor !== Array)
     return next(new restify.InvalidArgumentError('allergic must be an array'));
-
-  parse_valid_allergies(allergic, 'allergic', next);
+  parse_valid_allergies(parsed, 'allergic', next);
 }
 
 function parse_valid_allergies(array, type, next) {
