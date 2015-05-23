@@ -49,6 +49,41 @@ angular.module('arpa.controllers', [])
     $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
     $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
 
+    var updateDatabase = function(){
+        var intolerancesToSend = [];
+        var allergensToSend = [];
+        var alreadyRegistered = $localstorage.get('alreadyRegistered');
+
+        for(var i = 0; i < $scope.intolerances.length; i++){
+            intolerancesToSend.push($scope.intolerances[i].name);
+        }
+
+        for(var i = 0; i < $scope.allergens.length; i++){
+            allergensToSend.push($scope.allergens[i].name);
+        }
+
+        if(!alreadyRegistered){
+            $http.post(host + '/' + $localstorage.getObject('userinfo').id, {intolerant: JSON.stringify(intolerancesToSend), allergic: JSON.stringify(allergensToSend)}).
+            success(function(data, status, headers, config){
+                console.log(data);
+                $localstorage.setObject('alreadyRegistered', 'true');
+            }).
+            error(function(data, status, headers, config){
+                console.log("ERROR: " + JSON.stringify(data));
+            });
+        } else{
+            $http.put(host + '/' + $localstorage.getObject('userinfo').id, {intolerant: JSON.stringify(intolerancesToSend), allergic: JSON.stringify(allergensToSend)}).
+            success(function(data, status, headers, config){
+                console.log(data);
+                $localstorage.setObject('alreadyRegistered', 'true');
+            }).
+            error(function(data, status, headers, config){
+                console.log("ERROR: " + JSON.stringify(data));
+            });
+        }
+    };
+
+
 
     $scope.plus_into = function() {
         if ($scope.value_intolerances == true) {
@@ -57,7 +92,7 @@ angular.module('arpa.controllers', [])
         }else{ //Save
             $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
             $scope.value_intolerances = true;
-            $http.post
+            updateDatabase();
         }
     };
 
@@ -67,30 +102,9 @@ angular.module('arpa.controllers', [])
             $scope.extra_icons_allergs = "./img/allergens-icons/guardar.svg";
                 //$scope.push_down = {'opacity': "0.6"};
             }else{ //Save
-                var alreadyRegistered = $localstorage.get('alreadyRegistered');
                 $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
                 $scope.value_allergies = true;
-
-                
-                var allergensToSend = [];
-                for(var i = 0; i < $scope.allergens.length; i++){
-                    allergensToSend.push($scope.allergens[i].name);
-                }
-                if(!alreadyRegistered){
-                    $http.post(host + '/' + $localstorage.getObject('userinfo').id, {intolerant: "[]", allergic: JSON.stringify(allergensToSend)}).
-                    success(function(data, status, headers, config){
-                        console.log(data);
-                        $localstorage.setObject('alreadyRegistered', 'true');
-                    }).
-                    error(function(data, status, headers, config){
-                        console.log("ERROR: " + JSON.stringify(data));
-                    });
-                } else{
-                    
-                }
-                
-                
-
+                updateDatabase();
                 //$scope.push_down = {'opacity': "1"};
             }
         };
