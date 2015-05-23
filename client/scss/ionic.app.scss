@@ -21,6 +21,34 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+* {  
+ font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+img {
+  max-width: 80%;
+  height: auto;
+  width: auto;
+  display: block;
+  margin: auto;
+}
+
+#slide-box {
+  height: 100%;
+}
+.scroll {
+  height: 100%;
+}
+.slider-slide {
+  padding-top: 50px;
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+}
+.slider-pager {
+  bottom: 2%;
+}
+
 .circle {
   border-radius: 50%;
   width: 6.1rem;
@@ -30,7 +58,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   /* width and height can be anything, as long as they're equal */
 }
 
-.profile{
+.profile {
   // background-image: url("../img/novo_fundo.svg");
   height: 28%;
 }
@@ -54,7 +82,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   left: 50%;
 }
 
-.tabs{
+.tabs {
 
   top: 28% !important;
 }
@@ -74,7 +102,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   height: 150%
 }
 
-.tabbed{
+.tabbed {  
   top: 3.0rem;
   //background-image: url("../img/novo_fundo.svg");
   background-size: auto 100%;
@@ -200,7 +228,7 @@ ul.to-add-allergs li {
 }
 
 .pane{
-  background:url("../img/novo_fundo.svg") no-repeat center center fixed;
+  background:url("../img/novo_fundo1.png") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -288,8 +316,7 @@ ul.to-add-allergs li {
   font-weight: bold;
 }
 
-<<<<<<< HEAD
-.allergicBtn{
+.allergicBtn {
   margin-left: 5%;
   margin-bottom: 5%;
 }
@@ -298,14 +325,12 @@ ul.to-add-allergs li {
   margin-right: 60%;
   margin-bottom: 60%;
 }
-=======
+
 .intro_slide{
   margin-top:13%;
   height: 100%;
-  background-color: #ffffff;
 }
 
 .intro_slide .slider-pager{
     bottom:10% !important;
 }
->>>>>>> 122555b2ca856ec818bc121b8275ffee43be7458

@@ -6,41 +6,47 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'ngCordova', 'ngAnimate'])
+angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.socket-io', 'ngCordova', 'ngAnimate'])
 
-    .run(function($ionicPlatform) {
-      $ionicPlatform.ready(function() {
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
-        if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
-        if (window.StatusBar) {
-          // org.apache.cordova.statusbar required
-          StatusBar.styleLightContent();
-        }
+    .run(function($ionicPlatform, Socket) {
 
-      });
+
+        $ionicPlatform.ready(function() {
+            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+            // for form inputs)
+            if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            }
+            if (window.StatusBar) {
+                // org.apache.cordova.statusbar required
+                StatusBar.styleLightContent();
+            }
+
+            Socket.forward('connection');
+
+
+        });
     })
 
     .config(function($cordovaFacebookProvider){
+        /*
+         if(!window.cordova){ //Comment for browser testing, uncomment to deploy
+         var appID = 367156356826931;
+         var version = "v2.0";
+         $cordovaFacebookProvider.browserInit(appID, version);
+         }*/
 
-      /*if(!window.cordova){ //Comment for browser testing, uncomment to deploy
-        var appID = 367156356826931;
-        var version = "v2.0";
-        $cordovaFacebookProvider.browserInit(appID, version);
-      }*/
-
-      ionic.Platform.ready(function () {
-       var appID = 367156356826931;
-       var version = "v2.0";
-       $cordovaFacebookProvider.browserInit(appID, version);
-       });
+        /*ionic.Platform.ready(function () {
+            var appID = 367156356826931;
+            var version = "v2.0";
+            $cordovaFacebookProvider.browserInit(appID, version);
+        });*/
     })
 
     .config(function($ionicConfigProvider) {if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);})
 
     .config(function($stateProvider, $urlRouterProvider) {
+
       // Ionic uses AngularUI Router which uses the concept of states
       // Learn more here: https://github.com/angular-ui/ui-router
       // Set up the various states which the app can be in.
@@ -50,7 +56,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'ngCordova
           .state('firstSelect', {
             url: "/",
             templateUrl: "templates/select.html",
-            controller: 'SelectCtrl'
+            controller: 'SelectCtrl as selectCtrl'
           })
         // setup an abstract state for the tabs directive
           .state('tab', {
