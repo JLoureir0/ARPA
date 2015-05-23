@@ -282,7 +282,7 @@ angular.module('arpa.controllers', [])
                             });
                             $scope.$broadcast('logged_in', {});
 
-                            $window.location.reload();
+                            $window.location.reload(); //TODO verify event, if updated remove this line
                         }, function (error) {
 
                         });
