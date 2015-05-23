@@ -284,7 +284,6 @@ indexz++;
 
 })
 
-
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
     $scope.chat = Chats.get($stateParams.chatId);
 })
@@ -322,10 +321,6 @@ indexz++;
     };
 
 })
-
-
-
-
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
     $scope.chat = Chats.get($stateParams.chatId);
@@ -389,32 +384,51 @@ indexz++;
 
     var selectCtrl = this;
 
-        /*var firstRun = $localstorage.get('firstRun');
+    /*var firstRun = $localstorage.get('firstRun');
 
-         if (firstRun && firstRun == 'false'){
-         $state.go('tab.allergens');
+     if (firstRun && firstRun == 'false'){
+     $state.go('tab.allergens');
 
-         } else {
-         selectCtrl.$on('$ionicView.enter', function() {
-         $ionicSlideBoxDelegate.slide(0);
-         $localstorage.set('firstRun', 'false');
-         });
-}*/
+     } else {
+     selectCtrl.$on('$ionicView.enter', function() {
+     $ionicSlideBoxDelegate.slide(0);
+     $localstorage.set('firstRun', 'false');
+     });
+    }*/
 
-        // Called to navigate to the main app
-        selectCtrl.startApp = function() {
-            $state.go('tab.allergens');
+    selectCtrl.slideIndex = 0;
+    selectCtrl.showPager = true;
 
-        };
-        selectCtrl.next = function() {
-            $ionicSlideBoxDelegate.next();
-        };
-        selectCtrl.previous = function() {
-            $ionicSlideBoxDelegate.previous();
-        };
+    // Called to navigate to the main app
+    selectCtrl.startApp = function() {
+        $state.go('tab.allergens');
 
-        // Called each time the slide changes
-        selectCtrl.slideChanged = function(index) {
-            selectCtrl.slideIndex = index;
-        };
-    });
+    };
+    selectCtrl.next = function() {
+        $ionicSlideBoxDelegate.next();
+    };
+    selectCtrl.previous = function() {
+        $ionicSlideBoxDelegate.previous();
+    };
+
+    // Called each time the slide changes
+    selectCtrl.slideChanged = function(index) {
+        selectCtrl.slideIndex = index;
+
+        if (index == 2) {
+            selectCtrl.showPager = false;
+
+            var video = document.getElementById("video1");
+            video.load();
+            video.play();
+        } else if (index == 3) {
+            selectCtrl.showPager = false;
+
+            var video = document.getElementById("video2");
+            video.load();
+            video.play();
+        } else {
+            selectCtrl.showPager = true;
+        }
+    };
+});

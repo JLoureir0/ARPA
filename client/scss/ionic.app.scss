@@ -33,6 +33,8 @@ img {
   margin: auto;
 }
 
+/* Select Pages - BEGIN */
+
 #slide-box {
   height: 100%;
 }
@@ -48,6 +50,20 @@ img {
 .slider-pager {
   bottom: 2%;
 }
+
+video#video1 {
+  margin-top: -50px;
+  width: 100%;
+  height: auto;
+}
+
+video#video2 {
+  margin-top: -50px;
+  width: 100%;
+  height: auto;
+}
+
+/* Select Pages - END */
 
 .circle {
   border-radius: 50%;

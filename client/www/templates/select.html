@@ -4,27 +4,27 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-nav-buttons side="left">
-        <button class="button button-positive button-clear no-animation"
-                ng-click="selectCtrl.startApp()" ng-if="!selectCtrl.slideIndex">
+        <button id="skip-intro-btn" class="button button-positive button-clear no-animation"
+                ng-click="selectCtrl.startApp()" ng-if="selectCtrl.slideIndex == 0">
             Skip Intro
         </button>
-        <button class="button button-positive button-clear no-animation"
+        <button id="previous-slide-btn" class="button button-positive button-clear no-animation"
                 ng-click="selectCtrl.previous()" ng-if="selectCtrl.slideIndex > 0">
             Previous Slide
         </button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-        <button class="button button-positive button-clear no-animation"
-                ng-click="selectCtrl.next()" ng-if="selectCtrl.slideIndex != 3">
+        <button id="next-btn" class="button button-positive button-clear no-animation"
+                ng-click="selectCtrl.next()" ng-if="selectCtrl.slideIndex < 3">
             Next
         </button>
-        <button class="button button-positive button-clear no-animation"
+        <button id="start-arpa-btn" class="button button-positive button-clear no-animation"
                 ng-click="selectCtrl.startApp()" ng-if="selectCtrl.slideIndex == 3">
             Start using ARPA
         </button>
     </ion-nav-buttons>
     
-    <ion-slide-box id="slide-box" on-slide-changed="selectCtrl.slideChanged(index)">
+    <ion-slide-box id="slide-box" show-pager="{{selectCtrl.showPager}}" on-slide-changed="selectCtrl.slideChanged(index)">
       <ion-slide>
         <div>
             <h3 style="margin-top:10%">Welcome to ARPA</h3>
@@ -56,13 +56,13 @@
         </div>
       </ion-slide>
       <ion-slide>
-        <video id="video1" width="300" height="600">
+        <video id="video1" width="300" height="600" loop>
             <source src="./video/allergicprofile.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
      </ion-slide>
       <ion-slide>
-        <video id="video2" width="300" height="600">
+        <video id="video2" width="300" height="600" loop>
             <source src="./video/selection.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
