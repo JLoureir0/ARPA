@@ -7,6 +7,7 @@ io = socket_io.listen(server.server);
 var root_route       = require('./routes/root.js');
 var allergies_routes = require('./routes/allergies.js');
 var allergy_routes   = require('./routes/allergy.js');
+var filter_routes   = require('./routes/product_filter.js');
 
 restify.CORS.ALLOW_HEADERS.push('accept');
 restify.CORS.ALLOW_HEADERS.push('sid');
@@ -42,6 +43,7 @@ server.use(function(req, res, next) {
 root_route.define_route(server);
 allergies_routes.define_routes(server);
 allergy_routes.define_routes(server);
+filter_routes.define_routes(server);
 
 io.sockets.on('connection', function(socket){
   console.log('socket connected');

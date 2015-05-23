@@ -11,6 +11,7 @@ angular.module('arpa.controllers', [])
         Socket.forward('text', $scope);
         console.log("cenas");
 
+
         var launchNotification = function () {
             $cordovaLocalNotification.add({
                 id: 1,
@@ -284,43 +285,6 @@ angular.module('arpa.controllers', [])
 
     })
 
-    .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-        $scope.chat = Chats.get($stateParams.chatId);
-    })
-
-    .controller('AccountCtrl', function($scope) {
-        $scope.settings = {
-            enableFriends: true
-        };
-    })
-
-    .controller('ProfileCtrl', function($scope) {
-        $scope.myActiveSlide = 1;
-    })
-
-    .controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook) {
-        $scope.sign_in_hide = false;
-
-        $scope.fbLogin = function(){
-            $cordovaFacebook.login(["public_profile", "email"])
-                .then(function(success){
-                    $cordovaFacebook.api("me", ["public_profile"])
-                        .then(function(user) {
-                            $scope.user = user;
-                            var date = new Date($scope.user.birthday);
-                            $localstorage.setObject('userinfo', {
-                                id: $scope.user.id,
-                                name: $scope.user.name,
-                                birthday: date.toLocaleDateString()
-                            });
-                            $window.location.reload();
-                        }, function (error) {
-
-                        });
-                });
-        };
-
-    })
 
 
     .controller('ProfileCtrl', function($scope) {
@@ -344,7 +308,6 @@ angular.module('arpa.controllers', [])
                                 picture: 'http://graph.facebook.com/' + user.id + '/picture?width=270&height=270'
                             });
                             $scope.$broadcast('logged_in', {});
-
                             $window.location.reload();
                         }, function (error) {
 

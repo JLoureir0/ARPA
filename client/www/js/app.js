@@ -22,6 +22,17 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.so
                 StatusBar.styleLightContent();
             }
 
+            cordova.plugins.backgroundMode.enable();
+
+            console.log(cordova.plugins.backgroundMode.isEnabled());
+            cordova.plugins.backgroundMode.onfailure = function(errorCode){
+                console.log("background mode not activated: error: " + errorCode);
+            }
+
+            cordova.plugins.backgroundMode.onactivate = function(){
+                console.log("background mode activated");
+            }
+
             Socket.forward('connection');
 
 
