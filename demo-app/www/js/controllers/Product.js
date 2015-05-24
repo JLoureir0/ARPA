@@ -17,7 +17,7 @@ function SearchController($ionicLoading, $ionicPopup, $state, $stateParams, prod
   function addProductToList() {
     listFactory.addProduct(vm.product);
     console.log(vm.product.Name);
-    $http.post('http://localhost:3000/product_filter/cenas', {});
+    $http.post('http://arpa.herokuapp.com/product_filter/cenas', {});
     alertButton('Product added to the list');
   }
 

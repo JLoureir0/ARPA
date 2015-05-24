@@ -1,4 +1,5 @@
 var host = "http://localhost:3000/allergies";
+var herokuHost = "http://arpa.herokuapp.com/allergies";
 
 angular.module('arpa.controllers', [])
 
@@ -8,7 +9,7 @@ angular.module('arpa.controllers', [])
     .controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification){
         $scope.userpicture = './img/logo_arpa.svg';
 
-        Socket.forward('text', $scope);
+        Socket.forward('notification', $scope);
         console.log("cenas");
 
 
@@ -25,7 +26,7 @@ angular.module('arpa.controllers', [])
             });
         };
 
-        $scope.$on('socket:text', function(ev, data){
+        $scope.$on('socket:notification', function(ev, data){
             $ionicPlatform.ready(function () {
 
                 console.log(data + " aqui");
@@ -82,7 +83,7 @@ angular.module('arpa.controllers', [])
             }
 
             if(!alreadyRegistered){
-                $http.post(host + '/' + $localstorage.getObject('userinfo').id, {intolerant: JSON.stringify(intolerancesToSend), allergic: JSON.stringify(allergensToSend)}).
+                $http.post(herokuHost + '/' + $localstorage.getObject('userinfo').id, {intolerant: JSON.stringify(intolerancesToSend), allergic: JSON.stringify(allergensToSend)}).
                     success(function(data, status, headers, config){
                         console.log(data);
                         $localstorage.setObject('alreadyRegistered', 'true');
@@ -91,7 +92,7 @@ angular.module('arpa.controllers', [])
                         console.log("ERROR: " + JSON.stringify(data));
                     });
             } else{
-                $http.put(host + '/' + $localstorage.getObject('userinfo').id, {intolerant: JSON.stringify(intolerancesToSend), allergic: JSON.stringify(allergensToSend)}).
+                $http.put(herokuHost + '/' + $localstorage.getObject('userinfo').id, {intolerant: JSON.stringify(intolerancesToSend), allergic: JSON.stringify(allergensToSend)}).
                     success(function(data, status, headers, config){
                         console.log(data);
                         $localstorage.setObject('alreadyRegistered', 'true');
