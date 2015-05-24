@@ -33,6 +33,10 @@
     {
       "locator": "https://github.com/Wizcorp/phonegap-facebook-plugin.git",
       "id": "com.phonegap.plugins.facebookconnect"
+    },
+    {
+      "locator": "https://github.com/apache/cordova-plugin-whitelist.git",
+      "id": "cordova-plugin-whitelist"
     }
   ],
   "cordovaPlatforms": [

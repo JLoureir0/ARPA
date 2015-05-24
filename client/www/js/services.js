@@ -1,36 +1,108 @@
 angular.module('arpa.services', [])
 
-    .factory('$localstorage', ['$window', function($window) {
-      return {
-        set: function(key, value) {
-          $window.localStorage[key] = value;
-        },
-        get: function(key, defaultValue) {
-          return $window.localStorage[key] || defaultValue;
-        },
-        setObject: function(key, value) {
-          $window.localStorage[key] = JSON.stringify(value);
-        },
-        getObject: function(key) {
-          return JSON.parse($window.localStorage[key] || '{}');
+.factory('$localstorage', ['$window', function($window) {
+  return {
+    set: function(key, value) {
+      $window.localStorage[key] = value;
+    },
+    get: function(key, defaultValue) {
+      return $window.localStorage[key] || defaultValue;
+    },
+    setObject: function(key, value) {
+      $window.localStorage[key] = JSON.stringify(value);
+    },
+    getObject: function(key) {
+      return JSON.parse($window.localStorage[key] || '{}');
+    },
+    matchFromDb: function(array, result){
+      var allergens = [
+      {
+        id: 1,
+        name: "lacteos",
+        src: "./img/allergens-icons/lacteos.svg"
+      },
+      {
+        id: 2,
+        name: "gluten",
+        src: "./img/allergens-icons/gluten.svg"
+      },
+      {
+        id: 3,
+        name: "amendoins",
+        src: "./img/allergens-icons/amendoins.svg"
+      },
+      {
+        id: 4,
+        name: "ovos",
+        src: "./img/allergens-icons/ovos.svg"
+      },
+      {
+        id: 5,
+        name: "marisco",
+        src: "./img/allergens-icons/marisco.svg"
+      },
+      {
+        id: 6,
+        name: "moluscos",
+        src: "./img/allergens-icons/moluscos.svg"
+      },
+      {
+        id: 7,
+        name: "mostarda",
+        src: "./img/allergens-icons/mostarda.svg"
+      },
+      {
+        id: 8,
+        name: "peixe",
+        src: "./img/allergens-icons/peixe.svg"
+      },
+      {
+        id: 9,
+        name: "sesamo",
+        src: "./img/allergens-icons/sesamo.svg"
+      },
+      {
+        id: 10,
+        name: "so2",
+        src: "./img/allergens-icons/so2.svg"
+      },
+      {
+        id: 11,
+        name: "soja",
+        src: "./img/allergens-icons/soja.svg"
+      },
+      {
+        id: 12,
+        name: "tremocos",
+        src: "./img/allergens-icons/tremocos.svg"
+      }
+      ];
+
+      for(var i = 0; i < array.length; i++){
+        for(var j = 0; j < allergens.length; j++){
+          if(array[i] === allergens[j].name){
+            result.push({id: allergens[j].id, name: allergens[j].name, src: allergens[j].src});
+          }
         }
       }
-    }])
+    }
+  }
+}])
 
-    .factory('Socket', function(socketFactory){
-      console.log("aqui");
-      var myIoSocket = io.connect('arpa.herokuapp.com');
-      /*var myIoSocket = io.connect('http://192.168.56.1:3000');*/
-      /*var myIoSocket = io.connect('http://localhost:3000');*/
+.factory('Socket', function(socketFactory){
+  console.log("aqui");
+  var myIoSocket = io.connect('arpa.herokuapp.com');
+  /*var myIoSocket = io.connect('http://192.168.56.1:3000');*/
+  /*var myIoSocket = io.connect('http://localhost:3000');*/
 
-      var Socket = socketFactory({
-        ioSocket: myIoSocket
-      })
+  var Socket = socketFactory({
+    ioSocket: myIoSocket
+  })
 
-      return Socket;
-    })
+  return Socket;
+})
 
-    .factory('Chats', function() {
+.factory('Chats', function() {
       // Might use a resource here that returns a JSON array
 
       // Some fake testing data
