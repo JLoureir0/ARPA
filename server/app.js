@@ -56,6 +56,6 @@ io.sockets.on('connection', function(socket){
 })
 
 //Running server
-server.listen(3000, function() {
+server.listen(process.env.PORT || 3000, function() {
   console.log(server.name + ' listening at ' + server.url);
 });

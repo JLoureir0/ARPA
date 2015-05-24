@@ -2,7 +2,7 @@ angular.module('demo-app')
 
 .controller('ProductController', SearchController);
 
-function SearchController($ionicLoading, $ionicPopup, $state, $stateParams, productFactory, listFactory) {
+function SearchController($ionicLoading, $ionicPopup, $state, $stateParams, productFactory, listFactory, $http) {
   var vm = this;
 
   vm.product               = null;
@@ -16,6 +16,8 @@ function SearchController($ionicLoading, $ionicPopup, $state, $stateParams, prod
 
   function addProductToList() {
     listFactory.addProduct(vm.product);
+    console.log(vm.product.Name);
+    $http.post('http://localhost:3000/product_filter/cenas', {});
     alertButton('Product added to the list');
   }
 
