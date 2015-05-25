@@ -13,6 +13,83 @@ angular.module('arpa.services', [])
         },
         getObject: function(key) {
           return JSON.parse($window.localStorage[key] || '{}');
+        },
+        getAllergens: function(){
+          var allergens = [
+            {
+              id: 1,
+              name: "lacteos",
+              src: "./img/allergens-icons/lacteos.svg"
+            },
+            {
+              id: 2,
+              name: "gluten",
+              src: "./img/allergens-icons/gluten.svg"
+            },
+            {
+              id: 3,
+              name: "amendoins",
+              src: "./img/allergens-icons/amendoins.svg"
+            },
+            {
+              id: 4,
+              name: "ovos",
+              src: "./img/allergens-icons/ovos.svg"
+            },
+            {
+              id: 5,
+              name: "marisco",
+              src: "./img/allergens-icons/marisco.svg"
+            },
+            {
+              id: 6,
+              name: "moluscos",
+              src: "./img/allergens-icons/moluscos.svg"
+            },
+            {
+              id: 7,
+              name: "mostarda",
+              src: "./img/allergens-icons/mostarda.svg"
+            },
+            {
+              id: 8,
+              name: "peixe",
+              src: "./img/allergens-icons/peixe.svg"
+            },
+            {
+              id: 9,
+              name: "sesamo",
+              src: "./img/allergens-icons/sesamo.svg"
+            },
+            {
+              id: 10,
+              name: "so2",
+              src: "./img/allergens-icons/so2.svg"
+            },
+            {
+              id: 11,
+              name: "soja",
+              src: "./img/allergens-icons/soja.svg"
+            },
+            {
+              id: 12,
+              name: "tremocos",
+              src: "./img/allergens-icons/tremocos.svg"
+            }
+          ];
+
+          return allergens.slice(0, allergens.length);
+        },
+        matchFromDb: function(array, result){
+          var allergens = this.getAllergens();
+
+          for(var i = 0; i < array.length; i++){
+            for(var j = 0; j < allergens.length; j++){
+              if(array[i] === allergens[j].name){
+                result.push({id: allergens[j].id, name: allergens[j].name, src: allergens[j].src});
+              }
+            }
+          }
         }
       }
     }])
