@@ -132,6 +132,7 @@ angular.module('arpa.controllers', [])
         $scope.addAllergens = function($index, $value){
             $scope.not_selected_allergens.splice($index,1);
             $scope.allergens.push($value);
+            $scope.not_selected_intolerances.splice($scope.not_selected_intolerances.indexOf($value), 1);
             $localstorage.setObject('allergies', {allergies: $scope.allergens});
         };
 
@@ -139,6 +140,7 @@ angular.module('arpa.controllers', [])
             if ($scope.value_allergies != true) {
                 $scope.allergens.splice($index,1);
                 $scope.not_selected_allergens.unshift($value);
+                $scope.not_selected_intolerances.unshift($value);
                 $localstorage.setObject('allergies', {
                     allergies: $scope.allergens
                 });
@@ -148,15 +150,15 @@ angular.module('arpa.controllers', [])
         $scope.addIntol = function($index, $value){
             $scope.not_selected_intolerances.splice($index,1);
             $scope.intolerances.push($value);
-            $localstorage.setObject('intolerances', {
-                intolerances: $scope.intolerances
-            });
+            $scope.not_selected_allergens.splice($scope.not_selected_allergens.indexOf($value), 1);
+            $localstorage.setObject('intolerances', {intolerances: $scope.intolerances});
         };
 
         $scope.removeIntol = function($index, $value){
             if ($scope.value_intolerances != true) {
                 $scope.intolerances.splice($index,1);
                 $scope.not_selected_intolerances.unshift($value);
+                $scope.not_selected_allergens.unshift($value);
                 $localstorage.setObject('intolerances', {
                     intolerances: $scope.intolerances
                 });
