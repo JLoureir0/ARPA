@@ -14,7 +14,7 @@ angular.module('arpa.services', [])
     getObject: function(key) {
       return JSON.parse($window.localStorage[key] || '{}');
     },
-    matchFromDb: function(array, result){
+    getAllergens: function(){
       var allergens = [
       {
         id: 1,
@@ -77,6 +77,11 @@ angular.module('arpa.services', [])
         src: "./img/allergens-icons/tremocos.svg"
       }
       ];
+
+      return allergens.slice(0, allergens.length);
+    },
+    matchFromDb: function(array, result){
+      var allergens = this.getAllergens();
 
       for(var i = 0; i < array.length; i++){
         for(var j = 0; j < allergens.length; j++){

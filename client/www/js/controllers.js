@@ -28,7 +28,7 @@ angular.module('arpa.controllers', [])
     $scope.$on('socket:notification', function(ev, data){
         $ionicPlatform.ready(function () {
 
-            console.log(data + " aqui");
+            console.log(data + " TAG aqui");
 
             launchNotification();
         });
@@ -173,69 +173,7 @@ angular.module('arpa.controllers', [])
             }
         };
 
-        $scope.not_selected_allergens = [
-        {
-            id: 1,
-            name: "lacteos",
-            src: "./img/allergens-icons/lacteos.svg"
-        },
-        {
-            id: 2,
-            name: "gluten",
-            src: "./img/allergens-icons/gluten.svg"
-        },
-        {
-            id: 3,
-            name: "amendoins",
-            src: "./img/allergens-icons/amendoins.svg"
-        },
-        {
-            id: 4,
-            name: "ovos",
-            src: "./img/allergens-icons/ovos.svg"
-        },
-        {
-            id: 5,
-            name: "marisco",
-            src: "./img/allergens-icons/marisco.svg"
-        },
-        {
-            id: 6,
-            name: "moluscos",
-            src: "./img/allergens-icons/moluscos.svg"
-        },
-        {
-            id: 7,
-            name: "mostarda",
-            src: "./img/allergens-icons/mostarda.svg"
-        },
-        {
-            id: 8,
-            name: "peixe",
-            src: "./img/allergens-icons/peixe.svg"
-        },
-        {
-            id: 9,
-            name: "sesamo",
-            src: "./img/allergens-icons/sesamo.svg"
-        },
-        {
-            id: 10,
-            name: "so2",
-            src: "./img/allergens-icons/so2.svg"
-        },
-        {
-            id: 11,
-            name: "soja",
-            src: "./img/allergens-icons/soja.svg"
-        },
-        {
-            id: 12,
-            name: "tremocos",
-            src: "./img/allergens-icons/tremocos.svg"
-        }
-        ];
-
+        $scope.not_selected_allergens = $localstorage.getAllergens();
         $scope.not_selected_intolerances = $scope.not_selected_allergens.slice(0, $scope.not_selected_allergens.length);
 
         $scope.allergens = [];
@@ -287,32 +225,29 @@ angular.module('arpa.controllers', [])
     $scope.myActiveSlide = 1;
 })
 
-.controller('DefinitionsCtrl', function($scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook) {
+.controller('DefinitionsCtrl', function($http, $scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook) {
     $scope.sign_in_hide = false;
 
     var getFromDb = function(id, callback){
-        var alreadyRegistered = $localstorage.get('alreadyRegistered');
-        if(alreadyRegistered){
-            $http.get(host + '/' + id).
-            success(function(result, status, headers, config){
-                console.log("RESULT : " + JSON.stringify(result.data));
-                $scope.allergens = [];
-                $scope.intolerances = [];
-                $localstorage.matchFromDb(result.data.allergic, $scope.allergens);
-                $localstorage.matchFromDb(result.data.intolerant, $scope.intolerances);
-                $localstorage.setObject('allergies', {
-                    allergies: $scope.allergens
-                });
-                $localstorage.setObject('intolerances', {
-                    intolerances: $scope.intolerances
-                });
-                callback();
-            }).
-            error(function(result, status, headers, config){
-                console.log("ERROR: " + result.data);
-                callback();
-            })
-        }
+        $http.get(herokuHost + '/' + id).
+        success(function(result, status, headers, config){
+            console.log("TAG RESULT : " + JSON.stringify(result.data));
+            $scope.allergens = [];
+            $scope.intolerances = [];
+            $localstorage.matchFromDb(result.data.allergic, $scope.allergens);
+            $localstorage.matchFromDb(result.data.intolerant, $scope.intolerances);
+            $localstorage.setObject('allergies', {
+                allergies: $scope.allergens
+            });
+            $localstorage.setObject('intolerances', {
+                intolerances: $scope.intolerances
+            });
+            callback();
+        }).
+        error(function(result, status, headers, config){
+            console.log("TAG ERROR: " + result.data);
+            callback();
+        })
     };
 
     $scope.fbLogin = function(){
@@ -360,21 +295,20 @@ angular.module('arpa.controllers', [])
 .controller('SelectCtrl', function($state,  $ionicSlideBoxDelegate, $localstorage) {
 
     var selectCtrl = this;
-    $state.go('tab.allergens');
-        /*var firstRun = $localstorage.get('firstRun');
+    var firstRun = $localstorage.get('firstRun');
 
-         if (firstRun && firstRun == 'false'){
-         $state.go('tab.allergens');
+    if (firstRun && firstRun == 'false'){
+       $state.go('tab.allergens');
 
-         } else {
-         selectCtrl.$on('$ionicView.enter', function() {
-         $ionicSlideBoxDelegate.slide(0);
-         $localstorage.set('firstRun', 'false');
-         });
-}*/
+   } else {
+       selectCtrl.$on('$ionicView.enter', function() {
+           $ionicSlideBoxDelegate.slide(0);
+           $localstorage.set('firstRun', 'false');
+       });
+   }
 
-selectCtrl.slideIndex = 0;
-selectCtrl.showPager = true;
+   selectCtrl.slideIndex = 0;
+   selectCtrl.showPager = true;
 
         // Called to navigate to the main app
         selectCtrl.startApp = function() {
