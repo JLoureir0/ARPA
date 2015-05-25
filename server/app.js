@@ -28,15 +28,20 @@ server.use(function(req, res, next) {
   next();
 });
 
+
+io.use("transports", ["xhr-polling"]);
+io.use("polling duration", 10);
+
+
 /*server.use(
-    function crossOrigin(req, res, next){
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header("Access-Control-Allow-Headers", "Content-Type");
-      res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-      res.header("Access-Control-Allow-Credentials", "false");
-      return next();
-    }
-); */
+ function crossOrigin(req, res, next){
+ res.header("Access-Control-Allow-Origin", "*");
+ res.header("Access-Control-Allow-Headers", "Content-Type");
+ res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+ res.header("Access-Control-Allow-Credentials", "false");
+ return next();
+ }
+ ); */
 
 
 //Routes
