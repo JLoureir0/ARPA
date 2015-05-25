@@ -9,6 +9,9 @@
   </author>
   <content src="index.html"/>
   <access origin="*"/>
+  <allow-navigation href="https://*/*"/>
+  <allow-navigation href="http://*/*"/>
+  <allow-navigation href="http:192.168.56.1:8100"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
