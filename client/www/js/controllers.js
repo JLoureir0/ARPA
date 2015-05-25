@@ -52,7 +52,7 @@ angular.module('arpa.controllers', [])
         }
     })
 
-.controller('AllergensCtrl', function($scope, $ionicModal, $localstorage, $http){
+.controller('AllergensCtrl', function($scope, $ionicModal, $localstorage, $http, $cordovaMedia){
     $scope.value_allergies = true;
     $scope.value_intolerances = true;
     $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
@@ -60,9 +60,10 @@ angular.module('arpa.controllers', [])
 
     var access2 = $localstorage.get('accessibility');
     if(access2 && access2 == 'true'){
-        console.log($localstorage.get('accessibility'));
+        console.log('accessibility ' + $localstorage.get('accessibility'));
     } else {
-        console.log('false');
+		$localstorage.set('accessibility','true');
+        console.log('accessibility false');
     }
 
     var updateDatabase = function(){
@@ -161,14 +162,18 @@ angular.module('arpa.controllers', [])
 
         $scope.onHold = function() {
             var accessibility = $localstorage.get('accessibility');
-            if(accessibility && accessibility == 'true'){
-                $localstorage.set('accessibility','false');
-            } else {
-                $localstorage.set('accessibility','true');
-            }
-            if($localstorage.get('accessibility') == 'true') {
-                console.log('Pelos poderes de Greyskull! Eu tenho a acessibilidade!');
-            } else {
+            if(accessibility == 'true') {
+                console.log('AQUI Eu tenho a acessibilidade!');
+				 var src = "./sound/pt/allergies_f.mp3";
+				 var media = $cordovaMedia.newMedia(src).then(function() {
+					// success
+					console.log('PORRA AQUI sucess');
+				 }, function () {
+					// error
+					console.log('PORRA AQUI no sucess');
+				 });
+				 media.play();
+            } else if(accessibility == 'false') {
                 console.log('Eu já não tenho a acessibilidade...');
             }
         };
