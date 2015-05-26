@@ -61,8 +61,8 @@ angular.module('arpa.controllers', [])
     var access2 = $localstorage.get('accessibility');
     if(access2 && access2 == 'true'){
         console.log('accessibility ' + $localstorage.get('accessibility'));
+        // falar as cenas da acessibilidade aqui
     } else {
-        $localstorage.set('accessibility','true');
         console.log('accessibility false');
     }
 
@@ -185,12 +185,13 @@ angular.module('arpa.controllers', [])
         $scope.onHold = function() {
             var accessibility = $localstorage.get('accessibility');
             if(accessibility == 'true') {
-                console.log('AQUI Eu tenho a acessibilidade!');
-
-                media.play();
-
+                console.log('Desligar acessibilidade.');
+                $localstorage.get('accessibility','false')
+                media.play(); //apenas para testes por enquanto
+                // aqui texto de acessibilidade
             } else if(accessibility == 'false') {
-                console.log('Eu já não tenho a acessibilidade...');
+                console.log('Ligar acessibilidade');
+                $localstorage.get('accessibility','true')
             }
         };
 
