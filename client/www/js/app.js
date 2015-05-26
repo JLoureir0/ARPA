@@ -62,7 +62,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
         });*/
     })
 
-    .config(function($ionicConfigProvider) {if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);})
+   /* .config(function($ionicConfigProvider) {if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);})*/
 
     .config(function($stateProvider, $urlRouterProvider) {
 
