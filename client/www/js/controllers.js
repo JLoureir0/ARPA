@@ -67,6 +67,7 @@ angular.module('arpa.controllers', [])
     })
 
     var userinfo = $localstorage.getObject('userinfo');
+
     $scope.$on('logged_in', function(ev, data){
         $scope.userpicture = $localstorage.getObject('userinfo').picture;
     })

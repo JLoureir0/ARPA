@@ -15,7 +15,7 @@ var valid_allergies =
   'sesamo',
   'so2',
   'soja',
-  'tremoços' ];
+  'tremocos' ];
 
 exports.handle_params = function(req, res, next) {
   verify_allergies_attributes(req.params, next);

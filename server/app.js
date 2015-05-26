@@ -19,6 +19,7 @@ server.use(restify.CORS({'origins': ['http://localhost:8100']}));
 
 //Middleware
 server.use(restify.fullResponse());
+server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
 server.use(logger('dev'));
