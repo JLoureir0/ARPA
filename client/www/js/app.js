@@ -57,8 +57,6 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.so
         });*/
     })
 
-    .config(function($ionicConfigProvider) {if(!ionic.Platform.isIOS())$ionicConfigProvider.scrolling.jsScrolling(false);})
-
     .config(function($stateProvider, $urlRouterProvider) {
 
       // Ionic uses AngularUI Router which uses the concept of states
@@ -87,7 +85,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.so
             views: {
               'tab-allergens': {
                 templateUrl: 'templates/tab-allergens.html',
-                controller: 'AllergensCtrl'
+                controller: 'AllergensCtrl as allergensCtrl'
               }
             }
           })
@@ -122,6 +120,6 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.so
             }
           })
       // if none of the above states are matched, use this as the fallback
-      $urlRouterProvider.otherwise('/');
+      $urlRouterProvider.otherwise('/tab/allergens');
 
     });
