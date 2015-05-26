@@ -21,3 +21,18 @@ Inside platforms/android/src/de/applant/cordova/plugin/localnotification/local-n
 
 
 afterwards, delete the file android-support-v4.jar from platforms/android/libs, so that the application uses the local notifications one, avoiding collision between libraries.
+
+After this, one must verify if all dependencies are installed and located at the plugins folder. Those are:
+
+- com.phonegap.plugins.facebookconnect
+- cordova-plugin-file
+- cordova-plugin-media
+- de.appplant.cordova.plugin.background-mode
+- de.appplant.cordova.plugin.local-notification
+- org.apache.cordova.console
+- org.apache.cordova.device
+- org.apache.cordova.dialogs
+
+if any of the above are not installed, please install using ionic plugin add 'above name'
+
+also, make sure that all bower dependencies are installed.
