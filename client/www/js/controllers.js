@@ -168,15 +168,18 @@ angular.module('arpa.controllers', [])
 
         var media;
         $ionicPlatform.ready(function(){
-            var src = cordova.file.applicationDirectory + 'www/sound/pt/allergies_f.mp3';
-            media = $cordovaMedia.newMedia(src);
+            if(typeof cordova != "undefined"){
+                var src = cordova.file.applicationDirectory + 'www/sound/pt/allergies_f.mp3';
+                media = $cordovaMedia.newMedia(src);
 
-            media.then(function() {
-                console.log('PORRA AQUI sucess');
-            }, function () {
+                media.then(function() {
+                    console.log('PORRA AQUI sucess');
+                }, function () {
                 // error
                 console.log('PORRA AQUI no sucess');
             });
+            }
+            
         });
 
         $scope.onHold = function() {
