@@ -10,7 +10,6 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
 
     .run(function($ionicPlatform, Socket) {
 
-
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -25,7 +24,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             if (typeof cordova != "undefined") {
 
                 cordova.plugins.backgroundMode.configure({
-                    silent:true
+                    silent: true
                 })
 
               cordova.plugins.backgroundMode.enable();
@@ -41,8 +40,6 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             }
 
             Socket.forward('connection');
-
-
 
         });
     })
