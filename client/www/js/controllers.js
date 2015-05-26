@@ -339,6 +339,7 @@ angular.module('arpa.controllers', [])
         $state.go('tab.allergens');
 
     } else {
+        var newID = '_' + Math.random().toString(36).substr(2, 9);
         /*selectCtrl.$on('$ionicView.enter', function() {
             $ionicSlideBoxDelegate.slide(0);
             $localstorage.set('firstRun', 'false');
