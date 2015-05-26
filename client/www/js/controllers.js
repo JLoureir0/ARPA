@@ -265,9 +265,7 @@ angular.module('arpa.controllers', [])
         }
 
     })
-
-
-
+    
 .controller('ProfileCtrl', function($scope) {
     $scope.myActiveSlide = 1;
 })
