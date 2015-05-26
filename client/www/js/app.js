@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.socket-io', 'ngCordova', 'ngAnimate'])
+angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.directives', 'btford.socket-io', 'ngCordova', 'ngAnimate'])
 
     .run(function($ionicPlatform, Socket) {
 
@@ -23,6 +23,11 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.so
             }
 
             if (typeof cordova != "undefined") {
+
+                cordova.plugins.backgroundMode.configure({
+                    silent:true
+                })
+
               cordova.plugins.backgroundMode.enable();
 
               console.log(cordova.plugins.backgroundMode.isEnabled());
