@@ -3,6 +3,16 @@ Create tabs with an icon and label, using the tabs-positive style.
 Each tab's child <ion-nav-view> directive will have its own
 navigation history that also transitions its views in and out.
 -->
+
+<!--<div class="overlay-top">
+</div>
+<div class="overlay-left">
+</div>
+<div class="overlay-bottom">
+</div>
+<div class="overlay-right">
+</div> -->
+
 <div class="profile" on-long-press="activateAccessibility()">
   <div><img class="circle middle" ng-src="{{userpicture}}" /></div>
   <div class="profile-name middle">
@@ -11,9 +21,8 @@ navigation history that also transitions its views in and out.
 </div>
 
 <ion-tabs class="tabs-icon-top tabs-color-active-positive mid">
-
   <!-- Dashboard Tab -->
-  <ion-tab title="ALLERGENS"   href="#/tab/allergens">
+  <ion-tab id="tab-allergens" title="ALLERGENS" href="#/tab/allergens">
     <ion-nav-view name="tab-allergens"></ion-nav-view>
   </ion-tab>
 

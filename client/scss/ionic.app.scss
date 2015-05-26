@@ -228,14 +228,27 @@ ul.to-add-allergs li {
   margin-right:10%;
 }
 
+.allergy-symbol:hover {
+  opacity:0.5;
+}
+.intolerance-symbol:hover {
+  opacity:0.5;
+}
+
 .allergs{
   width: 19%;
   margin-left: 3%;
+  padding-bottom: 
 }
 
 .intols{
   width: 19%;
   margin-left: 3%;
+  margin-bottom: 20px;
+}
+
+.symbol-scroller > .scroll-bar > .scroll-bar-indicator {
+  display: none;
 }
 
 
@@ -350,3 +363,62 @@ ul.to-add-allergs li {
 .intro_slide .slider-pager{
     bottom:10% !important;
 }
+
+/* OVERLAY - BEGIN */ 
+$animation-time: 0.5s;
+$animation-start: 1s;
+
+.overlay-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 188px;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.5); /*dim the background*/
+}
+.overlay-left {
+  position: absolute;
+  top: 188px;
+  left: 0;
+  width: 10px;
+  height: 46px;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.5); /*dim the background*/
+}.overlay-bottom {
+  position: absolute;
+  top: 234px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.5); /*dim the background*/
+}.overlay-right {
+  position: absolute;
+  top: 188px;
+  left: 10px;
+  width: 100%;
+  height: 46px;
+  z-index: 10;
+  background-color: rgba(0,0,0,0.5); /*dim the background */
+  -moz-animation: cssAnimation $animation-time ease-out $animation-start forwards;
+    /* Firefox */
+    -webkit-animation: cssAnimation $animation-time ease-out $animation-start forwards;
+    /* Safari and Chrome */
+    -o-animation: cssAnimation $animation-time ease-out $animation-start forwards;
+    /* Opera */
+    animation: cssAnimation $animation-time ease-out $animation-start forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+@keyframes cssAnimation {
+    to {
+        left:116px;
+    }
+}
+@-webkit-keyframes cssAnimation {
+    to {
+      left:116px;
+    }
+}
+/* OVERLAY - END */

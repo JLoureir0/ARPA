@@ -78,13 +78,15 @@ angular.module('arpa.controllers', [])
         $scope.username = userinfo.name;
             //$scope.userbirthday = userinfo.birthday;
             $scope.userpicture = userinfo.picture;
-        } else {
-            $scope.username = 'ARPA';
-            $scope.userpicture = './img/logo_arpa.svg';
-        }
-    })
+    } else {
+        $scope.username = 'ARPA';
+        $scope.userpicture = './img/logo_arpa.svg';
+    }
+})
 
 .controller('AllergensCtrl', function($scope, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia){
+    var allergensCtrl = this;
+
     $scope.value_allergies = true;
     $scope.value_intolerances = true;
     $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
@@ -98,6 +100,9 @@ angular.module('arpa.controllers', [])
         $localstorage.set('accessibility', 'false');
         console.log('accessibility false');
     }
+
+    allergensCtrl.allergySymbol = "fakeclass";
+    allergensCtrl.intoleranceSymbol = "fakeclass";
 
     var updateDatabase = function(){
         var intolerancesToSend = [];
@@ -142,23 +147,27 @@ angular.module('arpa.controllers', [])
         if ($scope.value_intolerances == true) {
             $scope.value_intolerances = false;
             $scope.extra_icons_intol = "./img/allergens-icons/guardar.svg";
-            }else{ //Save
-                $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
-                $scope.value_intolerances = true;
-                updateDatabase();
-            }
-        };
+            
+            allergensCtrl.intoleranceSymbol = "intolerance-symbol";
+        } else { //Save
+            $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
+            $scope.value_intolerances = true;
+            updateDatabase();
+            allergensCtrl.intoleranceSymbol = "fakeclass";
+        }
+    };
 
         $scope.plus_allergs = function() {
             if ($scope.value_allergies == true) {
                 $scope.value_allergies = false;
                 $scope.extra_icons_allergs = "./img/allergens-icons/guardar.svg";
                 //$scope.push_down = {'opacity': "0.6"};
+                allergensCtrl.allergySymbol = "allergy-symbol";
             } else{ //Save
                 $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
                 $scope.value_allergies = true;
                 updateDatabase();
-
+                allergensCtrl.allergySymbol = "fakeclass";
             }
         };
 

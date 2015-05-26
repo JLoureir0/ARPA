@@ -1,17 +1,11 @@
 <ion-view view-title="Allergens"   class="over-background" on-long-press="activateAccessibility()">
     <ion-content class="tabbed" ng-style="push_down">
         <div class="tab-wrapper">
-            <div class="allergies ">
+            <div class="allergies">
                 <h1>ALLERGIES</h1>
-                <!--<ion-scroll direction="x" class="available-scroller"> //TODO for allergen sellection use this
-                    <div class="allergens" collection-repeat="allergen in allergens"
-                         item-height="150" item-width="100" >
-                        <img ng-src="{{allergen.src}}">
-                    </div>
-                </ion-scroll>-->
-                <ul class="allergens ">
+                <ul class="allergens">
                     <li ng-repeat="allergen in allergens">
-                        <img ng-src="{{allergen.src}}"  ng-click="removeAllergens($index, allergen)"/> <!-- TODO error in console, dunno why -->
+                        <img class="{{allergensCtrl.allergySymbol}}" ng-src="{{allergen.src}}"  ng-click="removeAllergens($index, allergen)"/> <!-- TODO error in console, dunno why -->
 
                     </li>
                     <li>
@@ -20,7 +14,7 @@
                 </ul>
             </div>
             <div class="to-add-allergs adding" ng-hide="value_allergies">
-                <ion-scroll direction="x" class="available-scroller no_block">
+                <ion-scroll direction="x" class="symbol-scroller available-scroller no_block" has-bouncing="true">
                     <div class="allergs" collection-repeat="allergen in not_selected_allergens"
                          item-height="150" item-width="19%" >
                         <img ng-src="{{allergen.src}}" ng-click="addAllergens($index, allergen)">
@@ -29,25 +23,26 @@
             </div>
             <div class="sexy-line"></div>
 
-            <div class="intolerances ">
+            <div class="intolerances">
                 <h1>INTOLERANCES</h1>
                 <ul class="intolerance">
                     <li ng-repeat="intolerance in intolerances">
-                        <img ng-src="{{intolerance.src}}"  ng-click="removeIntol($index, intolerance)"/>
+                        <img class="{{allergensCtrl.intoleranceSymbol}}" ng-src="{{intolerance.src}}"  ng-click="removeIntol($index, intolerance)"/>
                     </li>
                     <li>
-                            <img ng-click="plus_into()" ng-src="{{extra_icons_intol}}">
+                        <img ng-click="plus_into()" ng-src="{{extra_icons_intol}}">
                     </li>
                 </ul>
             </div>
             <div class="to-add-into "  ng-hide="value_intolerances">
-               <ion-scroll direction="x" class="available-scroller no_block">
+               <ion-scroll direction="x" class="symbol-scroller available-scroller no_block" has-bouncing="true">
                     <div class="intolers"  collection-repeat="intolerance in not_selected_intolerances"
                          item-height="150" item-width="19%" >
                         <img ng-src="{{intolerance.src}}" ng-click="addIntol($index, intolerance)">
                     </div>
                 </ion-scroll>
             </div>
+            <div class="sexy-line"></div>
         </div>
     </ion-content>
 </ion-view>
