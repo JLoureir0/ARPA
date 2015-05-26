@@ -13,35 +13,35 @@ angular.module('arpa.controllers', [])
     console.log("cenas");
 
 
-        var media;
-        $ionicPlatform.ready(function(){
-            if(typeof cordova != "undefined"){
-                var src = cordova.file.applicationDirectory + 'www/sound/pt/allergies_f.mp3';
-                media = $cordovaMedia.newMedia(src);
+    var media;
+    $ionicPlatform.ready(function(){
+        if(typeof cordova != "undefined"){
+            var src = cordova.file.applicationDirectory + 'www/sound/pt/allergies_f.mp3';
+            media = $cordovaMedia.newMedia(src);
 
-                media.then(function() {
-                    console.log('PORRA AQUI sucess');
-                }, function () {
-                    // error
-                    console.log('PORRA AQUI no sucess');
-                });
-            }
-
-        });
-
-        $scope.activateAccessibility = function(){
-            console.log("long press");
-            var accessibility = $localstorage.get('accessibility');
-            if(accessibility == 'true') {
-                console.log('Desligar acessibilidade.');
-                $localstorage.set('accessibility','false')
-                // aqui texto de acessibilidade
-            } else if(accessibility == 'false') {
-                console.log('Ligar acessibilidade');
-                media.play(); //apenas para testes por enquanto
-                $localstorage.set('accessibility','true')
-            }
+            media.then(function() {
+                console.log('PORRA AQUI sucess');
+            }, function () {
+                // error
+                console.log('PORRA AQUI no sucess');
+            });
         }
+
+    });
+
+    $scope.activateAccessibility = function(){
+        console.log("long press");
+        var accessibility = $localstorage.get('accessibility');
+        if(accessibility == 'true') {
+            console.log('Desligar acessibilidade.');
+            $localstorage.set('accessibility','false')
+            // aqui texto de acessibilidade
+        } else if(accessibility == 'false') {
+            console.log('Ligar acessibilidade');
+            media.play(); //apenas para testes por enquanto
+            $localstorage.set('accessibility','true')
+        }
+    }
 
     var launchNotification = function () {
         $cordovaLocalNotification.add({
@@ -85,7 +85,6 @@ angular.module('arpa.controllers', [])
 })
 
 .controller('AllergensCtrl', function($scope, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia){
-    var allergensCtrl = this;
 
     $scope.value_allergies = true;
     $scope.value_intolerances = true;
@@ -101,8 +100,8 @@ angular.module('arpa.controllers', [])
         console.log('accessibility false');
     }
 
-    allergensCtrl.allergySymbol = "fakeclass";
-    allergensCtrl.intoleranceSymbol = "fakeclass";
+    $scope.allergySymbol = "fakeclass";
+    $scope.intoleranceSymbol = "fakeclass";
 
     var updateDatabase = function(){
         var intolerancesToSend = [];
@@ -148,12 +147,13 @@ angular.module('arpa.controllers', [])
             $scope.value_intolerances = false;
             $scope.extra_icons_intol = "./img/allergens-icons/guardar.svg";
             
-            allergensCtrl.intoleranceSymbol = "intolerance-symbol";
+            $scope.intoleranceSymbol = "intolerance-symbol";
         } else { //Save
             $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
             $scope.value_intolerances = true;
+            $scope.intoleranceSymbol = "fakeclass";
+
             updateDatabase();
-            allergensCtrl.intoleranceSymbol = "fakeclass";
         }
     };
 
@@ -161,13 +161,14 @@ angular.module('arpa.controllers', [])
             if ($scope.value_allergies == true) {
                 $scope.value_allergies = false;
                 $scope.extra_icons_allergs = "./img/allergens-icons/guardar.svg";
-                //$scope.push_down = {'opacity': "0.6"};
-                allergensCtrl.allergySymbol = "allergy-symbol";
-            } else{ //Save
+
+                $scope.allergySymbol = "allergy-symbol";
+            } else { //Save
                 $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
                 $scope.value_allergies = true;
+                $scope.allergySymbol = "fakeclass";
+
                 updateDatabase();
-                allergensCtrl.allergySymbol = "fakeclass";
             }
         };
 

@@ -21,6 +21,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+$arpa-color: #0066b1;
+
 * {  
  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
@@ -107,7 +109,7 @@ video#video2 {
   padding-top: 5% !important;
   font-size: 1.0em !important;
   font-weight: bold !important;
-  color: #0066b1 !important;
+  color: $arpa-color !important;
 }
 
 .scroll{
@@ -151,8 +153,14 @@ video#video2 {
   vertical-align: middle;
 }
 
+.center-li {
+    display: table;
+    text-align: center;
+    color: $arpa-color;
+}
+
 ul.allergens li {
-  width: 19%;
+  width: 70px;
   display: inline-block;
   vertical-align: middle;
 }
@@ -222,7 +230,7 @@ ul.to-add-allergs li {
 .sexy-line{
   margin-top:5%;
   margin-bottom: 7%;
-  height: 2px;
+  height: 1px;
   background: none repeat scroll 0% 0% #fff;
   margin-left: 10%;
   margin-right:10%;
@@ -279,7 +287,7 @@ ul.to-add-allergs li {
   margin-top: 1.4em;
   font-size: 1.0em !important;
   font-weight: bold !important;
-  color: #0066b1 !important;
+  color: $arpa-color !important;
   border-color: transparent;
   background-color: transparent;
 }

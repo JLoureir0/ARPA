@@ -18,62 +18,62 @@ angular.module('arpa.services', [])
           var allergens = [
             {
               id: 1,
-              name: "lacteos",
+              name: "Lacteos",
               src: "./img/allergens-icons/lacteos.svg"
             },
             {
               id: 2,
-              name: "gluten",
+              name: "Gluten",
               src: "./img/allergens-icons/gluten.svg"
             },
             {
               id: 3,
-              name: "amendoins",
+              name: "Amendoins",
               src: "./img/allergens-icons/amendoins.svg"
             },
             {
               id: 4,
-              name: "ovos",
+              name: "Ovos",
               src: "./img/allergens-icons/ovos.svg"
             },
             {
               id: 5,
-              name: "marisco",
+              name: "Marisco",
               src: "./img/allergens-icons/marisco.svg"
             },
             {
               id: 6,
-              name: "moluscos",
+              name: "Moluscos",
               src: "./img/allergens-icons/moluscos.svg"
             },
             {
               id: 7,
-              name: "mostarda",
+              name: "Mostarda",
               src: "./img/allergens-icons/mostarda.svg"
             },
             {
               id: 8,
-              name: "peixe",
+              name: "Peixe",
               src: "./img/allergens-icons/peixe.svg"
             },
             {
               id: 9,
-              name: "sesamo",
+              name: "Sesamo",
               src: "./img/allergens-icons/sesamo.svg"
             },
             {
               id: 10,
-              name: "so2",
+              name: "SO2",
               src: "./img/allergens-icons/so2.svg"
             },
             {
               id: 11,
-              name: "soja",
+              name: "Soja",
               src: "./img/allergens-icons/soja.svg"
             },
             {
               id: 12,
-              name: "tremocos",
+              name: "Tremocos",
               src: "./img/allergens-icons/tremocos.svg"
             }
           ];
