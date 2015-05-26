@@ -1,0 +1,23 @@
+###DEVELOPER INSTRUCTIONS###
+
+There are some plugins that might not be actualized as frequently as the Ionic/Cordova, in this case, Local Notifications needs a local fix.
+
+Inside platforms/android/src/de/applant/cordova/plugin/localnotification/local-notification.js replace the whole function in line 485 with:
+
+ private static synchronized void sendJavascript(final String js) {
+
+        if (!deviceready) {
+            eventQueue.add(js);
+            return;
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webView.sendJavascript(js);
+        } else {
+            webView.loadUrl("javascript:" + js);
+        }
+
+    }
+
+
+afterwards, delete the file android-support-v4.jar from platforms/android/libs, so that the application uses the local notifications one, avoiding collision between libraries.
