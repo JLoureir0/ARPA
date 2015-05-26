@@ -33,7 +33,10 @@
     },
     "de.appplant.cordova.plugin.local-notification",
     "cordova-plugin-file",
-    "cordova-plugin-media"
+    "cordova-plugin-media",
+    "cordova-plugin-whitelist"
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "android"
+  ]
 }
