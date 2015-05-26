@@ -11,6 +11,7 @@ angular.module('arpa.controllers', [])
 
     Socket.forward('notification', $scope);
     console.log("cenas");
+    $localstorage.set('Language', 'EN');
 
 
     var media;
@@ -325,6 +326,15 @@ angular.module('arpa.controllers', [])
         $localstorage.setObject('userinfo',null);
         $window.location.reload();
     }
+        $scope.languages = [
+            { text: 'English', value: 1 },
+            { text: 'Português', value: 2 }
+        ];
+        $scope.changeLanguage = function(id){
+            window.alert('Old Value: ' + $localstorage.get('Language') + ' New Value: ' + id);
+            $localstorage.set('Language', id)
+
+        }
 
     $scope.contact = {
         name: 'Mittens Cat',
