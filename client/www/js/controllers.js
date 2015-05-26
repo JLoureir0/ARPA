@@ -226,6 +226,7 @@ angular.module('arpa.controllers', [])
                 for(var i = 0; i < $scope.not_selected_allergens.length; i++) {
                     if(allergies[indexy].name == $scope.not_selected_allergens[i].name) {
                         $scope.not_selected_allergens.splice(i,1);
+                        $scope.not_selected_intolerances.splice(i,1);
                     }
                 }
                 indexy++;
@@ -243,6 +244,11 @@ angular.module('arpa.controllers', [])
                 for(var j = 0; j < $scope.not_selected_intolerances.length; j++) {
                     if(intolerances[indexz].name == $scope.not_selected_intolerances[j].name) {
                         $scope.not_selected_intolerances.splice(j,1);
+                        for(var i = 0; i < $scope.not_selected_allergens.length; i++){
+                            if($scope.not_selected_allergens[i].name == intolerances[indexz].name){
+                                $scope.not_selected_allergens.splice(i, 1);
+                            }
+                        }
                     }
                 }
                 indexz++;
