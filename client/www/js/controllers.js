@@ -356,36 +356,36 @@ angular.module('arpa.controllers', [])
     selectCtrl.slideIndex = 0;
     selectCtrl.showPager = true;
 
-        // Called to navigate to the main app
-        selectCtrl.startApp = function() {
-            $state.go('tab.allergens');
+    // Called to navigate to the main app
+    selectCtrl.startApp = function() {
+        $state.go('tab.allergens');
 
-        };
-        selectCtrl.next = function() {
-            $ionicSlideBoxDelegate.next();
-        };
-        selectCtrl.previous = function() {
-            $ionicSlideBoxDelegate.previous();
-        };
+    };
+    selectCtrl.next = function() {
+        $ionicSlideBoxDelegate.next();
+    };
+    selectCtrl.previous = function() {
+        $ionicSlideBoxDelegate.previous();
+    };
 
-        // Called each time the slide changes
-        selectCtrl.slideChanged = function(index) {
-            selectCtrl.slideIndex = index;
+    // Called each time the slide changes
+    selectCtrl.slideChanged = function(index) {
+        selectCtrl.slideIndex = index;
 
-            if (index == 2) {
-                selectCtrl.showPager = false;
+        if (index == 2) {
+            selectCtrl.showPager = false;
 
-                var video = document.getElementById("video1");
-                video.load();
-                video.play();
-            } else if (index == 3) {
-                selectCtrl.showPager = false;
+            var video = document.getElementById("video1");
+            video.load();
+            video.play();
+        } else if (index == 3) {
+            selectCtrl.showPager = false;
 
-                var video = document.getElementById("video2");
-                video.load();
-                video.play();
-            } else {
-                selectCtrl.showPager = true;
-            }
-        };
-    });
+            var video = document.getElementById("video2");
+            video.load();
+            video.play();
+        } else {
+            selectCtrl.showPager = true;
+        }
+    };
+});
