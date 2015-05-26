@@ -3,7 +3,7 @@
         <div class="tab-wrapper">
             <div class="allergies">
                 <h1>ALLERGIES</h1>
-                <ul class="allergens ">
+                <ul class="allergens">
                     <li ng-repeat="allergen in allergens">
                         <img class="{{allergensCtrl.allergySymbol}}" ng-src="{{allergen.src}}"  ng-click="removeAllergens($index, allergen)"/> <!-- TODO error in console, dunno why -->
 
