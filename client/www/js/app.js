@@ -6,23 +6,32 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.socket-io', 'ngCordova', 'ngAnimate'])
+angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.directives', 'btford.socket-io', 'ngCordova', 'ngAnimate'])
 
-    .run(function($ionicPlatform, Socket) {
-
+    .run(function($ionicPlatform, $cordovaDevice, $localstorage, Socket) {
 
         $ionicPlatform.ready(function() {
+
+            $localstorage.set('device_id', $cordovaDevice.getUUID());
+
+
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             }
+
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
                 StatusBar.styleLightContent();
             }
 
             if (typeof cordova != "undefined") {
+
+                cordova.plugins.backgroundMode.configure({
+                    silent: true
+                })
+
               cordova.plugins.backgroundMode.enable();
 
               console.log(cordova.plugins.backgroundMode.isEnabled());
@@ -36,8 +45,6 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'btford.so
             }
 
             Socket.forward('connection');
-
-
 
         });
     })

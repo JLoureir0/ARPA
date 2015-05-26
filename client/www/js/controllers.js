@@ -6,12 +6,42 @@ angular.module('arpa.controllers', [])
 
 .controller('AppsCtrl', function($scope) {})
 
-.controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $window){
-
+.controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia){
     $scope.userpicture = './img/logo_arpa.svg';
 
     Socket.forward('notification', $scope);
     console.log("cenas");
+
+
+        var media;
+        $ionicPlatform.ready(function(){
+            if(typeof cordova != "undefined"){
+                var src = cordova.file.applicationDirectory + 'www/sound/pt/allergies_f.mp3';
+                media = $cordovaMedia.newMedia(src);
+
+                media.then(function() {
+                    console.log('PORRA AQUI sucess');
+                }, function () {
+                    // error
+                    console.log('PORRA AQUI no sucess');
+                });
+            }
+
+        });
+
+        $scope.activateAccessibility = function(){
+            console.log("long press");
+            var accessibility = $localstorage.get('accessibility');
+            if(accessibility == 'true') {
+                console.log('Desligar acessibilidade.');
+                $localstorage.set('accessibility','false')
+                // aqui texto de acessibilidade
+            } else if(accessibility == 'false') {
+                console.log('Ligar acessibilidade');
+                media.play(); //apenas para testes por enquanto
+                $localstorage.set('accessibility','true')
+            }
+        }
 
     var launchNotification = function () {
         $cordovaLocalNotification.add({
@@ -37,6 +67,7 @@ angular.module('arpa.controllers', [])
     })
 
     var userinfo = $localstorage.getObject('userinfo');
+
     $scope.$on('logged_in', function(ev, data){
         $scope.userpicture = $localstorage.getObject('userinfo').picture;
     })
@@ -66,6 +97,7 @@ angular.module('arpa.controllers', [])
         console.log('accessibility ' + $localstorage.get('accessibility'));
         // falar as cenas da acessibilidade aqui
     } else {
+        $localstorage.set('accessibility', 'false');
         console.log('accessibility false');
     }
 
@@ -176,33 +208,10 @@ angular.module('arpa.controllers', [])
 
         };
 
-        var media;
-        $ionicPlatform.ready(function(){
-            if(typeof cordova != "undefined"){
-                var src = cordova.file.applicationDirectory + 'www/sound/pt/allergies_f.mp3';
-                media = $cordovaMedia.newMedia(src);
 
-                media.then(function() {
-                    console.log('PORRA AQUI sucess');
-                }, function () {
-                // error
-                console.log('PORRA AQUI no sucess');
-            });
-            }
-            
-        });
 
         $scope.onHold = function() {
-            var accessibility = $localstorage.get('accessibility');
-            if(accessibility == 'true') {
-                console.log('Desligar acessibilidade.');
-                $localstorage.get('accessibility','false')
-                media.play(); //apenas para testes por enquanto
-                // aqui texto de acessibilidade
-            } else if(accessibility == 'false') {
-                console.log('Ligar acessibilidade');
-                $localstorage.get('accessibility','true')
-            }
+
         };
 
         $scope.not_selected_allergens = $localstorage.getAllergens();
@@ -226,6 +235,7 @@ angular.module('arpa.controllers', [])
                 for(var i = 0; i < $scope.not_selected_allergens.length; i++) {
                     if(allergies[indexy].name == $scope.not_selected_allergens[i].name) {
                         $scope.not_selected_allergens.splice(i,1);
+                        $scope.not_selected_intolerances.splice(i,1);
                     }
                 }
                 indexy++;
@@ -243,6 +253,11 @@ angular.module('arpa.controllers', [])
                 for(var j = 0; j < $scope.not_selected_intolerances.length; j++) {
                     if(intolerances[indexz].name == $scope.not_selected_intolerances[j].name) {
                         $scope.not_selected_intolerances.splice(j,1);
+                        for(var i = 0; i < $scope.not_selected_allergens.length; i++){
+                            if($scope.not_selected_allergens[i].name == intolerances[indexz].name){
+                                $scope.not_selected_allergens.splice(i, 1);
+                            }
+                        }
                     }
                 }
                 indexz++;
@@ -333,10 +348,10 @@ angular.module('arpa.controllers', [])
         $state.go('tab.allergens');
 
     } else {
-        selectCtrl.$on('$ionicView.enter', function() {
+        /*selectCtrl.$on('$ionicView.enter', function() {
             $ionicSlideBoxDelegate.slide(0);
             $localstorage.set('firstRun', 'false');
-        });
+        });*/
     }
 
     selectCtrl.slideIndex = 0;
