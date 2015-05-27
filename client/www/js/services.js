@@ -166,9 +166,9 @@ angular.module('arpa.services', [])
           }
         },
         setLanguage: function(lid) {
-          var sel_voice = 'f';
           var translator = angular.module('myApp', ['pascalprecht.translate']);
           var languageoptions = $localstorage.getObject('language');
+          var sel_voice = 'm';
           if(languageoptions.voice && languageoptions.voice != null) {
             sel_voice = languageoptions.voice;
           }
@@ -178,17 +178,30 @@ angular.module('arpa.services', [])
               voice: sel_voice
           });
         },
+        setVoice: function(vid) {
+          var translator = angular.module('myApp', ['pascalprecht.translate']);
+          var languageoptions = $localstorage.getObject('language');
+          var sel_language = 'en';
+          if(languageoptions.id && languageoptions.id != null) {
+            sel_language = languageoptions.id;
+          }
+            alert("Voice switched to " + vid + "!");
+          $localstorage.setObject('language', {
+              id: sel_language,
+              voice: vid
+          });
+        },
         loadOptions: function() {
           var languageoptions = $localstorage.getObject('language');
           if(languageoptions == null){
             $localstorage.setObject('language', {
-              id: 'pt',
-              voice: 'f'
+              id: 'en',
+              voice: 'm'
             });
             return;
           }
-          var sel_id = 'pt';
-          var sel_voice = 'f';
+          var sel_id = 'en';
+          var sel_voice = 'm';
           if(languageoptions.id && languageoptions.id != null) {
               sel_id = languageoptions.id;
           }
