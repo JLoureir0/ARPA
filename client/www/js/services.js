@@ -148,6 +148,7 @@ angular.module('arpa.services', [])
           if(languageoptions.voice && languageoptions.voice != null) {
             sel_voice = languageoptions.voice;
           }
+            alert("Language switched to " + lid + "!");
           $localstorage.setObject('language', {
               id: lid,
               voice: sel_voice
