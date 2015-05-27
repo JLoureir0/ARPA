@@ -11,36 +11,17 @@ angular.module('arpa.controllers', [])
 
     Socket.forward('notification', $scope);
     console.log("cenas");
-    $localstorage.set('Language', 'EN');
+    $localstorage.set('language', 'pt');
+    $localstorage.set('voice', 'f');
 
-
-    var media;
-    $ionicPlatform.ready(function(){
-        if(typeof cordova != "undefined"){
-            var src = cordova.file.applicationDirectory + 'www/sound/pt/allergies_f.mp3';
-            media = $cordovaMedia.newMedia(src);
-
-            media.then(function() {
-                console.log('PORRA AQUI sucess');
-            }, function () {
-                // error
-                console.log('PORRA AQUI no sucess');
-            });
-        }
-
-    });
-
-    $scope.activateAccessibility = function(){
-        console.log("long press");
-        var accessibility = $localstorage.get('accessibility');
-        if(accessibility == 'true') {
+    $scope.activateAccessibility = function(value){
+        var status_accessibility = $localstorage.get('accessibility');
+        if(status_accessibility == 'true') {
             console.log('Desligar acessibilidade.');
-            $localstorage.set('accessibility','false')
-            // aqui texto de acessibilidade
-        } else if(accessibility == 'false') {
+            $localstorage.set('accessibility','false');
+        } else if(status_accessibility == 'false') {
             console.log('Ligar acessibilidade');
-            media.play(); //apenas para testes por enquanto
-            $localstorage.set('accessibility','true')
+            $localstorage.set('accessibility','true');
         }
     }
 
@@ -92,13 +73,17 @@ angular.module('arpa.controllers', [])
     $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
     $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
 
-    var access2 = $localstorage.get('accessibility');
-    if(access2 && access2 == 'true'){
-        console.log('accessibility ' + $localstorage.get('accessibility'));
-        // falar as cenas da acessibilidade aqui
+    var access = $localstorage.get('accessibility');
+    if(access && access == 'true'){
+        $ionicPlatform.ready(function(){
+            if(typeof cordova != "undefined"){
+                var media = $accessibility.getVoice(2);
+                media.play();
+            }
+        });
     } else {
         $localstorage.set('accessibility', 'false');
-        console.log('accessibility false');
+        console.log('Desligado');
     }
 
     $scope.allergySymbol = "fakeclass";
