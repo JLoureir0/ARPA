@@ -127,14 +127,18 @@ angular.module('arpa.services', [])
             if(typeof cordova != "undefined"){
               var src;
               var languageoptions = $localstorage.getObject('language');
-              src = cordova.file.applicationDirectory + 'www/sound/' + languageoptions.id + '/' + id[value] + '_' + languageoptions.voice + '.mp3';
-              console.log('speaking');
-              media = $cordovaMedia.newMedia(src);
-              media.then(function() {
-                console.log('AQUI sucess');
-              }, function () {
-                console.log('AQUI no sucess');
-              });
+              if(languageoptions && languageoptions != null) {
+                src = cordova.file.applicationDirectory + 'www/sound/' + languageoptions.id + '/' + id[value] + '_' + languageoptions.voice + '.mp3';
+                console.log('speaking');
+                media = $cordovaMedia.newMedia(src);
+                media.then(function() {
+                  console.log('AQUI sucess');
+                }, function () {
+                  console.log('AQUI no sucess');
+                });
+              } else {
+                return null;
+              }
             }
           });
           return media;
@@ -167,6 +171,10 @@ angular.module('arpa.services', [])
         loadOptions: function() {
           var languageoptions = $localstorage.getObject('language');
           if(languageoptions == null){
+            $localstorage.setObject('language', {
+              id: 'pt',
+              voice: 'f'
+            });
             return;
           }
           var sel_id = 'pt';

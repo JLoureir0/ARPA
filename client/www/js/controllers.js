@@ -69,11 +69,15 @@ angular.module('arpa.controllers', [])
     $scope.editIntolerances = "Edit";
 
     var access = $localstorage.get('accessibility');
+    console.log('Entrou na view');
     if(access && access == 'true'){
+        console.log('entrou');
         $ionicPlatform.ready(function(){
             if(typeof cordova != "undefined"){
                 var media = $accessibility.getVoice(2);
-                media.play();
+                if(media != null) {
+                    media.play();
+                }
             }
         });
     } else {
@@ -89,7 +93,8 @@ angular.module('arpa.controllers', [])
         var allergensToSend = [];
         var objectToSend = {};
 
-        objectToSend.deviceId = '1';//JSON.stringiFy(device.uuid);
+        objectToSend.deviceId = JSON.stringify(device.uuid);
+
 
         if($localstorage.getObject('userinfo') != null){
             console.log("FOUND USERINFO: " +  JSON.stringify($localstorage.getObject('userinfo')));
