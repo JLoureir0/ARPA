@@ -122,7 +122,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             views: {
               'tab-applications': {
                 templateUrl: 'templates/tab-applications.html',
-                controller: 'AppsCtrl'
+                controller: 'ApplicationsCtrl'
               }
             }
           })
