@@ -92,9 +92,9 @@ angular.module('arpa.controllers', [])
         var allergensToSend = [];
         var objectToSend = {};
 
-        objectToSend.deviceId = JSON.stringigy(device.uuid);
+        objectToSend.deviceId = '1';//JSON.stringigy(device.uuid);
 
-        if($localstorage.getObject('userinfo')){
+        if($localstorage.getObject('userinfo') != null){
             console.log("FOUND USERINFO: " +  JSON.stringify($localstorage.getObject('userinfo')));
             objectToSend.fbId = $localstorage.getObject('userinfo').id;
         } else{
@@ -102,7 +102,7 @@ angular.module('arpa.controllers', [])
             objectToSend.fbId = '0'; //FbID = 0 -> Running local account for the first time
         }
 
-        if($localstorage.get('appId')){
+        if($localstorage.get('appId') != null){
             objectToSend.appId = $localstorage.get('appId');
         }
 
@@ -121,7 +121,7 @@ angular.module('arpa.controllers', [])
         $http.post(herokuHost + '/', objectToSend).
         success(function(result, status, headers, config){
             console.log(result.data);
-            if(!($localstorage.getObject('userinfo'))){ //Local Account, save the new ID
+            if($localstorage.getObject('userinfo') == null){ //Local Account, save the new ID
                 $localstorage.set('appId', result.data)
             }
         }).

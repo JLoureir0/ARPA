@@ -6,13 +6,22 @@ angular.module('arpa.services', [])
           $window.localStorage[key] = value;
         },
         get: function(key, defaultValue) {
-          return $window.localStorage[key];
+          if($window.localStorage[key]){
+            return $window.localStorage[key];
+          } else{
+            return null;
+          }
         },
         setObject: function(key, value) {
           $window.localStorage[key] = JSON.stringify(value);
         },
         getObject: function(key) {
-          return JSON.parse($window.localStorage[key]);
+          if($window.localStorage[key]){
+            return JSON.parse($window.localStorage[key]);
+          } else {
+            return null;
+          }
+          
         },
         getAllergens: function(){
           var allergens = [
@@ -155,6 +164,9 @@ angular.module('arpa.services', [])
         },
         loadOptions: function() {
           var languageoptions = $localstorage.getObject('language');
+          if(languageoptions == null){
+            return;
+          }
           var sel_id = 'pt';
           var sel_voice = 'f';
           if(languageoptions.id && languageoptions.id != null) {
