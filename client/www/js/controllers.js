@@ -62,11 +62,11 @@ angular.module('arpa.controllers', [])
         $scope.username = userinfo.name;
             //$scope.userbirthday = userinfo.birthday;
             $scope.userpicture = userinfo.picture;
-    } else {
-        $scope.username = 'ARPA';
-        $scope.userpicture = './img/logo_arpa.svg';
-    }
-})
+        } else {
+            $scope.username = 'ARPA';
+            $scope.userpicture = './img/logo_arpa.svg';
+        }
+    })
 
 .controller('AllergensCtrl', function($scope, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia){
 
@@ -94,39 +94,42 @@ angular.module('arpa.controllers', [])
     var updateDatabase = function(){
         var intolerancesToSend = [];
         var allergensToSend = [];
+        var objectToSend = {};
+
+        objectToSend.deviceId = '1'; //Trocar por deviceID
+
+        if($localstorage.getObject('userinfo')){
+            objectToSend.fbId = $localstorage.getObject('userinfo').id;
+        } else{
+            objectToSend.fbId = 0; //FbID = 0 -> Running local account for the first time
+        }
+
+        if($localstorage.get('appId')){
+            objectToSend.appId = $localstorage.get('appId');
+        }
 
         for(var i = 0; i < $scope.intolerances.length; i++){
-            intolerancesToSend.push($scope.intolerances[i].name);
+            intolerancesToSend.push($scope.intolerances[i].name.toLowerCase());
         }
 
         for(var i = 0; i < $scope.allergens.length; i++){
-            allergensToSend.push($scope.allergens[i].name);
+            allergensToSend.push($scope.allergens[i].name.toLowerCase());
         }
-/*
-        $http.get(herokuHost + '/' + $localstorage.getObject('userinfo').id).
-        success(function(data, status, headers, config){
-            $http.put(herokuHost + '/' + $localstorage.getObject('userinfo').id, {intolerant: JSON.stringify(intolerancesToSend), allergic: JSON.stringify(allergensToSend)}).
-            success(function(data, status, headers, config){
-                console.log(data);
-            }).
-            error(function(data, status, headers, config){
-                console.log("ERROR: " + JSON.stringify(data));
-            });
+
+        objectToSend.intolerant = JSON.stringify(intolerancesToSend);
+        objectToSend.allergic = JSON.stringify(allergensToSend);
+
+        $http.post(herokuHost + '/', objectToSend).
+        success(function(result, status, headers, config){
+            console.log(result.data);
+            if(!($localstorage.getObject('userinfo'))){ //Local Account, save the new ID
+                $localstorage.set('appId', data)
+            }
         }).
-        error(function(data, status, headers, config){
-            if(data === ""){
-                $http.post(herokuHost + '/' + $localstorage.getObject('userinfo').id, {intolerant: JSON.stringify(intolerancesToSend), allergic: JSON.stringify(allergensToSend)}).
-                success(function(data, status, headers, config){
-                    console.log(data);
-                }).
-                error(function(data, status, headers, config){
-                    console.log("ERROR: " + JSON.stringify(data));
-                });
-            }
-            else{
-                console.log("ERROR: " + data);
-            }
-        });*/
+        error(function(result, status, headers, config){
+            console.log("ERROR: " + JSON.stringify(result));
+        });
+
     };
 
 
@@ -145,12 +148,12 @@ angular.module('arpa.controllers', [])
         }
     };
 
-        $scope.plus_allergs = function() {
-            if ($scope.value_allergies == true) {
-                $scope.value_allergies = false;
-                $scope.extra_icons_allergs = "./img/allergens-icons/guardar.svg";
+    $scope.plus_allergs = function() {
+        if ($scope.value_allergies == true) {
+            $scope.value_allergies = false;
+            $scope.extra_icons_allergs = "./img/allergens-icons/guardar.svg";
 
-                $scope.allergySymbol = "allergy-symbol";
+            $scope.allergySymbol = "allergy-symbol";
             } else { //Save
                 $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
                 $scope.value_allergies = true;
@@ -254,7 +257,7 @@ angular.module('arpa.controllers', [])
         }
 
     })
-    
+
 .controller('ProfileCtrl', function($scope) {
     $scope.myActiveSlide = 1;
 })
@@ -297,6 +300,7 @@ angular.module('arpa.controllers', [])
                     birthday: date.toLocaleDateString(),
                     picture: 'http://graph.facebook.com/' + user.id + '/picture?width=270&height=270'
                 });
+                $localstorage.set('appId', null); //Facebook login, hence new account, forget appID
                 getFromDb(user.id, function(){
                     $window.location.reload();
                 });
@@ -313,15 +317,15 @@ angular.module('arpa.controllers', [])
         $localstorage.setObject('userinfo',null);
         $window.location.reload();
     }
-        $scope.languages = [
-            { text: 'English', value: 1 },
-            { text: 'Português', value: 2 }
-        ];
-        $scope.changeLanguage = function(id){
-            window.alert('Old Value: ' + $localstorage.get('language') + ' New Value: ' + id);
-            $localstorage.set('language', id);
+    $scope.languages = [
+    { text: 'English', value: 1 },
+    { text: 'Português', value: 2 }
+    ];
+    $scope.changeLanguage = function(id){
+        window.alert('Old Value: ' + $localstorage.get('language') + ' New Value: ' + id);
+        $localstorage.set('language', id);
 
-        }
+    }
 
     $scope.contact = {
         name: 'Mittens Cat',
@@ -344,14 +348,15 @@ angular.module('arpa.controllers', [])
         $state.go('tab.allergens');
 
     } else {
+        var newID = '_' + Math.random().toString(36).substr(2, 9);
         /*selectCtrl.$on('$ionicView.enter', function() {
             $ionicSlideBoxDelegate.slide(0);
             $localstorage.set('firstRun', 'false');
         });*/
-    }
+}
 
-    selectCtrl.slideIndex = 0;
-    selectCtrl.showPager = true;
+selectCtrl.slideIndex = 0;
+selectCtrl.showPager = true;
 
     // Called to navigate to the main app
     selectCtrl.startApp = function() {

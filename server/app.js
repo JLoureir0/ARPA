@@ -5,7 +5,6 @@ var logger = require('restify-logger');
 io = socket_io.listen(server.server);
 
 var root_route       = require('./routes/root.js');
-var allergies_routes = require('./routes/allergies.js');
 var allergy_routes   = require('./routes/allergy.js');
 var filter_routes   = require('./routes/product_filter.js');
 
@@ -47,7 +46,6 @@ io.use("polling duration", 10);
 
 //Routes
 root_route.define_route(server);
-allergies_routes.define_routes(server);
 allergy_routes.define_routes(server);
 filter_routes.define_routes(server);
 
