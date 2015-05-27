@@ -15,7 +15,8 @@ angular.module('arpa.controllers', [])
 
     $scope.activateAccessibility = function(value){
         $accessibility.toggleAccessibility();
-        $accessibility.getVoice(value);
+        console.log('acessib ' + value);
+        //$accessibility.getVoice(value);
     }
 
     var launchNotification = function () {
@@ -68,22 +69,21 @@ angular.module('arpa.controllers', [])
     $scope.editAllergens = "Edit";
     $scope.editIntolerances = "Edit";
 
-    var access = $localstorage.get('accessibility');
-    console.log('Entrou na view');
-    if(access && access == 'true'){
-        console.log('entrou');
-        $ionicPlatform.ready(function(){
-            if(typeof cordova != "undefined"){
-                var media = $accessibility.getVoice(2);
-                if(media != null) {
-                    media.play();
+    $scope.$on("$ionicView.enter", function () {
+        var access = $localstorage.get('accessibility');
+        if(access && access == 'true'){
+            $ionicPlatform.ready(function(){
+                if(typeof cordova != "undefined"){
+                    var media = $accessibility.getVoice(2);
+                    if(media != null) {
+                        media.play();
+                    }
                 }
-            }
-        });
-    } else {
-        $localstorage.set('accessibility', 'false');
-        console.log('Desligado');
-    }
+            });
+        } else {
+            $localstorage.set('accessibility', 'false');
+        }
+    });
 
     $scope.allergySymbol = "fakeclass";
     $scope.intoleranceSymbol = "fakeclass";

@@ -118,7 +118,7 @@ angular.module('arpa.services', [])
 
     .factory('$accessibility', function($ionicPlatform, $cordovaMedia, $localstorage) {
 
-      var id = ['off','on','allergies'];
+      var id = ['off','on','allergies','applications','definitions'];
 
       return {
         getVoice: function(value) {
@@ -129,13 +129,17 @@ angular.module('arpa.services', [])
               var languageoptions = $localstorage.getObject('language');
               if(languageoptions && languageoptions != null) {
                 src = cordova.file.applicationDirectory + 'www/sound/' + languageoptions.id + '/' + id[value] + '_' + languageoptions.voice + '.mp3';
-                console.log('speaking');
+                console.log(cordova.file.applicationDirectory + 'www/sound/' + languageoptions.id + '/' + id[value] + '_' + languageoptions.voice + '.mp3');
                 media = $cordovaMedia.newMedia(src);
-                media.then(function() {
-                  console.log('AQUI sucess');
-                }, function () {
-                  console.log('AQUI no sucess');
-                });
+                if(media && media != null) {
+                  media.then(function() {
+                    console.log('AQUI sucess');
+                  }, function () {
+                    console.log('AQUI no sucess');
+                  });
+                } else {
+                  return null;
+                }
               } else {
                 return null;
               }
@@ -148,11 +152,17 @@ angular.module('arpa.services', [])
           if(status_accessibility == 'true') {
               console.log('Desligar acessibilidade.');
               $localstorage.set('accessibility','false');
+              var sound = this.getVoice(0);
+              sound.play();
           } else if(status_accessibility == 'false') {
               console.log('Ligar acessibilidade');
               $localstorage.set('accessibility','true');
+              var sound = this.getVoice(1);
+              sound.play();
           } else {
               $localstorage.set('accessibility','true');
+              var sound = this.getVoice(1);
+              sound.play();
           }
         },
         setLanguage: function(lid) {
