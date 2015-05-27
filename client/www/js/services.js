@@ -6,13 +6,13 @@ angular.module('arpa.services', [])
           $window.localStorage[key] = value;
         },
         get: function(key, defaultValue) {
-          return $window.localStorage[key] || defaultValue;
+          return $window.localStorage[key];
         },
         setObject: function(key, value) {
           $window.localStorage[key] = JSON.stringify(value);
         },
         getObject: function(key) {
-          return JSON.parse($window.localStorage[key] || '{}');
+          return JSON.parse($window.localStorage[key]);
         },
         getAllergens: function(){
           var allergens = [

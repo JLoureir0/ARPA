@@ -95,8 +95,10 @@ angular.module('arpa.controllers', [])
         objectToSend.deviceId = device.uuid; //Trocar por deviceID
 
         if($localstorage.getObject('userinfo')){
+            console.log("FOUND USERINFO: " +  JSON.stringify($localstorage.getObject('userinfo')));
             objectToSend.fbId = $localstorage.getObject('userinfo').id;
         } else{
+            console.log("NOT FOUND USERINFO");
             objectToSend.fbId = 0; //FbID = 0 -> Running local account for the first time
         }
 
@@ -114,6 +116,7 @@ angular.module('arpa.controllers', [])
 
         objectToSend.intolerant = JSON.stringify(intolerancesToSend);
         objectToSend.allergic = JSON.stringify(allergensToSend);
+        console.log(JSON.stringify(objectToSend));
 
         $http.post(herokuHost + '/', objectToSend).
         success(function(result, status, headers, config){
