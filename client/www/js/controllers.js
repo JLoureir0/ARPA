@@ -12,7 +12,7 @@ angular.module('arpa.controllers', [])
     Socket.forward('notification', $scope);
     console.log("cenas");
     
-    $accessibility.loadOptions();
+   // $accessibility.loadOptions();
 
     $scope.activateAccessibility = function(value){
         $accessibility.toggleAccessibility();
@@ -92,14 +92,14 @@ angular.module('arpa.controllers', [])
         var allergensToSend = [];
         var objectToSend = {};
 
-        objectToSend.deviceId = device.uuid; //Trocar por deviceID
+        objectToSend.deviceId = JSON.stringigy(device.uuid);
 
         if($localstorage.getObject('userinfo')){
             console.log("FOUND USERINFO: " +  JSON.stringify($localstorage.getObject('userinfo')));
             objectToSend.fbId = $localstorage.getObject('userinfo').id;
         } else{
             console.log("NOT FOUND USERINFO");
-            objectToSend.fbId = 0; //FbID = 0 -> Running local account for the first time
+            objectToSend.fbId = '0'; //FbID = 0 -> Running local account for the first time
         }
 
         if($localstorage.get('appId')){
@@ -122,7 +122,7 @@ angular.module('arpa.controllers', [])
         success(function(result, status, headers, config){
             console.log(result.data);
             if(!($localstorage.getObject('userinfo'))){ //Local Account, save the new ID
-                $localstorage.set('appId', data)
+                $localstorage.set('appId', result.data)
             }
         }).
         error(function(result, status, headers, config){
