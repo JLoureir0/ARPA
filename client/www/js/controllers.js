@@ -15,8 +15,7 @@ angular.module('arpa.controllers', [])
 
     $scope.activateAccessibility = function(value){
         $accessibility.toggleAccessibility();
-        console.log('acessib ' + value);
-        //$accessibility.getVoice(value);
+        $accessibility.getVoice(value);
     }
 
     var launchNotification = function () {
@@ -268,8 +267,43 @@ angular.module('arpa.controllers', [])
     $scope.myActiveSlide = 1;
 })
 
-.controller('DefinitionsCtrl', function($http, $scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility) {
+.controller('ApplicationsCtrl', function($scope, $localstorage, $ionicPlatform, $cordovaMedia, $accessibility) {
+    $scope.$on("$ionicView.enter", function () {
+        var access = $localstorage.get('accessibility');
+        if(access && access == 'true'){
+            $ionicPlatform.ready(function(){
+                if(typeof cordova != "undefined"){
+                    var media = $accessibility.getVoice(3);
+                    if(media != null) {
+                        media.play();
+                    }
+                }
+            });
+        } else {
+            $localstorage.set('accessibility', 'false');
+        }
+    });
+})
+
+
+.controller('DefinitionsCtrl', function($http, $scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility, $cordovaMedia, $ionicPlatform) {
     $scope.sign_in_hide = false;
+
+    $scope.$on("$ionicView.enter", function () {
+        var access = $localstorage.get('accessibility');
+        if(access && access == 'true'){
+            $ionicPlatform.ready(function(){
+                if(typeof cordova != "undefined"){
+                    var media = $accessibility.getVoice(4);
+                    if(media != null) {
+                        media.play();
+                    }
+                }
+            });
+        } else {
+            $localstorage.set('accessibility', 'false');
+        }
+    });
 
     var getFromDb = function(id, callback){
         $http.get(herokuHost + '/' + id).
