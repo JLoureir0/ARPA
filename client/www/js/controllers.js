@@ -15,7 +15,13 @@ angular.module('arpa.controllers', [])
 
     $scope.activateAccessibility = function(value){
         $accessibility.toggleAccessibility();
-        $accessibility.getVoice(value);
+        var access = $localstorage.get('accessibility');
+        if(access && access == 'true') {
+            var thissound = $accessibility.getVoice(value);
+            if(thissound && thissound != null && thissound != undefined) {
+                thissound.play();
+            }
+        }
     }
 
     var launchNotification = function () {

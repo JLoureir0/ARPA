@@ -150,12 +150,10 @@ angular.module('arpa.services', [])
         toggleAccessibility: function() {
           var status_accessibility = $localstorage.get('accessibility');
           if(status_accessibility == 'true') {
-              console.log('Desligar acessibilidade.');
               $localstorage.set('accessibility','false');
               var sound = this.getVoice(0);
               sound.play();
           } else if(status_accessibility == 'false') {
-              console.log('Ligar acessibilidade');
               $localstorage.set('accessibility','true');
               var sound = this.getVoice(1);
               sound.play();
