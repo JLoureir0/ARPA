@@ -316,8 +316,8 @@ angular.module('arpa.controllers', [])
             { text: 'Português', value: 2 }
         ];
         $scope.changeLanguage = function(id){
-            window.alert('Old Value: ' + $localstorage.get('Language') + ' New Value: ' + id);
-            $localstorage.set('Language', id)
+            window.alert('Old Value: ' + $localstorage.get('language') + ' New Value: ' + id);
+            $localstorage.set('language', id);
 
         }
 
