@@ -3,7 +3,6 @@ var herokuHost = "http://arpa.herokuapp.com/allergies";
 
 angular.module('arpa.controllers', [])
 
-
 .controller('AppsCtrl', function($scope) {})
 
 .controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility){
