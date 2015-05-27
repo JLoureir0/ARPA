@@ -17,6 +17,8 @@ angular.module('arpa.controllers', [])
     $scope.activateAccessibility = function(value){
         $accessibility.toggleAccessibility();
         $accessibility.getVoice(value);
+
+        var recognition = new SpeechRecognition;
     }
 
     var launchNotification = function () {
@@ -90,7 +92,7 @@ angular.module('arpa.controllers', [])
         var allergensToSend = [];
         var objectToSend = {};
 
-        objectToSend.deviceId = '1'; //Trocar por deviceID
+        objectToSend.deviceId = device.uuid; //Trocar por deviceID
 
         if($localstorage.getObject('userinfo')){
             objectToSend.fbId = $localstorage.getObject('userinfo').id;
@@ -321,7 +323,7 @@ angular.module('arpa.controllers', [])
     { text: 'Português', value: 2 }
     ];
     $scope.changeLanguage = function(id){
-        window.alert('Old Value: ' + $localstorage.get('language') + ' New Value: ' + id);
+        alert('Old Value: ' + $localstorage.get('language') + ' New Value: ' + id);
         $accessibility.setLanguage(id);
     }
 

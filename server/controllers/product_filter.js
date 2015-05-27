@@ -4,7 +4,7 @@ var allergies_model = require('../models/allergies.js');
 exports.filter_product = function(req, res, next) {
     var allergies = req.params;
 
-    io.sockets.emit("notification", allergies.product);
+    //io.sockets.emit("notification", allergies.product);
     console.log(allergies);
     res.send(200);
 
@@ -15,13 +15,14 @@ exports.filter_product = function(req, res, next) {
      res.send(201, { data: req.params });
      });*/
 };
+
 exports.filter_product_get = function(req, res, next) {
     var product = req.query.product;
 
     console.log(product);
 
 
-    io.sockets.emit("notification", allergies.product);
+    //io.sockets.emit("notification", allergies.product);
     console.log(allergies);
     res.send(200);
 

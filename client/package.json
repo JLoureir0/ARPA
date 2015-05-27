@@ -34,7 +34,11 @@
     "de.appplant.cordova.plugin.local-notification",
     "cordova-plugin-file",
     "cordova-plugin-media",
-    "cordova-plugin-whitelist"
+    "cordova-plugin-whitelist",
+    {
+      "locator": "https://github.com/macdonst/SpeechRecognitionPlugin",
+      "id": "org.apache.cordova.speech.speechrecognition"
+    }
   ],
   "cordovaPlatforms": [
     "android"

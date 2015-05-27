@@ -28,9 +28,11 @@ server.use(function(req, res, next) {
   next();
 });
 
+/*
 
 io.use("transports", ["xhr-polling"]);
 io.use("polling duration", 10);
+*/
 
 
 /*server.use(
