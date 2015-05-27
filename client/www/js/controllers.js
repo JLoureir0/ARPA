@@ -11,7 +11,9 @@ angular.module('arpa.controllers', [])
 
     Socket.forward('notification', $scope);
     console.log("cenas");
-    $localstorage.set('language', 'pt');
+    if(!($localstorage.get('language')) || $localstorage.get('language') == null) {
+        $localstorage.set('language', 'pt');
+    }
     $localstorage.set('voice', 'f');
 
     $scope.activateAccessibility = function(value){
