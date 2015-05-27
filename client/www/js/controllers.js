@@ -6,7 +6,7 @@ angular.module('arpa.controllers', [])
 
 .controller('AppsCtrl', function($scope) {})
 
-.controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia){
+.controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility){
     $scope.userpicture = './img/logo_arpa.svg';
 
     Socket.forward('notification', $scope);
