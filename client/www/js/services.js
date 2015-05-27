@@ -94,7 +94,7 @@ angular.module('arpa.services', [])
 
           for(var i = 0; i < array.length; i++){
             for(var j = 0; j < allergens.length; j++){
-              if(array[i] === allergens[j].name){
+              if(array[i] === allergens[j].name.toLowerCase()){
                 result.push({id: allergens[j].id, name: allergens[j].name, src: allergens[j].src});
               }
             }
