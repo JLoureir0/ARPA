@@ -117,7 +117,9 @@ angular.module('arpa.services', [])
           $ionicPlatform.ready(function(){
             if(typeof cordova != "undefined"){
               var src;
-              src = cordova.file.applicationDirectory + 'www/sound/' + $localstorage.get('language') + '/' + id[value] + '_' + $localstorage.get('voice') + '.mp3';
+              var languageoptions = $localstorage.getObject('language');
+              src = cordova.file.applicationDirectory + 'www/sound/' + languageoptions.id + '/' + id[value] + '_' + languageoptions.voice + '.mp3';
+              console.log('speaking');
               media = $cordovaMedia.newMedia(src);
               media.then(function() {
                 console.log('AQUI sucess');
@@ -127,6 +129,44 @@ angular.module('arpa.services', [])
             }
           });
           return media;
+        },
+        toggleAccessibility: function() {
+          var status_accessibility = $localstorage.get('accessibility');
+          if(status_accessibility == 'true') {
+              console.log('Desligar acessibilidade.');
+              $localstorage.set('accessibility','false');
+          } else if(status_accessibility == 'false') {
+              console.log('Ligar acessibilidade');
+              $localstorage.set('accessibility','true');
+          } else {
+              $localstorage.set('accessibility','true');
+          }
+        },
+        setLanguage: function(lid) {
+          var sel_voice = 'f';
+          var languageoptions = $localstorage.getObject('language');
+          if(languageoptions.voice && languageoptions.voice != null) {
+            sel_voice = languageoptions.voice;
+          }
+          $localstorage.setObject('language', {
+              id: lid,
+              voice: sel_voice
+          });
+        },
+        loadOptions: function() {
+          var languageoptions = $localstorage.getObject('language');
+          var sel_id = 'pt';
+          var sel_voice = 'f';
+          if(languageoptions.id && languageoptions.id != null) {
+              sel_id = languageoptions.id;
+          }
+          if(languageoptions.voice && languageoptions.voice != null) {
+              sel_voice = languageoptions.voice;
+          }
+          $localstorage.setObject('language', {
+              id: sel_id,
+              voice: sel_voice
+          });
         }
       };
     });

@@ -11,20 +11,12 @@ angular.module('arpa.controllers', [])
 
     Socket.forward('notification', $scope);
     console.log("cenas");
-    if(!($localstorage.get('language')) || $localstorage.get('language') == null) {
-        $localstorage.set('language', 'pt');
-    }
-    $localstorage.set('voice', 'f');
+    
+    $accessibility.loadOptions();
 
     $scope.activateAccessibility = function(value){
-        var status_accessibility = $localstorage.get('accessibility');
-        if(status_accessibility == 'true') {
-            console.log('Desligar acessibilidade.');
-            $localstorage.set('accessibility','false');
-        } else if(status_accessibility == 'false') {
-            console.log('Ligar acessibilidade');
-            $localstorage.set('accessibility','true');
-        }
+        $accessibility.toggleAccessibility();
+        $accessibility.getVoice(value);
     }
 
     var launchNotification = function () {
@@ -68,7 +60,7 @@ angular.module('arpa.controllers', [])
         }
     })
 
-.controller('AllergensCtrl', function($scope, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia){
+.controller('AllergensCtrl', function($scope, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia, $accessibility){
 
     $scope.value_allergies = true;
     $scope.value_intolerances = true;
@@ -323,8 +315,7 @@ angular.module('arpa.controllers', [])
     ];
     $scope.changeLanguage = function(id){
         window.alert('Old Value: ' + $localstorage.get('language') + ' New Value: ' + id);
-        $localstorage.set('language', id);
-
+        $accessibility.setLanguage(id);
     }
 
     $scope.contact = {
