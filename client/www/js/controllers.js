@@ -66,6 +66,8 @@ angular.module('arpa.controllers', [])
     $scope.value_intolerances = true;
     $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
     $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
+    $scope.editAllergens = "Edit";
+    $scope.editIntolerances = "Edit";
 
     var access = $localstorage.get('accessibility');
     if(access && access == 'true'){
@@ -131,12 +133,15 @@ angular.module('arpa.controllers', [])
             $scope.extra_icons_intol = "./img/allergens-icons/guardar.svg";
             
             $scope.intoleranceSymbol = "intolerance-symbol";
+
+            $scope.editIntolerances = "Save";
         } else { //Save
             $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
             $scope.value_intolerances = true;
             $scope.intoleranceSymbol = "fakeclass";
 
             updateDatabase();
+            $scope.editIntolerances = "Edit";
         }
     };
 
@@ -146,109 +151,111 @@ angular.module('arpa.controllers', [])
             $scope.extra_icons_allergs = "./img/allergens-icons/guardar.svg";
 
             $scope.allergySymbol = "allergy-symbol";
-            } else { //Save
-                $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
-                $scope.value_allergies = true;
-                $scope.allergySymbol = "fakeclass";
+            $scope.editAllergens = "Save";
+        } else { //Save
+            $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
+            $scope.value_allergies = true;
+            $scope.allergySymbol = "fakeclass";
 
-                updateDatabase();
-            }
-        };
+            updateDatabase();
+            $scope.editAllergens = "Edit";
+        }
+    };
 
-        $scope.addAllergens = function($index, $value){
-            $scope.not_selected_allergens.splice($index,1);
-            $scope.allergens.push($value);
-            $scope.not_selected_intolerances.splice($scope.not_selected_intolerances.indexOf($value), 1);
-            $localstorage.setObject('allergies', {allergies: $scope.allergens});
-        };
+    $scope.addAllergens = function($index, $value){
+        $scope.not_selected_allergens.splice($index,1);
+        $scope.allergens.push($value);
+        $scope.not_selected_intolerances.splice($scope.not_selected_intolerances.indexOf($value), 1);
+        $localstorage.setObject('allergies', {allergies: $scope.allergens});
+    };
 
-        $scope.removeAllergens = function($index, $value) {
-            if ($scope.value_allergies != true) {
-                $scope.allergens.splice($index,1);
-                $scope.not_selected_allergens.unshift($value);
-                $scope.not_selected_intolerances.unshift($value);
-                $localstorage.setObject('allergies', {
-                    allergies: $scope.allergens
-                });
-            }
-        };
+    $scope.removeAllergens = function($index, $value) {
+        if ($scope.value_allergies != true) {
+            $scope.allergens.splice($index,1);
+            $scope.not_selected_allergens.unshift($value);
+            $scope.not_selected_intolerances.unshift($value);
+            $localstorage.setObject('allergies', {
+                allergies: $scope.allergens
+            });
+        }
+    };
 
-        $scope.addIntol = function($index, $value){
-            $scope.not_selected_intolerances.splice($index,1);
-            $scope.intolerances.push($value);
-            $scope.not_selected_allergens.splice($scope.not_selected_allergens.indexOf($value), 1);
-            $localstorage.setObject('intolerances', {intolerances: $scope.intolerances});
-        };
+    $scope.addIntol = function($index, $value){
+        $scope.not_selected_intolerances.splice($index,1);
+        $scope.intolerances.push($value);
+        $scope.not_selected_allergens.splice($scope.not_selected_allergens.indexOf($value), 1);
+        $localstorage.setObject('intolerances', {intolerances: $scope.intolerances});
+    };
 
-        $scope.removeIntol = function($index, $value){
-            if ($scope.value_intolerances != true) {
-                $scope.intolerances.splice($index,1);
-                $scope.not_selected_intolerances.unshift($value);
-                $scope.not_selected_allergens.unshift($value);
-                $localstorage.setObject('intolerances', {
-                    intolerances: $scope.intolerances
-                });
-            }
-
-        };
-
-
-
-        $scope.onHold = function() {
-
-        };
-
-        $scope.not_selected_allergens = $localstorage.getAllergens();
-        $scope.not_selected_intolerances = $scope.not_selected_allergens.slice(0, $scope.not_selected_allergens.length);
-
-        $scope.allergens = [];
-
-        $scope.intolerances = [];
-
-        var allergiesObject = $localstorage.getObject('allergies');
-        var intoleranceObject = $localstorage.getObject('intolerances');
-
-        if(allergiesObject && allergiesObject.allergies) {
-            var allergies = allergiesObject.allergies;
-            var indexy = 0;
-            while(indexy < allergies.length) {
-                if(allergies[indexy].$$hashKey != null) {
-                    allergies[indexy].$$hashKey = null;
-                }
-                $scope.allergens.push(allergies[indexy]);
-                for(var i = 0; i < $scope.not_selected_allergens.length; i++) {
-                    if(allergies[indexy].name == $scope.not_selected_allergens[i].name) {
-                        $scope.not_selected_allergens.splice(i,1);
-                        $scope.not_selected_intolerances.splice(i,1);
-                    }
-                }
-                indexy++;
-            }
+    $scope.removeIntol = function($index, $value){
+        if ($scope.value_intolerances != true) {
+            $scope.intolerances.splice($index,1);
+            $scope.not_selected_intolerances.unshift($value);
+            $scope.not_selected_allergens.unshift($value);
+            $localstorage.setObject('intolerances', {
+                intolerances: $scope.intolerances
+            });
         }
 
-        if(intoleranceObject && intoleranceObject.intolerances) {
-            var intolerances = intoleranceObject.intolerances;
-            var indexz = 0;
-            while(indexz < intolerances.length) {
-                if(intolerances[indexz].$$hashKey != null) {
-                    intolerances[indexz].$$hashKey = null;
+    };
+
+
+
+    $scope.onHold = function() {
+
+    };
+
+    $scope.not_selected_allergens = $localstorage.getAllergens();
+    $scope.not_selected_intolerances = $scope.not_selected_allergens.slice(0, $scope.not_selected_allergens.length);
+
+    $scope.allergens = [];
+
+    $scope.intolerances = [];
+
+    var allergiesObject = $localstorage.getObject('allergies');
+    var intoleranceObject = $localstorage.getObject('intolerances');
+
+    if(allergiesObject && allergiesObject.allergies) {
+        var allergies = allergiesObject.allergies;
+        var indexy = 0;
+        while(indexy < allergies.length) {
+            if(allergies[indexy].$$hashKey != null) {
+                allergies[indexy].$$hashKey = null;
+            }
+            $scope.allergens.push(allergies[indexy]);
+            for(var i = 0; i < $scope.not_selected_allergens.length; i++) {
+                if(allergies[indexy].name == $scope.not_selected_allergens[i].name) {
+                    $scope.not_selected_allergens.splice(i,1);
+                    $scope.not_selected_intolerances.splice(i,1);
                 }
-                $scope.intolerances.push(intolerances[indexz]);
-                for(var j = 0; j < $scope.not_selected_intolerances.length; j++) {
-                    if(intolerances[indexz].name == $scope.not_selected_intolerances[j].name) {
-                        $scope.not_selected_intolerances.splice(j,1);
-                        for(var i = 0; i < $scope.not_selected_allergens.length; i++){
-                            if($scope.not_selected_allergens[i].name == intolerances[indexz].name){
-                                $scope.not_selected_allergens.splice(i, 1);
-                            }
+            }
+            indexy++;
+        }
+    }
+
+    if(intoleranceObject && intoleranceObject.intolerances) {
+        var intolerances = intoleranceObject.intolerances;
+        var indexz = 0;
+        while(indexz < intolerances.length) {
+            if(intolerances[indexz].$$hashKey != null) {
+                intolerances[indexz].$$hashKey = null;
+            }
+            $scope.intolerances.push(intolerances[indexz]);
+            for(var j = 0; j < $scope.not_selected_intolerances.length; j++) {
+                if(intolerances[indexz].name == $scope.not_selected_intolerances[j].name) {
+                    $scope.not_selected_intolerances.splice(j,1);
+                    for(var i = 0; i < $scope.not_selected_allergens.length; i++){
+                        if($scope.not_selected_allergens[i].name == intolerances[indexz].name){
+                            $scope.not_selected_allergens.splice(i, 1);
                         }
                     }
                 }
-                indexz++;
             }
+            indexz++;
         }
+    }
 
-    })
+})
 
 .controller('ProfileCtrl', function($scope) {
     $scope.myActiveSlide = 1;
