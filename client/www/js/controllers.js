@@ -17,8 +17,6 @@ angular.module('arpa.controllers', [])
     $scope.activateAccessibility = function(value){
         $accessibility.toggleAccessibility();
         $accessibility.getVoice(value);
-
-        var recognition = new SpeechRecognition;
     }
 
     var launchNotification = function () {
@@ -92,12 +90,14 @@ angular.module('arpa.controllers', [])
         var allergensToSend = [];
         var objectToSend = {};
 
-        objectToSend.deviceId = device.uuid; //Trocar por deviceID
+        objectToSend.deviceId = JSON.stringigy(device.uuid);
 
         if($localstorage.getObject('userinfo')){
+            console.log("FOUND USERINFO: " +  JSON.stringify($localstorage.getObject('userinfo')));
             objectToSend.fbId = $localstorage.getObject('userinfo').id;
         } else{
-            objectToSend.fbId = 0; //FbID = 0 -> Running local account for the first time
+            console.log("NOT FOUND USERINFO");
+            objectToSend.fbId = '0'; //FbID = 0 -> Running local account for the first time
         }
 
         if($localstorage.get('appId')){
@@ -114,12 +114,13 @@ angular.module('arpa.controllers', [])
 
         objectToSend.intolerant = JSON.stringify(intolerancesToSend);
         objectToSend.allergic = JSON.stringify(allergensToSend);
+        console.log(JSON.stringify(objectToSend));
 
         $http.post(herokuHost + '/', objectToSend).
         success(function(result, status, headers, config){
             console.log(result.data);
             if(!($localstorage.getObject('userinfo'))){ //Local Account, save the new ID
-                $localstorage.set('appId', data)
+                $localstorage.set('appId', result.data)
             }
         }).
         error(function(result, status, headers, config){
