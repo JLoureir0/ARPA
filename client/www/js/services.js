@@ -193,15 +193,15 @@ angular.module('arpa.services', [])
         },
         loadOptions: function() {
           var languageoptions = $localstorage.getObject('language');
+          var sel_id = 'en';
+          var sel_voice = 'm';
           if(languageoptions == null){
             $localstorage.setObject('language', {
-              id: 'en',
-              voice: 'm'
+              id: sel_id,
+              voice: sel_voice
             });
             return;
           }
-          var sel_id = 'en';
-          var sel_voice = 'm';
           if(languageoptions.id && languageoptions.id != null) {
               sel_id = languageoptions.id;
           }
