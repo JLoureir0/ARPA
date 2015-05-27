@@ -5,7 +5,7 @@ angular.module('arpa.controllers', [])
 
 .controller('AppsCtrl', function($scope) {})
 
-.controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility){
+.controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility, $timeout){
     $scope.userpicture = './img/logo_arpa.svg';
 
     Socket.forward('notification', $scope);
@@ -15,6 +15,7 @@ angular.module('arpa.controllers', [])
 
     $scope.activateAccessibility = function(value){
         $accessibility.toggleAccessibility();
+        $timeout(function(){
         var access = $localstorage.get('accessibility');
         if(access && access == 'true') {
             var thissound = $accessibility.getVoice(value);
@@ -22,6 +23,7 @@ angular.module('arpa.controllers', [])
                 thissound.play();
             }
         }
+        },3000);
     }
 
     var launchNotification = function () {
