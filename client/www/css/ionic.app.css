@@ -7699,10 +7699,6 @@ video#video2 {
 
 .tabbed {
   top: 3rem;
-  background-size: auto 100%;
-  -webkit-background-size: auto 100%;
-  -moz-background-size: auto 100%;
-  -o-background-size: auto 100%;
   background-color: rgba(255, 255, 255, 0.6); }
 
 .tabbed h1 {
@@ -7812,7 +7808,7 @@ ul.to-add-allergs li {
   display: none; }
 
 .no_block .scroll {
-  height: 4.4em; }
+  height: 100px; }
 
 .pane {
   background: url("../img/novo_fundo1.png") no-repeat center center fixed;

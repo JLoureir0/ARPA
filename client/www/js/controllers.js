@@ -102,7 +102,7 @@ angular.module('arpa.controllers', [])
         for(var i = 0; i < $scope.allergens.length; i++){
             allergensToSend.push($scope.allergens[i].name);
         }
-
+/*
         $http.get(herokuHost + '/' + $localstorage.getObject('userinfo').id).
         success(function(data, status, headers, config){
             $http.put(herokuHost + '/' + $localstorage.getObject('userinfo').id, {intolerant: JSON.stringify(intolerancesToSend), allergic: JSON.stringify(allergensToSend)}).
@@ -126,7 +126,7 @@ angular.module('arpa.controllers', [])
             else{
                 console.log("ERROR: " + data);
             }
-        });
+        });*/
     };
 
 

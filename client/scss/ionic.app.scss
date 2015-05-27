@@ -122,11 +122,6 @@ video#video2 {
 
 .tabbed {  
   top: 3.0rem;
-  //background-image: url("../img/novo_fundo.svg");
-  background-size: auto 100%;
-  -webkit-background-size: auto 100%;
-  -moz-background-size: auto 100%;
-  -o-background-size: auto 100%;
   background-color: rgba(255,255,255,0.6);
 }
 
@@ -261,7 +256,7 @@ ul.to-add-allergs li {
 
 
 .no_block .scroll{
-  height: 4.4em;
+  height: 100px;
 }
 
 .pane{
