@@ -12,7 +12,7 @@ angular.module('arpa.controllers', [])
     Socket.forward('notification', $scope);
     console.log("cenas");
     
-   // $accessibility.loadOptions();
+    $accessibility.loadOptions();
 
     $scope.activateAccessibility = function(value){
         $accessibility.toggleAccessibility();
