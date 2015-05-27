@@ -89,7 +89,7 @@ angular.module('arpa.controllers', [])
         var allergensToSend = [];
         var objectToSend = {};
 
-        objectToSend.deviceId = '1';//JSON.stringigy(device.uuid);
+        objectToSend.deviceId = JSON.stringigy(device.uuid);
 
         if($localstorage.getObject('userinfo') != null){
             console.log("FOUND USERINFO: " +  JSON.stringify($localstorage.getObject('userinfo')));
