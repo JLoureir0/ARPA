@@ -33,6 +33,8 @@ After this, one must verify if all dependencies are installed and located at the
 - org.apache.cordova.device
 - org.apache.cordova.dialogs
 - cordova-plugin-whitelist
+- https://github.com/macdonst/SpeechRecognitionPlugin
+
 
 if any of the above are not installed, please install using ionic plugin add 'above name'
 

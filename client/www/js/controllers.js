@@ -17,8 +17,6 @@ angular.module('arpa.controllers', [])
     $scope.activateAccessibility = function(value){
         $accessibility.toggleAccessibility();
         $accessibility.getVoice(value);
-
-        var recognition = new SpeechRecognition;
     }
 
     var launchNotification = function () {
