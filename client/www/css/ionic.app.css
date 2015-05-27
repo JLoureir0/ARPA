@@ -7725,8 +7725,13 @@ video#video2 {
   max-width: 100%;
   vertical-align: middle; }
 
+.center-li {
+  display: table;
+  text-align: center;
+  color: #0066b1; }
+
 ul.allergens li {
-  width: 19%;
+  width: 70px;
   display: inline-block;
   vertical-align: middle; }
 
@@ -7783,7 +7788,7 @@ ul.to-add-allergs li {
 .sexy-line {
   margin-top: 5%;
   margin-bottom: 7%;
-  height: 2px;
+  height: 1px;
   background: none repeat scroll 0% 0% #fff;
   margin-left: 10%;
   margin-right: 10%; }
