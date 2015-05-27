@@ -153,10 +153,12 @@ angular.module('arpa.services', [])
         },
         setLanguage: function(lid) {
           var sel_voice = 'f';
+          var translator = angular.module('myApp', ['pascalprecht.translate']);
           var languageoptions = $localstorage.getObject('language');
           if(languageoptions.voice && languageoptions.voice != null) {
             sel_voice = languageoptions.voice;
           }
+            alert("Language switched to " + lid + "!");
           $localstorage.setObject('language', {
               id: lid,
               voice: sel_voice

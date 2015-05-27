@@ -3,7 +3,6 @@ var herokuHost = "http://arpa.herokuapp.com/allergies";
 
 angular.module('arpa.controllers', [])
 
-
 .controller('AppsCtrl', function($scope) {})
 
 .controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility){
@@ -17,8 +16,6 @@ angular.module('arpa.controllers', [])
     $scope.activateAccessibility = function(value){
         $accessibility.toggleAccessibility();
         $accessibility.getVoice(value);
-
-        var recognition = new SpeechRecognition;
     }
 
     var launchNotification = function () {
@@ -266,7 +263,7 @@ angular.module('arpa.controllers', [])
     $scope.myActiveSlide = 1;
 })
 
-.controller('DefinitionsCtrl', function($http, $scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook) {
+.controller('DefinitionsCtrl', function($http, $scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility) {
     $scope.sign_in_hide = false;
 
     var getFromDb = function(id, callback){
@@ -325,9 +322,8 @@ angular.module('arpa.controllers', [])
     { text: 'English', value: 1 },
     { text: 'Português', value: 2 }
     ];
-    $scope.changeLanguage = function(id){
-        alert('Old Value: ' + $localstorage.get('language') + ' New Value: ' + id);
-        $accessibility.setLanguage(id);
+    $scope.changeLanguage = function(lid){
+        $accessibility.setLanguage(lid);
     }
 
     $scope.contact = {
