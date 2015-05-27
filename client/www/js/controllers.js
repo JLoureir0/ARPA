@@ -89,7 +89,7 @@ angular.module('arpa.controllers', [])
         var allergensToSend = [];
         var objectToSend = {};
 
-        objectToSend.deviceId = JSON.stringigy(device.uuid);
+        objectToSend.deviceId = '1';//JSON.stringiFy(device.uuid);
 
         if($localstorage.getObject('userinfo') != null){
             console.log("FOUND USERINFO: " +  JSON.stringify($localstorage.getObject('userinfo')));
@@ -99,7 +99,7 @@ angular.module('arpa.controllers', [])
             objectToSend.fbId = '0'; //FbID = 0 -> Running local account for the first time
         }
 
-        if($localstorage.get('appId') != null){
+        if($localstorage.get('appId') != null && $localstorage.get('appId') != ''){
             objectToSend.appId = $localstorage.get('appId');
         }
 
@@ -301,7 +301,7 @@ angular.module('arpa.controllers', [])
                     birthday: date.toLocaleDateString(),
                     picture: 'http://graph.facebook.com/' + user.id + '/picture?width=270&height=270'
                 });
-                $localstorage.set('appId', null); //Facebook login, hence new account, forget appID
+                $localstorage.set('appId', ''); //Facebook login, hence new account, forget appID
                 getFromDb(user.id, function(){
                     $window.location.reload();
                 });
