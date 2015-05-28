@@ -44,7 +44,13 @@ angular.module('arpa.controllers', [])
                     customProperty: 'custom value'
                 }
             }).then(function (result) {
-                // ...
+                var access = $localstorage.get('accessibility');
+                if(access && access == 'true') {
+                    var alertsound = $accessibility.getVoice(5);
+                    if(alertsound && alertsound != null && alertsound != undefined) {
+                        alertsound.play();
+                    }
+                }
             });
         };
 

@@ -130,7 +130,7 @@ angular.module('arpa.services', [])
 
     .factory('$accessibility', function($ionicPlatform, $cordovaMedia, $localstorage) {
 
-      var id = ['off','on','allergies','applications','definitions'];
+      var id = ['off','on','allergies','applications','definitions','allergic'];
 
       return {
         getVoice: function(value) {
