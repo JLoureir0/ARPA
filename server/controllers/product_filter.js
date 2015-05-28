@@ -23,7 +23,7 @@ exports.filter_product = function(req, res, next) {
      return next(new restify.ForbiddenError(err.detail));
      console.log('Inserted the allergies of user "' + allergies._id + '" to the database');
      res.send(201, { data: req.params });
-     });*/
+ });*/
 };
 
 exports.filter_product_get = function(req, res, next) {
@@ -39,13 +39,8 @@ exports.filter_product_get = function(req, res, next) {
 
 };
 
-var get_allergies_by_device = function(devideId, res){
-  allergies_model.getByDevice(devideId, function(result){
-    if(result.length === 0){
-      res.send(404);
-    }
-    else{
-      res.send(200, { data: result});
-    }
-  });
+var get_allergies_by_device = function(deviceId, res){
+    allergies_model.getByDevice(deviceId, function(result){
+    return result;
+});
 }

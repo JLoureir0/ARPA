@@ -81,3 +81,27 @@ exports.get = function(fbId, cb){
 
 };
 
+exports.getByDevice = function(deviceId, cb){
+	console.log("BY DEVICE");
+	var allergicQuery = "SELECT ALLERGEN FROM CLIENTS_TO_ALLERGIC C INNER JOIN CLIENT CL ON C.CLIENTID = CL.APPID AND CL.DEVICEID='" + deviceId + "';";
+	var intolerantQuery = "SELECT ALLERGEN FROM CLIENTS_TO_INTOLERANCE C INNER JOIN CLIENT CL ON C.CLIENTID = CL.APPID AND CL.DEVICEID='" + deviceId + "';";
+	var finalResult = [];
+
+	connection.query(allergicQuery, function(err, result){
+		for(var i = 0; i < result.rows.length; i++){
+			finalResult.push(result.rows[i].allergen);
+		}
+
+		connection.query(intolerantQuery, function(err2, result2){
+			for(var i = 0; i < result2.rows.length; i++){
+				finalResult.push(result2.rows[i].allergen);
+			}
+
+			cb(finalResult);
+		});
+
+	});
+
+
+};
+
