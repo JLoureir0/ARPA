@@ -63,7 +63,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             $cordovaFacebookProvider.browserInit(appID, version);
         });*/
     })
-    .config(['$translateProvider', function ($translateProvider) {
+    .config(function ($translateProvider) {
         $translateProvider.translations('pt', {
             'TAB1': 'ALERGÉNIOS',
             'TAB2': 'APLICAÇÕES',
@@ -82,7 +82,8 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
         });
 
         $translateProvider.preferredLanguage('en');
-    }])
+    })
+
     .config(function($stateProvider, $urlRouterProvider) {
 
       // Ionic uses AngularUI Router which uses the concept of states

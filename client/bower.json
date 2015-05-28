@@ -6,6 +6,7 @@
     "facebook-connect-plugin": "https://github.com/Wizcorp/phonegap-facebook-plugin.git"
   },
   "dependencies": {
-    "angular-socket-io": "~0.7.0"
+    "angular-socket-io": "~0.7.0",
+    "angular-translate": "~2.7.0"
   }
 }
