@@ -81,8 +81,24 @@ angular.module('arpa.controllers', [])
         $scope.value_intolerances = true;
         $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
         $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
-        $scope.editAllergens = "Edit";
-        $scope.editIntolerances = "Edit";
+        $scope.editAllergens = "Editar";
+        $scope.editIntolerances = "Editar";
+        $scope.activeLanguage = "pt";
+
+        $scope.$on('changeLanguageEn', function(ev, data){
+
+                $scope.editAllergens = 'Edit';
+                $scope.editIntolerances = 'Edit';
+                $scope.activeLanguage = "en";
+
+        })
+        $scope.$on('changeLanguagePt', function(ev, data){
+
+            $scope.editAllergens = 'Editar';
+            $scope.editIntolerances = 'Editar';
+            $scope.activeLanguage = "pt";
+
+        })
 
         $scope.$on("$ionicView.enter", function () {
             var access = $localstorage.get('accessibility');
@@ -155,15 +171,26 @@ angular.module('arpa.controllers', [])
                 $scope.extra_icons_intol = "./img/allergens-icons/guardar.svg";
 
                 $scope.intoleranceSymbol = "intolerance-symbol";
-
-                $scope.editIntolerances = "Save";
+                if($scope.activeLanguage=='pt') {
+                    $scope.editIntolerances = "Guardar";
+                }else{
+                    if($scope.activeLanguage=='en'){
+                        $scope.editIntolerances = "Save";
+                    }
+                }
             } else { //Save
                 $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
                 $scope.value_intolerances = true;
                 $scope.intoleranceSymbol = "fakeclass";
 
                 updateDatabase();
-                $scope.editIntolerances = "Edit";
+                if($scope.activeLanguage=='pt') {
+                    $scope.editIntolerances = "Editar";
+                }else{
+                    if($scope.activeLanguage=='en'){
+                        $scope.editIntolerances = "Edit";
+                    }
+                }
             }
         };
 
@@ -173,14 +200,27 @@ angular.module('arpa.controllers', [])
                 $scope.extra_icons_allergs = "./img/allergens-icons/guardar.svg";
 
                 $scope.allergySymbol = "allergy-symbol";
-                $scope.editAllergens = "Save";
+
+                if($scope.activeLanguage=='pt') {
+                    $scope.editAllergens = "Guardar";
+                }else{
+                    if($scope.activeLanguage=='en'){
+                        $scope.editAllergens = "Save";
+                    }
+                }
             } else { //Save
                 $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
                 $scope.value_allergies = true;
                 $scope.allergySymbol = "fakeclass";
 
                 updateDatabase();
-                $scope.editAllergens = "Edit";
+                if($scope.activeLanguage=='pt') {
+                    $scope.editAllergens = "Editar";
+                }else{
+                    if($scope.activeLanguage=='en'){
+                        $scope.editAllergens = "Edit";
+                    }
+                }
             }
         };
 
@@ -302,7 +342,7 @@ angular.module('arpa.controllers', [])
     })
 
 
-    .controller('DefinitionsCtrl', function($http, $scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility, $cordovaMedia, $ionicPlatform, $translate) {
+    .controller('DefinitionsCtrl', function($http, $scope, $rootScope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility, $cordovaMedia, $ionicPlatform, $translate) {
         $scope.sign_in_hide = false;
 
         $scope.$on("$ionicView.enter", function () {
@@ -381,12 +421,16 @@ angular.module('arpa.controllers', [])
             $accessibility.setLanguage(lid);
             if(lid=='pt'){
                 $translate.use('pt');
-                alert("Linguagem alterada para Português!")
+                $rootScope.$broadcast('changeLanguagePt', {});
+                alert("Linguagem alterada para Português!");
             }else{
                 if(lid=='en'){
                     $translate.use('en');
-                    alert("Language changed to English!")
+                    $rootScope.$broadcast('changeLanguageEn', {});
+                    alert("Language changed to English!");
+
                 }
+
             }
 
         }
