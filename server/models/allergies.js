@@ -20,9 +20,9 @@ exports.save = function(appId, fbId, deviceId, intolerant, allergic, user, cb) {
 			if( (!result || result.rowCount == 0) && !appId){
 				var subQuery;
 				if(fbId != 0){
-					subQuery = 'INSERT INTO client(fbID, deviceID) VALUES(' + fbId + "," + deviceId + ") RETURNING appID;";
+					subQuery = "INSERT INTO client(fbID, deviceID) VALUES('" + fbId + "','" + deviceId + "') RETURNING appID;";
 				} else{
-					subQuery = 'INSERT INTO client(fbID, deviceID) VALUES(-1,' + deviceId + ") RETURNING appID;";
+					subQuery = "INSERT INTO client(fbID, deviceID) VALUES(-1,'" + deviceId + "') RETURNING appID;";
 				}
 
 				connection.query(subQuery, function(err2, result2){
@@ -39,14 +39,14 @@ exports.save = function(appId, fbId, deviceId, intolerant, allergic, user, cb) {
 			} else {
 				if(appId) user.id = appId;
 				else user.id = result.rows[0].appid;
-				query += "UPDATE CLIENT SET DEVICEID=" + deviceId + " WHERE APPID='" + user.id + "';";
+				query += "UPDATE CLIENT SET DEVICEID='" + deviceId + "' WHERE APPID='" + user.id + "';";
 				query += "DELETE FROM CLIENTS_TO_ALLERGIC WHERE CLIENTID='" + user.id + "';";
 				query += "DELETE FROM CLIENTS_TO_INTOLERANCE WHERE CLIENTID='" + user.id + "';";
 				for(var i = 0; i < allergicArr.length; i++){
-					query += 'INSERT INTO CLIENTS_TO_ALLERGIC(CLIENTID, ALLERGEN) VALUES(' + user.id + ',' + JSON.stringify(allergicArr[i]).replace(/"/g, "'") + ');';
+					query += "INSERT INTO CLIENTS_TO_ALLERGIC(CLIENTID, ALLERGEN) VALUES(" + user.id + "," + JSON.stringify(allergicArr[i]).replace(/"/g, "'") + ");";
 				}
 				for(var i = 0; i < intolerantArr.length; i++){
-					query += 'INSERT INTO CLIENTS_TO_INTOLERANCE(CLIENTID, ALLERGEN) VALUES(' + user.id + ',' + JSON.stringify(intolerantArr[i]).replace(/"/g, "'") + ');';
+					query += "INSERT INTO CLIENTS_TO_INTOLERANCE(CLIENTID, ALLERGEN) VALUES(" + user.id + "," + JSON.stringify(intolerantArr[i]).replace(/"/g, "'") + ");";
 				}
 				query += 'COMMIT;';
 				connection.query(query, cb);
