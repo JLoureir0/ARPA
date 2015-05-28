@@ -4,108 +4,108 @@ var herokuHost = "http://arpa.herokuapp.com/allergies";
 angular.module('arpa.controllers', [])
 
 
-    .controller('AppsCtrl', function($scope) {})
+.controller('AppsCtrl', function($scope) {})
 
-    .controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility, $timeout, $rootScope){
-        $scope.userpicture = './img/logo_arpa.svg';
+.controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility, $timeout, $rootScope){
+    $scope.userpicture = './img/logo_arpa.svg';
 
-        Socket.forward('notification', $scope);
-        Socket.on('connection',function(){
-            $ionicPlatform.ready(function () {
-                var id = device.uuid;
-                console.log(device.uuid);
-                Socket.emit('device_id', id);
-            });
+    Socket.forward('notification', $scope);
+    Socket.on('connection',function(){
+        $ionicPlatform.ready(function () {
+            var id = device.uuid;
+            console.log(device.uuid);
+            Socket.emit('device_id', id);
         });
+    });
 
-        $accessibility.loadOptions();
+    $accessibility.loadOptions();
 
-        $scope.activateAccessibility = function(value){
-            $accessibility.toggleAccessibility();
-            var access = $localstorage.get('accessibility');
-            var sound;
-            if(access && access == 'true') {
-                sound = $accessibility.getVoice(1);
-            } else {
-                sound = $accessibility.getVoice(0);
-            }
-            if(sound && sound != null && sound != undefined) {
-                $ionicPlatform.ready(function() {
-                    if(typeof cordova != "undefined") {
-                      $rootScope.$broadcast('playing');
-                      sound.play();
-                      $scope.$on('playing', function() {
-                          sound.stop();
-                      });
+    $scope.activateAccessibility = function(value){
+        $accessibility.toggleAccessibility();
+        var access = $localstorage.get('accessibility');
+        var sound;
+        if(access && access == 'true') {
+            sound = $accessibility.getVoice(1);
+        } else {
+            sound = $accessibility.getVoice(0);
+        }
+        if(sound && sound != null && sound != undefined) {
+            $ionicPlatform.ready(function() {
+                if(typeof cordova != "undefined") {
+                  $rootScope.$broadcast('playing');
+                  sound.play();
+                  $scope.$on('playing', function() {
+                      sound.stop();
+                  });
+              }
+          });
+        }
+        $timeout(function() {
+            $ionicPlatform.ready(function(){
+                if(typeof cordova != "undefined"){
+                    if(access && access == 'true') {
+                        var thissound = $accessibility.getVoice(value);
+                        if(thissound && thissound != null && thissound != undefined) {
+                            $rootScope.$broadcast('playing');
+                            thissound.play();
+                            $scope.$on('playing', function() {
+                                thissound.stop();
+                            });
+                        }
+                    } else {
+                        $rootScope.$broadcast('playing');
                     }
-                });
+                }
+            });
+        },3000);
+    }
+
+    var launchNotification = function (req) {
+
+        console.log(req.product);
+        $cordovaLocalNotification.add({
+            id: 1,
+            title: 'Allergic Alert',
+            text: 'Attention, you are allergic to ' + req.product +' (' + req.tag + ')!',
+            data: {
+                customProperty: 'custom value'
             }
-            $timeout(function() {
+        }).then(function (result) {
+            var access = $localstorage.get('accessibility');
+            if(access && access == 'true') {
                 $ionicPlatform.ready(function(){
                     if(typeof cordova != "undefined"){
-                        if(access && access == 'true') {
-                            var thissound = $accessibility.getVoice(value);
-                            if(thissound && thissound != null && thissound != undefined) {
-                                $rootScope.$broadcast('playing');
-                                thissound.play();
-                                $scope.$on('playing', function() {
-                                    thissound.stop();
-                                });
-                            }
-                        } else {
+                        var alertsound = $accessibility.getVoice(5);
+                        if(alertsound && alertsound != null && alertsound != undefined) {
                             $rootScope.$broadcast('playing');
+                            alertsound.play();
                         }
                     }
                 });
-            },3000);
-        }
+            }
+        });
+    };
 
-        var launchNotification = function (req) {
+    $scope.$on('socket:notification', function(ev, data){
+        $ionicPlatform.ready(function () {
+            console.log(data.tag);
+            var parsed = $localstorage.parseAllergen(""+data.tag+"");
+            var toNotify = {product: data.name, tag: parsed};
+            launchNotification(toNotify);
+        });
 
-            console.log(req.product);
-            $cordovaLocalNotification.add({
-                id: 1,
-                title: 'Allergic Alert',
-                text: 'Attention, you are allergic to ' + req.product +' (' + req.tag + ')!',
-                data: {
-                    customProperty: 'custom value'
-                }
-            }).then(function (result) {
-                var access = $localstorage.get('accessibility');
-                if(access && access == 'true') {
-                    $ionicPlatform.ready(function(){
-                        if(typeof cordova != "undefined"){
-                            var alertsound = $accessibility.getVoice(5);
-                            if(alertsound && alertsound != null && alertsound != undefined) {
-                                $rootScope.$broadcast('playing');
-                                alertsound.play();
-                            }
-                        }
-                    });
-                }
-            });
-        };
+    })
 
-        $scope.$on('socket:notification', function(ev, data){
-            $ionicPlatform.ready(function () {
-                console.log(data.tag);
-                var parsed = $localstorage.parseAllergen(""+data.tag+"");
-                var toNotify = {product: data.name, tag: parsed};
-                launchNotification(toNotify);
-            });
+    var userinfo = $localstorage.getObject('userinfo');
 
-        })
-
-        var userinfo = $localstorage.getObject('userinfo');
-
-        $scope.$on('logged_in', function(ev, data){
-            $scope.userpicture = $localstorage.getObject('userinfo').picture;
-        })
+    $scope.$on('logged_in', function(ev, data){
+        $scope.userpicture = $localstorage.getObject('userinfo').picture;
+    })
 
 
 
-        if(userinfo) {
-            $scope.username = userinfo.name;
+    if(userinfo) {
+        $scope.username = userinfo.name;
             //$scope.userbirthday = userinfo.birthday;
             $scope.userpicture = userinfo.picture;
         } else {
@@ -114,22 +114,22 @@ angular.module('arpa.controllers', [])
         }
     })
 
-    .controller('AllergensCtrl', function($scope, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia, $accessibility, $rootScope){
+.controller('AllergensCtrl', function($scope, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia, $accessibility, $rootScope){
 
-        $scope.value_allergies = true;
-        $scope.value_intolerances = true;
-        $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
-        $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
-        $scope.editAllergens = "Editar";
-        $scope.editIntolerances = "Editar";
-        $scope.activeLanguage = "pt";
+    $scope.value_allergies = true;
+    $scope.value_intolerances = true;
+    $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
+    $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
+    $scope.editAllergens = "Editar";
+    $scope.editIntolerances = "Editar";
+    $scope.activeLanguage = "pt";
 
-        $scope.$on('changeLanguageEn', function(ev, data){
+    $scope.$on('changeLanguageEn', function(ev, data){
 
-                $scope.editAllergens = 'Edit';
-                $scope.editIntolerances = 'Edit';
-                $scope.activeLanguage = "en";
-                var translatedAllergens = $localstorage.getAllergensEn();
+        $scope.editAllergens = 'Edit';
+        $scope.editIntolerances = 'Edit';
+        $scope.activeLanguage = "en";
+        var translatedAllergens = $localstorage.getAllergensEn();
                 //Changing selected allergens
                 for(var i=0; i<$scope.allergens.length;i++){
                     for(var j=0; j<translatedAllergens.length; j++){
@@ -168,12 +168,12 @@ angular.module('arpa.controllers', [])
                 }
             }
         })
-        $scope.$on('changeLanguagePt', function(ev, data){
+$scope.$on('changeLanguagePt', function(ev, data){
 
-            $scope.editAllergens = 'Editar';
-            $scope.editIntolerances = 'Editar';
-            $scope.activeLanguage = "pt";
-            var translatedAllergens = $localstorage.getAllergensPt();
+    $scope.editAllergens = 'Editar';
+    $scope.editIntolerances = 'Editar';
+    $scope.activeLanguage = "pt";
+    var translatedAllergens = $localstorage.getAllergensPt();
             //Changing selected allergens
             for(var i=0; i<$scope.allergens.length;i++){
                 for(var j=0; j<translatedAllergens.length; j++){
@@ -213,42 +213,42 @@ angular.module('arpa.controllers', [])
             }
         })
 
-        $scope.$on("$ionicView.enter", function () {
-            var access = $localstorage.get('accessibility');
-            if(access && access == 'true'){
-                $ionicPlatform.ready(function(){
-                    if(typeof cordova != "undefined"){
-                        var media = $accessibility.getVoice(2);
-                        if(media != null) {
-                            $rootScope.$broadcast('playing');
-                            media.play();
-                            $scope.$on('playing', function() {
-                                media.stop();
-                            });
-                        }
-                    }
-                });
-            } else {
-                $localstorage.set('accessibility', 'false');
+$scope.$on("$ionicView.enter", function () {
+    var access = $localstorage.get('accessibility');
+    if(access && access == 'true'){
+        $ionicPlatform.ready(function(){
+            if(typeof cordova != "undefined"){
+                var media = $accessibility.getVoice(2);
+                if(media != null) {
+                    $rootScope.$broadcast('playing');
+                    media.play();
+                    $scope.$on('playing', function() {
+                        media.stop();
+                    });
+                }
             }
         });
+    } else {
+        $localstorage.set('accessibility', 'false');
+    }
+});
 
-        $scope.allergySymbol = "fakeclass";
-        $scope.intoleranceSymbol = "fakeclass";
+$scope.allergySymbol = "fakeclass";
+$scope.intoleranceSymbol = "fakeclass";
 
-        var updateDatabase = function(){
-            var intolerancesToSend = [];
-            var allergensToSend = [];
-            var objectToSend = {};
+var updateDatabase = function(){
+    var intolerancesToSend = [];
+    var allergensToSend = [];
+    var objectToSend = {};
 
-            objectToSend.deviceId = device.uuid;
+    objectToSend.deviceId = device.uuid;
 
 
-            if($localstorage.getObject('userinfo') != null){
-                console.log("FOUND USERINFO: " +  JSON.stringify($localstorage.getObject('userinfo')));
-                objectToSend.fbId = $localstorage.getObject('userinfo').id;
-            } else{
-                console.log("NOT FOUND USERINFO");
+    if($localstorage.getObject('userinfo') != null){
+        console.log("FOUND USERINFO: " +  JSON.stringify($localstorage.getObject('userinfo')));
+        objectToSend.fbId = $localstorage.getObject('userinfo').id;
+    } else{
+        console.log("NOT FOUND USERINFO");
                 objectToSend.fbId = '0'; //FbID = 0 -> Running local account for the first time
             }
 
@@ -269,15 +269,15 @@ angular.module('arpa.controllers', [])
             console.log(JSON.stringify(objectToSend));
 
             $http.post(herokuHost + '/', objectToSend).
-                success(function(result, status, headers, config){
-                    console.log(result.data);
+            success(function(result, status, headers, config){
+                console.log(result.data);
                     if($localstorage.getObject('userinfo') == null){ //Local Account, save the new ID
                         $localstorage.set('appId', result.data)
                     }
                 }).
-                error(function(result, status, headers, config){
-                    console.log("ERROR: " + JSON.stringify(result));
-                });
+            error(function(result, status, headers, config){
+                console.log("ERROR: " + JSON.stringify(result));
+            });
 
         };
 
@@ -436,104 +436,104 @@ angular.module('arpa.controllers', [])
 
     })
 
-    .controller('ProfileCtrl', function($scope) {
-        $scope.myActiveSlide = 1;
-    })
+.controller('ProfileCtrl', function($scope) {
+    $scope.myActiveSlide = 1;
+})
 
-    .controller('ApplicationsCtrl', function($scope, $localstorage, $ionicPlatform, $cordovaMedia, $accessibility, $rootScope) {
+.controller('ApplicationsCtrl', function($scope, $localstorage, $ionicPlatform, $cordovaMedia, $accessibility, $rootScope) {
 
-        $scope.applicationsList = [
-            {
-                app: "Continente Mobile",
+    $scope.applicationsList = [
+    {
+        app: "Continente Mobile",
                 checked: false  //fix connection
             },
             {
                 app: "Farmácia Mobile",
                 checked: false
             }
-        ];
+            ];
 
 
-        $scope.$on("$ionicView.enter", function () {
-            var access = $localstorage.get('accessibility');
-            if(access && access == 'true'){
-                $ionicPlatform.ready(function(){
-                    if(typeof cordova != "undefined"){
-                        var media = $accessibility.getVoice(3);
-                        if(media != null) {
-                            $rootScope.$broadcast('playing');
-                            media.play();
-                            $scope.$on('playing', function() {
-                                media.stop();
-                            });
+            $scope.$on("$ionicView.enter", function () {
+                var access = $localstorage.get('accessibility');
+                if(access && access == 'true'){
+                    $ionicPlatform.ready(function(){
+                        if(typeof cordova != "undefined"){
+                            var media = $accessibility.getVoice(3);
+                            if(media != null) {
+                                $rootScope.$broadcast('playing');
+                                media.play();
+                                $scope.$on('playing', function() {
+                                    media.stop();
+                                });
+                            }
                         }
-                    }
-                });
-            } else {
-                $localstorage.set('accessibility', 'false');
-            }
-        });
-    })
-
-
-    .controller('DefinitionsCtrl', function($http, $scope, $rootScope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility, $cordovaMedia, $ionicPlatform, $translate, $rootScope) {
-        $scope.sign_in_hide = false;
-
-        $scope.$on("$ionicView.enter", function () {
-            var access = $localstorage.get('accessibility');
-            if(access && access == 'true'){
-                $ionicPlatform.ready(function(){
-                    if(typeof cordova != "undefined"){
-                        var media = $accessibility.getVoice(4);
-                        if(media != null) {
-                            $rootScope.$broadcast('playing');
-                            media.play();
-                            $scope.$on('playing', function() {
-                                media.stop();
-                            });
-                        }
-                    }
-                });
-            } else {
-                $localstorage.set('accessibility', 'false');
-            }
-        });
-
-        var getFromDb = function(id, callback){
-            $http.get(herokuHost + '/' + id).
-                success(function(result, status, headers, config){
-                    console.log("TAG RESULT : " + JSON.stringify(result.data));
-                    $scope.allergens = [];
-                    $scope.intolerances = [];
-                    $localstorage.matchFromDb(result.data.allergic, $scope.allergens);
-                    $localstorage.matchFromDb(result.data.intolerant, $scope.intolerances);
-                    $localstorage.setObject('allergies', {
-                        allergies: $scope.allergens
                     });
-                    $localstorage.setObject('intolerances', {
-                        intolerances: $scope.intolerances
-                    });
-                    callback();
-                }).
-                error(function(result, status, headers, config){
-                    console.log("TAG ERROR: " + result.data);
-                    callback();
-                })
-        };
+                } else {
+                    $localstorage.set('accessibility', 'false');
+                }
+            });
+        })
 
-        $scope.fbLogin = function(){
-            $cordovaFacebook.login(["public_profile", "email"])
-                .then(function(success){
-                    $cordovaFacebook.api("me", ["public_profile"])
-                        .then(function(user) {
-                            $scope.user = user;
-                            var date = new Date($scope.user.birthday);
-                            $localstorage.setObject('userinfo', {
-                                id: $scope.user.id,
-                                name: $scope.user.name,
-                                birthday: date.toLocaleDateString(),
-                                picture: 'http://graph.facebook.com/' + user.id + '/picture?width=270&height=270'
-                            });
+
+.controller('DefinitionsCtrl', function($http, $scope, $rootScope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility, $cordovaMedia, $ionicPlatform, $translate, $rootScope) {
+    $scope.sign_in_hide = false;
+
+    $scope.$on("$ionicView.enter", function () {
+        var access = $localstorage.get('accessibility');
+        if(access && access == 'true'){
+            $ionicPlatform.ready(function(){
+                if(typeof cordova != "undefined"){
+                    var media = $accessibility.getVoice(4);
+                    if(media != null) {
+                        $rootScope.$broadcast('playing');
+                        media.play();
+                        $scope.$on('playing', function() {
+                            media.stop();
+                        });
+                    }
+                }
+            });
+        } else {
+            $localstorage.set('accessibility', 'false');
+        }
+    });
+
+    var getFromDb = function(id, callback){
+        $http.get(herokuHost + '/' + id).
+        success(function(result, status, headers, config){
+            console.log("TAG RESULT : " + JSON.stringify(result.data));
+            $scope.allergens = [];
+            $scope.intolerances = [];
+            $localstorage.matchFromDb(result.data.allergic, $scope.allergens);
+            $localstorage.matchFromDb(result.data.intolerant, $scope.intolerances);
+            $localstorage.setObject('allergies', {
+                allergies: $scope.allergens
+            });
+            $localstorage.setObject('intolerances', {
+                intolerances: $scope.intolerances
+            });
+            callback();
+        }).
+        error(function(result, status, headers, config){
+            console.log("TAG ERROR: " + result.data);
+            callback();
+        })
+    };
+
+    $scope.fbLogin = function(){
+        $cordovaFacebook.login(["public_profile", "email"])
+        .then(function(success){
+            $cordovaFacebook.api("me", ["public_profile"])
+            .then(function(user) {
+                $scope.user = user;
+                var date = new Date($scope.user.birthday);
+                $localstorage.setObject('userinfo', {
+                    id: $scope.user.id,
+                    name: $scope.user.name,
+                    birthday: date.toLocaleDateString(),
+                    picture: 'http://graph.facebook.com/' + user.id + '/picture?width=270&height=270'
+                });
                             $localstorage.set('appId', ''); //Facebook login, hence new account, forget appID
                             getFromDb(user.id, function(){
                                 $window.location.reload();
@@ -543,82 +543,90 @@ angular.module('arpa.controllers', [])
 
                         });
 
-                }, function(error){
+        }, function(error){
 
+        });
+    };
+
+    $scope.recognition = new SpeechRecognition();
+    $scope.recognition.onresult = function(event) {
+      if (event.results.length > 0) {
+        var value = event.results[0][0].transcript;
+        console.log("I HEARD " + value);
+    }
+};
+$scope.logout = function(){
+    $localstorage.setObject('userinfo',null);
+    $window.location.reload();
+}
+$scope.languages = [
+{ text: 'English', value: 1 },
+{ text: 'Português', value: 2 }
+];
+$scope.changeLanguage = function(lid){
+    $accessibility.setLanguage(lid);
+    var access = $localstorage.get('accessibility');
+    if(access && access == 'true') {
+        $ionicPlatform.ready(function(){
+            if(typeof cordova != "undefined"){
+              var sound = $accessibility.getVoice(6);
+              if(sound && sound != null && sound != undefined) {
+                $rootScope.$broadcast('playing');
+                sound.play();
+                $scope.$on('playing', function() {
+                    sound.stop();
                 });
-        };
-        $scope.logout = function(){
-            $localstorage.setObject('userinfo',null);
-            $window.location.reload();
+            }
         }
-        $scope.languages = [
-            { text: 'English', value: 1 },
-            { text: 'Português', value: 2 }
-        ];
-        $scope.changeLanguage = function(lid){
-            $accessibility.setLanguage(lid);
-            var access = $localstorage.get('accessibility');
-            if(access && access == 'true') {
-                $ionicPlatform.ready(function(){
-                    if(typeof cordova != "undefined"){
-                      var sound = $accessibility.getVoice(6);
-                      if(sound && sound != null && sound != undefined) {
-                        $rootScope.$broadcast('playing');
-                        sound.play();
-                        $scope.$on('playing', function() {
-                            sound.stop();
-                        });
-                      }
-                    }
-                });
-            } else {
-                if(lid=='pt'){
-                    $translate.use('pt');
-                    $rootScope.$broadcast('changeLanguagePt', {});
-                    alert("Linguagem alterada para Português!");
-                }else{
-                    if(lid=='en'){
-                        $translate.use('en');
-                        $rootScope.$broadcast('changeLanguageEn', {});
-                        alert("Language changed to English!");
+    });
+    } else {
+        if(lid=='pt'){
+            $translate.use('pt');
+            $rootScope.$broadcast('changeLanguagePt', {});
+            alert("Linguagem alterada para Português!");
+        }else{
+            if(lid=='en'){
+                $translate.use('en');
+                $rootScope.$broadcast('changeLanguageEn', {});
+                alert("Language changed to English!");
 
-                    }
-
-                }
             }
 
         }
+    }
 
-        $scope.contact = {
-            name: 'Mittens Cat',
-            info: 'Tap anywhere on the card to open the modal'
-        }
+}
 
-        $ionicModal.fromTemplateUrl('./templates/login.html', {
-            scope: $scope
-        }).then(function(modal) {
-            $scope.modal = modal;
-        });
-    })
+$scope.contact = {
+    name: 'Mittens Cat',
+    info: 'Tap anywhere on the card to open the modal'
+}
 
-    .controller('SelectCtrl', function($state,  $ionicSlideBoxDelegate, $localstorage) {
+$ionicModal.fromTemplateUrl('./templates/login.html', {
+    scope: $scope
+}).then(function(modal) {
+    $scope.modal = modal;
+});
+})
 
-        var selectCtrl = this;
-        var firstRun = $localstorage.get('firstRun');
+.controller('SelectCtrl', function($state,  $ionicSlideBoxDelegate, $localstorage) {
 
-        if (firstRun && firstRun == 'false'){
-            $state.go('tab.allergens');
+    var selectCtrl = this;
+    var firstRun = $localstorage.get('firstRun');
 
-        } else {
-            var newID = '_' + Math.random().toString(36).substr(2, 9);
+    if (firstRun && firstRun == 'false'){
+        $state.go('tab.allergens');
+
+    } else {
+        var newID = '_' + Math.random().toString(36).substr(2, 9);
             /*selectCtrl.$on('$ionicView.enter', function() {
              $ionicSlideBoxDelegate.slide(0);
              $localstorage.set('firstRun', 'false');
-             });*/
-        }
+         });*/
+}
 
-        selectCtrl.slideIndex = 0;
-        selectCtrl.showPager = true;
+selectCtrl.slideIndex = 0;
+selectCtrl.showPager = true;
 
         // Called to navigate to the main app
         selectCtrl.startApp = function() {
