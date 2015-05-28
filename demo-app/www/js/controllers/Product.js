@@ -20,24 +20,20 @@ function SearchController($ionicLoading, $ionicPlatform, $ionicPopup, $state, $s
     var id;
 
     $ionicPlatform.ready(function(){
-      id = device.uuid;
+      id = "15e5b49b21f1f562";
 
       var body = {
-        product: vm.product.name,
-        device: id
+        product: vm.product.Name,
+        id: id
       };
-
-      $http.post('http://arpa.herokuapp.com/product_filter/', body);
+      console.log(JSON.stringify(body));
+      $http.post('http://arpa.herokuapp.com/product_filter', body);
       alertButton('Product added to the list');
+
     })
 
 
-    $http.post('http://arpa.herokuapp.com/product_filter/',
-        {
-          product: vm.product.name,
-          device: id
-        });
-    alertButton('Product added to the list');
+
   }
 
   function removeProductFromList() {

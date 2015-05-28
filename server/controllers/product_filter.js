@@ -3,18 +3,19 @@ var allergies_model = require('../models/allergies.js');
 var handler = require('../controllers/product_handler.js');
 
 exports.filter_product = function(req, res, next) {
+    console.log("Entrei");
     var request = req.body;
-    var received = JSON.parse(request);
+    console.log(request);
+    var received = request;
     var allergen = handler.handleProduct(received.product);
     var id = ""+received.id +"";
-console.log(received.id);
+    console.log(received.id);
 
 
     allergies_model.getByDevice(id,function(result){
-        console.log("cenas: " +  result);
+        console.log("cenas: " +  result + " cenas2: " + id);
 
         if(result.indexOf(allergen) >= 0){
-            console.log("mandei!!");
             io.to(id).emit('notification', {tag: allergen, name: received.product});
         }
     });
