@@ -39,8 +39,8 @@ exports.filter_product_get = function(req, res, next) {
 
 };
 
-exports.get_allergies_by_device = function(req, res, next){
-  allergies_model.getByDevice(req.params[0], function(result){
+var get_allergies_by_device = function(devideId, res){
+  allergies_model.getByDevice(devideId, function(result){
     if(result.length === 0){
       res.send(404);
     }
