@@ -97,14 +97,88 @@ angular.module('arpa.controllers', [])
                 $scope.editAllergens = 'Edit';
                 $scope.editIntolerances = 'Edit';
                 $scope.activeLanguage = "en";
-
+                var translatedAllergens = $localstorage.getAllergensEn();
+                //Changing selected allergens
+                for(var i=0; i<$scope.allergens.length;i++){
+                    for(var j=0; j<translatedAllergens.length; j++){
+                        if($scope.allergens[i].id==translatedAllergens[j].id){
+                            $scope.allergens.splice(i,1);
+                            $scope.allergens.splice(i,0,translatedAllergens[j]);
+                        }
+                    }
+                }
+            //Changing unselected allergens
+            for(var i=0; i<$scope.not_selected_allergens.length;i++){
+                for(var j=0; j<translatedAllergens.length; j++){
+                    if($scope.not_selected_allergens[i].id==translatedAllergens[j].id){
+                        $scope.not_selected_allergens.splice(i,1);
+                        $scope.not_selected_allergens.splice(i,0,translatedAllergens[j]);
+                    }
+                }
+            }
+            //------------------------------------------------------------------------------
+            //Changing selected intolerances
+            for(var i=0; i<$scope.intolerances.length;i++){
+                for(var j=0; j<translatedAllergens.length; j++){
+                    if($scope.intolerances[i].id==translatedAllergens[j].id){
+                        $scope.intolerances.splice(i,1);
+                        $scope.intolerances.splice(i,0,translatedAllergens[j]);
+                    }
+                }
+            }
+            //Changing unselected allergens
+            for(var i=0; i<$scope.not_selected_intolerances.length;i++){
+                for(var j=0; j<translatedAllergens.length; j++){
+                    if($scope.not_selected_intolerances[i].id==translatedAllergens[j].id){
+                        $scope.not_selected_intolerances.splice(i,1);
+                        $scope.not_selected_intolerances.splice(i,0,translatedAllergens[j]);
+                    }
+                }
+            }
         })
         $scope.$on('changeLanguagePt', function(ev, data){
 
             $scope.editAllergens = 'Editar';
             $scope.editIntolerances = 'Editar';
             $scope.activeLanguage = "pt";
-
+            var translatedAllergens = $localstorage.getAllergensPt();
+            //Changing selected allergens
+            for(var i=0; i<$scope.allergens.length;i++){
+                for(var j=0; j<translatedAllergens.length; j++){
+                    if($scope.allergens[i].id==translatedAllergens[j].id){
+                        $scope.allergens.splice(i,1);
+                        $scope.allergens.splice(i,0,translatedAllergens[j]);
+                    }
+                }
+            }
+            //Changing unselected allergens
+            for(var i=0; i<$scope.not_selected_allergens.length;i++){
+                for(var j=0; j<translatedAllergens.length; j++){
+                    if($scope.not_selected_allergens[i].id==translatedAllergens[j].id){
+                        $scope.not_selected_allergens.splice(i,1);
+                        $scope.not_selected_allergens.splice(i,0,translatedAllergens[j]);
+                    }
+                }
+            }
+            //------------------------------------------------------------------------------
+            //Changing selected intolerances
+            for(var i=0; i<$scope.intolerances.length;i++){
+                for(var j=0; j<translatedAllergens.length; j++){
+                    if($scope.intolerances[i].id==translatedAllergens[j].id){
+                        $scope.intolerances.splice(i,1);
+                        $scope.intolerances.splice(i,0,translatedAllergens[j]);
+                    }
+                }
+            }
+            //Changing unselected allergens
+            for(var i=0; i<$scope.not_selected_intolerances.length;i++){
+                for(var j=0; j<translatedAllergens.length; j++){
+                    if($scope.not_selected_intolerances[i].id==translatedAllergens[j].id){
+                        $scope.not_selected_intolerances.splice(i,1);
+                        $scope.not_selected_intolerances.splice(i,0,translatedAllergens[j]);
+                    }
+                }
+            }
         })
 
         $scope.$on("$ionicView.enter", function () {
@@ -274,7 +348,7 @@ angular.module('arpa.controllers', [])
 
         };
 
-        $scope.not_selected_allergens = $localstorage.getAllergens();
+        $scope.not_selected_allergens = $localstorage.getAllergensPt();
         $scope.not_selected_intolerances = $scope.not_selected_allergens.slice(0, $scope.not_selected_allergens.length);
 
         $scope.allergens = [];

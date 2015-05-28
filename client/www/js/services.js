@@ -23,7 +23,7 @@ angular.module('arpa.services', [])
           }
 
         },
-        getAllergens: function(){
+        getAllergensPt: function(){
           var allergens = [
             {
               id: 1,
@@ -89,6 +89,74 @@ angular.module('arpa.services', [])
 
           return allergens.slice(0, allergens.length);
         },
+
+        getAllergensEn: function(){
+          var allergens = [
+            {
+              id: 1,
+              name: "Dairy",
+              src: "./img/allergens-icons/lacteos.svg"
+            },
+            {
+              id: 2,
+              name: "Gluten",
+              src: "./img/allergens-icons/gluten.svg"
+            },
+            {
+              id: 3,
+              name: "Peanuts",
+              src: "./img/allergens-icons/amendoins.svg"
+            },
+            {
+              id: 4,
+              name: "Eggs",
+              src: "./img/allergens-icons/ovos.svg"
+            },
+            {
+              id: 5,
+              name: "Shellfish",
+              src: "./img/allergens-icons/marisco.svg"
+            },
+            {
+              id: 6,
+              name: "Molluscs",
+              src: "./img/allergens-icons/moluscos.svg"
+            },
+            {
+              id: 7,
+              name: "Mustard",
+              src: "./img/allergens-icons/mostarda.svg"
+            },
+            {
+              id: 8,
+              name: "Fish",
+              src: "./img/allergens-icons/peixe.svg"
+            },
+            {
+              id: 9,
+              name: "Sesame",
+              src: "./img/allergens-icons/sesamo.svg"
+            },
+            {
+              id: 10,
+              name: "SO2",
+              src: "./img/allergens-icons/so2.svg"
+            },
+            {
+              id: 11,
+              name: "Soy",
+              src: "./img/allergens-icons/soja.svg"
+            },
+            {
+              id: 12,
+              name: "Lupins",
+              src: "./img/allergens-icons/tremocos.svg"
+            }
+          ];
+
+          return allergens.slice(0, allergens.length);
+        },
+
         matchFromDb: function(array, result){
           var allergens = this.getAllergens();
 
