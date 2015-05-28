@@ -34,7 +34,6 @@ angular.module('arpa.controllers', [])
 
         var launchNotification = function (req) {
 
-
             console.log(req.product);
             $cordovaLocalNotification.add({
                 id: 1,
