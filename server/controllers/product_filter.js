@@ -7,16 +7,18 @@ exports.filter_product = function(req, res, next) {
     var received = JSON.parse(request);
     var allergen = handler.handleProduct(received.product);
     var id = ""+received.id +"";
-
-    var user_allergens;
-
-    var allergies = get_allergies_by_device(id);
-    console.log(allergies);
+console.log(received.id);
 
 
-    if(allergies.indexOf(allergen) >= 0){
-        io.to(id).emit('notification', {tag: allergen, name: received.product});
-    }
+    allergies_model.getByDevice(id,function(result){
+        console.log("cenas: " +  result);
+
+        if(result.indexOf(allergen) >= 0){
+            console.log("mandei!!");
+            io.to(id).emit('notification', {tag: allergen, name: received.product});
+        }
+    });
+
 
     res.send(200);
 
@@ -40,9 +42,3 @@ exports.filter_product_get = function(req, res, next) {
     res.send(200);
 
 };
-
-var get_allergies_by_device = function(deviceId, res){
-    allergies_model.getByDevice(deviceId, function(result){
-    return result;
-});
-}

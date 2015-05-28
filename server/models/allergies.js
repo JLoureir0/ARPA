@@ -89,6 +89,7 @@ exports.getByDevice = function(deviceId, cb){
 	var finalResult = [];
 
 	connection.query(allergicQuery, function(err, result){
+		console.log(result);
 		for(var i = 0; i < result.rows.length; i++){
 			finalResult.push(result.rows[i].allergen);
 		}
@@ -97,6 +98,7 @@ exports.getByDevice = function(deviceId, cb){
 			for(var i = 0; i < result2.rows.length; i++){
 				finalResult.push(result2.rows[i].allergen);
 			}
+			console.log(JSON.stringify(finalResult));
 
 			cb(finalResult);
 		});

@@ -12,7 +12,8 @@ angular.module('arpa.controllers', [])
         Socket.forward('notification', $scope);
         Socket.on('connection',function(){
             $ionicPlatform.ready(function () {
-                var id = ""+device.uuid+"";
+                var id = device.uuid;
+                console.log(device.uuid);
                 Socket.emit('device_id', id);
             })
         })
@@ -124,7 +125,7 @@ angular.module('arpa.controllers', [])
             var allergensToSend = [];
             var objectToSend = {};
 
-            objectToSend.deviceId = "'" + device.uuid "'";
+            objectToSend.deviceId = device.uuid;
 
 
             if($localstorage.getObject('userinfo') != null){
