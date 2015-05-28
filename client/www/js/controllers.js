@@ -476,7 +476,7 @@ var updateDatabase = function(){
         })
 
 
-.controller('DefinitionsCtrl', function($http, $scope, $rootScope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility, $cordovaMedia, $ionicPlatform, $translate, $rootScope) {
+.controller('DefinitionsCtrl', function($http, $scope, $rootScope, $ionicPopup, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility, $cordovaMedia, $ionicPlatform, $translate, $rootScope) {
     $scope.sign_in_hide = false;
 
     $scope.$on("$ionicView.enter", function () {
@@ -552,6 +552,10 @@ var updateDatabase = function(){
     $scope.recognition.onresult = function(event) {
       if (event.results.length > 0) {
         var value = event.results[0][0].transcript;
+        var alertPopup = $ionicPopup.alert({
+            title: 'HEARD',
+            template: value
+     });
         console.log("I HEARD " + value);
     }
 };
