@@ -38,3 +38,14 @@ exports.filter_product_get = function(req, res, next) {
     res.send(200);
 
 };
+
+exports.get_allergies_by_device = function(req, res, next){
+  allergies_model.getByDevice(req.params[0], function(result){
+    if(result.length === 0){
+      res.send(404);
+    }
+    else{
+      res.send(200, { data: result});
+    }
+  });
+}

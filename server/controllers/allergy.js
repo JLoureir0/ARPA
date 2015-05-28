@@ -54,18 +54,6 @@ exports.get_allergies = function(req, res) {
   });
 };
 
-exports.get_allergies_by_device = function(req, res){
-  console.log("HERE");
-  allergies_model.getByDevice(req.params[0], function(result){
-    if(result.length === 0){
-      res.send(404);
-    }
-    else{
-      res.send(200, { data: result});
-    }
-  });
-}
-
 exports.update_allergies = function(req, res) {
   allergies_model.get(req.params[0], function(err, result) {
     if(result.rows.length === 0)
