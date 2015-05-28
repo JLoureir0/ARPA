@@ -166,20 +166,17 @@ angular.module('arpa.services', [])
           }
         },
         setLanguage: function(lid) {
-          var translator = angular.module('myApp', ['pascalprecht.translate']);
           var languageoptions = $localstorage.getObject('language');
           var sel_voice = 'm';
           if(languageoptions.voice && languageoptions.voice != null) {
             sel_voice = languageoptions.voice;
           }
-            alert("Language switched to " + lid + "!");
           $localstorage.setObject('language', {
               id: lid,
               voice: sel_voice
           });
         },
         setVoice: function(vid) {
-          var translator = angular.module('myApp', ['pascalprecht.translate']);
           var languageoptions = $localstorage.getObject('language');
           var sel_language = 'en';
           if(languageoptions.id && languageoptions.id != null) {
@@ -215,3 +212,4 @@ angular.module('arpa.services', [])
         }
       };
     });
+

@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.directives', 'btford.socket-io', 'ngCordova', 'ngAnimate'])
+angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.directives', 'btford.socket-io', 'ngCordova', 'ngAnimate', 'pascalprecht.translate'])
 
     .run(function($ionicPlatform, $cordovaDevice, $localstorage, Socket) {
 
@@ -63,7 +63,26 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             $cordovaFacebookProvider.browserInit(appID, version);
         });*/
     })
+    .config(['$translateProvider', function ($translateProvider) {
+        $translateProvider.translations('pt', {
+            'TAB1': 'ALERGÉNIOS',
+            'TAB2': 'APLICAÇÕES',
+            'TAB3': 'DEFINIÇÕES',
+            'ALLERGIES': 'ALERGIAS',
+            'INTOLERANCES': 'INTOLERÂNCIAS'
 
+        });
+
+        $translateProvider.translations('en', {
+            'TAB1': 'ALLERGENS',
+            'TAB2': 'APPLICATIONS',
+            'TAB3': 'DEFINITIONS',
+            'ALLERGIES': 'ALLERGIES',
+            'INTOLERANCES': 'INTOLERANCES'
+        });
+
+        $translateProvider.preferredLanguage('pt');
+    }])
     .config(function($stateProvider, $urlRouterProvider) {
 
       // Ionic uses AngularUI Router which uses the concept of states

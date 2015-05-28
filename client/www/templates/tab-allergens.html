@@ -1,7 +1,7 @@
 <ion-view view-title="Allergens"   class="over-background" on-long-press="activateAccessibility(2)">
     <ion-content class="tabbed" ng-style="push_down" has-bouncing="true">
         <div class="allergies">
-            <h1>ALLERGIES</h1>
+            <h1>{{ 'ALLERGIES' | translate }}</h1>
             <ul class="allergens">
                 <li class="center-item-content" ng-repeat="allergen in allergens">
                     <img class="{{allergySymbol}}" ng-src="{{allergen.src}}"  ng-click="removeAllergens($index, allergen)"> <!-- TODO error in console, dunno why -->
@@ -25,7 +25,7 @@
         <div class="sexy-line"></div>
         
         <div class="intolerances">
-            <h1>INTOLERANCES</h1>
+            <h1>{{ 'INTOLERANCES' | translate }}</h1>
             <ul class="intolerance">
                 <li class="center-item-content" ng-repeat="intolerance in intolerances">
                     <img class="{{intoleranceSymbol}}" ng-src="{{intolerance.src}}"  ng-click="removeIntol($index, intolerance)">

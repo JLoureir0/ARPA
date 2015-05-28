@@ -3,6 +3,7 @@ var herokuHost = "http://arpa.herokuapp.com/allergies";
 
 angular.module('arpa.controllers', [])
 
+
 .controller('AppsCtrl', function($scope) {})
 
 .controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility){
@@ -286,7 +287,7 @@ angular.module('arpa.controllers', [])
 })
 
 
-.controller('DefinitionsCtrl', function($http, $scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility, $cordovaMedia, $ionicPlatform) {
+.controller('DefinitionsCtrl', function($http, $scope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility, $cordovaMedia, $ionicPlatform, $translate) {
     $scope.sign_in_hide = false;
 
     $scope.$on("$ionicView.enter", function () {
@@ -363,6 +364,16 @@ angular.module('arpa.controllers', [])
     ];
     $scope.changeLanguage = function(lid){
         $accessibility.setLanguage(lid);
+        if(lid=='pt'){
+            $translate.use('pt');
+            alert("Linguagem alterada para Português!")
+        }else{
+            if(lid=='en'){
+                $translate.use('en');
+                alert("Language changed to English!")
+            }
+        }
+
     }
 
     $scope.contact = {
