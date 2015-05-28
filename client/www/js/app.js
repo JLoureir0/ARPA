@@ -81,7 +81,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             'INTOLERANCES': 'INTOLERANCES'
         });
 
-        $translateProvider.preferredLanguage('pt');
+        $translateProvider.preferredLanguage('en');
     }])
     .config(function($stateProvider, $urlRouterProvider) {
 

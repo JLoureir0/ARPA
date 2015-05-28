@@ -124,7 +124,7 @@ angular.module('arpa.controllers', [])
             var allergensToSend = [];
             var objectToSend = {};
 
-            objectToSend.deviceId = "'"+ device.uuid +"'";
+            objectToSend.deviceId = device.uuid;
 
 
             if($localstorage.getObject('userinfo') != null){
@@ -324,6 +324,19 @@ angular.module('arpa.controllers', [])
     })
 
     .controller('ApplicationsCtrl', function($scope, $localstorage, $ionicPlatform, $cordovaMedia, $accessibility) {
+
+        $scope.applicationsList = [
+            {
+                app: "Continente Mobile",
+                checked: false  //fix connection
+            },
+            {
+                app: "Farmácia Mobile",
+                checked: false
+            }
+        ];
+
+
         $scope.$on("$ionicView.enter", function () {
             var access = $localstorage.get('accessibility');
             if(access && access == 'true'){

@@ -117,8 +117,8 @@ angular.module('arpa.services', [])
 
     .factory('Socket', function(socketFactory){
 
-      /* var myIoSocket = io.connect('http://arpa.herokuapp.com');*/
-      var myIoSocket = io.connect('http://192.168.56.1:3000');
+       var myIoSocket = io.connect('http://arpa.herokuapp.com');
+      /*var myIoSocket = io.connect('http://192.168.56.1:3000');*/
       /*var myIoSocket = io.connect('http://localhost:3000');*/
 
       var Socket = socketFactory({

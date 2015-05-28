@@ -13,6 +13,7 @@ exports.save = function(appId, fbId, deviceId, intolerant, allergic, user, cb) {
 	var query = 'BEGIN;'
 	var allergicArr = JSON.parse(allergic);
 	var intolerantArr = JSON.parse(intolerant);
+	console.log(deviceId);
 
 	cleanDeviceID(deviceId, function(){
 		connection.query("SELECT appID FROM CLIENT WHERE fbID='" + fbId + "';", function(err, result){

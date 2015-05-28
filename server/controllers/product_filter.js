@@ -1,18 +1,20 @@
 var restify         = require('restify');
 var allergies_model = require('../models/allergies.js');
-
 var handler = require('../controllers/product_handler.js');
 
 exports.filter_product = function(req, res, next) {
     var request = req.body;
-    var user_allergens = ["lacteos", "so2"];
-
-   // io.sockets.emit("notification", allergies.product);
-    //io.to('34c68907f9c67fe0').emit('notification');
     var received = JSON.parse(request);
     var allergen = handler.handleProduct(received.product);
     var id = ""+received.id +"";
-    if(user_allergens.indexOf(allergen) >= 0){
+
+    var user_allergens;
+
+    var allergies = get_allergies_by_device(id);
+    console.log(allergies);
+
+
+    if(allergies.indexOf(allergen) >= 0){
         io.to(id).emit('notification', {tag: allergen, name: received.product});
     }
 
