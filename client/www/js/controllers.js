@@ -9,11 +9,16 @@ angular.module('arpa.controllers', [])
 .controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility, $timeout){
     $scope.userpicture = './img/logo_arpa.svg';
 
-    Socket.forward('notification', $scope);
-    console.log("cenas");
-    
-    $accessibility.loadOptions();
+        Socket.forward('notification', $scope);
+        Socket.on('connection',function(){
+            $ionicPlatform.ready(function () {
+                var id = ""+device.uuid+"";
+                Socket.emit('device_id', id);
+            })
+        })
 
+        $accessibility.loadOptions();
+        
     $scope.activateAccessibility = function(value){
         $accessibility.toggleAccessibility();
         $timeout(function(){
