@@ -6,7 +6,7 @@ angular.module('arpa.controllers', [])
 
     .controller('AppsCtrl', function($scope) {})
 
-    .controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility, $timeout){
+    .controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility, $timeout, $rootScope){
         $scope.userpicture = './img/logo_arpa.svg';
 
         Socket.forward('notification', $scope);
@@ -15,21 +15,48 @@ angular.module('arpa.controllers', [])
                 var id = device.uuid;
                 console.log(device.uuid);
                 Socket.emit('device_id', id);
-            })
-        })
+            });
+        });
 
         $accessibility.loadOptions();
 
         $scope.activateAccessibility = function(value){
             $accessibility.toggleAccessibility();
-            $timeout(function(){
-                var access = $localstorage.get('accessibility');
-                if(access && access == 'true') {
-                    var thissound = $accessibility.getVoice(value);
-                    if(thissound && thissound != null && thissound != undefined) {
-                        thissound.play();
+            var access = $localstorage.get('accessibility');
+            var sound;
+            if(access && access == 'true') {
+                sound = $accessibility.getVoice(1);
+            } else {
+                sound = $accessibility.getVoice(0);
+            }
+            if(sound && sound != null && sound != undefined) {
+                $ionicPlatform.ready(function() {
+                    if(typeof cordova != "undefined") {
+                      $rootScope.$broadcast('playing');
+                      sound.play();
+                      $scope.$on('playing', function() {
+                          sound.stop();
+                      });
                     }
-                }
+                });
+            }
+            $timeout(function() {
+                $ionicPlatform.ready(function(){
+                    if(typeof cordova != "undefined"){
+                        if(access && access == 'true') {
+                            var thissound = $accessibility.getVoice(value);
+                            if(thissound && thissound != null && thissound != undefined) {
+                                $rootScope.$broadcast('playing');
+                                thissound.play();
+                                $scope.$on('playing', function() {
+                                    thissound.stop();
+                                });
+                            }
+                        } else {
+                            $rootScope.$broadcast('playing');
+                        }
+                    }
+                });
             },3000);
         }
 
@@ -46,10 +73,15 @@ angular.module('arpa.controllers', [])
             }).then(function (result) {
                 var access = $localstorage.get('accessibility');
                 if(access && access == 'true') {
-                    var alertsound = $accessibility.getVoice(5);
-                    if(alertsound && alertsound != null && alertsound != undefined) {
-                        alertsound.play();
-                    }
+                    $ionicPlatform.ready(function(){
+                        if(typeof cordova != "undefined"){
+                            var alertsound = $accessibility.getVoice(5);
+                            if(alertsound && alertsound != null && alertsound != undefined) {
+                                $rootScope.$broadcast('playing');
+                                alertsound.play();
+                            }
+                        }
+                    });
                 }
             });
         };
@@ -82,7 +114,7 @@ angular.module('arpa.controllers', [])
         }
     })
 
-    .controller('AllergensCtrl', function($scope, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia, $accessibility){
+    .controller('AllergensCtrl', function($scope, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia, $accessibility, $rootScope){
 
         $scope.value_allergies = true;
         $scope.value_intolerances = true;
@@ -114,7 +146,11 @@ angular.module('arpa.controllers', [])
                     if(typeof cordova != "undefined"){
                         var media = $accessibility.getVoice(2);
                         if(media != null) {
+                            $rootScope.$broadcast('playing');
                             media.play();
+                            $scope.$on('playing', function() {
+                                media.stop();
+                            });
                         }
                     }
                 });
@@ -330,7 +366,7 @@ angular.module('arpa.controllers', [])
         $scope.myActiveSlide = 1;
     })
 
-    .controller('ApplicationsCtrl', function($scope, $localstorage, $ionicPlatform, $cordovaMedia, $accessibility) {
+    .controller('ApplicationsCtrl', function($scope, $localstorage, $ionicPlatform, $cordovaMedia, $accessibility, $rootScope) {
 
         $scope.applicationsList = [
             {
@@ -351,7 +387,11 @@ angular.module('arpa.controllers', [])
                     if(typeof cordova != "undefined"){
                         var media = $accessibility.getVoice(3);
                         if(media != null) {
+                            $rootScope.$broadcast('playing');
                             media.play();
+                            $scope.$on('playing', function() {
+                                media.stop();
+                            });
                         }
                     }
                 });
@@ -362,7 +402,7 @@ angular.module('arpa.controllers', [])
     })
 
 
-    .controller('DefinitionsCtrl', function($http, $scope, $rootScope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility, $cordovaMedia, $ionicPlatform, $translate) {
+    .controller('DefinitionsCtrl', function($http, $scope, $rootScope, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility, $cordovaMedia, $ionicPlatform, $translate, $rootScope) {
         $scope.sign_in_hide = false;
 
         $scope.$on("$ionicView.enter", function () {
@@ -372,7 +412,11 @@ angular.module('arpa.controllers', [])
                     if(typeof cordova != "undefined"){
                         var media = $accessibility.getVoice(4);
                         if(media != null) {
+                            $rootScope.$broadcast('playing');
                             media.play();
+                            $scope.$on('playing', function() {
+                                media.stop();
+                            });
                         }
                     }
                 });
@@ -439,18 +483,34 @@ angular.module('arpa.controllers', [])
         ];
         $scope.changeLanguage = function(lid){
             $accessibility.setLanguage(lid);
-            if(lid=='pt'){
-                $translate.use('pt');
-                $rootScope.$broadcast('changeLanguagePt', {});
-                alert("Linguagem alterada para Português!");
-            }else{
-                if(lid=='en'){
-                    $translate.use('en');
-                    $rootScope.$broadcast('changeLanguageEn', {});
-                    alert("Language changed to English!");
+            var access = $localstorage.get('accessibility');
+            if(access && access == 'true') {
+                $ionicPlatform.ready(function(){
+                    if(typeof cordova != "undefined"){
+                      var sound = $accessibility.getVoice(6);
+                      if(sound && sound != null && sound != undefined) {
+                        $rootScope.$broadcast('playing');
+                        sound.play();
+                        $scope.$on('playing', function() {
+                            sound.stop();
+                        });
+                      }
+                    }
+                });
+            } else {
+                if(lid=='pt'){
+                    $translate.use('pt');
+                    $rootScope.$broadcast('changeLanguagePt', {});
+                    alert("Linguagem alterada para Português!");
+                }else{
+                    if(lid=='en'){
+                        $translate.use('en');
+                        $rootScope.$broadcast('changeLanguageEn', {});
+                        alert("Language changed to English!");
+
+                    }
 
                 }
-
             }
 
         }
