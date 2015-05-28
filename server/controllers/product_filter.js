@@ -5,20 +5,16 @@ var handler = require('../controllers/product_handler.js');
 
 exports.filter_product = function(req, res, next) {
     var request = req.body;
-    var user_allergens = ["lacteos", "coisas"];
+    var user_allergens = ["lacteos", "so2"];
 
    // io.sockets.emit("notification", allergies.product);
     //io.to('34c68907f9c67fe0').emit('notification');
     var received = JSON.parse(request);
     var allergen = handler.handleProduct(received.product);
-    console.log(user_allergens.indexOf(allergen));
+    var id = ""+received.id +"";
     if(user_allergens.indexOf(allergen) >= 0){
-        console.log("mandou");
-        io.to(request.id).emit('notification');
+        io.to(id).emit('notification', {tag: allergen, name: received.product});
     }
-    console.log(received.product)
-    console.log(allergen);
-
 
     res.send(200);
 

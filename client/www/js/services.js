@@ -21,7 +21,7 @@ angular.module('arpa.services', [])
           } else {
             return null;
           }
-          
+
         },
         getAllergens: function(){
           var allergens = [
@@ -99,13 +99,25 @@ angular.module('arpa.services', [])
               }
             }
           }
+        },
+
+        parseAllergen: function(allergen){
+          console.log(allergen);
+          var allergens = this.getAllergens();
+          for(var i = 0; i < allergens.length; i++){
+            if(allergens[i].name.toLowerCase() == allergen){
+              return allergens[i].name;
+            }
+          }
+
+          return "not found";
         }
       }
     }])
 
     .factory('Socket', function(socketFactory){
-      
-     /* var myIoSocket = io.connect('http://arpa.herokuapp.com');*/
+
+      /* var myIoSocket = io.connect('http://arpa.herokuapp.com');*/
       var myIoSocket = io.connect('http://192.168.56.1:3000');
       /*var myIoSocket = io.connect('http://localhost:3000');*/
 
@@ -150,17 +162,17 @@ angular.module('arpa.services', [])
         toggleAccessibility: function() {
           var status_accessibility = $localstorage.get('accessibility');
           if(status_accessibility == 'true') {
-              $localstorage.set('accessibility','false');
-              var sound = this.getVoice(0);
-              sound.play();
+            $localstorage.set('accessibility','false');
+            var sound = this.getVoice(0);
+            sound.play();
           } else if(status_accessibility == 'false') {
-              $localstorage.set('accessibility','true');
-              var sound = this.getVoice(1);
-              sound.play();
+            $localstorage.set('accessibility','true');
+            var sound = this.getVoice(1);
+            sound.play();
           } else {
-              $localstorage.set('accessibility','true');
-              var sound = this.getVoice(1);
-              sound.play();
+            $localstorage.set('accessibility','true');
+            var sound = this.getVoice(1);
+            sound.play();
           }
         },
         setLanguage: function(lid) {
@@ -170,8 +182,8 @@ angular.module('arpa.services', [])
             sel_voice = languageoptions.voice;
           }
           $localstorage.setObject('language', {
-              id: lid,
-              voice: sel_voice
+            id: lid,
+            voice: sel_voice
           });
         },
         setVoice: function(vid) {
@@ -180,10 +192,10 @@ angular.module('arpa.services', [])
           if(languageoptions.id && languageoptions.id != null) {
             sel_language = languageoptions.id;
           }
-            alert("Voice switched to " + vid + "!");
+          alert("Voice switched to " + vid + "!");
           $localstorage.setObject('language', {
-              id: sel_language,
-              voice: vid
+            id: sel_language,
+            voice: vid
           });
         },
         loadOptions: function() {
@@ -198,14 +210,14 @@ angular.module('arpa.services', [])
             return;
           }
           if(languageoptions.id && languageoptions.id != null) {
-              sel_id = languageoptions.id;
+            sel_id = languageoptions.id;
           }
           if(languageoptions.voice && languageoptions.voice != null) {
-              sel_voice = languageoptions.voice;
+            sel_voice = languageoptions.voice;
           }
           $localstorage.setObject('language', {
-              id: sel_id,
-              voice: sel_voice
+            id: sel_id,
+            voice: sel_voice
           });
         }
       };
