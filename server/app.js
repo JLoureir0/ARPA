@@ -28,9 +28,11 @@ server.use(function(req, res, next) {
   next();
 });
 
+/*
 
 io.use("transports", ["xhr-polling"]);
 io.use("polling duration", 10);
+*/
 
 
 /*server.use(
@@ -51,12 +53,17 @@ filter_routes.define_routes(server);
 
 io.sockets.on('connection', function(socket){
   console.log('socket connected');
+    socket.emit('connection');
 
   socket.on('disconnect', function(){
     console.log('socket disconnected');
   });
 
-  socket.emit('text', 'wow. nice');
+    socket.on('device_id', function(msg){
+        console.log(msg);
+        socket.join(msg);
+    });
+
 })
 
 //Running server

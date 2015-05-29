@@ -1,4 +1,4 @@
-<ion-view view-title="Definitions">
+<ion-view view-title="Definitions" on-long-press="activateAccessibility(4)">
   <ion-content class="tabbed">
     <!--<ion-list show-delete="true">
       <br />
@@ -28,7 +28,7 @@
         </ul>
         <ul>
           <a class="thick">
-            <button class="button button-positive width-150px" ng-click="logout()">
+            <button class="button button-positive width-150px" ng-click="recognition.start()">
               SIGN OUT
             </button>
           </a>
@@ -42,9 +42,6 @@
                   <img ng-src="./img/en.jpg" ng-click="changeLanguage('en')">
               </li>
           </ul>
-
-      </div>
-    </div>
 
     <!--<ul class="list- _toggle defs" >
       <li>

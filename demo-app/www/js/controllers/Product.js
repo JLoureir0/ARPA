@@ -2,7 +2,7 @@ angular.module('demo-app')
 
 .controller('ProductController', SearchController);
 
-function SearchController($ionicLoading, $ionicPopup, $state, $stateParams, productFactory, listFactory, $http) {
+function SearchController($ionicLoading, $ionicPlatform, $ionicPopup, $state, $stateParams, productFactory, listFactory, $http) {
   var vm = this;
 
   vm.product               = null;
@@ -17,8 +17,23 @@ function SearchController($ionicLoading, $ionicPopup, $state, $stateParams, prod
   function addProductToList() {
     listFactory.addProduct(vm.product);
     console.log(vm.product.Name);
-    $http.post('http://arpa.herokuapp.com/product_filter/cenas', {});
-    alertButton('Product added to the list');
+    var id;
+
+    $ionicPlatform.ready(function(){
+      id = "15e5b49b21f1f562";
+
+      var body = {
+        product: vm.product.Name,
+        id: id
+      };
+      console.log(JSON.stringify(body));
+      $http.post('http://arpa.herokuapp.com/product_filter', body);
+      alertButton('Product added to the list');
+
+    })
+
+
+
   }
 
   function removeProductFromList() {

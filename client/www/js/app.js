@@ -6,7 +6,7 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.directives', 'btford.socket-io', 'ngCordova', 'ngAnimate'])
+angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.directives', 'btford.socket-io', 'ngCordova', 'ngAnimate', 'pascalprecht.translate'])
 
     .run(function($ionicPlatform, $cordovaDevice, $localstorage, Socket) {
 
@@ -62,6 +62,26 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             var version = "v2.0";
             $cordovaFacebookProvider.browserInit(appID, version);
         });*/
+    })
+    .config(function ($translateProvider) {
+        $translateProvider.translations('pt', {
+            'TAB1': 'ALERGÉNIOS',
+            'TAB2': 'APLICAÇÕES',
+            'TAB3': 'DEFINIÇÕES',
+            'ALLERGIES': 'ALERGIAS',
+            'INTOLERANCES': 'INTOLERÂNCIAS'
+
+        });
+
+        $translateProvider.translations('en', {
+            'TAB1': 'ALLERGENS',
+            'TAB2': 'APPLICATIONS',
+            'TAB3': 'DEFINITIONS',
+            'ALLERGIES': 'ALLERGIES',
+            'INTOLERANCES': 'INTOLERANCES'
+        });
+
+        $translateProvider.preferredLanguage('en');
     })
 
     .config(function($stateProvider, $urlRouterProvider) {
@@ -122,7 +142,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             views: {
               'tab-applications': {
                 templateUrl: 'templates/tab-applications.html',
-                controller: 'AppsCtrl'
+                controller: 'ApplicationsCtrl'
               }
             }
           })

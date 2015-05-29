@@ -33,6 +33,7 @@ exports.handle_params = function(req, res, next) {
 
 exports.new_user = function(req, res){
   var user = {};
+  console.log(req.params);
   allergies_model.save(req.params.appId, req.params.fbId, req.params.deviceId, req.params.intolerant, req.params.allergic, user, function(err, result){
     if(result){
       res.send(200, {data: user.id});

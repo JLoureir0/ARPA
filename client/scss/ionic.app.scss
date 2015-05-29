@@ -36,7 +36,7 @@ img {
 }
 
 /* Select Pages - BEGIN */
-
+/*
 #slide-box {
   height: 100%;
 }
@@ -64,7 +64,7 @@ video#video2 {
   width: 100%;
   height: auto;
 }
-
+*/
 /* Select Pages - END */
 
 .circle {
@@ -90,7 +90,6 @@ video#video2 {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   margin: 0 0 0 0;
-
 }
 
 .profile-name {
@@ -101,7 +100,6 @@ video#video2 {
 }
 
 .tabs {
-
   top: 28% !important;
 }
 
@@ -110,14 +108,6 @@ video#video2 {
   font-size: 1.0em !important;
   font-weight: bold !important;
   color: $arpa-color !important;
-}
-
-.scroll{
-  height:100%;
-}
-
-.overflow-scroll .scroll{
-  height: 150%
 }
 
 .tabbed {  
@@ -133,7 +123,23 @@ video#video2 {
   font-weight: bold;
 }
 
+/* ALLERGIES TAB - BEGIN */
 .allergies{
+  margin-top: 5%;
+  margin-bottom: 7%;
+  margin-left: 3%
+}
+.intolerances{
+  margin-top: 5%;
+  margin-bottom: 7%;
+  margin-left: 3%
+}
+.to-add-allergs {
+  margin-top: 5%;
+  margin-bottom: 7%;
+  margin-left: 3%
+}
+.to-add-into {
   margin-top: 5%;
   margin-bottom: 7%;
   margin-left: 3%
@@ -147,25 +153,6 @@ video#video2 {
   max-width: 100%;
   vertical-align: middle;
 }
-
-.center-li {
-    display: table;
-    text-align: center;
-    color: $arpa-color;
-}
-
-ul.allergens li {
-  width: 70px;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.intolerances{
-  margin-top: 5%;
-  margin-bottom: 8%;
-  margin-left: 3%
-}
-
 .intolerances img{
   width: 85%;
   border: 0 none;
@@ -175,53 +162,27 @@ ul.allergens li {
   vertical-align: middle;
 }
 
-ul.intolerance li {
-  width: 19%;
-  display: inline-block;
+.center-item-content {
+    width: 19%;
+    display: inline-table;
+    text-align: center;
+    color: $arpa-color;
 }
 
-
-.to-add-into{
-  margin-top: 5%;
-  margin-bottom: 5%;
-  margin-left: 3%
+.allergy-symbol:hover {
+  opacity:0.5;
+}
+.intolerance-symbol:hover {
+  opacity:0.5;
+}
+.symbol-scroller > .scroll-bar > .scroll-bar-indicator {
+  display: none;
 }
 
-.to-add-into img{
-  width: 85%;
-  border: 0 none;
-  display: inline-block;
-  height: auto;
-  max-width: 100%;
-  vertical-align: middle;
-}
-ul.to-add-into li {
-  width: 19%;
-  display: inline-block;
+.no_block {
+  height: 85px;
 }
 
-
-.box_shadow {
-  box-shadow: 0px 10px 5px #888888;
-  opacity: 1 !important;
-}
-
-
-.to-add-allergs img{
-  width: 85%;
-  border: 0 none;
-  display: inline-block;
-  height: auto;
-  max-width: 100%;
-  vertical-align: middle;
-}
-
-
-
-ul.to-add-allergs li {
-  width: 19%;
-  display: inline-block;
-}
 .sexy-line{
   margin-top:5%;
   margin-bottom: 7%;
@@ -231,33 +192,15 @@ ul.to-add-allergs li {
   margin-right:10%;
 }
 
-.allergy-symbol:hover {
-  opacity:0.5;
-}
-.intolerance-symbol:hover {
-  opacity:0.5;
-}
+/* ALLERGIES TAB - END */
 
-.allergs{
-  width: 19%;
-  margin-left: 3%;
-  padding-bottom: 
-}
 
-.intols{
-  width: 19%;
-  margin-left: 3%;
-  margin-bottom: 20px;
-}
-
-.symbol-scroller > .scroll-bar > .scroll-bar-indicator {
-  display: none;
+.box_shadow {
+  box-shadow: 0px 10px 5px #888888;
+  opacity: 1 !important;
 }
 
 
-.no_block .scroll{
-  height: 100px;
-}
 
 .pane{
   background:url("../img/novo_fundo1.png") no-repeat center center fixed;
@@ -265,10 +208,6 @@ ul.to-add-allergs li {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-
-.ionic-scroll[direction=y] {
-  height: 100vh!important;
 }
 
 ._toggle{
@@ -367,7 +306,7 @@ ul.to-add-allergs li {
     bottom:10% !important;
 }
 
-/* OVERLAY - BEGIN */ 
+/* OVERLAY - BEGIN */ /*
 $animation-time: 0.5s;
 $animation-start: 1s;
 
@@ -378,7 +317,7 @@ $animation-start: 1s;
   width: 100%;
   height: 188px;
   z-index: 10;
-  background-color: rgba(0,0,0,0.5); /*dim the background*/
+  background-color: rgba(0,0,0,0.5);
 }
 .overlay-left {
   position: absolute;
@@ -387,7 +326,7 @@ $animation-start: 1s;
   width: 10px;
   height: 46px;
   z-index: 10;
-  background-color: rgba(0,0,0,0.5); /*dim the background*/
+  background-color: rgba(0,0,0,0.5);
 }.overlay-bottom {
   position: absolute;
   top: 234px;
@@ -395,7 +334,7 @@ $animation-start: 1s;
   width: 100%;
   height: 100%;
   z-index: 10;
-  background-color: rgba(0,0,0,0.5); /*dim the background*/
+  background-color: rgba(0,0,0,0.5);
 }.overlay-right {
   position: absolute;
   top: 188px;
@@ -403,13 +342,13 @@ $animation-start: 1s;
   width: 100%;
   height: 46px;
   z-index: 10;
-  background-color: rgba(0,0,0,0.5); /*dim the background */
+  background-color: rgba(0,0,0,0.5); 
   -moz-animation: cssAnimation $animation-time ease-out $animation-start forwards;
-    /* Firefox */
+    // Firefox 
     -webkit-animation: cssAnimation $animation-time ease-out $animation-start forwards;
-    /* Safari and Chrome */
+    // Safari and Chrome 
     -o-animation: cssAnimation $animation-time ease-out $animation-start forwards;
-    /* Opera */
+    // Opera
     animation: cssAnimation $animation-time ease-out $animation-start forwards;
     -webkit-animation-fill-mode: forwards;
     animation-fill-mode: forwards;
@@ -423,5 +362,5 @@ $animation-start: 1s;
     to {
       left:116px;
     }
-}
+} */
 /* OVERLAY - END */

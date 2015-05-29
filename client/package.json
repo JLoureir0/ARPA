@@ -15,10 +15,9 @@
     "shelljs": "^0.3.0"
   },
   "cordovaPlugins": [
-    "org.apache.cordova.device",
+    "org.apache.cordovaionic.device",
     "org.apache.cordova.console",
     "org.apache.cordova.dialogs",
-    "org.apache.cordova.media",
     {
       "locator": "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git",
       "id": "nl.x-services.plugins.toast"
@@ -34,7 +33,10 @@
     "de.appplant.cordova.plugin.local-notification",
     "cordova-plugin-file",
     "cordova-plugin-media",
-    "cordova-plugin-whitelist"
+    {
+      "locator": "https://github.com/apache/cordova-plugin-whitelist.git",
+      "id": "cordova-plugin-whitelist"
+    }
   ],
   "cordovaPlatforms": [
     "android"

@@ -7630,31 +7630,35 @@ img {
   margin: auto; }
 
 /* Select Pages - BEGIN */
+/*
 #slide-box {
-  height: 100%; }
-
+  height: 100%;
+}
 .scroll {
-  height: 100%; }
-
+  height: 100%;
+}
 .slider-slide {
   padding-top: 50px;
   color: #000;
   background-color: #fff;
-  text-align: center; }
-
+  text-align: center;
+}
 .slider-pager {
-  bottom: 2%; }
+  bottom: 2%;
+}
 
 video#video1 {
   margin-top: -50px;
   width: 100%;
-  height: auto; }
+  height: auto;
+}
 
 video#video2 {
   margin-top: -50px;
   width: 100%;
-  height: auto; }
-
+  height: auto;
+}
+*/
 /* Select Pages - END */
 .circle {
   border-radius: 50%;
@@ -7691,12 +7695,6 @@ video#video2 {
   font-weight: bold !important;
   color: #0066b1 !important; }
 
-.scroll {
-  height: 100%; }
-
-.overflow-scroll .scroll {
-  height: 150%; }
-
 .tabbed {
   top: 3rem;
   background-color: rgba(255, 255, 255, 0.6); }
@@ -7708,7 +7706,23 @@ video#video2 {
   font-size: medium;
   font-weight: bold; }
 
+/* ALLERGIES TAB - BEGIN */
 .allergies {
+  margin-top: 5%;
+  margin-bottom: 7%;
+  margin-left: 3%; }
+
+.intolerances {
+  margin-top: 5%;
+  margin-bottom: 7%;
+  margin-left: 3%; }
+
+.to-add-allergs {
+  margin-top: 5%;
+  margin-bottom: 7%;
+  margin-left: 3%; }
+
+.to-add-into {
   margin-top: 5%;
   margin-bottom: 7%;
   margin-left: 3%; }
@@ -7721,21 +7735,6 @@ video#video2 {
   max-width: 100%;
   vertical-align: middle; }
 
-.center-li {
-  display: table;
-  text-align: center;
-  color: #0066b1; }
-
-ul.allergens li {
-  width: 70px;
-  display: inline-block;
-  vertical-align: middle; }
-
-.intolerances {
-  margin-top: 5%;
-  margin-bottom: 8%;
-  margin-left: 3%; }
-
 .intolerances img {
   width: 85%;
   border: 0 none;
@@ -7744,42 +7743,23 @@ ul.allergens li {
   max-width: 100%;
   vertical-align: middle; }
 
-ul.intolerance li {
+.center-item-content {
   width: 19%;
-  display: inline-block; }
+  display: inline-table;
+  text-align: center;
+  color: #0066b1; }
 
-.to-add-into {
-  margin-top: 5%;
-  margin-bottom: 5%;
-  margin-left: 3%; }
+.allergy-symbol:hover {
+  opacity: 0.5; }
 
-.to-add-into img {
-  width: 85%;
-  border: 0 none;
-  display: inline-block;
-  height: auto;
-  max-width: 100%;
-  vertical-align: middle; }
+.intolerance-symbol:hover {
+  opacity: 0.5; }
 
-ul.to-add-into li {
-  width: 19%;
-  display: inline-block; }
+.symbol-scroller > .scroll-bar > .scroll-bar-indicator {
+  display: none; }
 
-.box_shadow {
-  box-shadow: 0px 10px 5px #888888;
-  opacity: 1 !important; }
-
-.to-add-allergs img {
-  width: 85%;
-  border: 0 none;
-  display: inline-block;
-  height: auto;
-  max-width: 100%;
-  vertical-align: middle; }
-
-ul.to-add-allergs li {
-  width: 19%;
-  display: inline-block; }
+.no_block {
+  height: 85px; }
 
 .sexy-line {
   margin-top: 5%;
@@ -7789,26 +7769,10 @@ ul.to-add-allergs li {
   margin-left: 10%;
   margin-right: 10%; }
 
-.allergy-symbol:hover {
-  opacity: 0.5; }
-
-.intolerance-symbol:hover {
-  opacity: 0.5; }
-
-.allergs {
-  width: 19%;
-  margin-left: 3%; }
-
-.intols {
-  width: 19%;
-  margin-left: 3%;
-  margin-bottom: 20px; }
-
-.symbol-scroller > .scroll-bar > .scroll-bar-indicator {
-  display: none; }
-
-.no_block .scroll {
-  height: 100px; }
+/* ALLERGIES TAB - END */
+.box_shadow {
+  box-shadow: 0px 10px 5px #888888;
+  opacity: 1 !important; }
 
 .pane {
   background: url("../img/novo_fundo1.png") no-repeat center center fixed;
@@ -7816,9 +7780,6 @@ ul.to-add-allergs li {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; }
-
-.ionic-scroll[direction=y] {
-  height: 100vh !important; }
 
 ._toggle {
   background-color: transparent;
@@ -7899,6 +7860,10 @@ ul.to-add-allergs li {
   bottom: 10% !important; }
 
 /* OVERLAY - BEGIN */
+/*
+$animation-time: 0.5s;
+$animation-start: 1s;
+
 .overlay-top {
   position: absolute;
   top: 0;
@@ -7906,9 +7871,8 @@ ul.to-add-allergs li {
   width: 100%;
   height: 188px;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.5);
-  /*dim the background*/ }
-
+  background-color: rgba(0,0,0,0.5);
+}
 .overlay-left {
   position: absolute;
   top: 188px;
@@ -7916,44 +7880,41 @@ ul.to-add-allergs li {
   width: 10px;
   height: 46px;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.5);
-  /*dim the background*/ }
-
-.overlay-bottom {
+  background-color: rgba(0,0,0,0.5);
+}.overlay-bottom {
   position: absolute;
   top: 234px;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.5);
-  /*dim the background*/ }
-
-.overlay-right {
+  background-color: rgba(0,0,0,0.5);
+}.overlay-right {
   position: absolute;
   top: 188px;
   left: 10px;
   width: 100%;
   height: 46px;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.5);
-  /*dim the background */
-  -moz-animation: cssAnimation 0.5s ease-out 1s forwards;
-  /* Firefox */
-  -webkit-animation: cssAnimation 0.5s ease-out 1s forwards;
-  /* Safari and Chrome */
-  -o-animation: cssAnimation 0.5s ease-out 1s forwards;
-  /* Opera */
-  animation: cssAnimation 0.5s ease-out 1s forwards;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards; }
-
+  background-color: rgba(0,0,0,0.5); 
+  -moz-animation: cssAnimation $animation-time ease-out $animation-start forwards;
+    // Firefox 
+    -webkit-animation: cssAnimation $animation-time ease-out $animation-start forwards;
+    // Safari and Chrome 
+    -o-animation: cssAnimation $animation-time ease-out $animation-start forwards;
+    // Opera
+    animation: cssAnimation $animation-time ease-out $animation-start forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
 @keyframes cssAnimation {
-  to {
-    left: 116px; } }
-
+    to {
+        left:116px;
+    }
+}
 @-webkit-keyframes cssAnimation {
-  to {
-    left: 116px; } }
-
+    to {
+      left:116px;
+    }
+} */
 /* OVERLAY - END */
