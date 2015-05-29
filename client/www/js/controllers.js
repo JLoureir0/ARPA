@@ -60,7 +60,6 @@ angular.module('arpa.controllers', [])
                                 checkUser();
                                 $rootScope.$broadcast('killFbModal', {});
                                 $rootScope.$broadcast('logged_in', {});
-                                //$window.location.reload();
                             });
                         }, function (error) {
 
@@ -73,7 +72,8 @@ angular.module('arpa.controllers', [])
 
 $scope.logout = function(){
     $localstorage.setObject('userinfo',null);
-    $window.location.reload();
+    checkUser();
+    //$window.location.reload();
 }
 
 $accessibility.loadOptions();
@@ -370,7 +370,8 @@ var updateDatabase = function(){
                         $scope.editIntolerances = "Edit";
                     }
                 }
-                
+
+                $localstorage.setObject('intolerances', {intolerances: $scope.intolerances.slice(0, $scope.intolerances.length)});
                 updateDatabase();
             }
         };
@@ -402,6 +403,10 @@ var updateDatabase = function(){
                     }
                 }
 
+
+                //$localstorage.setObject('allergies', {allergies: angular.toJson($scope.allergens)});
+                $localstorage.setObject('allergies', {allergies: $scope.allergens});
+                console.log("TAG ADDED ALLERGIES: " + JSON.stringify($localstorage.getObject('allergies')));
                 updateDatabase();
             }
         };
@@ -410,7 +415,6 @@ var updateDatabase = function(){
             $scope.not_selected_allergens.splice($index,1);
             $scope.allergens.push($value);
             $scope.not_selected_intolerances.splice($scope.not_selected_intolerances.indexOf($value), 1);
-            $localstorage.setObject('allergies', {allergies: $scope.allergens});
         };
 
         $scope.removeAllergens = function($index, $value) {
@@ -428,7 +432,6 @@ var updateDatabase = function(){
             $scope.not_selected_intolerances.splice($index,1);
             $scope.intolerances.push($value);
             $scope.not_selected_allergens.splice($scope.not_selected_allergens.indexOf($value), 1);
-            $localstorage.setObject('intolerances', {intolerances: $scope.intolerances});
         };
 
         $scope.removeIntol = function($index, $value){
@@ -460,6 +463,7 @@ var updateDatabase = function(){
             var allergiesObject = $localstorage.getObject('allergies');
             var intoleranceObject = $localstorage.getObject('intolerances');
 
+            console.log("TAG ALLERGIES ON BEGGINING: " + JSON.stringify(allergiesObject));
             if(allergiesObject && allergiesObject.allergies) {
                 var allergies = allergiesObject.allergies;
                 var indexy = 0;
