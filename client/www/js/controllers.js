@@ -32,7 +32,7 @@ angular.module('arpa.controllers', [])
                 if(value == 'login'){
                     $scope.fbLogin();
                 }
-                else if(value = 'logout'){
+                else if(value == 'logout'){
                     $scope.logout();
                 }
             }
