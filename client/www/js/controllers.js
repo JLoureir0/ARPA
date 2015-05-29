@@ -20,6 +20,18 @@ angular.module('arpa.controllers', [])
 
     $accessibility.loadOptions();
 
+    var checkUser = function(){
+        var userinfo = $localstorage.getObject('userinfo');
+
+        if(userinfo) {
+            $scope.username = userinfo.name;
+            $scope.userpicture = userinfo.picture;
+        } else {
+            $scope.username = 'ARPA';
+            $scope.userpicture = './img/logo_arpa.svg';
+        }
+    };
+
     $scope.activateAccessibility = function(value){
         $accessibility.toggleAccessibility();
         var access = $localstorage.get('accessibility');
@@ -96,23 +108,17 @@ angular.module('arpa.controllers', [])
 
     })
 
-    var userinfo = $localstorage.getObject('userinfo');
+    
 
     $scope.$on('logged_in', function(ev, data){
+        console.log("TAG LOGGED IN");
         $scope.userpicture = $localstorage.getObject('userinfo').picture;
+        checkUser();
     })
 
 
-
-    if(userinfo) {
-        $scope.username = userinfo.name;
-            //$scope.userbirthday = userinfo.birthday;
-            $scope.userpicture = userinfo.picture;
-        } else {
-            $scope.username = 'ARPA';
-            $scope.userpicture = './img/logo_arpa.svg';
-        }
-    })
+    checkUser();
+})
 
 .controller('AllergensCtrl', function($scope, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia, $accessibility, $rootScope){
 
@@ -123,6 +129,11 @@ angular.module('arpa.controllers', [])
     $scope.editAllergens = "Editar";
     $scope.editIntolerances = "Editar";
     $scope.activeLanguage = "pt";
+
+    $scope.$on('logged_in', function(ev, data){
+        console.log("TAG LOGGED IN @ ALLERGENS");
+        updateAllergies();
+    })
 
     $scope.$on('changeLanguageEn', function(ev, data){
 
@@ -384,55 +395,60 @@ var updateDatabase = function(){
 
         };
 
-        $scope.not_selected_allergens = $localstorage.getAllergensPt();
-        $scope.not_selected_intolerances = $scope.not_selected_allergens.slice(0, $scope.not_selected_allergens.length);
+        var updateAllergies = function(){
+            $scope.not_selected_allergens = $localstorage.getAllergensPt();
+            $scope.not_selected_intolerances = $scope.not_selected_allergens.slice(0, $scope.not_selected_allergens.length);
 
-        $scope.allergens = [];
+            $scope.allergens = [];
 
-        $scope.intolerances = [];
+            $scope.intolerances = [];
 
-        var allergiesObject = $localstorage.getObject('allergies');
-        var intoleranceObject = $localstorage.getObject('intolerances');
+            var allergiesObject = $localstorage.getObject('allergies');
+            var intoleranceObject = $localstorage.getObject('intolerances');
 
-        if(allergiesObject && allergiesObject.allergies) {
-            var allergies = allergiesObject.allergies;
-            var indexy = 0;
-            while(indexy < allergies.length) {
-                if(allergies[indexy].$$hashKey != null) {
-                    allergies[indexy].$$hashKey = null;
-                }
-                $scope.allergens.push(allergies[indexy]);
-                for(var i = 0; i < $scope.not_selected_allergens.length; i++) {
-                    if(allergies[indexy].name == $scope.not_selected_allergens[i].name) {
-                        $scope.not_selected_allergens.splice(i,1);
-                        $scope.not_selected_intolerances.splice(i,1);
+            if(allergiesObject && allergiesObject.allergies) {
+                var allergies = allergiesObject.allergies;
+                var indexy = 0;
+                while(indexy < allergies.length) {
+                    if(allergies[indexy].$$hashKey != null) {
+                        allergies[indexy].$$hashKey = null;
                     }
+                    $scope.allergens.push(allergies[indexy]);
+                    for(var i = 0; i < $scope.not_selected_allergens.length; i++) {
+                        if(allergies[indexy].name == $scope.not_selected_allergens[i].name) {
+                            $scope.not_selected_allergens.splice(i,1);
+                            $scope.not_selected_intolerances.splice(i,1);
+                        }
+                    }
+                    indexy++;
                 }
-                indexy++;
             }
-        }
 
-        if(intoleranceObject && intoleranceObject.intolerances) {
-            var intolerances = intoleranceObject.intolerances;
-            var indexz = 0;
-            while(indexz < intolerances.length) {
-                if(intolerances[indexz].$$hashKey != null) {
-                    intolerances[indexz].$$hashKey = null;
-                }
-                $scope.intolerances.push(intolerances[indexz]);
-                for(var j = 0; j < $scope.not_selected_intolerances.length; j++) {
-                    if(intolerances[indexz].name == $scope.not_selected_intolerances[j].name) {
-                        $scope.not_selected_intolerances.splice(j,1);
-                        for(var i = 0; i < $scope.not_selected_allergens.length; i++){
-                            if($scope.not_selected_allergens[i].name == intolerances[indexz].name){
-                                $scope.not_selected_allergens.splice(i, 1);
+            if(intoleranceObject && intoleranceObject.intolerances) {
+                var intolerances = intoleranceObject.intolerances;
+                var indexz = 0;
+                while(indexz < intolerances.length) {
+                    if(intolerances[indexz].$$hashKey != null) {
+                        intolerances[indexz].$$hashKey = null;
+                    }
+                    $scope.intolerances.push(intolerances[indexz]);
+                    for(var j = 0; j < $scope.not_selected_intolerances.length; j++) {
+                        if(intolerances[indexz].name == $scope.not_selected_intolerances[j].name) {
+                            $scope.not_selected_intolerances.splice(j,1);
+                            for(var i = 0; i < $scope.not_selected_allergens.length; i++){
+                                if($scope.not_selected_allergens[i].name == intolerances[indexz].name){
+                                    $scope.not_selected_allergens.splice(i, 1);
+                                }
                             }
                         }
                     }
+                    indexz++;
                 }
-                indexz++;
             }
-        }
+        };
+
+        updateAllergies();
+        
 
     })
 
@@ -528,6 +544,7 @@ var updateDatabase = function(){
             .then(function(user) {
                 $scope.user = user;
                 var date = new Date($scope.user.birthday);
+                console.log("TAG ID = " + user.id);
                 $localstorage.setObject('userinfo', {
                     id: $scope.user.id,
                     name: $scope.user.name,
@@ -536,9 +553,10 @@ var updateDatabase = function(){
                 });
                             $localstorage.set('appId', ''); //Facebook login, hence new account, forget appID
                             getFromDb(user.id, function(){
-                                $window.location.reload();
+                                $rootScope.$broadcast('logged_in', {});
+                                $scope.modal.remove();
+                                //$window.location.reload();
                             });
-                            $scope.$broadcast('logged_in', {});
                         }, function (error) {
 
                         });
@@ -546,18 +564,18 @@ var updateDatabase = function(){
         }, function(error){
 
         });
-    };
+};
 
-    $scope.recognition = new SpeechRecognition();
-    $scope.recognition.onresult = function(event) {
-      if (event.results.length > 0) {
-        var value = event.results[0][0].transcript;
-        var alertPopup = $ionicPopup.alert({
-            title: 'HEARD',
-            template: value
-     });
-        console.log("I HEARD " + value);
-    }
+$scope.recognition = new SpeechRecognition();
+$scope.recognition.onresult = function(event) {
+  if (event.results.length > 0) {
+    var value = event.results[0][0].transcript;
+    var alertPopup = $ionicPopup.alert({
+        title: 'HEARD',
+        template: value
+    });
+    console.log("I HEARD " + value);
+}
 };
 $scope.logout = function(){
     $localstorage.setObject('userinfo',null);
