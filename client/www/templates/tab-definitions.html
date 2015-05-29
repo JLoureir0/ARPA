@@ -1,4 +1,4 @@
-<ion-view view-title="Definitions" on-long-press="activateAccessibility(4)">
+<ion-view view-title="Definitions" on-double-tap="recognition.start()" on-long-press="activateAccessibility(4)">
   <ion-content class="tabbed">
     <!--<ion-list show-delete="true">
       <br />
@@ -28,7 +28,7 @@
         </ul>
         <ul>
           <a class="thick">
-            <button class="button button-positive width-150px" ng-click="recognition.start()">
+            <button class="button button-positive width-150px" ng-click="logout()">
               SIGN OUT
             </button>
           </a>
