@@ -363,7 +363,6 @@ var updateDatabase = function(){
                 $scope.value_intolerances = true;
                 $scope.intoleranceSymbol = "fakeclass";
 
-                updateDatabase();
                 if($scope.activeLanguage=='pt') {
                     $scope.editIntolerances = "Editar";
                 }else{
@@ -371,6 +370,8 @@ var updateDatabase = function(){
                         $scope.editIntolerances = "Edit";
                     }
                 }
+                
+                updateDatabase();
             }
         };
 
@@ -393,7 +394,6 @@ var updateDatabase = function(){
                 $scope.value_allergies = true;
                 $scope.allergySymbol = "fakeclass";
 
-                updateDatabase();
                 if($scope.activeLanguage=='pt') {
                     $scope.editAllergens = "Editar";
                 }else{
@@ -401,6 +401,8 @@ var updateDatabase = function(){
                         $scope.editAllergens = "Edit";
                     }
                 }
+
+                updateDatabase();
             }
         };
 
