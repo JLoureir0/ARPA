@@ -6,7 +6,7 @@ angular.module('arpa.controllers', [])
 
 .controller('AppsCtrl', function($scope) {})
 
-.controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility, $timeout, $rootScope){
+.controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $cordovaFacebook, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility, $timeout, $rootScope){
     $scope.userpicture = './img/logo_arpa.svg';
 
     Socket.forward('notification', $scope);
@@ -18,106 +18,158 @@ angular.module('arpa.controllers', [])
         });
     });
 
-    $accessibility.loadOptions();
-
-    var checkUser = function(){
-        var userinfo = $localstorage.getObject('userinfo');
-
-        if(userinfo) {
-            $scope.username = userinfo.name;
-            $scope.userpicture = userinfo.picture;
-        } else {
-            $scope.username = 'ARPA';
-            $scope.userpicture = './img/logo_arpa.svg';
-        }
+    var getFromDb = function(id, callback){
+        $http.get(herokuHost + '/' + id).
+        success(function(result, status, headers, config){
+            console.log("TAG RESULT : " + JSON.stringify(result.data));
+            $scope.allergens = [];
+            $scope.intolerances = [];
+            $localstorage.matchFromDb(result.data.allergic, $scope.allergens);
+            $localstorage.matchFromDb(result.data.intolerant, $scope.intolerances);
+            $localstorage.setObject('allergies', {
+                allergies: $scope.allergens
+            });
+            $localstorage.setObject('intolerances', {
+                intolerances: $scope.intolerances
+            });
+            callback();
+        }).
+        error(function(result, status, headers, config){
+            console.log("TAG ERROR: " + result.data);
+            callback();
+        })
     };
 
-    $scope.activateAccessibility = function(value){
-        $accessibility.toggleAccessibility();
+    $scope.fbLogin = function(){
+        $cordovaFacebook.login(["public_profile", "email"])
+        .then(function(success){
+            $cordovaFacebook.api("me", ["public_profile"])
+            .then(function(user) {
+                $scope.user = user;
+                var date = new Date($scope.user.birthday);
+                console.log("TAG ID = " + user.id);
+                $localstorage.setObject('userinfo', {
+                    id: $scope.user.id,
+                    name: $scope.user.name,
+                    birthday: date.toLocaleDateString(),
+                    picture: 'http://graph.facebook.com/' + user.id + '/picture?width=270&height=270'
+                });
+                            $localstorage.set('appId', ''); //Facebook login, hence new account, forget appID
+                            getFromDb(user.id, function(){
+                                $scope.userpicture = $localstorage.getObject('userinfo').picture;
+                                checkUser();
+                                $rootScope.$broadcast('killFbModal', {});
+                                $rootScope.$broadcast('logged_in', {});
+                                //$window.location.reload();
+                            });
+                        }, function (error) {
+
+                        });
+
+}, function(error){
+
+});
+};
+
+$scope.logout = function(){
+    $localstorage.setObject('userinfo',null);
+    $window.location.reload();
+}
+
+$accessibility.loadOptions();
+
+var checkUser = function(){
+    var userinfo = $localstorage.getObject('userinfo');
+
+
+    if(userinfo) {
+        console.log("TAG USER FOUND");
+        $scope.username = userinfo.name;
+        $scope.userpicture = userinfo.picture;
+    } else {
+        console.log("TAG USER NOT FOUND");
+        $scope.username = 'ARPA';
+        $scope.userpicture = './img/logo_arpa.svg';
+    }
+};
+
+$scope.activateAccessibility = function(value){
+    $accessibility.toggleAccessibility();
+    var access = $localstorage.get('accessibility');
+    var sound;
+    if(access && access == 'true') {
+        sound = $accessibility.getVoice(1);
+    } else {
+        sound = $accessibility.getVoice(0);
+    }
+    if(sound && sound != null && sound != undefined) {
+        $ionicPlatform.ready(function() {
+            if(typeof cordova != "undefined") {
+              $rootScope.$broadcast('playing');
+              sound.play();
+              $scope.$on('playing', function() {
+                  sound.stop();
+              });
+          }
+      });
+    }
+    $timeout(function() {
+        $ionicPlatform.ready(function(){
+            if(typeof cordova != "undefined"){
+                if(access && access == 'true') {
+                    var thissound = $accessibility.getVoice(value);
+                    if(thissound && thissound != null && thissound != undefined) {
+                        $rootScope.$broadcast('playing');
+                        thissound.play();
+                        $scope.$on('playing', function() {
+                            thissound.stop();
+                        });
+                    }
+                } else {
+                    $rootScope.$broadcast('playing');
+                }
+            }
+        });
+    },3000);
+}
+
+var launchNotification = function (req) {
+
+    console.log(req.product);
+    $cordovaLocalNotification.add({
+        id: 1,
+        title: 'Allergic Alert',
+        text: 'Attention, you are allergic to ' + req.product +' (' + req.tag + ')!',
+        data: {
+            customProperty: 'custom value'
+        }
+    }).then(function (result) {
         var access = $localstorage.get('accessibility');
-        var sound;
         if(access && access == 'true') {
-            sound = $accessibility.getVoice(1);
-        } else {
-            sound = $accessibility.getVoice(0);
-        }
-        if(sound && sound != null && sound != undefined) {
-            $ionicPlatform.ready(function() {
-                if(typeof cordova != "undefined") {
-                  $rootScope.$broadcast('playing');
-                  sound.play();
-                  $scope.$on('playing', function() {
-                      sound.stop();
-                  });
-              }
-          });
-        }
-        $timeout(function() {
             $ionicPlatform.ready(function(){
                 if(typeof cordova != "undefined"){
-                    if(access && access == 'true') {
-                        var thissound = $accessibility.getVoice(value);
-                        if(thissound && thissound != null && thissound != undefined) {
-                            $rootScope.$broadcast('playing');
-                            thissound.play();
-                            $scope.$on('playing', function() {
-                                thissound.stop();
-                            });
-                        }
-                    } else {
+                    var alertsound = $accessibility.getVoice(5);
+                    if(alertsound && alertsound != null && alertsound != undefined) {
                         $rootScope.$broadcast('playing');
+                        alertsound.play();
                     }
                 }
             });
-        },3000);
-    }
+        }
+    });
+};
 
-    var launchNotification = function (req) {
+$scope.$on('socket:notification', function(ev, data){
+    $ionicPlatform.ready(function () {
+        console.log(data.tag);
+        var parsed = $localstorage.parseAllergen(""+data.tag+"");
+        var toNotify = {product: data.name, tag: parsed};
+        launchNotification(toNotify);
+    });
 
-        console.log(req.product);
-        $cordovaLocalNotification.add({
-            id: 1,
-            title: 'Allergic Alert',
-            text: 'Attention, you are allergic to ' + req.product +' (' + req.tag + ')!',
-            data: {
-                customProperty: 'custom value'
-            }
-        }).then(function (result) {
-            var access = $localstorage.get('accessibility');
-            if(access && access == 'true') {
-                $ionicPlatform.ready(function(){
-                    if(typeof cordova != "undefined"){
-                        var alertsound = $accessibility.getVoice(5);
-                        if(alertsound && alertsound != null && alertsound != undefined) {
-                            $rootScope.$broadcast('playing');
-                            alertsound.play();
-                        }
-                    }
-                });
-            }
-        });
-    };
+})
 
-    $scope.$on('socket:notification', function(ev, data){
-        $ionicPlatform.ready(function () {
-            console.log(data.tag);
-            var parsed = $localstorage.parseAllergen(""+data.tag+"");
-            var toNotify = {product: data.name, tag: parsed};
-            launchNotification(toNotify);
-        });
-
-    })
-
-    
-
-    $scope.$on('logged_in', function(ev, data){
-        console.log("TAG LOGGED IN");
-        $scope.userpicture = $localstorage.getObject('userinfo').picture;
-        checkUser();
-    })
-
-
-    checkUser();
+checkUser();
 })
 
 .controller('AllergensCtrl', function($scope, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia, $accessibility, $rootScope){
@@ -492,8 +544,15 @@ var updateDatabase = function(){
         })
 
 
-.controller('DefinitionsCtrl', function($http, $scope, $rootScope, $ionicPopup, $state, $localstorage, $window, $ionicModal, $cordovaFacebook, $accessibility, $cordovaMedia, $ionicPlatform, $translate, $rootScope) {
+.controller('DefinitionsCtrl', function($http, $scope, $rootScope, $ionicPopup, $state, $localstorage, $window, $ionicModal, $accessibility, $cordovaMedia, $ionicPlatform, $translate, $rootScope) {
     $scope.sign_in_hide = false;
+
+    $scope.$on('killFbModal', function(ev, data){
+        $ionicPlatform.ready(function () {
+            $scope.modal.remove();
+        });
+
+    })
 
     $scope.$on("$ionicView.enter", function () {
         var access = $localstorage.get('accessibility');
@@ -515,72 +574,20 @@ var updateDatabase = function(){
         }
     });
 
-    var getFromDb = function(id, callback){
-        $http.get(herokuHost + '/' + id).
-        success(function(result, status, headers, config){
-            console.log("TAG RESULT : " + JSON.stringify(result.data));
-            $scope.allergens = [];
-            $scope.intolerances = [];
-            $localstorage.matchFromDb(result.data.allergic, $scope.allergens);
-            $localstorage.matchFromDb(result.data.intolerant, $scope.intolerances);
-            $localstorage.setObject('allergies', {
-                allergies: $scope.allergens
-            });
-            $localstorage.setObject('intolerances', {
-                intolerances: $scope.intolerances
-            });
-            callback();
-        }).
-        error(function(result, status, headers, config){
-            console.log("TAG ERROR: " + result.data);
-            callback();
-        })
-    };
 
-    $scope.fbLogin = function(){
-        $cordovaFacebook.login(["public_profile", "email"])
-        .then(function(success){
-            $cordovaFacebook.api("me", ["public_profile"])
-            .then(function(user) {
-                $scope.user = user;
-                var date = new Date($scope.user.birthday);
-                console.log("TAG ID = " + user.id);
-                $localstorage.setObject('userinfo', {
-                    id: $scope.user.id,
-                    name: $scope.user.name,
-                    birthday: date.toLocaleDateString(),
-                    picture: 'http://graph.facebook.com/' + user.id + '/picture?width=270&height=270'
-                });
-                            $localstorage.set('appId', ''); //Facebook login, hence new account, forget appID
-                            getFromDb(user.id, function(){
-                                $rootScope.$broadcast('logged_in', {});
-                                $scope.modal.remove();
-                                //$window.location.reload();
-                            });
-                        }, function (error) {
 
-                        });
-
-        }, function(error){
-
+    $scope.recognition = new SpeechRecognition();
+    $scope.recognition.onresult = function(event) {
+      if (event.results.length > 0) {
+        var value = event.results[0][0].transcript;
+        var alertPopup = $ionicPopup.alert({
+            title: 'HEARD',
+            template: value
         });
+        console.log("I HEARD " + value);
+    }
 };
 
-$scope.recognition = new SpeechRecognition();
-$scope.recognition.onresult = function(event) {
-  if (event.results.length > 0) {
-    var value = event.results[0][0].transcript;
-    var alertPopup = $ionicPopup.alert({
-        title: 'HEARD',
-        template: value
-    });
-    console.log("I HEARD " + value);
-}
-};
-$scope.logout = function(){
-    $localstorage.setObject('userinfo',null);
-    $window.location.reload();
-}
 $scope.languages = [
 { text: 'English', value: 1 },
 { text: 'Português', value: 2 }
