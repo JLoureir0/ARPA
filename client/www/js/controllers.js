@@ -388,7 +388,7 @@ var updateDatabase = function(){
                     }
                 }
 
-                $localstorage.setObject('intolerances', {intolerances: $scope.intolerances.slice(0, $scope.intolerances.length)});
+                $localstorage.setObject('intolerances', {intolerances: $scope.intolerances});
 
                 updateDatabase();
             }
@@ -422,9 +422,7 @@ var updateDatabase = function(){
                 }
 
 
-                //$localstorage.setObject('allergies', {allergies: angular.toJson($scope.allergens)});
                 $localstorage.setObject('allergies', {allergies: $scope.allergens});
-                console.log("TAG ADDED ALLERGIES: " + JSON.stringify($localstorage.getObject('allergies')));
                 updateDatabase();
             }
         };
