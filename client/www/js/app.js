@@ -68,6 +68,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             'TAB1': 'ALERGÉNIOS',
             'TAB2': 'APLICAÇÕES',
             'TAB3': 'DEFINIÇÕES',
+            'NOTIFICATIONS': 'NOTIFICAÇÕES',
             'ALLERGIES': 'ALERGIAS',
             'INTOLERANCES': 'INTOLERÂNCIAS'
 
@@ -77,6 +78,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             'TAB1': 'ALLERGENS',
             'TAB2': 'APPLICATIONS',
             'TAB3': 'SETTINGS',
+            'NOTIFICATIONS': 'NOTIFICATIONS',
             'ALLERGIES': 'ALLERGIES',
             'INTOLERANCES': 'INTOLERANCES'
         });

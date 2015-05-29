@@ -33,15 +33,30 @@
             </button>
           </a>
         </ul>
-
-          <ul>
-              <li>
-                  <img ng-src="./img/pt.jpg" ng-click="changeLanguage('pt')">
-              </li>
-              <li>
-                  <img ng-src="./img/en.jpg" ng-click="changeLanguage('en')">
-              </li>
-          </ul>
+        <ul>
+        <li class="item item-toggle toggle-button">
+          <img src="./img/continente.png">
+          {{ 'NOTIFICATIONS' | translate }}
+          <label class="toggle toggle-positive">
+            <input type="checkbox">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+        </ul>
+        <ul>
+          <li>
+            <div style="position:absolute;width:20%;height:20%;top:55%;right:6%">
+              <img ng-src="./img/pt.jpg" ng-click="changeLanguage('pt')">
+            </div>
+          </li>
+          <li>
+            <div style="position:absolute;width:20%;height:20%;top:55%;right:10%">
+              <img ng-src="./img/en.jpg" ng-click="changeLanguage('en')">
+            </div>
+          </li>
+        </ul>
 
     <!--<ul class="list- _toggle defs" >
       <li>
@@ -55,6 +70,7 @@
         </button>
       </li>
     </ul>-->
-
+        </div>
+      </div>
   </ion-content>
 </ion-view>
