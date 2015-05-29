@@ -617,12 +617,12 @@ angular.module('arpa.controllers', [])
                 if(lid=='pt'){
                     $translate.use('pt');
                     $rootScope.$broadcast('changeLanguagePt', {});
-                    alert("Linguagem alterada para Português!");
+                    //alert("Linguagem alterada para Português!");
                 }else{
                     if(lid=='en'){
                         $translate.use('en');
                         $rootScope.$broadcast('changeLanguageEn', {});
-                        alert("Language changed to English!");
+                        //alert("Language changed to English!");
 
                     }
 

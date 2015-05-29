@@ -76,7 +76,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
         $translateProvider.translations('en', {
             'TAB1': 'ALLERGENS',
             'TAB2': 'APPLICATIONS',
-            'TAB3': 'DEFINITIONS',
+            'TAB3': 'SETTINGS',
             'ALLERGIES': 'ALLERGIES',
             'INTOLERANCES': 'INTOLERANCES'
         });
