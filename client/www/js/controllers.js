@@ -597,9 +597,9 @@ var updateDatabase = function(){
  });
 
     $scope.languages = [
-    { text: 'English', value: 1 },
-    { text: 'Português', value: 2 }
-    ];
+    { text: 'English', value: 'en' },
+    { text: 'Português', value: 'pt' }
+        ];
     $scope.changeLanguage = function(lid){
         $accessibility.setLanguage(lid);
         var access = $localstorage.get('accessibility');
