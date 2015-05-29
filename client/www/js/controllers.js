@@ -18,6 +18,23 @@ angular.module('arpa.controllers', [])
         });
     });
 
+    $ionicPlatform.ready(function(){
+        $scope.recognition = new SpeechRecognition();
+        $scope.recognition.onresult = function(event) {
+            if (event.results.length > 0) {
+                var value = event.results[0][0].transcript;
+
+                if(value == 'login'){
+                    $scope.fbLogin();
+                }
+                else if(value = 'logout'){
+                    $scope.logout();
+                }
+            }
+        };
+    });
+
+
     var getFromDb = function(id, callback){
         $http.get(herokuHost + '/' + id).
         success(function(result, status, headers, config){
@@ -70,10 +87,10 @@ angular.module('arpa.controllers', [])
 });
 };
 
+
 $scope.logout = function(){
     $localstorage.setObject('userinfo',null);
     checkUser();
-    //$window.location.reload();
 }
 
 $accessibility.loadOptions();
@@ -105,13 +122,13 @@ $scope.activateAccessibility = function(value){
     if(sound && sound != null && sound != undefined) {
         $ionicPlatform.ready(function() {
             if(typeof cordova != "undefined") {
-              $rootScope.$broadcast('playing');
-              sound.play();
-              $scope.$on('playing', function() {
-                  sound.stop();
-              });
-          }
-      });
+                $rootScope.$broadcast('playing');
+                sound.play();
+                $scope.$on('playing', function() {
+                    sound.stop();
+                });
+            }
+        });
     }
     $timeout(function() {
         $ionicPlatform.ready(function(){
@@ -132,12 +149,12 @@ $scope.activateAccessibility = function(value){
         });
     },3000);
 }
-
+var i = 1;
 var launchNotification = function (req) {
 
     console.log(req.product);
     $cordovaLocalNotification.add({
-        id: 1,
+        id: i++,
         title: 'Allergic Alert',
         text: 'Attention, you are allergic to ' + req.product +' (' + req.tag + ')!',
         data: {
@@ -193,15 +210,15 @@ checkUser();
         $scope.editIntolerances = 'Edit';
         $scope.activeLanguage = "en";
         var translatedAllergens = $localstorage.getAllergensEn();
-                //Changing selected allergens
-                for(var i=0; i<$scope.allergens.length;i++){
-                    for(var j=0; j<translatedAllergens.length; j++){
-                        if($scope.allergens[i].id==translatedAllergens[j].id){
-                            $scope.allergens.splice(i,1);
-                            $scope.allergens.splice(i,0,translatedAllergens[j]);
-                        }
+            //Changing selected allergens
+            for(var i=0; i<$scope.allergens.length;i++){
+                for(var j=0; j<translatedAllergens.length; j++){
+                    if($scope.allergens[i].id==translatedAllergens[j].id){
+                        $scope.allergens.splice(i,1);
+                        $scope.allergens.splice(i,0,translatedAllergens[j]);
                     }
                 }
+            }
             //Changing unselected allergens
             for(var i=0; i<$scope.not_selected_allergens.length;i++){
                 for(var j=0; j<translatedAllergens.length; j++){
@@ -372,6 +389,7 @@ var updateDatabase = function(){
                 }
 
                 $localstorage.setObject('intolerances', {intolerances: $scope.intolerances.slice(0, $scope.intolerances.length)});
+
                 updateDatabase();
             }
         };
@@ -506,7 +524,7 @@ var updateDatabase = function(){
         };
 
         updateAllergies();
-        
+
 
     })
 
@@ -580,68 +598,54 @@ var updateDatabase = function(){
         }
     });
 
+    $scope.languages = [
+    { text: 'English', value: 1 },
+    { text: 'Português', value: 2 }
+    ];
+    $scope.changeLanguage = function(lid){
+        $accessibility.setLanguage(lid);
+        var access = $localstorage.get('accessibility');
+        if(access && access == 'true') {
+            $ionicPlatform.ready(function(){
+                if(typeof cordova != "undefined"){
+                    var sound = $accessibility.getVoice(6);
+                    if(sound && sound != null && sound != undefined) {
+                        $rootScope.$broadcast('playing');
+                        sound.play();
+                        $scope.$on('playing', function() {
+                            sound.stop();
+                        });
+                    }
+                }
+            });
+        } else {
+            if(lid=='pt'){
+                $translate.use('pt');
+                $rootScope.$broadcast('changeLanguagePt', {});
+                alert("Linguagem alterada para Português!");
+            }else{
+                if(lid=='en'){
+                    $translate.use('en');
+                    $rootScope.$broadcast('changeLanguageEn', {});
+                    alert("Language changed to English!");
 
+                }
 
-    $scope.recognition = new SpeechRecognition();
-    $scope.recognition.onresult = function(event) {
-      if (event.results.length > 0) {
-        var value = event.results[0][0].transcript;
-        var alertPopup = $ionicPopup.alert({
-            title: 'HEARD',
-            template: value
-        });
-        console.log("I HEARD " + value);
-    }
-};
-
-$scope.languages = [
-{ text: 'English', value: 1 },
-{ text: 'Português', value: 2 }
-];
-$scope.changeLanguage = function(lid){
-    $accessibility.setLanguage(lid);
-    var access = $localstorage.get('accessibility');
-    if(access && access == 'true') {
-        $ionicPlatform.ready(function(){
-            if(typeof cordova != "undefined"){
-              var sound = $accessibility.getVoice(6);
-              if(sound && sound != null && sound != undefined) {
-                $rootScope.$broadcast('playing');
-                sound.play();
-                $scope.$on('playing', function() {
-                    sound.stop();
-                });
             }
         }
+
+    }
+
+    $scope.contact = {
+        name: 'Mittens Cat',
+        info: 'Tap anywhere on the card to open the modal'
+    }
+
+    $ionicModal.fromTemplateUrl('./templates/login.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modal = modal;
     });
-    } else {
-        if(lid=='pt'){
-            $translate.use('pt');
-            $rootScope.$broadcast('changeLanguagePt', {});
-            alert("Linguagem alterada para Português!");
-        }else{
-            if(lid=='en'){
-                $translate.use('en');
-                $rootScope.$broadcast('changeLanguageEn', {});
-                alert("Language changed to English!");
-
-            }
-
-        }
-    }
-
-}
-
-$scope.contact = {
-    name: 'Mittens Cat',
-    info: 'Tap anywhere on the card to open the modal'
-}
-
-$ionicModal.fromTemplateUrl('./templates/login.html', {
-    scope: $scope
-}).then(function(modal) {
-    $scope.modal = modal;
-});
 })
 
 .controller('SelectCtrl', function($state,  $ionicSlideBoxDelegate, $localstorage) {
