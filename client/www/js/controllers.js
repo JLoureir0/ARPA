@@ -579,24 +579,24 @@ var updateDatabase = function(){
     })
 
     $scope.$on("$ionicView.enter", function () {
-        var access = $localstorage.get('accessibility');
-        if(access && access == 'true'){
-            $ionicPlatform.ready(function(){
-                if(typeof cordova != "undefined"){
-                    var media = $accessibility.getVoice(4);
-                    if(media != null) {
-                        $rootScope.$broadcast('playing');
-                        media.play();
-                        $scope.$on('playing', function() {
-                            media.stop();
-                        });
-                    }
-                }
-            });
-        } else {
-            $localstorage.set('accessibility', 'false');
-        }
-    });
+     var access = $localstorage.get('accessibility');
+     if(access && access == 'true'){
+         $ionicPlatform.ready(function(){
+             if(typeof cordova != "undefined"){
+                 var media = $accessibility.getVoice(4);
+                 if(media != null) {
+                     $rootScope.$broadcast('playing');
+                     media.play();
+                     $scope.$on('playing', function() {
+                         media.stop();
+                     });
+                 }
+             }
+         });
+     } else {
+         $localstorage.set('accessibility', 'false');
+     }
+ });
 
     $scope.languages = [
     { text: 'English', value: 1 },
