@@ -20,7 +20,7 @@ function SearchController($ionicLoading, $ionicPlatform, $ionicPopup, $state, $s
     var id;
 
     $ionicPlatform.ready(function(){
-      id = "15e5b49b21f1f562";
+      id = device.uuid;
 
       var body = {
         product: vm.product.Name,
