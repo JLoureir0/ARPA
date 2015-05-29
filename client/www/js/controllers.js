@@ -9,6 +9,11 @@ angular.module('arpa.controllers', [])
 .controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $cordovaFacebook, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $accessibility, $timeout, $rootScope){
     $scope.userpicture = './img/logo_arpa.svg';
 
+    var notifications = $localstorage.get('notifications');
+    if(!(notifications) || notifications == undefined || notifications == null) {
+        $localstorage.set('notifications','true');
+    }
+
     Socket.forward('notification', $scope);
     Socket.on('connection',function(){
         $ionicPlatform.ready(function () {
@@ -181,7 +186,12 @@ $scope.$on('socket:notification', function(ev, data){
         console.log(data.tag);
         var parsed = $localstorage.parseAllergen(""+data.tag+"");
         var toNotify = {product: data.name, tag: parsed};
-        launchNotification(toNotify);
+        var notifications = $localstorage.get('notifications');
+        if(notifications && notifications != undefined && notifications != null) {
+            if(notifications == 'true') {
+                launchNotification(toNotify);
+            }   
+        }    
     });
 
 })
@@ -568,6 +578,12 @@ var updateDatabase = function(){
 
 .controller('DefinitionsCtrl', function($http, $scope, $rootScope, $ionicPopup, $state, $localstorage, $window, $ionicModal, $accessibility, $cordovaMedia, $ionicPlatform, $translate, $rootScope) {
     $scope.sign_in_hide = false;
+
+    $scope.notificationstoggle = $localstorage.get('notifications') === 'true';
+
+    $scope.toggleNotifications = function () {
+        $localstorage.set('notifications','true');
+    };
 
     $scope.$on('killFbModal', function(ev, data){
         $ionicPlatform.ready(function () {
