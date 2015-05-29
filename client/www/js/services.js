@@ -158,7 +158,7 @@ angular.module('arpa.services', [])
         },
 
         matchFromDb: function(array, result){
-          var allergens = this.getAllergens();
+          var allergens = this.getAllergensPt();
 
           for(var i = 0; i < array.length; i++){
             for(var j = 0; j < allergens.length; j++){
@@ -171,7 +171,7 @@ angular.module('arpa.services', [])
 
         parseAllergen: function(allergen){
           console.log(allergen);
-          var allergens = this.getAllergens();
+          var allergens = this.getAllergensPt();
           for(var i = 0; i < allergens.length; i++){
             if(allergens[i].name.toLowerCase() == allergen){
               return allergens[i].name;
