@@ -8,6 +8,8 @@ exports.handleProduct = function(product_name){
         || product_name.indexOf("Queijo") >= 0
         || product_name.indexOf("manteiga") >= 0
         || product_name.indexOf("Manteiga") >= 0
+        || product_name.indexOf("gelado") >= 0
+        || product_name.indexOf("Gelado") >= 0
     ){
         allergen = "lacteos";
     }

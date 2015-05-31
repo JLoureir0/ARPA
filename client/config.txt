@@ -39,3 +39,11 @@ After this, one must verify if all dependencies are installed and located at the
 if any of the above are not installed, please install using ionic plugin add 'above name'
 
 also, make sure that all bower dependencies are installed.
+
+
+Para a apresentação:
+    EXPLORAR CONCEITO DAS ALERGIAS, EXPANSÃO
+    Alergias pequeno modulo de uma possivel maior expansão, explicar roadmap futuro
+    FUTUROS ERROS NA ALICAÇÃO GERAR MORTES. USAR DISCLAIMER E PENSAR EM PROITECÇÃO CONTRA ESSE ATAQUE
+    DEMONSTRAÇÃO EM VIDEO E DAR TELEMOVEL AS EPSSOAS
+    -MODELO DE NEGOCIO

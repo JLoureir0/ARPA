@@ -21,7 +21,7 @@ angular.module('arpa.directives', [])
                             $scope.$eval($attrs.onLongPress)
                         });
                     }
-                }, 2000);
+                }, 3000);
             });
 
             $elm.bind('touchend', function(evt) {

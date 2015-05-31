@@ -33,28 +33,13 @@
             </button>
           </a>
         </ul>
-        <ul>
-        <li class="item item-toggle toggle-button">
-          <img src="./img/notifications.png">
-          {{ 'NOTIFICATIONS' | translate }}
-          <label class="toggle toggle-positive">
-            <input type="checkbox" ng-model="notificationstoggle" ng-change="toggleNotifications()">
-            <div class="track">
-              <div class="handle"></div>
-            </div>
-          </label>
-        </li>
-        </ul>
+
         <ul>
           <li>
-            <div style="position:absolute;width:100%;height:100%;top:100%;right:5%">
               <img ng-src="./img/pt.jpg" ng-click="changeLanguage('pt')">
-            </div>
           </li>
           <li>
-            <div style="position:absolute;width:100%;height:100%;top:100%;right:20%">
               <img ng-src="./img/en.jpg" ng-click="changeLanguage('en')">
-            </div>
           </li>
         </ul>
 
@@ -71,6 +56,18 @@
       </li>
     </ul>-->
         </div>
+
+      <ul class="list _toggle">
+        <li class="item item-toggle toggle-button">
+          {{ 'NOTIFICATIONS' | translate }}
+          <label class="toggle toggle-positive">
+            <input type="checkbox" ng-model="notificationstoggle" ng-change="toggleNotifications()">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+      </ul>
       </div>
   </ion-content>
 </ion-view>

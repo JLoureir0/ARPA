@@ -32,16 +32,18 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
                     silent: true
                 })
 
-              cordova.plugins.backgroundMode.enable();
+                cordova.plugins.backgroundMode.setDefaults({title: "ARPA is running", text: "Watching for allergens"});
 
-              console.log(cordova.plugins.backgroundMode.isEnabled());
-              cordova.plugins.backgroundMode.onfailure = function(errorCode){
-                  console.log("background mode not activated: error: " + errorCode);
-              }
+                cordova.plugins.backgroundMode.enable();
 
-              cordova.plugins.backgroundMode.onactivate = function(){
-                  console.log("background mode activated");
-              }
+                console.log(cordova.plugins.backgroundMode.isEnabled());
+                cordova.plugins.backgroundMode.onfailure = function(errorCode){
+                    console.log("background mode not activated: error: " + errorCode);
+                }
+
+                cordova.plugins.backgroundMode.onactivate = function(){
+                    console.log("background mode activated");
+                }
             }
 
             Socket.forward('connection');
@@ -58,10 +60,10 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
          }*/
 
         /*ionic.Platform.ready(function () {
-            var appID = 367156356826931;
-            var version = "v2.0";
-            $cordovaFacebookProvider.browserInit(appID, version);
-        });*/
+         var appID = 367156356826931;
+         var version = "v2.0";
+         $cordovaFacebookProvider.browserInit(appID, version);
+         });*/
     })
     .config(function ($translateProvider) {
         $translateProvider.translations('pt', {
@@ -88,67 +90,67 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
 
     .config(function($stateProvider, $urlRouterProvider) {
 
-      // Ionic uses AngularUI Router which uses the concept of states
-      // Learn more here: https://github.com/angular-ui/ui-router
-      // Set up the various states which the app can be in.
-      // Each state's controller can be found in controllers.js
-      $stateProvider
+        // Ionic uses AngularUI Router which uses the concept of states
+        // Learn more here: https://github.com/angular-ui/ui-router
+        // Set up the various states which the app can be in.
+        // Each state's controller can be found in controllers.js
+        $stateProvider
 
-          .state('firstSelect', {
-            url: "/",
-            templateUrl: "templates/select.html",
-            controller: 'SelectCtrl as selectCtrl'
-          })
-        // setup an abstract state for the tabs directive
-          .state('tab', {
-            url: "/tab",
-            abstract: true,
-            templateUrl: "templates/tabs.html",
-            controller: 'MainCtrl'
-          })
+            .state('firstSelect', {
+                url: "/",
+                templateUrl: "templates/select.html",
+                controller: 'SelectCtrl as selectCtrl'
+            })
+            // setup an abstract state for the tabs directive
+            .state('tab', {
+                url: "/tab",
+                abstract: true,
+                templateUrl: "templates/tabs.html",
+                controller: 'MainCtrl'
+            })
 
-        // Each tab has its own nav history stack:
+            // Each tab has its own nav history stack:
 
-          .state('tab.allergens', {
-            url: '/allergens',
-            views: {
-              'tab-allergens': {
-                templateUrl: 'templates/tab-allergens.html',
-                controller: 'AllergensCtrl as allergensCtrl'
-              }
-            }
-          })
+            .state('tab.allergens', {
+                url: '/allergens',
+                views: {
+                    'tab-allergens': {
+                        templateUrl: 'templates/tab-allergens.html',
+                        controller: 'AllergensCtrl as allergensCtrl'
+                    }
+                }
+            })
 
-          .state('tab.definitions', {
-            url: '/definitions',
-            views: {
-              'tab-definitions': {
-                templateUrl: 'templates/tab-definitions.html',
-                controller: 'DefinitionsCtrl'
-              }
-            }
-          })
+            .state('tab.definitions', {
+                url: '/definitions',
+                views: {
+                    'tab-definitions': {
+                        templateUrl: 'templates/tab-definitions.html',
+                        controller: 'DefinitionsCtrl'
+                    }
+                }
+            })
 
-          .state('tab.dash', {
-            url: '/dash',
-            views: {
-              'tab-dash': {
-                templateUrl: 'templates/tab-dash.html',
-                controller: 'DashCtrl'
-              }
-            }
-          })
+            .state('tab.dash', {
+                url: '/dash',
+                views: {
+                    'tab-dash': {
+                        templateUrl: 'templates/tab-dash.html',
+                        controller: 'DashCtrl'
+                    }
+                }
+            })
 
-          .state('tab.applications', {
-            url: '/applications',
-            views: {
-              'tab-applications': {
-                templateUrl: 'templates/tab-applications.html',
-                controller: 'ApplicationsCtrl'
-              }
-            }
-          })
-      // if none of the above states are matched, use this as the fallback
-      $urlRouterProvider.otherwise('/tab/allergens');
+            .state('tab.applications', {
+                url: '/applications',
+                views: {
+                    'tab-applications': {
+                        templateUrl: 'templates/tab-applications.html',
+                        controller: 'ApplicationsCtrl'
+                    }
+                }
+            })
+        // if none of the above states are matched, use this as the fallback
+        $urlRouterProvider.otherwise('/tab/allergens');
 
     });

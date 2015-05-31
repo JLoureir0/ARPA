@@ -24,7 +24,7 @@
     },
     {
       "locator": "https://github.com/Wizcorp/phonegap-facebook-plugin.git",
-      "id": "com.phonegap.plugins.facebookconnect"
+      "id": "com.phonegap.ionic run plugins.facebookconnect"
     },
     {
       "locator": "https://github.com/katzer/cordova-plugin-background-mode.git",
