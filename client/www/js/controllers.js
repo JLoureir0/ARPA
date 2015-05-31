@@ -43,6 +43,7 @@ angular.module('arpa.controllers', [])
                         $scope.logout();
                     }
                     else if(value.indexOf('allergy') >= 0){
+
                         if(value.indexOf('at') >= 0 || value.indexOf('add') >= 0 || value.indexOf('as') >= 0){
                             var res = value.split(" ");
                             if(res.length == 3) {
@@ -54,13 +55,28 @@ angular.module('arpa.controllers', [])
                                 $rootScope.$broadcast('add_allergy', args);
                             }
                             else
-                                $cordovaToast.showShortBottom("Command not Recognized! Try 'Add allergy *allergy*' ");
+                                $cordovaToast.showShortBottom("Command not recognized! Try 'Add allergy *allergy*' ");
+                        }
+                        else if(value.indexOf('delete') >= 0 || value.indexOf('remove') >= 0){
+
+                            var res = value.split(" ");
+                            if(res.length == 3) {
+                                alert(res[2]);
+                                var allergen = res[2];
+                                var args = {
+                                    allergen: allergen
+                                }
+                                $rootScope.$broadcast('delete_allergy', args);
+                            }
+                            else
+                                $cordovaToast.showShortBottom("Command not recognized! Try 'Delete allergy *allergy*' ");
                         }
                     }
-                    else
-                        $cordovaToast.showShortBottom("Command not Recognized!");
                 }
-            };
+
+                else
+                    $cordovaToast.showShortBottom("Command not recognized!");
+            }
         });
 
 
@@ -129,7 +145,7 @@ angular.module('arpa.controllers', [])
             $translate.use('pt')
         }
         else
-        $translate.use('en');
+            $translate.use('en');
 
         var checkUser = function(){
             var userinfo = $localstorage.getObject('userinfo');
@@ -242,7 +258,6 @@ angular.module('arpa.controllers', [])
 
         $scope.$on('changeLanguageEn', function(ev, data){
 
-            console.log("ENTREI");
             $scope.editAllergens = 'Edit';
             $scope.editIntolerances = 'Edit';
             $scope.activeLanguage = "en";
@@ -353,6 +368,18 @@ angular.module('arpa.controllers', [])
         $scope.allergySymbol = "fakeclass";
         $scope.intoleranceSymbol = "fakeclass";
 
+        var findIndexObject = function(array, Object){
+            for(var i = 0; i< array.length; i++){
+                console.log(array[i].id);
+                console.log(Object.id);
+                if(array[i].id === Object.id){
+                    console.log("deu");
+                    return i;
+                }
+            }
+            return -1;
+        }
+
         var updateDatabase = function(){
             var intolerancesToSend = [];
             var allergensToSend = [];
@@ -391,7 +418,7 @@ angular.module('arpa.controllers', [])
                     allergensToSend.push(translated.name.toLowerCase());
                 }
                 else
-                allergensToSend.push($scope.allergens[i].name.toLowerCase());
+                    allergensToSend.push($scope.allergens[i].name.toLowerCase());
             }
 
             objectToSend.intolerant = JSON.stringify(intolerancesToSend);
@@ -417,16 +444,49 @@ angular.module('arpa.controllers', [])
             var allergen = $localstorage.translateAllergen(allergenEn, 'pt');
 
             if(allergen != undefined) {
-                var $index = $scope.not_selected_allergens.indexOf(allergen);
+                var $index = findIndexObject($scope.not_selected_allergens, allergen);
+                console.log("ind " + $index); //not being found
                 $scope.not_selected_allergens.splice($index, 1);
                 $scope.allergens.push(allergen);
-                $scope.not_selected_intolerances.splice($scope.not_selected_intolerances.indexOf(allergen), 1);
+                $scope.not_selected_intolerances.splice(findIndexObject($scope.not_selected_intolerances, allergen), 1);
                 $localstorage.setObject('allergies', {allergies: $scope.allergens});
                 updateDatabase();
                 if($localstorage.getObject('language').id == 'en') {
                     $rootScope.$broadcast('changeLanguageEn', {});
                 }
                 $cordovaToast.showShortBottom("Allergy added!");
+            }
+        })
+
+        $scope.$on('delete_allergy', function(event, args){
+            var allergenEn = args.allergen;
+            var allergensEn = $localstorage.getAllergensEn();
+            var allergen;
+
+            for(var j = 0; j < allergensEn.length; j++){
+                console.log(allergenEn);
+                console.log(allergensEn[j].name.toLowerCase());
+                if(allergenEn == allergensEn[j].name.toLowerCase()){
+                    allergen = allergensEn[j];
+                }
+            }
+
+            if(allergen != undefined) {
+                var $index = findIndexObject($scope.allergens, allergen);
+                if ($index >= 0) {
+
+                    $scope.allergens.splice($index, 1);
+                    $scope.not_selected_allergens.unshift(allergen);
+                    $scope.not_selected_intolerances.unshift(allergen);
+                    $localstorage.setObject('allergies', {
+                        allergies: $scope.allergens
+                    });
+                    updateDatabase();
+                    if ($localstorage.getObject('language').id == 'en') {
+                        $rootScope.$broadcast('changeLanguageEn', {});
+                    }
+                    $cordovaToast.showShortBottom("Allergy deleted!");
+                }
             }
         })
 
