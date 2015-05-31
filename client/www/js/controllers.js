@@ -39,15 +39,22 @@ angular.module('arpa.controllers', [])
                         $scope.logout();
                     }
                     else if(value.indexOf('allergy') >= 0){
-                        if(value.indexOf('at') >= 0 || value.indexOf('add') >= 0){
+                        if(value.indexOf('at') >= 0 || value.indexOf('add') >= 0 || value.indexOf('as') >= 0){
                             var res = value.split(" ");
-                            if(res.length > 2) {
+                            if(res.length == 3) {
                                 alert(res[2]);
                                 var allergen = res[2];
-                                $rootScope.$broadcast('add_allergy', allergen);
+                                var args = {
+                                    allergen: allergen
+                                }
+                                $rootScope.$broadcast('add_allergy', args);
                             }
+                            else
+                                $cordovaToast.showShortBottom("Command not Recognized! Try 'Add allergy *allergy*' ");
                         }
                     }
+                    else
+                        $cordovaToast.showShortBottom("Command not Recognized!");
                 }
             };
         });
@@ -381,15 +388,20 @@ angular.module('arpa.controllers', [])
 
         };
 
-        $scope.$on('add_allergy', function(args){
 
-            var $index = $scope.not_selected_allergens.indexOf(args);
-            $scope.not_selected_allergens.splice($index,1);
-            $scope.allergens.push(args);
-            $scope.not_selected_intolerances.splice($scope.not_selected_intolerances.indexOf(args), 1);
-            $localstorage.setObject('allergies', {allergies: $scope.allergens});
-            updateDatabase();
-            $cordovaToast.showShortBottom("Allergy added!");
+        $scope.$on('add_allergy', function(event, args){
+            var allergenEn = args.allergen;
+            var allergen = $localstorage.translateAllergen(allergenEn, 'pt');
+
+            if(allergen != undefined) {
+                var $index = $scope.not_selected_allergens.indexOf(allergen);
+                $scope.not_selected_allergens.splice($index, 1);
+                $scope.allergens.push(allergen);
+                $scope.not_selected_intolerances.splice($scope.not_selected_intolerances.indexOf(allergen), 1);
+                $localstorage.setObject('allergies', {allergies: $scope.allergens});
+                updateDatabase();
+                $cordovaToast.showShortBottom("Allergy added!");
+            }
         })
 
 
@@ -495,11 +507,6 @@ angular.module('arpa.controllers', [])
 
         };
 
-
-
-        $scope.onHold = function() {
-
-        };
 
         var updateAllergies = function(){
             $scope.not_selected_allergens = $localstorage.getAllergensPt();

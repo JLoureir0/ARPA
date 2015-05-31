@@ -169,6 +169,21 @@ angular.module('arpa.services', [])
           }
         },
 
+        translateAllergen: function(allergen, toLanguage){
+          if(toLanguage == 'pt'){
+            var allergensEn = this.getAllergensEn();
+            var allergensPt = this.getAllergensPt();
+
+            for(var j = 0; j < allergensEn.length; j++){
+              if(allergen == allergensEn[j].name.toLowerCase()){
+                return allergensPt[j];
+              }
+            }
+            return undefined;
+
+          }
+        },
+
         parseAllergen: function(allergen){
           console.log(allergen);
           var allergens = this.getAllergensPt();
