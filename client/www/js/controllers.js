@@ -6,13 +6,17 @@ angular.module('arpa.controllers', [])
 
     .controller('AppsCtrl', function($scope) {})
 
-    .controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $cordovaFacebook, $http, Socket, $cordovaLocalNotification, $cordovaMedia, $cordovaToast, $accessibility, $timeout, $rootScope){
+    .controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $cordovaFacebook, $http, $translate, Socket, $cordovaLocalNotification, $cordovaMedia, $cordovaToast, $accessibility, $timeout, $rootScope){
         $scope.userpicture = './img/logo_arpa.svg';
 
         var notifications = $localstorage.get('notifications');
         if(!(notifications) || notifications == undefined || notifications == null) {
             $localstorage.set('notifications','true');
         }
+
+        $accessibility.loadOptions();
+
+
 
         Socket.forward('notification', $scope);
 
@@ -121,6 +125,11 @@ angular.module('arpa.controllers', [])
         }
 
         $accessibility.loadOptions();
+        if($localstorage.getObject('language').id == 'pt'){
+            $translate.use('pt')
+        }
+        else
+        $translate.use('en');
 
         var checkUser = function(){
             var userinfo = $localstorage.getObject('userinfo');
@@ -216,15 +225,15 @@ angular.module('arpa.controllers', [])
         checkUser();
     })
 
-    .controller('AllergensCtrl', function($scope, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia, $accessibility, $rootScope, $cordovaToast){
+    .controller('AllergensCtrl', function($scope, $translate, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia, $accessibility, $rootScope, $cordovaToast){
 
         $scope.value_allergies = true;
         $scope.value_intolerances = true;
         $scope.extra_icons_intol = "./img/allergens-icons/mais.svg";
         $scope.extra_icons_allergs = "./img/allergens-icons/mais.svg";
-        $scope.editAllergens = "Editar";
-        $scope.editIntolerances = "Editar";
-        $scope.activeLanguage = "pt";
+        $scope.editAllergens = "Edit";
+        $scope.editIntolerances = "Edit";
+        $scope.activeLanguage = "en";
 
         $scope.$on('logged_in', function(ev, data){
             console.log("TAG LOGGED IN @ ALLERGENS");
@@ -233,6 +242,7 @@ angular.module('arpa.controllers', [])
 
         $scope.$on('changeLanguageEn', function(ev, data){
 
+            console.log("ENTREI");
             $scope.editAllergens = 'Edit';
             $scope.editIntolerances = 'Edit';
             $scope.activeLanguage = "en";
@@ -364,10 +374,23 @@ angular.module('arpa.controllers', [])
             }
 
             for(var i = 0; i < $scope.intolerances.length; i++){
-                intolerancesToSend.push($scope.intolerances[i].name.toLowerCase());
+                if($localstorage.getObject('language').id == 'en')
+                {
+                    var translated = $localstorage.translateAllergen($scope.intolerances[i].name.toLowerCase(), 'pt')
+                    intolerancesToSend.push(translated.name.toLowerCase());
+                }
+                else
+                    intolerancesToSend.push($scope.intolerances[i].name.toLowerCase());
             }
 
             for(var i = 0; i < $scope.allergens.length; i++){
+                if($localstorage.getObject('language').id == 'en')
+                {
+                    var translated = $localstorage.translateAllergen($scope.allergens[i].name.toLowerCase(), 'pt');
+                    console.log("tranlasta: " + translated.name);
+                    allergensToSend.push(translated.name.toLowerCase());
+                }
+                else
                 allergensToSend.push($scope.allergens[i].name.toLowerCase());
             }
 
@@ -400,6 +423,9 @@ angular.module('arpa.controllers', [])
                 $scope.not_selected_intolerances.splice($scope.not_selected_intolerances.indexOf(allergen), 1);
                 $localstorage.setObject('allergies', {allergies: $scope.allergens});
                 updateDatabase();
+                if($localstorage.getObject('language').id == 'en') {
+                    $rootScope.$broadcast('changeLanguageEn', {});
+                }
                 $cordovaToast.showShortBottom("Allergy added!");
             }
         })
@@ -559,6 +585,10 @@ angular.module('arpa.controllers', [])
                     indexz++;
                 }
             }
+            if($localstorage.getObject('language').id == 'en') {
+                console.log("broad");
+                $rootScope.$broadcast('changeLanguageEn', {});
+            }
         };
 
         updateAllergies();
@@ -606,7 +636,7 @@ angular.module('arpa.controllers', [])
     })
 
 
-    .controller('DefinitionsCtrl', function($http, $scope, $rootScope, $ionicPopup, $state, $localstorage, $window, $ionicModal, $cordovaToast, $accessibility, $cordovaMedia, $ionicPlatform, $translate, $rootScope) {
+    .controller('DefinitionsCtrl', function($http, $scope, $rootScope, $ionicPopup, $state, $localstorage, $window, $ionicModal, $cordovaToast, $accessibility, $cordovaMedia, $ionicPlatform, $translate) {
         $scope.sign_in_hide = false;
 
         $scope.notificationstoggle = $localstorage.get('notifications') === 'true';

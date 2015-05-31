@@ -174,11 +174,19 @@ angular.module('arpa.services', [])
             var allergensEn = this.getAllergensEn();
             var allergensPt = this.getAllergensPt();
 
+            console.log("rec: " + allergen);
             for(var j = 0; j < allergensEn.length; j++){
               if(allergen == allergensEn[j].name.toLowerCase()){
                 return allergensPt[j];
               }
             }
+
+            for(var j = 0; j < allergensPt.length; j++){
+              if(allergen == allergensPt[j].name.toLowerCase()){
+                return allergensPt[j];
+              }
+            }
+
             return undefined;
 
           }
