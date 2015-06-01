@@ -1,2 +1,2 @@
-# bZapp
-Source Code for bZapp - Smart Choice mobile application
+# ARPA
+Source Code for ARPA - Allergic Reaction Product Alert
