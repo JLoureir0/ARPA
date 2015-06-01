@@ -6,7 +6,7 @@ angular.module('arpa.controllers', [])
 
     .controller('AppsCtrl', function($scope) {})
 
-    .controller('MainCtrl', function($ionicPlatform, $scope, $localstorage, $cordovaFacebook, $http, $translate, Socket, $cordovaLocalNotification, $cordovaMedia, $cordovaToast, $accessibility, $timeout, $rootScope){
+    .controller('MainCtrl', function($ionicPlatform, $scope, $state, $localstorage, $cordovaFacebook, $http, $translate, Socket, $cordovaLocalNotification, $cordovaMedia, $cordovaToast, $accessibility, $timeout, $rootScope){
         $scope.userpicture = './img/logo_arpa.svg';
 
         var notifications = $localstorage.get('notifications');
@@ -29,72 +29,74 @@ angular.module('arpa.controllers', [])
         });
 
         $ionicPlatform.ready(function(){
-            $scope.recognition = new SpeechRecognition();
-            $scope.recognition.onresult = function(event) {
-                console.log("aqui");
-                if (event.results.length > 0) {
-                    var value = event.results[0][0].transcript;
-                    alert(value);
+            if (typeof SpeechRecognition === 'function') {
+                $scope.recognition = new SpeechRecognition();
+                $scope.recognition.onresult = function(event) {
+                    console.log("aqui");
+                    if (event.results.length > 0) {
+                        var value = event.results[0][0].transcript;
+                        alert(value);
 
-                    if(value == 'login'){
-                        $scope.fbLogin();
-                    }
-                    else if(value == 'logout'){
-                        $scope.logout();
-                    }
-                    else if(value.indexOf('allergy') >= 0){
+                        if(value == 'login'){
+                            $scope.fbLogin();
+                        }
+                        else if(value == 'logout'){
+                            $scope.logout();
+                        }
+                        else if(value.indexOf('allergy') >= 0){
 
-                        if(value.indexOf('at') >= 0 || value.indexOf('add') >= 0 || value.indexOf('as') >= 0){
-                            var res = value.split(" ");
-                            if(res.length == 3) {
-                                alert(res[2]);
-                                var allergen = res[2];
-                                var args = {
-                                    allergen: allergen
+                            if(value.indexOf('at') >= 0 || value.indexOf('add') >= 0 || value.indexOf('as') >= 0){
+                                var res = value.split(" ");
+                                if(res.length == 3) {
+                                    alert(res[2]);
+                                    var allergen = res[2];
+                                    var args = {
+                                        allergen: allergen
+                                    }
+                                    $rootScope.$broadcast('add_allergy', args);
                                 }
-                                $rootScope.$broadcast('add_allergy', args);
+                                else
+                                    $cordovaToast.showShortBottom("Command not recognized! Try 'Add allergy *allergy*' ");
+                            }
+                            else if(value.indexOf('delete') >= 0 || value.indexOf('remove') >= 0){
+
+                                var res = value.split(" ");
+                                if(res.length == 3) {
+                                    alert(res[2]);
+                                    var allergen = res[2];
+                                    var args = {
+                                        allergen: allergen
+                                    }
+                                    $rootScope.$broadcast('delete_allergy', args);
+                                }
+                                else
+                                    $cordovaToast.showShortBottom("Command not recognized! Try 'Delete allergy *allergy*' ");
+                            }
+                        }
+                        else if(value.indexOf('language') >= 0) {
+                            var res = value.split(" ");
+                            if (value.indexOf('change') >= 0) {
+                                if (res.length == 3) {
+                                    alert(res[2]);
+                                    var language = res[2];
+                                    var args = {
+                                        lang: language
+                                    }
+                                    if(language == 'Portuguese') {
+                                        changeLang('pt');
+                                    }
+                                    else if(language == 'English')
+                                        changeLang('en');
+                                }
                             }
                             else
-                                $cordovaToast.showShortBottom("Command not recognized! Try 'Add allergy *allergy*' ");
+                                $cordovaToast.showShortBottom("Command not recognized! Try 'Change language *language*' ");
                         }
-                        else if(value.indexOf('delete') >= 0 || value.indexOf('remove') >= 0){
+                    }
 
-                            var res = value.split(" ");
-                            if(res.length == 3) {
-                                alert(res[2]);
-                                var allergen = res[2];
-                                var args = {
-                                    allergen: allergen
-                                }
-                                $rootScope.$broadcast('delete_allergy', args);
-                            }
-                            else
-                                $cordovaToast.showShortBottom("Command not recognized! Try 'Delete allergy *allergy*' ");
-                        }
-                    }
-                    else if(value.indexOf('language') >= 0) {
-                        var res = value.split(" ");
-                        if (value.indexOf('change') >= 0) {
-                            if (res.length == 3) {
-                                alert(res[2]);
-                                var language = res[2];
-                                var args = {
-                                    lang: language
-                                }
-                                if(language == 'Portuguese') {
-                                    changeLang('pt');
-                                }
-                                else if(language == 'English')
-                                    changeLang('en');
-                            }
-                        }
-                        else
-                            $cordovaToast.showShortBottom("Command not recognized! Try 'Change language *language*' ");
-                    }
+                    else
+                        $cordovaToast.showShortBottom("Command not recognized!");
                 }
-
-                else
-                    $cordovaToast.showShortBottom("Command not recognized!");
             }
         });
 
@@ -709,8 +711,6 @@ angular.module('arpa.controllers', [])
         };
 
         updateAllergies();
-
-
     })
 
     .controller('ProfileCtrl', function($scope) {

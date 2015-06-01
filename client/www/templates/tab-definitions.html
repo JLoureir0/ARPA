@@ -1,73 +1,60 @@
 <ion-view view-title="Definitions" on-double-tap="recognition.start()" on-long-press="activateAccessibility(4)">
   <ion-content class="tabbed">
-    <!--<ion-list show-delete="true">
-      <br />
-      <br />
-      <br />
 
-      <button class="btn btn-facebook medium-button" ng-click="fbLogin()">
-        <i class="fa fa-facebook"></i>
-        Login
-      </button>
-      <br />
-      <br />
+    <div class="sexy-line"></div>
+    
+    <div class="row">
+      <div class="col">
+        <h1>{{ 'LANGUAGE' | translate }}<h1>
+      </div>
+    </div>
+    <div class="row language-label">
+      <div class="col">
+        <img ng-src="./img/pt.jpg" ng-click="changeLanguage('pt')">
+        <span>{{ 'LANGUAGE-PT' | translate }}</span>
+      </div>
+      <div class="col">
+        <img ng-src="./img/en.jpg" ng-click="changeLanguage('en')">
+        <span>{{ 'LANGUAGE-EN' | translate }}</span>
+      </div>
+    </div>
 
-      <button class="button button-positive middle tab-center" ng-click="logout()">
-        Logout
-      </button>
-    </ion-list>-->
+    <div class="sexy-line"></div>
 
-    <div class="buttons-block">
-      <div class="centered">
-        <ul>
-          <a class="thick">
-            <button class="button button-positive width-150px" ng-click="modal.show()" ng-hide="sign_in_hide">
-              SIGN IN
-            </button>
-          </a>
-        </ul>
-        <ul>
-          <a class="thick">
-            <button class="button button-positive width-150px" ng-click="logout()">
-              SIGN OUT
-            </button>
-          </a>
-        </ul>
+    <div class="row">
+      <div class="col">
+        <h1>{{ 'GENERAL' | translate }}<h1>
+      </div>
+    </div>
 
-        <ul>
-          <li>
-              <img ng-src="./img/pt.jpg" ng-click="changeLanguage('pt')">
-          </li>
-          <li>
-              <img ng-src="./img/en.jpg" ng-click="changeLanguage('en')">
-          </li>
-        </ul>
-
-    <!--<ul class="list- _toggle defs" >
-      <li>
-        <button class="button button-positive middle tab-center" >
-          Logout
-        </button>
-      </li>
-      <li>
-        <button class="button button-positive middle tab-center" ng-click="logout()">
-          Logout
-        </button>
-      </li>
-    </ul>-->
-        </div>
-
-      <ul class="list _toggle">
-        <li class="item item-toggle toggle-button">
-          {{ 'NOTIFICATIONS' | translate }}
+    <div class="row">
+      <div class="col-75 notification-label">
+        {{ 'NOTIFICATIONS' | translate }}
+      </div>
+      <div class="col">
           <label class="toggle toggle-positive">
             <input type="checkbox" ng-model="notificationstoggle" ng-change="toggleNotifications()">
             <div class="track">
               <div class="handle"></div>
             </div>
           </label>
-        </li>
-      </ul>
       </div>
+    </div>
+
+    <div class="sexy-line"></div>
+
+    <div class="row">
+      <div class="col">
+        <button class="button button-block button-light" ng-click="modal.show()" ng-hide="sign_in_hide">
+          SIGN IN
+        </button>
+      </div>
+      <div class="col">
+        <button class="button button-block button-light" ng-click="logout()">
+          SIGN OUT
+        </button>
+      </div>
+    </div>
+
   </ion-content>
 </ion-view>

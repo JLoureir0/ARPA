@@ -72,7 +72,11 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             'TAB3': 'DEFINIÇÕES',
             'NOTIFICATIONS': 'NOTIFICAÇÕES',
             'ALLERGIES': 'ALERGIAS',
-            'INTOLERANCES': 'INTOLERÂNCIAS'
+            'INTOLERANCES': 'INTOLERÂNCIAS',
+            'LANGUAGE': 'LINGUAGENS',
+            'LANGUAGE-PT': 'Português',
+            'LANGUAGE-EN': 'Inglês',
+            'GENERAL': 'DEFINIÇÕES GERAIS'
 
         });
 
@@ -82,7 +86,11 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             'TAB3': 'SETTINGS',
             'NOTIFICATIONS': 'NOTIFICATIONS',
             'ALLERGIES': 'ALLERGIES',
-            'INTOLERANCES': 'INTOLERANCES'
+            'INTOLERANCES': 'INTOLERANCES',
+            'LANGUAGE': 'LANGUAGES',
+            'LANGUAGE-PT': 'Portuguese',
+            'LANGUAGE-EN': 'English',
+            'GENERAL': 'GENERAL SETTINGS'
         });
 
         $translateProvider.preferredLanguage('en');
@@ -114,7 +122,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             .state('tab.allergens', {
                 url: '/allergens',
                 views: {
-                    'tab-allergens': {
+                    'tab': {
                         templateUrl: 'templates/tab-allergens.html',
                         controller: 'AllergensCtrl as allergensCtrl'
                     }
@@ -124,19 +132,9 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             .state('tab.definitions', {
                 url: '/definitions',
                 views: {
-                    'tab-definitions': {
+                    'tab': {
                         templateUrl: 'templates/tab-definitions.html',
                         controller: 'DefinitionsCtrl'
-                    }
-                }
-            })
-
-            .state('tab.dash', {
-                url: '/dash',
-                views: {
-                    'tab-dash': {
-                        templateUrl: 'templates/tab-dash.html',
-                        controller: 'DashCtrl'
                     }
                 }
             })
@@ -144,7 +142,7 @@ angular.module('arpa', ['ionic', 'arpa.controllers', 'arpa.services', 'arpa.dire
             .state('tab.applications', {
                 url: '/applications',
                 views: {
-                    'tab-applications': {
+                    'tab': {
                         templateUrl: 'templates/tab-applications.html',
                         controller: 'ApplicationsCtrl'
                     }

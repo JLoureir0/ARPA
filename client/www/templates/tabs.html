@@ -1,39 +1,28 @@
-<!--
-Create tabs with an icon and label, using the tabs-positive style.
-Each tab's child <ion-nav-view> directive will have its own
-navigation history that also transitions its views in and out.
--->
-
-<!--<div class="overlay-top">
-</div>
-<div class="overlay-left">
-</div>
-<div class="overlay-bottom">
-</div>
-<div class="overlay-right">
-</div> -->
 
 <div class="profile" on-long-press="activateAccessibility()">
-  <div><img class="circle middle" ng-src="{{userpicture}}" /></div>
-  <div class="profile-name middle">
-    {{username}}
+  <div class="row">
+    <div class="col col-50 col-offset-25">
+      <img class="circle" ng-src="{{userpicture}}"/>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col col-50 col-offset-25 profile-name">
+      {{username}}
+    </div>
   </div>
 </div>
 
-<ion-tabs class="tabs-icon-top tabs-color-active-positive mid">
-  <!-- Dashboard Tab -->
-  <ion-tab id="tab-allergens" title="{{ 'TAB1' | translate }}" href="#/tab/allergens">
-    <ion-nav-view name="tab-allergens"></ion-nav-view>
-  </ion-tab>
+<div class="row my-tabs">
+  <div class="col col-33">
+    <a href="#/tab/allergens">{{ 'TAB1' | translate }}</a>
+  </div>
+  <div class="col col-33">
+    <a href="#/tab/applications">{{ 'TAB2' | translate }}</a>
+  </div>
+  <div class="col col-33">
+    <a href="#/tab/definitions">{{ 'TAB3' | translate }}</a>
+  </div>
+</div>
 
-  <!-- Chats Tab -->
-  <ion-tab title="{{ 'TAB2' | translate }}" href="#/tab/applications">
-    <ion-nav-view name="tab-applications"></ion-nav-view>
-  </ion-tab>
-
-  <!-- Account Tab -->
-  <ion-tab title="{{ 'TAB3' | translate }}" href="#/tab/definitions">
-    <ion-nav-view name="tab-definitions"></ion-nav-view>
-  </ion-tab>
-
-</ion-tabs>
+<ion-nav-view name="tab"></ion-nav-view>
