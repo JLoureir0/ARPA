@@ -72,12 +72,68 @@ angular.module('arpa.controllers', [])
                                 $cordovaToast.showShortBottom("Command not recognized! Try 'Delete allergy *allergy*' ");
                         }
                     }
+                    else if(value.indexOf('language') >= 0) {
+                        var res = value.split(" ");
+                        if (value.indexOf('change') >= 0) {
+                            if (res.length == 3) {
+                                alert(res[2]);
+                                var language = res[2];
+                                var args = {
+                                    lang: language
+                                }
+                                if(language == 'Portuguese') {
+                                    changeLang('pt');
+                                }
+                                else if(language == 'English')
+                                    changeLang('en');
+                            }
+                        }
+                        else
+                            $cordovaToast.showShortBottom("Command not recognized! Try 'Change language *language*' ");
+                    }
                 }
 
                 else
                     $cordovaToast.showShortBottom("Command not recognized!");
             }
         });
+
+        var changeLang = function(lid){
+            $accessibility.setLanguage(lid);
+            var access = $localstorage.get('accessibility');
+            if(access && access == 'true') {
+                $ionicPlatform.ready(function(){
+                    if(typeof cordova != "undefined"){
+                        var sound = $accessibility.getVoice(6);
+                        if(sound && sound != null && sound != undefined) {
+                            $rootScope.$broadcast('playing');
+                            sound.play();
+                            $scope.$on('playing', function() {
+                                sound.stop();
+                            });
+                        }
+                    }
+                });
+            } else {
+                if(lid=='pt'){
+                    $translate.use('pt');
+                    $rootScope.$broadcast('changeLanguagePt', {});
+                    $cordovaToast.showShortBottom("Linguagem alterada para Português!");
+                }else{
+                    if(lid=='en'){
+                        $translate.use('en');
+                        $rootScope.$broadcast('changeLanguageEn', {});
+                        $cordovaToast.showShortBottom("Language changed to English!");
+
+                    }
+
+                }
+            }
+
+        };
+        $scope.changeLanguage = function(lid){
+            changeLang(lid);
+        }
 
 
         var getFromDb = function(id, callback){
@@ -343,6 +399,7 @@ angular.module('arpa.controllers', [])
                     }
                 }
             }
+
         })
 
         $scope.$on("$ionicView.enter", function () {
@@ -736,39 +793,10 @@ angular.module('arpa.controllers', [])
             { text: 'English', value: 'en' },
             { text: 'Português', value: 'pt' }
         ];
-        $scope.changeLanguage = function(lid){
-            $accessibility.setLanguage(lid);
-            var access = $localstorage.get('accessibility');
-            if(access && access == 'true') {
-                $ionicPlatform.ready(function(){
-                    if(typeof cordova != "undefined"){
-                        var sound = $accessibility.getVoice(6);
-                        if(sound && sound != null && sound != undefined) {
-                            $rootScope.$broadcast('playing');
-                            sound.play();
-                            $scope.$on('playing', function() {
-                                sound.stop();
-                            });
-                        }
-                    }
-                });
-            } else {
-                if(lid=='pt'){
-                    $translate.use('pt');
-                    $rootScope.$broadcast('changeLanguagePt', {});
-                    $cordovaToast.showShortBottom("Linguagem alterada para Português!");
-                }else{
-                    if(lid=='en'){
-                        $translate.use('en');
-                        $rootScope.$broadcast('changeLanguageEn', {});
-                        $cordovaToast.showShortBottom("Language changed to English!");
 
-                    }
 
-                }
-            }
 
-        }
+
 
         $scope.contact = {
             name: 'Mittens Cat',
