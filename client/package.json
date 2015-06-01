@@ -11,8 +11,12 @@
   },
   "devDependencies": {
     "bower": "^1.3.3",
+    "clean-css": "^2.2.2",
+    "cordova-uglify": "^0.1.5",
     "gulp-util": "^2.2.14",
-    "shelljs": "^0.3.0"
+    "ng-annotate": "^0.15.4",
+    "shelljs": "^0.3.0",
+    "uglify-js": "^2.4.14"
   },
   "cordovaPlugins": [
     "org.apache.cordova.device",
@@ -42,12 +46,12 @@
     "cordova-plugin-splashscreen"
   ],
   "cordovaPlatforms": [
-    "android",
     {
       "platform": "android",
       "version": "",
       "locator": "android"
     },
-    "ios"
+    "ios",
+    "android"
   ]
 }
