@@ -47,6 +47,7 @@
       "platform": "android",
       "version": "",
       "locator": "android"
-    }
+    },
+    "ios"
   ]
 }
