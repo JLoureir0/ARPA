@@ -35,7 +35,6 @@ angular.module('arpa.controllers', [])
                     console.log("aqui");
                     if (event.results.length > 0) {
                         var value = event.results[0][0].transcript;
-                        alert(value);
 
                         if(value == 'login'){
                             $scope.fbLogin();
@@ -48,7 +47,7 @@ angular.module('arpa.controllers', [])
                             if(value.indexOf('at') >= 0 || value.indexOf('add') >= 0 || value.indexOf('as') >= 0){
                                 var res = value.split(" ");
                                 if(res.length == 3) {
-                                    alert(res[2]);
+
                                     var allergen = res[2];
                                     var args = {
                                         allergen: allergen
@@ -62,7 +61,7 @@ angular.module('arpa.controllers', [])
 
                                 var res = value.split(" ");
                                 if(res.length == 3) {
-                                    alert(res[2]);
+
                                     var allergen = res[2];
                                     var args = {
                                         allergen: allergen
@@ -77,7 +76,7 @@ angular.module('arpa.controllers', [])
                             var res = value.split(" ");
                             if (value.indexOf('change') >= 0) {
                                 if (res.length == 3) {
-                                    alert(res[2]);
+
                                     var language = res[2];
                                     var args = {
                                         lang: language
@@ -92,6 +91,8 @@ angular.module('arpa.controllers', [])
                             else
                                 $cordovaToast.showShortBottom("Command not recognized! Try 'Change language *language*' ");
                         }
+                        else
+                            $cordovaToast.showShortBottom("Command not recognized!");
                     }
 
                     else
@@ -225,8 +226,10 @@ angular.module('arpa.controllers', [])
             var access = $localstorage.get('accessibility');
             var sound;
             if(access && access == 'true') {
+                $cordovaToast.showShortBottom("Accessibility Mode Activated!");
                 sound = $accessibility.getVoice(1);
             } else {
+                $cordovaToast.showShortBottom("Accessibility Mode Deactivated!");
                 sound = $accessibility.getVoice(0);
             }
             if(sound && sound != null && sound != undefined) {
@@ -257,7 +260,7 @@ angular.module('arpa.controllers', [])
                         }
                     }
                 });
-            },2000);
+            },2500);
         }
         var i = 1;
         var launchNotification = function (req) {
