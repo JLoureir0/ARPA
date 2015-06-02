@@ -34,6 +34,9 @@ After this, one must verify if all dependencies are installed and located at the
 - org.apache.cordova.dialogs
 - cordova-plugin-whitelist
 - https://github.com/macdonst/SpeechRecognitionPlugin
+- nl.x-services.plugins.toast
+- cordova-plugin-crosswalk-webview
+- cordova-plugin-splashscreen
 
 
 if any of the above are not installed, please install using ionic plugin add 'above name'
