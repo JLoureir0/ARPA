@@ -302,7 +302,7 @@ angular.module('arpa.controllers', [])
         checkUser();
     })
 
-    .controller('AllergensCtrl', function($scope, $translate, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia, $accessibility, $rootScope, $cordovaToast){
+    .controller('AllergensCtrl', function($scope, $translate, $ionicPlatform, $ionicModal, $localstorage, $http, $cordovaMedia, $accessibility, $rootScope, $cordovaToast, $ionicScrollDelegate){
 
         $scope.value_allergies = true;
         $scope.value_intolerances = true;
@@ -584,6 +584,7 @@ angular.module('arpa.controllers', [])
                 updateDatabase();
                 $cordovaToast.showShortBottom("Updated Intolerances!");
             }
+            $ionicScrollDelegate.$getByHandle('allergyScroll').resize();
         };
 
         $scope.plus_allergs = function() {
@@ -618,6 +619,7 @@ angular.module('arpa.controllers', [])
                 updateDatabase();
                 $cordovaToast.showShortBottom("Updated Allergies!");
             }
+            $ionicScrollDelegate.$getByHandle('allergyScroll').resize();
         };
 
         $scope.addAllergens = function($index, $value){
